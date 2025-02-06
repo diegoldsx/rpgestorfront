@@ -52,7 +52,8 @@ export function DataTableViewOptions<TData>({
 									column.getCanHide()
 							)
 							.map((column) => {
-								const columnLabel = column?.columnDef.header as string;
+								console.log(column.columnDef.meta);
+								const columnLabel = column.columnDef.meta as string;
 								return (
 									<li key={column.id}>
 										<DropdownMenuCheckboxItem

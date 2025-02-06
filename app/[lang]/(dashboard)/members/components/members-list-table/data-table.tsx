@@ -41,10 +41,11 @@ export function DataTable<TData, TValue>({
 	const [rowSelection, setRowSelection] = React.useState<RowSelectionState>({});
 	const [columnVisibility, setColumnVisibility] =
 		React.useState<VisibilityState>({
-			id: true,
+			id: false,
 			code: false,
 			type: false,
 			document: true,
+			corporateName: true,
 			name: true,
 			email: true,
 			paymentGroup: true,

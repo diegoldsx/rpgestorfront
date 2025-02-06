@@ -4,7 +4,7 @@ import { columns } from "./columns";
 import { DataTable } from "./data-table";
 import { generateFakeMembers } from "../../data/data";
 
-const data = generateFakeMembers();
+const data = generateFakeMembers(10);
 
 export default function MembersListTable() {
 	return (

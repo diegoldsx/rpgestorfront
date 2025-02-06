@@ -4,10 +4,10 @@ import { SocialMedia } from "./SocialMedia";
 import { Status } from "./Status";
 
 export interface Member {
-	id: number;
+	id: string;
 	type: "CPF" | "CNPJ";
 	status: Status;
-	code: number;
+	code: string;
 	document: string; // Agora tanto CPF quanto CNPJ compartilham esse campo
 	corporateName: string | null; // Apenas para CNPJ
 	tradeName: string | null; // Apenas para CNPJ
@@ -20,7 +20,7 @@ export interface Member {
 	phone: string;
 	mobile: string;
 	linkedTo?: string | null;
-	billingAmount: number;
+	billingAmount: string;
 	password: string;
 	stateRegistration?: string | null; // Apenas para CNPJ
 	municipalRegistration?: string | null; // Apenas para CNPJ

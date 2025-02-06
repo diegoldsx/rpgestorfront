@@ -61,10 +61,10 @@ const generateFakeSocialMedia = () => ({
 const generateFakeMember = (): Member => {
 	const isIndividual = faker.datatype.boolean();
 	return {
-		id: faker.number.int({ min: 1, max: 1000 }),
+		id: faker.string.numeric(4),
 		type: isIndividual ? "CPF" : "CNPJ",
 		status: faker.helpers.arrayElement(statusOptions),
-		code: faker.number.int({ min: 1000, max: 9999 }),
+		code: faker.string.numeric(6),
 		document: isIndividual
 			? faker.string.numeric(11)
 			: faker.string.numeric(14),
@@ -81,7 +81,7 @@ const generateFakeMember = (): Member => {
 		phone: faker.phone.number(),
 		mobile: faker.phone.number(),
 		linkedTo: faker.helpers.maybe(() => faker.person.fullName()),
-		billingAmount: faker.number.float({ min: 100, max: 5000, precision: 0.01 }),
+		billingAmount: faker.string.numeric(3),
 		password: faker.internet.password(),
 		stateRegistration: isIndividual
 			? null

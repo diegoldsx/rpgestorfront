@@ -6,111 +6,419 @@ import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { Icon } from "@iconify/react";
 import { RiMoneyDollarCircleLine } from "react-icons/ri";
+import { Input } from "@/components/ui/input";
 
 // Definição das colunas da tabela Nome, CPF, E-mail, Grupo de Pagamento, Situação Cadastral, Situação Financeira,
 export const columns: ColumnDef<Member>[] = [
 	{
+		id: "id",
 		accessorKey: "id",
-		header: "ID",
-		enableHiding: true,
+		enableColumnFilter: true,
+		meta: "ID",
+		header: ({ column }) => (
+			<div className="flex flex-col  h-20 gap-2 p-1">
+				<span>Nome</span>
+				<div className="relative w-64">
+					<Icon
+						icon="heroicons-outline:search"
+						className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5"
+					/>
+					<Input
+						onChange={(e) => column.setFilterValue(e.target.value)}
+						className="w-full text-sm border-gray-300 focus:border-gray-500 transition-all pl-10" // pl-10 adiciona espaço para o ícone
+					/>
+				</div>
+			</div>
+		),
+
 		cell: ({ row }) => <span>{row.getValue("id")}</span>,
 	},
 	{
-		accessorKey: "name",
-		header: "Nome / Razão Social",
-		enableHiding: true,
-		cell: ({ row }) => (
-			<span>
-				{row.original.type === "CPF"
-					? row.original.name
-					: row.original.corporateName}
-			</span>
-		),
-	},
-	{
-		accessorKey: "document",
-		header: "CPF / CNPJ",
-		enableHiding: true,
-		cell: ({ row }) => <span>{row.original.document}</span>,
-	},
-	{
-		accessorKey: "email",
-		header: "E-mail",
-		enableHiding: true,
-		cell: ({ row }) => <span>{row.getValue("email")}</span>,
-	},
-
-	{
-		accessorKey: "status",
-		header: "Situação",
-		enableHiding: true,
-		cell: ({ row }) => <StatusBadge status={row.getValue("status")} />,
-	},
-	{
-		accessorKey: "paymentGroup",
-		header: "Grupo de pagamento",
-		enableHiding: true,
-		cell: ({ row }) => <span>{row.getValue("paymentGroup")}</span>,
-	},
-	{
-		accessorKey: "code",
-		header: "Código",
-		enableHiding: true,
-		cell: ({ row }) => <span>{row.getValue("code")}</span>,
-	},
-	{
+		id: "type",
 		accessorKey: "type",
-		header: "Tipo",
+		enableColumnFilter: true,
+		meta: "Tipo",
+
+		header: ({ column }) => (
+			<div className="flex flex-col  h-20 gap-2 p-1">
+				<span>Tipo</span>
+				<div className="relative w-64">
+					<Icon
+						icon="heroicons-outline:search"
+						className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5"
+					/>
+					<Input
+						onChange={(e) => column.setFilterValue(e.target.value)}
+						className="w-full text-sm border-gray-300 focus:border-gray-500 transition-all pl-10" // pl-10 adiciona espaço para o ícone
+					/>
+				</div>
+			</div>
+		),
 		enableHiding: true,
+
 		cell: ({ row }) => (
 			<span>
 				{row.getValue("type") === "CPF" ? "Pessoa Física" : "Pessoa Jurídica"}
 			</span>
 		),
 	},
+	{
+		id: "name",
+		accessorKey: "name",
+		meta: "Nome",
+		enableColumnFilter: true,
+		enableHiding: true,
+
+		header: ({ column }) => (
+			<div className="flex flex-col h-20 gap-2 p-1">
+				<span>Nome</span>
+				<div className="relative w-64">
+					<Icon
+						icon="heroicons-outline:search"
+						className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5"
+					/>
+					<Input
+						onChange={(e) => column.setFilterValue(e.target.value)}
+						className="w-full text-sm border-gray-300 focus:border-gray-500 transition-all pl-10" // pl-10 adiciona espaço para o ícone
+					/>
+				</div>
+			</div>
+		),
+
+		cell: ({ row }) => (
+			<div>
+				<span>{row.original.name}</span>
+			</div>
+		),
+	},
+	{
+		id: "corporateName",
+		meta: "Empresa",
+		accessorKey: "corporateName",
+		enableColumnFilter: true,
+
+		header: ({ column }) => (
+			<div className="flex flex-col  h-20 gap-2 p-1">
+				<span>Nome da Empresa</span>
+				<div className="relative w-64">
+					<Icon
+						icon="heroicons-outline:search"
+						className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5"
+					/>
+					<Input
+						onChange={(e) => column.setFilterValue(e.target.value)}
+						className="w-full text-sm border-gray-300 focus:border-gray-500 transition-all pl-10" // pl-10 adiciona espaço para o ícone
+					/>
+				</div>
+			</div>
+		),
+
+		cell: ({ row }) => (
+			<div>
+				<span>{row.original.corporateName}</span>
+			</div>
+		),
+	},
+	{
+		id: "document",
+		accessorKey: "document",
+		meta: "Documento",
+
+		enableColumnFilter: true,
+
+		header: ({ column }) => (
+			<div className="flex flex-col  h-20 gap-2 p-1">
+				<span>Documento</span>
+				<div className="relative w-64">
+					<Icon
+						icon="heroicons-outline:search"
+						className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5"
+					/>
+					<Input
+						onChange={(e) => column.setFilterValue(e.target.value)}
+						className="w-full text-sm border-gray-300 focus:border-gray-500 transition-all pl-10" // pl-10 adiciona espaço para o ícone
+					/>
+				</div>
+			</div>
+		),
+		enableHiding: true,
+
+		cell: ({ row }) => <span>{row.original.document}</span>,
+	},
+	{
+		id: "email",
+		accessorKey: "email",
+		meta: "Email",
+
+		enableHiding: true,
+		enableColumnFilter: true,
+
+		header: ({ column }) => (
+			<div className="flex flex-col  h-20 gap-2 p-1">
+				<span>Email</span>
+				<div className="relative w-64">
+					<Icon
+						icon="heroicons-outline:search"
+						className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5"
+					/>
+					<Input
+						onChange={(e) => column.setFilterValue(e.target.value)}
+						className="w-full text-sm border-gray-300 focus:border-gray-500 transition-all pl-10" // pl-10 adiciona espaço para o ícone
+					/>
+				</div>
+			</div>
+		),
+
+		cell: ({ row }) => <span>{row.getValue("email")}</span>,
+	},
 
 	{
-		accessorKey: "billingCycle",
-		header: "Ciclo de Cobrança",
+		id: "status",
+		accessorKey: "status",
+		meta: "Status",
+
+		enableColumnFilter: true,
+
+		header: ({ column }) => (
+			<div className="flex flex-col  h-20 gap-2 p-1">
+				<span>Status</span>
+				<div className="relative w-64">
+					<Icon
+						icon="heroicons-outline:search"
+						className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5"
+					/>
+					<Input
+						onChange={(e) => column.setFilterValue(e.target.value)}
+						className="w-full text-sm border-gray-300 focus:border-gray-500 transition-all pl-10" // pl-10 adiciona espaço para o ícone
+					/>
+				</div>
+			</div>
+		),
 		enableHiding: true,
+
+		cell: ({ row }) => <StatusBadge status={row.getValue("status")} />,
+	},
+	{
+		id: "paymentGroup",
+		meta: "Grupo de pagamento",
+		accessorKey: "paymentGroup",
+		enableColumnFilter: true,
+
+		header: ({ column }) => (
+			<div className="flex flex-col  h-20 gap-2 p-1">
+				<span>Grupo de pagamento</span>
+				<div className="relative w-64">
+					<Icon
+						icon="heroicons-outline:search"
+						className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5"
+					/>
+					<Input
+						onChange={(e) => column.setFilterValue(e.target.value)}
+						className="w-full text-sm border-gray-300 focus:border-gray-500 transition-all pl-10" // pl-10 adiciona espaço para o ícone
+					/>
+				</div>
+			</div>
+		),
+		enableHiding: true,
+
+		cell: ({ row }) => <span>{row.getValue("paymentGroup")}</span>,
+	},
+	{
+		id: "code",
+		accessorKey: "code",
+		meta: "Código",
+		enableColumnFilter: true,
+
+		header: ({ column }) => (
+			<div className="flex flex-col  h-20 gap-2 p-1">
+				<span>Código</span>
+				<div className="relative w-64">
+					<Icon
+						icon="heroicons-outline:search"
+						className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5"
+					/>
+					<Input
+						onChange={(e) => column.setFilterValue(e.target.value)}
+						className="w-full text-sm border-gray-300 focus:border-gray-500 transition-all pl-10" // pl-10 adiciona espaço para o ícone
+					/>
+				</div>
+			</div>
+		),
+		enableHiding: true,
+
+		cell: ({ row }) => <span>{row.getValue("code")}</span>,
+	},
+
+	{
+		id: "billingCycle",
+		meta: "Ciclo de cobrança",
+		accessorKey: "billingCycle",
+		enableColumnFilter: true,
+
+		header: ({ column }) => (
+			<div className="flex flex-col  h-20 gap-2 p-1">
+				<span>Ciclo de cobrança</span>
+				<div className="relative w-64">
+					<Icon
+						icon="heroicons-outline:search"
+						className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5"
+					/>
+					<Input
+						onChange={(e) => column.setFilterValue(e.target.value)}
+						className="w-full text-sm border-gray-300 focus:border-gray-500 transition-all pl-10" // pl-10 adiciona espaço para o ícone
+					/>
+				</div>
+			</div>
+		),
+		enableHiding: true,
+
 		cell: ({ row }) => <span>{row.getValue("billingCycle")}</span>,
 	},
 	{
+		id: "automaticBilling",
+		meta: "Cobrança automática",
 		accessorKey: "automaticBilling",
-		header: "Cobrança Automática",
+		enableColumnFilter: true,
+
+		header: ({ column }) => (
+			<div className="flex flex-col  h-20 gap-2 p-1">
+				<span>Cobrança automática</span>
+				<div className="relative w-64">
+					<Icon
+						icon="heroicons-outline:search"
+						className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5"
+					/>
+					<Input
+						onChange={(e) => column.setFilterValue(e.target.value)}
+						className="w-full text-sm border-gray-300 focus:border-gray-500 transition-all pl-10" // pl-10 adiciona espaço para o ícone
+					/>
+				</div>
+			</div>
+		),
 		enableHiding: true,
 		cell: ({ row }) => (
 			<span>{row.getValue("automaticBilling") ? "Sim" : "Não"}</span>
 		),
 	},
 	{
+		id: "phone",
 		accessorKey: "phone",
-		header: "Telefone",
+		meta: "Telefone",
+		enableColumnFilter: true,
+
+		header: ({ column }) => (
+			<div className="flex flex-col  h-20 gap-2 p-1">
+				<span>Telefone</span>
+				<div className="relative w-64">
+					<Icon
+						icon="heroicons-outline:search"
+						className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5"
+					/>
+					<Input
+						onChange={(e) => column.setFilterValue(e.target.value)}
+						className="w-full text-sm border-gray-300 focus:border-gray-500 transition-all pl-10" // pl-10 adiciona espaço para o ícone
+					/>
+				</div>
+			</div>
+		),
 		enableHiding: true,
+
 		cell: ({ row }) => <span>{row.getValue("phone")}</span>,
 	},
 	{
+		id: "mobile",
 		accessorKey: "mobile",
-		header: "Celular",
+		meta: "Celular",
+		enableColumnFilter: true,
+
+		header: ({ column }) => (
+			<div className="flex flex-col  h-20 gap-2 p-1">
+				<span>Celular</span>
+				<div className="relative w-64">
+					<Icon
+						icon="heroicons-outline:search"
+						className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5"
+					/>
+					<Input
+						onChange={(e) => column.setFilterValue(e.target.value)}
+						className="w-full text-sm border-gray-300 focus:border-gray-500 transition-all pl-10" // pl-10 adiciona espaço para o ícone
+					/>
+				</div>
+			</div>
+		),
 		enableHiding: true,
+
 		cell: ({ row }) => <span>{row.getValue("mobile")}</span>,
 	},
 	{
+		id: "city",
 		accessorKey: "city",
-		header: "Cidade",
+		meta: "Cidade",
+		header: ({ column }) => (
+			<div className="flex flex-col  h-20 gap-2 p-1">
+				<span>Cidade</span>
+				<div className="relative w-64">
+					<Icon
+						icon="heroicons-outline:search"
+						className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5"
+					/>
+					<Input
+						onChange={(e) => column.setFilterValue(e.target.value)}
+						className="w-full text-sm border-gray-300 focus:border-gray-500 transition-all pl-10" // pl-10 adiciona espaço para o ícone
+					/>
+				</div>
+			</div>
+		),
 		enableHiding: true,
+
 		cell: ({ row }) => <span>{row.original.address.city}</span>,
 	},
 	{
+		id: "state",
 		accessorKey: "state",
-		header: "UF",
+		meta: "Estado",
+		header: ({ column }) => (
+			<div className="flex flex-col  h-20 gap-2 p-1">
+				<span>Estado</span>
+				<div className="relative w-64">
+					<Icon
+						icon="heroicons-outline:search"
+						className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5"
+					/>
+					<Input
+						onChange={(e) => column.setFilterValue(e.target.value)}
+						className="w-full text-sm border-gray-300 focus:border-gray-500 transition-all pl-10" // pl-10 adiciona espaço para o ícone
+					/>
+				</div>
+			</div>
+		),
 		enableHiding: true,
+		enableGlobalFilter: true,
 
 		cell: ({ row }) => <span>{row.original.address.state}</span>,
 	},
 	{
+		id: "registrationDate",
 		accessorKey: "registrationDate",
-		header: "Data de Registro",
+		meta: "Data de regitro",
+		enableColumnFilter: true,
+
+		header: ({ column }) => (
+			<div className="flex flex-col  h-20 gap-2 p-1">
+				<span>Data de registro</span>
+				<div className="relative w-64">
+					<Icon
+						icon="heroicons-outline:search"
+						className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5"
+					/>
+					<Input
+						onChange={(e) => column.setFilterValue(e.target.value)}
+						className="w-full text-sm border-gray-300 focus:border-gray-500 transition-all pl-10" // pl-10 adiciona espaço para o ícone
+					/>
+				</div>
+			</div>
+		),
+
 		enableHiding: true,
 		cell: ({ row }) => {
 			const dateValue = row.getValue("registrationDate");
@@ -138,14 +446,31 @@ export const columns: ColumnDef<Member>[] = [
 		},
 	},
 	{
+		id: "instagram",
 		accessorKey: "instagram",
-		header: "Instagram",
+		meta: "Instagram",
+		enableColumnFilter: true,
 		enableHiding: true,
+		header: ({ column }) => (
+			<div className="flex flex-col  h-20 gap-2 p-1">
+				<span>Instagram</span>
+				<div className="relative w-64">
+					<Icon
+						icon="heroicons-outline:search"
+						className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5"
+					/>
+					<Input
+						onChange={(e) => column.setFilterValue(e.target.value)}
+						className="w-full text-sm border-gray-300 focus:border-gray-500 transition-all pl-10" // pl-10 adiciona espaço para o ícone
+					/>
+				</div>
+			</div>
+		),
 		cell: ({ row }) => {
 			const instagram = row.original.socialMedia?.instagram;
 			return instagram ? (
 				<a href={instagram} target="_blank" rel="noopener noreferrer">
-					reeee
+					{instagram}
 				</a>
 			) : (
 				"-"
@@ -153,14 +478,31 @@ export const columns: ColumnDef<Member>[] = [
 		},
 	},
 	{
+		id: "facebook",
+
 		accessorKey: "facebook",
-		header: "Facebook",
+		meta: "Facebook",
+		header: ({ column }) => (
+			<div className="flex flex-col  h-20 gap-2 p-1">
+				<span>Facebook</span>
+				<div className="relative w-64">
+					<Icon
+						icon="heroicons-outline:search"
+						className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5"
+					/>
+					<Input
+						onChange={(e) => column.setFilterValue(e.target.value)}
+						className="w-full text-sm border-gray-300 focus:border-gray-500 transition-all pl-10" // pl-10 adiciona espaço para o ícone
+					/>
+				</div>
+			</div>
+		),
 
 		cell: ({ row }) => {
 			const facebook = row.original.socialMedia?.facebook;
 			return facebook ? (
 				<a href={facebook} target="_blank" rel="noopener noreferrer">
-					Facebook
+					{facebook}
 				</a>
 			) : (
 				"-"
@@ -168,13 +510,29 @@ export const columns: ColumnDef<Member>[] = [
 		},
 	},
 	{
+		id: "linkedn",
+		meta: "Linkedn",
 		accessorKey: "linkedIn",
-		header: "LinkedIn",
+		header: ({ column }) => (
+			<div className="flex flex-col  h-20 gap-2 p-1 ">
+				<span>Linkedn</span>
+				<div className="relative w-64">
+					<Icon
+						icon="heroicons-outline:search"
+						className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5"
+					/>
+					<Input
+						onChange={(e) => column.setFilterValue(e.target.value)}
+						className="w-full text-sm border-gray-300 focus:border-gray-500 transition-all pl-10"
+					/>
+				</div>
+			</div>
+		),
 		cell: ({ row }) => {
 			const linkedIn = row.original.socialMedia?.linkedIn;
 			return linkedIn ? (
 				<a href={linkedIn} target="_blank" rel="noopener noreferrer">
-					LinkedIn
+					{linkedIn}
 				</a>
 			) : (
 				"-"
@@ -184,6 +542,7 @@ export const columns: ColumnDef<Member>[] = [
 	{
 		id: "actions",
 		header: "Ações",
+
 		cell: ({ row }) => <ActionButtons row={row} />,
 	},
 ];
