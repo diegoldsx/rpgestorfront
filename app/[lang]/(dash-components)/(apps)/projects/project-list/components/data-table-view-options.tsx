@@ -52,7 +52,6 @@ export function DataTableViewOptions<TData>({
 									column.getCanHide()
 							)
 							.map((column) => {
-								console.log(column.columnDef.meta);
 								const columnLabel = column.columnDef.meta as string;
 								return (
 									<li key={column.id}>
