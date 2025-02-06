@@ -1,158 +1,215 @@
-"use client";
-
-import { Badge } from "@/components/ui/badge";
-import { Checkbox } from "@/components/ui/checkbox";
+import { ColumnDef } from "@tanstack/react-table";
+import { format } from "date-fns";
+import { Member } from "../../types/Member";
+import { StatusBadge } from "../status-badge";
+import { Button } from "@/components/ui/button";
+import Link from "next/link";
+import { Icon } from "@iconify/react";
 import { RiMoneyDollarCircleLine } from "react-icons/ri";
 
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { Button } from "@/components/ui/button";
-import { Icon } from "@iconify/react";
-import Link from "next/link";
-import { ColumnDef } from "@tanstack/react-table";
-import { DataTableColumnHeader } from "@/components/common/data-table/table-column-header";
-
-// Tipo para os dados dos membros
-export interface Member {
-	id: number;
-	name?: string;
-	cnpj?: string;
-	cpf?: string;
-	paymentGroup?: string;
-	financialStatus?: string;
-	registrationStatus?: string;
-	status: "ACTIVE" | "INACTIVE";
-}
-
+// Definição das colunas da tabela Nome, CPF, E-mail, Grupo de Pagamento, Situação Cadastral, Situação Financeira,
 export const columns: ColumnDef<Member>[] = [
 	{
-		id: "select",
-		header: ({ table }) => (
-			<Checkbox
-				checked={table.getIsAllPageRowsSelected()}
-				onCheckedChange={(value) => table.toggleAllPageRowsSelected(!!value)}
-				aria-label="Select all"
-				className="translate-y-[2px]"
-			/>
-		),
-		cell: ({ row }) => (
-			<Checkbox
-				checked={row.getIsSelected()}
-				onCheckedChange={(value) => row.toggleSelected(!!value)}
-				aria-label="Select row"
-				className="translate-y-[2px]"
-			/>
-		),
-		enableSorting: false,
-		enableHiding: false,
-	},
-	{
 		accessorKey: "id",
-
 		header: "ID",
-		cell: ({ row }: any) => <span>{row.getValue("id")}</span>,
 		enableHiding: true,
-		enableSorting: true,
+		cell: ({ row }) => <span>{row.getValue("id")}</span>,
 	},
 	{
 		accessorKey: "name",
-		header: "Nome",
-		cell: ({ row }: any) => (
-			<div className="flex gap-2 items-center">
-				<Avatar className=" border border-slate-300 rounded-full">
-					<AvatarImage src="" />
-					<AvatarFallback className="">
-						{row.getValue("name").toString().substring(0, 2).toUpperCase()}
-					</AvatarFallback>
-				</Avatar>
-				<div className="flex flex-col">
-					<span className="text-sm font-medium text-default-600 whitespace-nowrap">
-						{row.getValue("name")}
-					</span>
-				</div>
-			</div>
+		header: "Nome / Razão Social",
+		enableHiding: true,
+		cell: ({ row }) => (
+			<span>
+				{row.original.type === "CPF"
+					? row.original.name
+					: row.original.corporateName}
+			</span>
 		),
-		enableHiding: true,
-		enableSorting: true,
 	},
 	{
-		accessorKey: "cnpj",
-		header: "CNPJ",
-		cell: ({ row }: any) => <span>{row.getValue("cnpj")}</span>,
+		accessorKey: "document",
+		header: "CPF / CNPJ",
 		enableHiding: true,
-		enableSorting: true,
+		cell: ({ row }) => <span>{row.original.document}</span>,
 	},
 	{
-		accessorKey: "cpf",
-		header: "CPF",
-		cell: ({ row }: any) => <span>{row.getValue("cpf")}</span>,
+		accessorKey: "email",
+		header: "E-mail",
 		enableHiding: true,
-		enableSorting: true,
-	},
-	{
-		accessorKey: "paymentGroup",
-		header: "Grupo de Pagamento",
-		cell: ({ row }: any) => <span>{row.getValue("paymentGroup")}</span>,
-		enableHiding: true,
-		enableSorting: true,
-	},
-
-	{
-		accessorKey: "financialStatus",
-		header: "Status Financeiro",
-		cell: ({ row }: any) => <span>{row.getValue("financialStatus")}</span>,
-		enableHiding: true,
-		enableSorting: true,
-	},
-	{
-		accessorKey: "registrationStatus",
-		header: "Situação Cadastral",
-		cell: ({ row }: any) => <span>{row.getValue("registrationStatus")}</span>,
-		enableHiding: true,
-		enableSorting: true,
+		cell: ({ row }) => <span>{row.getValue("email")}</span>,
 	},
 
 	{
 		accessorKey: "status",
-		header: "Status",
-		cell: ({ row }) => (
-			<Badge
-				className="rounded capitalize whitespace-nowrap"
-				variant="soft"
-				color={row.getValue("status") === "ACTIVE" ? "success" : "warning"}
-			>
-				{row.getValue("status") === "ACTIVE" ? "Ativo" : "Inativo"}
-			</Badge>
-		),
+		header: "Situação",
 		enableHiding: true,
-		enableSorting: true,
+		cell: ({ row }) => <StatusBadge status={row.getValue("status")} />,
+	},
+	{
+		accessorKey: "paymentGroup",
+		header: "Grupo de pagamento",
+		enableHiding: true,
+		cell: ({ row }) => <span>{row.getValue("paymentGroup")}</span>,
+	},
+	{
+		accessorKey: "code",
+		header: "Código",
+		enableHiding: true,
+		cell: ({ row }) => <span>{row.getValue("code")}</span>,
+	},
+	{
+		accessorKey: "type",
+		header: "Tipo",
+		enableHiding: true,
+		cell: ({ row }) => (
+			<span>
+				{row.getValue("type") === "CPF" ? "Pessoa Física" : "Pessoa Jurídica"}
+			</span>
+		),
+	},
+
+	{
+		accessorKey: "billingCycle",
+		header: "Ciclo de Cobrança",
+		enableHiding: true,
+		cell: ({ row }) => <span>{row.getValue("billingCycle")}</span>,
+	},
+	{
+		accessorKey: "automaticBilling",
+		header: "Cobrança Automática",
+		enableHiding: true,
+		cell: ({ row }) => (
+			<span>{row.getValue("automaticBilling") ? "Sim" : "Não"}</span>
+		),
+	},
+	{
+		accessorKey: "phone",
+		header: "Telefone",
+		enableHiding: true,
+		cell: ({ row }) => <span>{row.getValue("phone")}</span>,
+	},
+	{
+		accessorKey: "mobile",
+		header: "Celular",
+		enableHiding: true,
+		cell: ({ row }) => <span>{row.getValue("mobile")}</span>,
+	},
+	{
+		accessorKey: "city",
+		header: "Cidade",
+		enableHiding: true,
+		cell: ({ row }) => <span>{row.original.address.city}</span>,
+	},
+	{
+		accessorKey: "state",
+		header: "UF",
+		enableHiding: true,
+
+		cell: ({ row }) => <span>{row.original.address.state}</span>,
+	},
+	{
+		accessorKey: "registrationDate",
+		header: "Data de Registro",
+		enableHiding: true,
+		cell: ({ row }) => {
+			const dateValue = row.getValue("registrationDate");
+
+			if (
+				!dateValue ||
+				(typeof dateValue !== "string" &&
+					typeof dateValue !== "number" &&
+					!(dateValue instanceof Date))
+			) {
+				return "-";
+			}
+
+			try {
+				const parsedDate = new Date(dateValue);
+
+				if (isNaN(parsedDate.getTime())) {
+					return "-";
+				}
+
+				return format(parsedDate, "dd/MM/yyyy");
+			} catch (error) {
+				return "-";
+			}
+		},
+	},
+	{
+		accessorKey: "instagram",
+		header: "Instagram",
+		enableHiding: true,
+		cell: ({ row }) => {
+			const instagram = row.original.socialMedia?.instagram;
+			return instagram ? (
+				<a href={instagram} target="_blank" rel="noopener noreferrer">
+					reeee
+				</a>
+			) : (
+				"-"
+			);
+		},
+	},
+	{
+		accessorKey: "facebook",
+		header: "Facebook",
+
+		cell: ({ row }) => {
+			const facebook = row.original.socialMedia?.facebook;
+			return facebook ? (
+				<a href={facebook} target="_blank" rel="noopener noreferrer">
+					Facebook
+				</a>
+			) : (
+				"-"
+			);
+		},
+	},
+	{
+		accessorKey: "linkedIn",
+		header: "LinkedIn",
+		cell: ({ row }) => {
+			const linkedIn = row.original.socialMedia?.linkedIn;
+			return linkedIn ? (
+				<a href={linkedIn} target="_blank" rel="noopener noreferrer">
+					LinkedIn
+				</a>
+			) : (
+				"-"
+			);
+		},
 	},
 	{
 		id: "actions",
 		header: "Ações",
-		cell: ({ row }) => (
-			<div className="flex gap-3 items-center justify-end">
-				<Button
-					asChild
-					size="icon"
-					className="h-9 w-9 rounded bg-default-100 dark:bg-default-200 text-default-500 hover:text-primary-foreground"
-				>
-					<Link href={`/members/${row.original.id}`}>
-						<Icon icon="heroicons:eye" className="w-5 h-5" />
-					</Link>
-				</Button>
-				<Button
-					size="icon"
-					className="h-9 w-9 rounded bg-default-100 dark:bg-default-200 text-default-500 hover:text-primary-foreground"
-				>
-					<Icon icon="heroicons:pencil-square" className="w-5 h-5" />
-				</Button>
-				<Button
-					size="icon"
-					className="h-9 w-9 rounded bg-default-100 dark:bg-default-200 text-default-500 hover:text-primary-foreground"
-				>
-					<RiMoneyDollarCircleLine className="w-5 h-5" />
-				</Button>
-			</div>
-		),
+		cell: ({ row }) => <ActionButtons row={row} />,
 	},
 ];
+
+const ActionButtons = ({ row }: any) => (
+	<div className="flex gap-3 items-center justify-end">
+		<Button
+			asChild
+			size="icon"
+			className="h-9 w-9 rounded bg-default-100 dark:bg-default-200 text-default-500 hover:text-primary-foreground"
+		>
+			<Link href={`/members/${row.original.id}`}>
+				<Icon icon="heroicons:eye" className="w-5 h-5" />
+			</Link>
+		</Button>
+		<Button
+			size="icon"
+			className="h-9 w-9 rounded bg-default-100 dark:bg-default-200 text-default-500 hover:text-primary-foreground"
+		>
+			<Icon icon="heroicons:pencil-square" className="w-5 h-5" />
+		</Button>
+		<Button
+			size="icon"
+			className="h-9 w-9 rounded bg-default-100 dark:bg-default-200 text-default-500 hover:text-primary-foreground"
+		>
+			<RiMoneyDollarCircleLine className="w-5 h-5" />
+		</Button>
+	</div>
+);

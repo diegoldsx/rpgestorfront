@@ -1,6 +1,6 @@
-'use client';
+"use client";
 
-import * as React from 'react';
+import * as React from "react";
 import {
 	ColumnDef,
 	ColumnFiltersState,
@@ -15,7 +15,7 @@ import {
 	getPaginationRowModel,
 	getSortedRowModel,
 	useReactTable,
-} from '@tanstack/react-table';
+} from "@tanstack/react-table";
 
 import {
 	Table,
@@ -24,11 +24,10 @@ import {
 	TableHead,
 	TableHeader,
 	TableRow,
-} from '@/components/ui/table';
+} from "@/components/ui/table";
 
-import { Member } from './columns';
-import { DataTableToolbar } from './data-table-toolbar';
-import { DataTablePagination } from '@/app/[lang]/(dash-components)/(invoice)/invoice-list/invoice-list-table/components/data-table-pagination';
+import { DataTableToolbar } from "./data-table-toolbar";
+import { DataTablePagination } from "@/app/[lang]/(dash-components)/(invoice)/invoice-list/invoice-list-table/components/data-table-pagination";
 
 interface DataTableProps<TData, TValue> {
 	columns: ColumnDef<TData, TValue>[];
@@ -41,7 +40,28 @@ export function DataTable<TData, TValue>({
 }: DataTableProps<TData, TValue>) {
 	const [rowSelection, setRowSelection] = React.useState<RowSelectionState>({});
 	const [columnVisibility, setColumnVisibility] =
-		React.useState<VisibilityState>({});
+		React.useState<VisibilityState>({
+			id: true,
+			code: false,
+			type: false,
+			document: true,
+			name: true,
+			email: true,
+			paymentGroup: true,
+			status: true,
+			financialStatus: true,
+			billingCycle: false,
+			automaticBilling: false,
+			phone: false,
+			mobile: false,
+			registrationDate: false,
+			city: false,
+			state: false,
+			instagram: false,
+			facebook: false,
+			linkedIn: false,
+			actions: true,
+		});
 	const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
 		[]
 	);
@@ -71,11 +91,11 @@ export function DataTable<TData, TValue>({
 
 	return (
 		<div>
-			<div className='p-6'>
+			<div className="p-6">
 				<DataTableToolbar table={table} />
 			</div>
 
-			<div className='border-t border-default-200'>
+			<div className="border-t border-default-200">
 				<Table>
 					<TableHeader>
 						{table.getHeaderGroups().map((headerGroup) => (
@@ -85,7 +105,7 @@ export function DataTable<TData, TValue>({
 										<TableHead
 											key={header.id}
 											colSpan={header.colSpan}
-											className='whitespace-nowrap h-11'
+											className="whitespace-nowrap h-11"
 										>
 											{header.isPlaceholder
 												? null
@@ -104,13 +124,13 @@ export function DataTable<TData, TValue>({
 							table.getRowModel().rows.map((row) => (
 								<TableRow
 									key={row.id}
-									data-state={row.getIsSelected() && 'selected'}
-									className='hover:bg-default-50'
+									data-state={row.getIsSelected() && "selected"}
+									className="hover:bg-default-50"
 								>
 									{row.getVisibleCells().map((cell) => (
 										<TableCell
 											key={cell.id}
-											className='text-sm text-default-600'
+											className="text-sm text-default-600"
 										>
 											{flexRender(
 												cell.column.columnDef.cell,
@@ -124,7 +144,7 @@ export function DataTable<TData, TValue>({
 							<TableRow>
 								<TableCell
 									colSpan={columns.length}
-									className='h-24 text-center'
+									className="h-24 text-center"
 								>
 									Nenhum registro encontrado.
 								</TableCell>
