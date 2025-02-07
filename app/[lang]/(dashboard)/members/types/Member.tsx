@@ -8,7 +8,7 @@ export interface Member {
 	type: "CPF" | "CNPJ";
 	status: Status;
 	code: string;
-	document: string; // Agora tanto CPF quanto CNPJ compartilham esse campo
+	document: string;
 	corporateName: string | null; // Apenas para CNPJ
 	tradeName: string | null; // Apenas para CNPJ
 	name: string | null; // Apenas para CPF
@@ -26,8 +26,6 @@ export interface Member {
 	municipalRegistration?: string | null; // Apenas para CNPJ
 	billingEmail?: string | null; // Apenas para CNPJ
 	website?: string | null; // Apenas para CNPJ
-	notes?: string | null;
-	additionalInfo?: string | null;
 	socialMedia: SocialMedia;
 	address: Address;
 }

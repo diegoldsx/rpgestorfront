@@ -95,8 +95,6 @@ const generateFakeMember = (): Member => {
 		website: isIndividual
 			? null
 			: faker.helpers.maybe(() => faker.internet.url()),
-		notes: faker.helpers.maybe(() => faker.lorem.sentence()),
-		additionalInfo: faker.helpers.maybe(() => faker.lorem.paragraph()),
 		socialMedia: generateFakeSocialMedia(),
 		address: generateFakeAddress(),
 	};

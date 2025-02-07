@@ -1,63 +1,116 @@
-import { Column, ColumnDef, Row } from "@tanstack/react-table";
-import { Icon } from "@iconify/react";
-import { Input } from "@/components/ui/input";
-import { ChevronDown, ChevronUp } from "lucide-react";
+import { ColumnDef } from "@tanstack/react-table";
+import { format } from "date-fns";
+import { Member } from "../../types/Member";
 
 const columnConfig = [
 	{ id: "id", accessorKey: "id", label: "ID" },
-	{ id: "name", accessorKey: "name", label: "Name" },
-
+	{ id: "name", accessorKey: "name", label: "Nome", onlyFor: "CPF" },
+	{ id: "type", accessorKey: "type", label: "Tipo" },
+	{ id: "status", accessorKey: "status", label: "Status" },
+	{ id: "code", accessorKey: "code", label: "Código" },
+	{ id: "document", accessorKey: "document", label: "Documento" },
 	{
 		id: "corporateName",
 		accessorKey: "corporateName",
-		label: "Nome da Empresa",
+		label: "Razão Social",
+		onlyFor: "CNPJ",
 	},
 	{
-		id: "document",
-		accessorKey: "document",
-		label: "Documento",
+		id: "tradeName",
+		accessorKey: "tradeName",
+		label: "Nome Fantasia",
+		onlyFor: "CNPJ",
 	},
-	{ id: "email", accessorKey: "email", label: "Email" },
+	{
+		id: "birthDate",
+		accessorKey: "birthDate",
+		label: "Nascimento",
+		onlyFor: "CPF",
+	},
+	{ id: "email", accessorKey: "email", label: "E-mail" },
+	{
+		id: "paymentGroup",
+		accessorKey: "paymentGroup",
+		label: "Grupo de Pagamento",
+	},
+	{
+		id: "billingCycle",
+		accessorKey: "billingCycle",
+		label: "Ciclo de Faturamento",
+	},
+	{
+		id: "automaticBilling",
+		accessorKey: "automaticBilling",
+		label: "Faturamento Automático",
+	},
+	{ id: "phone", accessorKey: "phone", label: "Telefone" },
+	{ id: "mobile", accessorKey: "mobile", label: "Celular" },
+	{ id: "linkedTo", accessorKey: "linkedTo", label: "Vinculado a" },
+	{
+		id: "billingAmount",
+		accessorKey: "billingAmount",
+		label: "Valor de Cobrança",
+	},
+	{ id: "password", accessorKey: "password", label: "Senha" },
+	{
+		id: "stateRegistration",
+		accessorKey: "stateRegistration",
+		label: "Inscrição Estadual",
+		onlyFor: "CNPJ",
+	},
+	{
+		id: "municipalRegistration",
+		accessorKey: "municipalRegistration",
+		label: "Inscrição Municipal",
+		onlyFor: "CNPJ",
+	},
+	{
+		id: "billingEmail",
+		accessorKey: "billingEmail",
+		label: "E-mail de Cobrança",
+		onlyFor: "CNPJ",
+	},
+	{ id: "website", accessorKey: "website", label: "Website", onlyFor: "CNPJ" },
 ];
 
-const createColumnConfig = (id: string, label: string, sortable = false) => ({
-	id,
-	accessorKey: id,
-	enableSorting: sortable,
-	enableColumnFilter: true,
-	sortable: false,
-	meta: label,
-
-	header: ({ column }: { column: Column<any> }) => (
-		<div className="flex flex-col h-20 gap-2 p-1 ">
-			<span
-				className="flex items-center gap-2 cursor-pointer select-none"
-				onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-			>
-				<p>{label}</p>
-				{column.getIsSorted() === "asc" ? (
-					<ChevronUp className="h-4 w-4" />
-				) : (
-					<ChevronDown className="h-4 w-4" />
-				)}
+export const columns: ColumnDef<Member>[] = columnConfig.map(
+	({ id, accessorKey, label }) => ({
+		id,
+		accessorKey,
+		enableSorting: false,
+		enableColumnFilter: true,
+		enableHiding: true,
+		meta: label,
+		header: () => (
+			<span className="w-32 text-left">
+				<p className="text-md font-semibold">{label}</p>
 			</span>
+		),
+		cell: ({ row }) => {
+			switch (id) {
+				case "birthDate": {
+					const raw = row.original.birthDate;
+					const date = raw instanceof Date ? raw : new Date(raw);
+					return (
+						<span>
+							{!isNaN(date.getTime()) ? format(date, "dd/MM/yyyy") : "N/A"}
+						</span>
+					);
+				}
 
-			<div className="relative w-64">
-				<Icon
-					icon="heroicons-outline:search"
-					className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5"
-				/>
-				<Input
-					value={(column.getFilterValue() as string) || ""}
-					onChange={(e) => column.setFilterValue(e.target.value)}
-					className="w-full text-sm border-gray-300 focus:border-gray-500 transition-all pl-10 focus:outline-none focus:ring-0"
-				/>
-			</div>
-		</div>
-	),
-	cell: ({ row }: { row: Row<any> }) => <span>{row.getValue(id) || ""}</span>,
-});
-
-export const columns = columnConfig.map((item) =>
-	createColumnConfig(item.id, item.label)
+				default: {
+					const value = row.getValue(id);
+					return (
+						<span>
+							{value != null
+								? typeof value === "object"
+									? JSON.stringify(value)
+									: String(value)
+								: ""}
+						</span>
+					);
+				}
+			}
+		},
+	})
 );
