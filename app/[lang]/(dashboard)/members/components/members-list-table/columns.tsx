@@ -1,6 +1,7 @@
 import { ColumnDef } from "@tanstack/react-table";
 import { format } from "date-fns";
 import { Member } from "../../types/Member";
+import { Badge } from "@/components/ui/badge";
 
 const columnConfig = [
 	{ id: "id", accessorKey: "id", label: "ID" },
@@ -73,6 +74,31 @@ const columnConfig = [
 	{ id: "website", accessorKey: "website", label: "Website", onlyFor: "CNPJ" },
 ];
 
+const getStatusBadge = (status: string) => {
+	const normalizedStatus = status.toLowerCase();
+
+	const statusClasses: Record<string, string> = {
+		ativo: "bg-green-400 text-white ",
+		inativo: "bg-red-400 text-white   ",
+		pendente: "bg-yellow-400 text-black  ",
+	};
+
+	return (
+		<Badge
+			className={`px-2 py-1 rounded ${
+				statusClasses[normalizedStatus] || "bg-gray-500 text-white"
+			}`}
+		>
+			{status}
+		</Badge>
+	);
+};
+
+const formatDate = (dateValue: any) => {
+	const date = dateValue instanceof Date ? dateValue : new Date(dateValue);
+	return !isNaN(date.getTime()) ? format(date, "dd/MM/yyyy") : "N/A";
+};
+
 export const columns: ColumnDef<Member>[] = columnConfig.map(
 	({ id, accessorKey, label }) => ({
 		id,
@@ -86,31 +112,29 @@ export const columns: ColumnDef<Member>[] = columnConfig.map(
 				<p className="text-md font-semibold">{label}</p>
 			</span>
 		),
-		cell: ({ row }) => {
-			switch (id) {
-				case "birthDate": {
-					const raw = row.original.birthDate;
-					const date = raw instanceof Date ? raw : new Date(raw);
-					return (
-						<span>
-							{!isNaN(date.getTime()) ? format(date, "dd/MM/yyyy") : "N/A"}
-						</span>
-					);
-				}
 
-				default: {
-					const value = row.getValue(id);
-					return (
-						<span>
-							{value != null
-								? typeof value === "object"
-									? JSON.stringify(value)
-									: String(value)
-								: ""}
-						</span>
-					);
-				}
+		cell: ({ row }) => {
+			const value = row.getValue(id);
+
+			if (id === "birthDate") {
+				return (
+					<p className="text-left">{formatDate(row.original.birthDate)}</p>
+				);
 			}
+
+			if (id === "status") {
+				return getStatusBadge(value as string);
+			}
+
+			return (
+				<p className="text-left">
+					{value != null
+						? typeof value === "object"
+							? JSON.stringify(value)
+							: String(value)
+						: ""}
+				</p>
+			);
 		},
 	})
 );

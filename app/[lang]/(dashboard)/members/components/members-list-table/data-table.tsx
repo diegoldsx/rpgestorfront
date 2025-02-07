@@ -164,10 +164,13 @@ export function DataTable<TData>({ columns, data }: DataTableProps<Member>) {
 							<TableRow
 								key={row.id}
 								data-state={row.getIsSelected() && "selected"}
-								className="hover:bg-default-50"
+								className="hover:bg-default-50 "
 							>
 								{row.getVisibleCells().map((cell) => (
-									<TableCell key={cell.id} className="text-sm text-default-600">
+									<TableCell
+										key={cell.id}
+										className="text-sm text-default-600 text-left"
+									>
 										{flexRender(cell.column.columnDef.cell, cell.getContext())}
 									</TableCell>
 								))}
