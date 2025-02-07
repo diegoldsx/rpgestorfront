@@ -1,6 +1,6 @@
 "use client";
 
-import * as React from "react";
+import React, { useState } from "react";
 import {
 	ColumnDef,
 	ColumnFiltersState,
@@ -33,40 +33,39 @@ interface DataTableProps<TData, TValue> {
 	columns: ColumnDef<TData, TValue>[];
 	data: TData[];
 }
+const COLUMNS_VISIBILITY = {
+	id: false,
+	code: false,
+	type: true,
+	document: true,
+	corporateName: true,
+	name: true,
+	email: true,
+	paymentGroup: true,
+	status: true,
+	financialStatus: true,
+	billingCycle: false,
+	automaticBilling: false,
+	phone: false,
+	mobile: false,
+	registrationDate: false,
+	city: false,
+	state: false,
+	instagram: false,
+	facebook: false,
+	linkedIn: false,
+	actions: true,
+};
 
 export function DataTable<TData, TValue>({
 	columns,
 	data,
 }: DataTableProps<TData, TValue>) {
-	const [rowSelection, setRowSelection] = React.useState<RowSelectionState>({});
+	const [rowSelection, setRowSelection] = useState<RowSelectionState>({});
 	const [columnVisibility, setColumnVisibility] =
-		React.useState<VisibilityState>({
-			id: false,
-			code: false,
-			type: false,
-			document: true,
-			corporateName: true,
-			name: true,
-			email: true,
-			paymentGroup: true,
-			status: true,
-			financialStatus: true,
-			billingCycle: false,
-			automaticBilling: false,
-			phone: false,
-			mobile: false,
-			registrationDate: false,
-			city: false,
-			state: false,
-			instagram: false,
-			facebook: false,
-			linkedIn: false,
-			actions: true,
-		});
-	const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
-		[]
-	);
-	const [sorting, setSorting] = React.useState<SortingState>([]);
+		useState<VisibilityState>(COLUMNS_VISIBILITY);
+	const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
+	const [sorting, setSorting] = useState<SortingState>([]);
 
 	const table = useReactTable({
 		data,
@@ -89,7 +88,6 @@ export function DataTable<TData, TValue>({
 		getFacetedRowModel: getFacetedRowModel(),
 		getFacetedUniqueValues: getFacetedUniqueValues(),
 	});
-
 	return (
 		<div>
 			<div className="p-6">
