@@ -9,7 +9,7 @@ interface InputFieldProps {
 	name: string;
 	control: any;
 	placeholder?: string;
-	type?: string;
+	type: "text" | "number" | "textarea" | "date" | "select";
 	rules?: object;
 }
 
