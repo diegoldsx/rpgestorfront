@@ -1,8 +1,6 @@
-"use client"
-
-import * as React from "react"
+import * as React from "react";
 import * as LabelPrimitive from "@radix-ui/react-label"
-import { Slot } from "@radix-ui/react-slot"
+import { Slot } from "@radix-ui/react-slot";
 import {
   Controller,
   ControllerProps,
@@ -12,8 +10,9 @@ import {
   useFormContext,
 } from "react-hook-form"
 
-import { cn } from "@/lib/utils"
-import { Label } from "@/components/ui/label"
+import { cn } from "@/lib/utils";
+import { Label } from "@/components/ui/label";
+
 
 const Form = FormProvider
 
@@ -135,17 +134,20 @@ const FormDescription = React.forwardRef<
     <p
       ref={ref}
       id={formDescriptionId}
-      className={cn("text-[0.8rem] text-muted-foreground", className)}
+      className={cn("text-sm text-muted-foreground", className)}
       {...props}
     />
   )
 })
 FormDescription.displayName = "FormDescription"
 
+interface FormMessageProps extends React.HTMLAttributes<HTMLParagraphElement> {
+  tooltip?: boolean
+}
 const FormMessage = React.forwardRef<
   HTMLParagraphElement,
-  React.HTMLAttributes<HTMLParagraphElement>
->(({ className, children, ...props }, ref) => {
+  FormMessageProps
+>(({ className, children, tooltip = false, ...props }, ref) => {
   const { error, formMessageId } = useFormField()
   const body = error ? String(error?.message) : children
 
@@ -157,7 +159,10 @@ const FormMessage = React.forwardRef<
     <p
       ref={ref}
       id={formMessageId}
-      className={cn("text-[0.8rem] font-medium text-destructive", className)}
+      className={cn("text-xs text-destructive leading-none px-1.5 py-2  rounded-0.5", className, {
+        " bg-destructive text-destructive-foreground  inline-block":
+          tooltip,
+      })}
       {...props}
     >
       {body}
