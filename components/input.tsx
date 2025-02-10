@@ -9,7 +9,7 @@ interface InputFieldProps {
 	name: string;
 	control: any;
 	placeholder?: string;
-	type: "text" | "number" | "email" | "password";
+	type: string;
 	rules?: object;
 }
 

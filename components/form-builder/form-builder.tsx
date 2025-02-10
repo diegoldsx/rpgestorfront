@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -35,10 +35,14 @@ interface Field {
 	options?: string[];
 }
 
-const fieldTypes = [
+const fieldTypes: {
+	type: "text" | "textarea" | "select" | "date";
+	label: string;
+	icon: JSX.Element;
+}[] = [
 	{ type: "text", label: "Texto", icon: <FaFont /> },
 	{ type: "textarea", label: "Área de Texto", icon: <FaAlignLeft /> },
-	{ type: "select", label: "Seleção de Opções", icon: <FaList /> },
+	{ type: "select", label: "Seleção Única", icon: <FaList /> },
 	{ type: "date", label: "Data", icon: <FaCalendarAlt /> },
 ];
 
