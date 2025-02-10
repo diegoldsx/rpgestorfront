@@ -4,19 +4,13 @@ import { useForm } from "react-hook-form";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
-import {
-	Select,
-	SelectTrigger,
-	SelectContent,
-	SelectItem,
-	SelectValue,
-} from "@/components/ui/select";
+
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 import { CPFMember } from "../../types/Member";
-import MaskedInput from "@/components/ui/input-mask;
-import InputText from "@/components/ui/input-text";
+
 import SelectField from "@/components/select";
+import InputField from "@/components/input";
 
 export default function CPFMemberForm() {
 	const {
@@ -49,37 +43,12 @@ export default function CPFMemberForm() {
 						<Separator className="my-2" />
 						<div className="grid grid-cols-1 md:grid-cols-2 gap-4">
 							<div>
-								<InputText
-									label="Nome Completo"
-									name="name"
-									control={control}
-									placeholder="Digite seu nome"
-									rules={{ required: "Nome é obrigatório" }}
-								/>
-							</div>
+								<Label htmlFor="name">Nome</Label>
 
-							<div>
-								<Label htmlFor="birthDate">Data de Nascimento</Label>
 								<Input
-									id="birthDate"
-									type="date"
-									{...register("birthDate", { required: true })}
-								/>
-								{errors.birthDate && (
-									<span className="text-red-500 text-sm">
-										Data de nascimento é obrigatória
-									</span>
-								)}
-							</div>
-
-							<div>
-								<MaskedInput
-									label="CPF"
-									name="cpf"
-									mask="999.999.999-99"
-									placeholder="000.000.000-00"
-									control={control}
-									rules={{ required: "O CPF é obrigatório" }}
+									id="name"
+									placeholder="Digite seu nome"
+									{...register("name", { required: true })}
 								/>
 							</div>
 
@@ -167,8 +136,6 @@ export default function CPFMemberForm() {
 									</span>
 								)}
 							</div>
-
-						
 						</div>
 					</div>
 
@@ -176,7 +143,6 @@ export default function CPFMemberForm() {
 						<h2 className="text-lg font-semibold text-gray-700">Endereço</h2>
 						<Separator className="my-2" />
 						<Label htmlFor="address">Endereço Completo</Label>
-						<Input id="address" {...register("address")} />
 					</div>
 
 					<div className="text-center mt-4">
