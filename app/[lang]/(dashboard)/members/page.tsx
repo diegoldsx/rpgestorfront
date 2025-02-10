@@ -1,44 +1,48 @@
-'use client';
+"use client";
+import { useState } from "react";
+import CPFMemberForm from "./register/components/CPFForm";
+import CNPJMemberForm from "./register/components/CNPJForm";
 
-import { Fragment } from 'react';
-import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Breadcrumbs, BreadcrumbItem } from '@/components/ui/breadcrumbs';
-import { Icon } from '@iconify/react';
-import PromotionalCard from './components/promotional-card';
-import MembersStats from './components/members-stats';
-import MembersListTable from './components/members-list-table';
-import Link from 'next/link';
-import { ImportIcon, LucideImport, Plus } from 'lucide-react';
-import { HeadingPages } from '@/components/common/heading/heading-pages';
+const FormSwitcher = () => {
+	const [formType, setFormType] = useState("cpf");
 
-const MembersPage = () => {
 	return (
-		<Fragment>
-			<HeadingPages
-				title='Associados'
-				breadcrumbs={{ title: 'Associados', href: '/members' }}
-				actions={{
-					primary: { text: 'Importar', href: '/members/import' },
-					secondary: { text: 'Cadastrar Associado', href: '/members/create' },
-				}}
-			/>
+		<div className="max-w-5xl mx-auto p-6 bg-white shadow-md rounded-lg">
+			<h2 className="text-2xl font-bold text-gray-800 mb-6 text-center">
+				Selecione o Tipo de Cadastro
+			</h2>
 
-			<Card className='mt-3'>
-				<CardHeader className='flex-row items-center border-none mb-0'></CardHeader>
-				<CardContent className='pt-0 px-6'>
-					<div className='grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 2xl:grid-cols-5 gap-4'>
-						<MembersStats />
-					</div>
-				</CardContent>
-			</Card>
-			<Card className='mt-6'>
-				<CardContent className='p-0'>
-					<MembersListTable />
-				</CardContent>
-			</Card>
-		</Fragment>
+			{/* Radio Button Group */}
+			<div className="flex justify-center space-x-6 mb-6">
+				<label className="flex items-center space-x-2 cursor-pointer">
+					<input
+						type="radio"
+						value="cpf"
+						checked={formType === "cpf"}
+						onChange={() => setFormType("cpf")}
+						className="w-5 h-5 text-blue-600 border-gray-300 focus:ring-blue-500"
+					/>
+					<span className="text-gray-700">CPF</span>
+				</label>
+
+				<label className="flex items-center space-x-2 cursor-pointer">
+					<input
+						type="radio"
+						value="cnpj"
+						checked={formType === "cnpj"}
+						onChange={() => setFormType("cnpj")}
+						className="w-5 h-5 text-blue-600 border-gray-300 focus:ring-blue-500"
+					/>
+					<span className="text-gray-700">CNPJ</span>
+				</label>
+			</div>
+
+			{/* Renderiza CPF ou CNPJ Form */}
+			<div className="mt-8">
+				{formType === "cpf" ? <CPFMemberForm /> : <CNPJMemberForm />}
+			</div>
+		</div>
 	);
 };
 
-export default MembersPage;
+export default FormSwitcher;
