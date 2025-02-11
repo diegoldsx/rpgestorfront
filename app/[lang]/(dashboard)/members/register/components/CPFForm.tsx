@@ -1,20 +1,15 @@
 "use client";
 
 import { useForm } from "react-hook-form";
-import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { Label } from "@/components/ui/label";
-
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Separator } from "@/components/ui/separator";
 import { CPFMember } from "../../types/Member";
-
-import SelectField from "@/components/select";
-import InputField from "@/components/input";
+import SelectField from "@/components/select-field";
+import TextField from "@/components/text-field";
+import Section from "./Section";
+import states from "../../types/states";
 
 export default function CPFMemberForm() {
 	const {
-		register,
 		handleSubmit,
 		reset,
 		control,
@@ -27,131 +22,123 @@ export default function CPFMemberForm() {
 	};
 
 	return (
-		<Card className="max-w-7xl mx-auto p-6 shadow-md bg-white">
-			<CardHeader>
-				<CardTitle className="text-center text-xl font-bold text-gray-800">
-					Cadastro de Pessoa Física
-				</CardTitle>
-			</CardHeader>
+		<div className="max-w-7xl mx-auto p-6 shadow-md bg-white">
+			<form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
+				<Section title="Informações Pessoais">
+					<TextField
+						label="Nome"
+						name="name"
+						control={control}
+						placeholder="Digite seu nome"
+						rules={{ required: "Nome é obrigatório" }}
+					/>
+					<SelectField
+						label="Status"
+						name="status"
+						control={control}
+						placeholder="Selecione o status financeiro"
+						options={[
+							{ value: "ativo", label: "Ativo" },
+							{ value: "inativo", label: "Inativo" },
+							{ value: "pendente", label: "Pendente" },
+						]}
+						rules={{ required: "O status é obrigatório" }}
+					/>
+					<TextField
+						label="Data de Nascimento"
+						name="birthDate"
+						control={control}
+						placeholder="Digite sua data de nascimento"
+						type="date"
+						rules={{ required: "Data de nascimento é obrigatória" }}
+					/>
+				</Section>
 
-			<CardContent>
-				<form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
-					<div>
-						<h2 className="text-lg font-semibold text-gray-700">
-							Informações Pessoais
-						</h2>
-						<Separator className="my-2" />
-						<div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-							<div>
-								<Label htmlFor="name">Nome</Label>
+				<Section title="Informações de Contato">
+					<TextField
+						label="Email"
+						name="email"
+						control={control}
+						placeholder="Digite seu email"
+						type="email"
+						rules={{ required: "Email é obrigatório" }}
+					/>
+					<TextField
+						label="Telefone"
+						name="phone"
+						control={control}
+						placeholder="Digite seu telefone"
+						type="tel"
+						rules={{ required: "Telefone é obrigatório" }}
+					/>
+					<TextField
+						label="Celular"
+						name="mobile"
+						control={control}
+						placeholder="Digite seu celular"
+						type="tel"
+						rules={{ required: "Celular é obrigatório" }}
+					/>
+				</Section>
 
-								<Input
-									id="name"
-									placeholder="Digite seu nome"
-									{...register("name", { required: true })}
-								/>
-							</div>
+				<Section title="Endereço">
+					<TextField
+						label="CEP"
+						name="cep"
+						control={control}
+						placeholder="Digite seu CEP"
+						rules={{ required: "CEP é obrigatório" }}
+					/>
+					<TextField
+						label="Rua"
+						name="street"
+						control={control}
+						placeholder="Digite sua rua"
+						rules={{ required: "Rua é obrigatória" }}
+					/>
+					<TextField
+						label="Número"
+						name="number"
+						control={control}
+						placeholder="Digite o número"
+						rules={{ required: "Número é obrigatório" }}
+					/>
+					<TextField
+						label="Complemento"
+						name="complement"
+						control={control}
+						placeholder="Digite o complemento (opcional)"
+					/>
+					<TextField
+						label="Bairro"
+						name="neighborhood"
+						control={control}
+						placeholder="Digite seu bairro"
+						rules={{ required: "Bairro é obrigatório" }}
+					/>
+					<TextField
+						label="Cidade"
+						name="city"
+						control={control}
+						placeholder="Digite sua cidade"
+						rules={{ required: "Cidade é obrigatória" }}
+					/>
+					<SelectField
+						label="Estado"
+						name="state"
+						control={control}
+						placeholder="Selecione seu estado"
+						options={states}
+						rules={{ required: "Estado é obrigatório" }}
+					/>
+				</Section>
 
-							<div>
-								<SelectField
-									label="Status"
-									name="status"
-									control={control}
-									placeholder="Selecione o status"
-									options={[
-										{ value: "ativo", label: "Ativo" },
-										{ value: "inativo", label: "Inativo" },
-										{ value: "pendente", label: "Pendente" },
-									]}
-									rules={{ required: "O status é obrigatório" }}
-								/>
-							</div>
-						</div>
-					</div>
-
-					{/* Contato */}
-					<div>
-						<h2 className="text-lg font-semibold text-gray-700">Contato</h2>
-						<Separator className="my-2" />
-						<div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-							<div>
-								<Label htmlFor="email">Email</Label>
-								<Input
-									id="email"
-									type="email"
-									{...register("email", { required: true })}
-								/>
-								{errors.email && (
-									<span className="text-red-500 text-sm">
-										Email é obrigatório
-									</span>
-								)}
-							</div>
-
-							<div>
-								<Label htmlFor="phone">Telefone</Label>
-								<Input
-									id="phone"
-									type="tel"
-									{...register("phone", { required: true })}
-								/>
-								{errors.phone && (
-									<span className="text-red-500 text-sm">
-										Telefone é obrigatório
-									</span>
-								)}
-							</div>
-
-							<div>
-								<Label htmlFor="mobile">Celular</Label>
-								<Input
-									id="mobile"
-									type="tel"
-									{...register("mobile", { required: true })}
-								/>
-								{errors.mobile && (
-									<span className="text-red-500 text-sm">
-										Celular é obrigatório
-									</span>
-								)}
-							</div>
-						</div>
-					</div>
-
-					<div>
-						<h2 className="text-lg font-semibold text-gray-700">
-							Dados Financeiros
-						</h2>
-						<Separator className="my-2" />
-						<div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-							<div>
-								<Label htmlFor="paymentGroup">Grupo de Pagamento</Label>
-								<Input
-									id="paymentGroup"
-									{...register("paymentGroup", { required: true })}
-								/>
-								{errors.paymentGroup && (
-									<span className="text-red-500 text-sm">
-										Grupo de pagamento é obrigatório
-									</span>
-								)}
-							</div>
-						</div>
-					</div>
-
-					<div>
-						<h2 className="text-lg font-semibold text-gray-700">Endereço</h2>
-						<Separator className="my-2" />
-						<Label htmlFor="address">Endereço Completo</Label>
-					</div>
-
-					<div className="text-center mt-4">
-						<Button type="submit" className="w-full md:w-auto px-6 py-2">
-							Cadastrar Pessoa Física
-						</Button>
-					</div>
-				</form>
-			</CardContent>
-		</Card>
+				<div className="text-center mt-4">
+					<Button type="submit" className="w-full md:w-auto px-6 py-2">
+						Cadastrar Pessoa Física
+					</Button>
+				</div>
+			</form>
+		</div>
 	);
 }
