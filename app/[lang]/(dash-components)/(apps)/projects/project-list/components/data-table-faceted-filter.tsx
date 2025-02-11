@@ -1,9 +1,5 @@
-"use client";
-
 import * as React from "react";
 import { Check } from "lucide-react";
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
 import {
 	Command,
 	CommandEmpty,
@@ -18,35 +14,44 @@ import {
 	PopoverContent,
 	PopoverTrigger,
 } from "@/components/ui/popover";
+import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
-import { Column } from "@tanstack/react-table";
-
-interface DataTableFacetedFilterProps {
-	column: Column<any, unknown>;
-	title: string;
-	options: { value: string; label: string }[];
-}
 
 export function DataTableFacetedFilter({
 	column,
 	title,
 	options,
-}: DataTableFacetedFilterProps) {
-	const selectedValues = new Set(column.getFilterValue() as string[]);
+}: {
+	column: any;
+	title: string;
+	options: { value: string; label: string }[];
+}) {
+	const selectedValues = new Set(column?.getFilterValue() ?? []);
+
+	const selectedLabels = options
+		.filter((option) => selectedValues.has(option.value))
+		.map((option) => option.label);
 
 	return (
 		<Popover>
 			<PopoverTrigger asChild>
 				<Button variant="outline" size="sm" className="w-full">
 					{title}
-					{selectedValues.size > 0 && (
-						<>
-							<Separator orientation="vertical" className="mx-2 h-4" />
-							<Badge variant="outline" className="rounded-sm px-1 font-normal">
-								{selectedValues.size} selecionado(s)
-							</Badge>
-						</>
-					)}
+					{selectedLabels.length > 0 ? (
+						<div className="ml-2 flex flex-wrap items-center gap-1">
+							{selectedLabels.slice(0, 2).map((label) => (
+								<Badge key={label} className="rounded-sm px-1 font-normal">
+									{label}
+								</Badge>
+							))}
+							{selectedLabels.length > 2 && (
+								<Badge className="rounded-sm px-1 font-normal">
+									+{selectedLabels.length - 2}
+								</Badge>
+							)}
+						</div>
+					) : null}
 				</Button>
 			</PopoverTrigger>
 			<PopoverContent className="max-w-[200px] p-0">
@@ -67,14 +72,16 @@ export function DataTableFacetedFilter({
 												selectedValues.add(option.value);
 											}
 											const filterValues = Array.from(selectedValues);
-											column.setFilterValue(
+											column?.setFilterValue(
 												filterValues.length ? filterValues : undefined
 											);
 										}}
 									>
 										<div
-											className={`mr-2 h-4 w-4 rounded-sm border ${
-												isSelected ? "bg-primary text-primary-foreground" : ""
+											className={`mr-2 flex h-4 w-4 items-center justify-center rounded-sm border ${
+												isSelected
+													? "bg-primary text-primary-foreground"
+													: "opacity-50"
 											}`}
 										>
 											{isSelected && <Check className="h-4 w-4" />}
@@ -89,7 +96,8 @@ export function DataTableFacetedFilter({
 								<CommandSeparator />
 								<CommandGroup>
 									<CommandItem
-										onSelect={() => column.setFilterValue(undefined)}
+										onSelect={() => column?.setFilterValue(undefined)}
+										className="justify-center"
 									>
 										Limpar filtros
 									</CommandItem>

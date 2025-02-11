@@ -13,6 +13,18 @@ import { Member } from "../../types/Member";
 import { DataTableViewOptions } from "@/app/[lang]/(dash-components)/(apps)/projects/project-list/components/data-table-view-options";
 import { DataTableFacetedFilter } from "@/app/[lang]/(dash-components)/(apps)/projects/project-list/components/data-table-faceted-filter";
 
+export const paymentGroupOptions = [
+	{ value: "Grupo Alfa", label: "Grupo Alfa" },
+	{ value: "Grupo Beta", label: "Grupo Beta" },
+];
+
+export const billingCycleOptions = [
+	{ value: "mensal", label: "Mensal" },
+	{ value: "bimestral", label: "Bimestral" },
+	{ value: "trimestral", label: "Trimestral" },
+	{ value: "anual", label: "Anual" },
+];
+
 export const financialStatusOptions = [
 	{ value: "ativo", label: "Ativo" },
 	{ value: "inativo", label: "Inativo" },
@@ -24,6 +36,8 @@ interface DataTableToolbarProps {
 
 export function DataTableToolbar({ table }: DataTableToolbarProps) {
 	const financialStatusColumn = table.getColumn("financialStatus");
+	const billingCycleColumn = table.getColumn("billingCycle");
+	const paymentGroupColumn = table.getColumn("paymentGroup");
 
 	return (
 		<div className="flex flex-col md:flex-row gap-4">
@@ -51,6 +65,20 @@ export function DataTableToolbar({ table }: DataTableToolbarProps) {
 						column={financialStatusColumn}
 						title="Status Financeiro"
 						options={financialStatusOptions}
+					/>
+				)}
+				{paymentGroupColumn && (
+					<DataTableFacetedFilter
+						column={paymentGroupColumn}
+						title="Grupo de Pagamento"
+						options={paymentGroupOptions}
+					/>
+				)}
+				{billingCycleColumn && (
+					<DataTableFacetedFilter
+						column={billingCycleColumn}
+						title="Ciclo de Cobrança"
+						options={billingCycleOptions}
 					/>
 				)}
 				<DataTableViewOptions table={table} />

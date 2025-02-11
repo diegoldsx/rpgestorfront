@@ -39,7 +39,7 @@ export const visibilityState: VisibilityState = {
 	birthDate: false,
 	email: true,
 	paymentGroup: true,
-	billingCycle: false,
+	billingCycle: true,
 	financialStatus: true,
 
 	city: false,
