@@ -5,30 +5,28 @@ import { Badge } from "@/components/ui/badge";
 
 const columnConfig = [
 	{ id: "id", accessorKey: "id", label: "ID" },
-	{ id: "name", accessorKey: "name", label: "Nome", onlyFor: "CPF" },
 	{ id: "type", accessorKey: "type", label: "Tipo" },
-	{ id: "status", accessorKey: "status", label: "Status" },
-	{ id: "code", accessorKey: "code", label: "Código" },
-	{ id: "document", accessorKey: "document", label: "Documento" },
+	{ id: "name", accessorKey: "name", label: "Nome", onlyFor: "cpf" },
 	{
 		id: "corporateName",
 		accessorKey: "corporateName",
 		label: "Razão Social",
-		onlyFor: "CNPJ",
+		onlyFor: "cnpj",
 	},
+	{ id: "email", accessorKey: "email", label: "E-mail" },
+	{ id: "document", accessorKey: "document", label: "Documento" },
 	{
 		id: "tradeName",
 		accessorKey: "tradeName",
 		label: "Nome Fantasia",
-		onlyFor: "CNPJ",
+		onlyFor: "cnpj",
 	},
 	{
 		id: "birthDate",
 		accessorKey: "birthDate",
 		label: "Nascimento",
-		onlyFor: "CPF",
+		onlyFor: "cpf",
 	},
-	{ id: "email", accessorKey: "email", label: "E-mail" },
 	{
 		id: "paymentGroup",
 		accessorKey: "paymentGroup",
@@ -39,60 +37,16 @@ const columnConfig = [
 		accessorKey: "billingCycle",
 		label: "Ciclo de Faturamento",
 	},
-	{
-		id: "automaticBilling",
-		accessorKey: "automaticBilling",
-		label: "Faturamento Automático",
-	},
 	{ id: "phone", accessorKey: "phone", label: "Telefone" },
 	{ id: "mobile", accessorKey: "mobile", label: "Celular" },
-	{ id: "linkedTo", accessorKey: "linkedTo", label: "Vinculado a" },
-	{
-		id: "billingAmount",
-		accessorKey: "billingAmount",
-		label: "Valor de Cobrança",
-	},
-	{ id: "password", accessorKey: "password", label: "Senha" },
-	{
-		id: "stateRegistration",
-		accessorKey: "stateRegistration",
-		label: "Inscrição Estadual",
-		onlyFor: "CNPJ",
-	},
-	{
-		id: "municipalRegistration",
-		accessorKey: "municipalRegistration",
-		label: "Inscrição Municipal",
-		onlyFor: "CNPJ",
-	},
-	{
-		id: "billingEmail",
-		accessorKey: "billingEmail",
-		label: "E-mail de Cobrança",
-		onlyFor: "CNPJ",
-	},
-	{ id: "website", accessorKey: "website", label: "Website", onlyFor: "CNPJ" },
+	{ id: "cep", accessorKey: "cep", label: "CEP" },
+	{ id: "street", accessorKey: "street", label: "Rua" },
+	{ id: "number", accessorKey: "number", label: "Número" },
+	{ id: "complement", accessorKey: "complement", label: "Complemento" },
+	{ id: "neighborhood", accessorKey: "neighborhood", label: "Bairro" },
+	{ id: "city", accessorKey: "city", label: "Cidade" },
+	{ id: "state", accessorKey: "state", label: "Estado" },
 ];
-
-const getStatusBadge = (status: string) => {
-	const normalizedStatus = status.toLowerCase();
-
-	const statusClasses: Record<string, string> = {
-		ativo: "bg-green-400 text-white ",
-		inativo: "bg-red-400 text-white   ",
-		pendente: "bg-yellow-400 text-black  ",
-	};
-
-	return (
-		<Badge
-			className={`px-2 py-1 rounded ${
-				statusClasses[normalizedStatus] || "bg-gray-500 text-white"
-			}`}
-		>
-			{status}
-		</Badge>
-	);
-};
 
 const formatDate = (dateValue: any) => {
 	const date = dateValue instanceof Date ? dateValue : new Date(dateValue);
@@ -112,18 +66,11 @@ export const columns: ColumnDef<Member>[] = columnConfig.map(
 				<p className="text-md font-semibold">{label}</p>
 			</span>
 		),
-
 		cell: ({ row }) => {
 			const value = row.getValue(id);
 
 			if (id === "birthDate") {
-				return (
-					<p className="text-left">{formatDate(row.original.birthDate)}</p>
-				);
-			}
-
-			if (id === "status") {
-				return getStatusBadge(value as string);
+				return <p>{formatDate(value)}</p>;
 			}
 
 			return (

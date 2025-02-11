@@ -5,7 +5,6 @@ import { DataTable } from "./data-table";
 import { generateFakeMembers } from "../../data/data";
 
 const data = generateFakeMembers(40);
-console.log(data);
 export default function MembersListTable() {
 	return (
 		<Fragment>
