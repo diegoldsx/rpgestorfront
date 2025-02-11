@@ -1,0 +1,6 @@
+id,email,phone,mobile,financialStatus,billingCycle,paymentGroup,paymentMethod,password,cep,street,number,complement,neighborhood,state,city,document,type,name,birthDate,corporateName,tradeName
+1,john.doe@example.com,(11) 1234-5678,(11) 98765-4321,active,mensal,Grupo Alfa,pix,securepassword1,12345-678,Rua das Flores,123,Apto 45,Centro,SP,São Paulo,12345678901,cpf,John Doe,1985-07-15,,
+2,jane.smith@example.com,(21) 8765-4321,(21) 99876-5432,inactive,anual,Grupo Beta,boleto,securepassword2,23456-789,Avenida Brasil,456,Bloco B,Jardim,RJ,Rio de Janeiro,98765432100,cpf,Jane Smith,1990-03-25,,
+3,michael.brown@example.com,(31) 1357-2468,(31) 91234-5678,pending,trimestral,Grupo Alfa,pix,securepassword3,34567-890,Rua Minas,789,Casa,Bairro Novo,MG,Belo Horizonte,11122233344,cpf,Michael Brown,1978-11-05,,
+4,emily.jones@example.com,(41) 2468-1357,(41) 98765-1234,active,bimestral,Grupo Beta,boleto,securepassword4,45678-901,Alameda Santos,101,Sala 12,Centro,PR,Curitiba,55566677788,cnpj,,,Emily Jones Ltda,Emily's Boutique
+5,robert.wilson@example.com,(51) 3698-1472,(51) 99876-4321,inactive,mensal,Grupo Alfa,pix,securepassword5,56789-012,Rua das Palmeiras,321,Cobertura,Praia,RS,Porto Alegre,99988877766,cnpj,,,Wilson Corp,Wilson Services
