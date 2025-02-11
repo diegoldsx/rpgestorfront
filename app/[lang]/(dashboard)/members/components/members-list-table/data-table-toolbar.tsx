@@ -9,14 +9,22 @@ import {
 	SelectTrigger,
 	SelectValue,
 } from "@/components/ui/select";
-import { DataTableViewOptions } from "@/app/[lang]/(dash-components)/(apps)/projects/project-list/components/data-table-view-options";
 import { Member } from "../../types/Member";
+import { DataTableViewOptions } from "@/app/[lang]/(dash-components)/(apps)/projects/project-list/components/data-table-view-options";
+import { DataTableFacetedFilter } from "@/app/[lang]/(dash-components)/(apps)/projects/project-list/components/data-table-faceted-filter";
 
+export const financialStatusOptions = [
+	{ value: "ativo", label: "Ativo" },
+	{ value: "inativo", label: "Inativo" },
+	{ value: "pendente", label: "Pendente" },
+];
 interface DataTableToolbarProps {
 	table: Table<Member>;
 }
 
 export function DataTableToolbar({ table }: DataTableToolbarProps) {
+	const financialStatusColumn = table.getColumn("financialStatus");
+
 	return (
 		<div className="flex flex-col md:flex-row gap-4">
 			<div className="flex-1 flex flex-col sm:flex-row sm:items-center gap-3">
@@ -36,7 +44,15 @@ export function DataTableToolbar({ table }: DataTableToolbarProps) {
 					</Select>
 				</div>
 			</div>
+
 			<div className="flex-none flex flex-col sm:flex-row sm:items-center gap-4">
+				{financialStatusColumn && (
+					<DataTableFacetedFilter
+						column={financialStatusColumn}
+						title="Status Financeiro"
+						options={financialStatusOptions}
+					/>
+				)}
 				<DataTableViewOptions table={table} />
 			</div>
 		</div>

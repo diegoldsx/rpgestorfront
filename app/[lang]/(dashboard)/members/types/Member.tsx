@@ -5,7 +5,7 @@ interface BaseMember {
 	email: string;
 	phone?: string;
 	mobile?: string;
-	financialStatus: "active" | "inactive" | "pending";
+	financialStatus: "ativo" | "inativo" | "pendente";
 	billingCycle: "mensal" | "bimestral" | "trimestral" | "anual";
 	paymentGroup: "Grupo Alfa" | "Grupo Beta";
 	paymentMethod: "pix" | "boleto";

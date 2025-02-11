@@ -43,9 +43,9 @@ function generateFakeMember(): Member {
 		phone: faker.phone.number(), // Usando a forma recomendada
 		mobile: faker.phone.number(),
 		financialStatus: faker.helpers.arrayElement([
-			"active",
-			"inactive",
-			"pending",
+			"ativo",
+			"inativo",
+			"pendente",
 		]),
 		billingCycle: faker.helpers.arrayElement([
 			"mensal",
