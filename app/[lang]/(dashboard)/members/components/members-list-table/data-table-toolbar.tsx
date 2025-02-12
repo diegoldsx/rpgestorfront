@@ -41,7 +41,7 @@ export function DataTableToolbar({ table }: DataTableToolbarProps) {
 	const paymentGroupColumn = table.getColumn("paymentGroup");
 
 	return (
-		<div className="flex gap-4">
+		<div className="flex gap-4 p-2">
 			<div className="flex-1 flex flex-col sm:flex-row sm:items-center gap-3">
 				<div className="flex items-center gap-3">
 					<span className="text-base font-medium text-default-600">Exibir</span>
@@ -60,7 +60,7 @@ export function DataTableToolbar({ table }: DataTableToolbarProps) {
 				</div>
 			</div>
 
-			<div className="flex-none flex flex-col sm:flex-row sm:items-center gap-4">
+			{/* <div className="flex-none flex flex-col sm:flex-row sm:items-center gap-4">
 				{financialStatusColumn && (
 					<DataTableFacetedFilter
 						column={financialStatusColumn}
@@ -82,7 +82,7 @@ export function DataTableToolbar({ table }: DataTableToolbarProps) {
 						options={billingCycleOptions}
 					/>
 				)}
-			</div>
+			</div> */}
 			<DataTableViewOptions table={table} />
 		</div>
 	);
