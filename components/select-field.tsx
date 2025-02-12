@@ -12,10 +12,10 @@ import { Label } from "@/components/ui/label";
 import { Controller } from "react-hook-form";
 
 interface SelectFieldProps {
-	label: string;
-	name: string;
-	control: any; // Control do React Hook Form
-	options: { value: string; label: string }[]; // Lista de opções
+	label?: string;
+	name?: string;
+	control?: any; // Control do React Hook Form
+	options?: { value: string; label: string }[]; // Lista de opções
 	placeholder?: string;
 	rules?: object; // Regras de validação (React Hook Form)
 }

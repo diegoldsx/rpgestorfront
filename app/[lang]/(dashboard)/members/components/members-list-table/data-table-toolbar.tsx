@@ -12,6 +12,7 @@ import {
 import { Member } from "../../types/Member";
 import { DataTableViewOptions } from "@/app/[lang]/(dash-components)/(apps)/projects/project-list/components/data-table-view-options";
 import { DataTableFacetedFilter } from "@/app/[lang]/(dash-components)/(apps)/projects/project-list/components/data-table-faceted-filter";
+import { DataTableFilter } from "./data-table-filter";
 
 export const paymentGroupOptions = [
 	{ value: "Grupo Alfa", label: "Grupo Alfa" },
@@ -40,7 +41,7 @@ export function DataTableToolbar({ table }: DataTableToolbarProps) {
 	const paymentGroupColumn = table.getColumn("paymentGroup");
 
 	return (
-		<div className="flex flex-col md:flex-row gap-4">
+		<div className="flex gap-4">
 			<div className="flex-1 flex flex-col sm:flex-row sm:items-center gap-3">
 				<div className="flex items-center gap-3">
 					<span className="text-base font-medium text-default-600">Exibir</span>
@@ -81,8 +82,8 @@ export function DataTableToolbar({ table }: DataTableToolbarProps) {
 						options={billingCycleOptions}
 					/>
 				)}
-				<DataTableViewOptions table={table} />
 			</div>
+			<DataTableViewOptions table={table} />
 		</div>
 	);
 }

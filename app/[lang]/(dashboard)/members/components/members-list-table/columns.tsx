@@ -24,7 +24,7 @@ export const billingCycleOptions = [
 
 export const columns: ColumnDef<Member>[] = [
 	{
-		id: "select-col",
+		id: "select",
 		enableSorting: false,
 		enableColumnFilter: false,
 		enableHiding: false,
@@ -45,7 +45,6 @@ export const columns: ColumnDef<Member>[] = [
 		id: "id",
 		accessorKey: "id",
 		header: "Id",
-		enableColumnFilter: true,
 		cell: ({ row }: CellContext<Member, any>) => (
 			<div className="text-left px-2 py-1">{row.getValue("id")}</div>
 		),
@@ -64,7 +63,7 @@ export const columns: ColumnDef<Member>[] = [
 		id: "type",
 		accessorKey: "type",
 		header: "Tipo",
-		enableColumnFilter: true,
+		enableColumnFilter: false,
 
 		cell: ({ row }: CellContext<Member, any>) => {
 			const type = row.getValue<string>("type");
@@ -118,7 +117,8 @@ export const columns: ColumnDef<Member>[] = [
 	{
 		id: "billingCycle",
 		accessorKey: "billingCycle",
-		header: "Ciclo de Faturamento",
+		header: "Cobrança",
+		enableColumnFilter: true,
 
 		filterFn: (row, columnId, filterValue) => {
 			if (!filterValue) return true;
@@ -144,26 +144,12 @@ export const columns: ColumnDef<Member>[] = [
 			return <div className="text-left">{label}</div>;
 		},
 	},
-	{
-		id: "billingCycle",
-		accessorKey: "billingCycle",
-		header: "Ciclo de Faturamento",
-		filterFn: (row, columnId, filterValue) => {
-			if (!filterValue) return true;
-			const cellValue = row.getValue(columnId);
-			return filterValue.includes(cellValue);
-		},
-		cell: ({ row }: CellContext<Member, any>) => {
-			const cycle = row.getValue<string>("billingCycle");
-			const label = billingCycleOptions.find((op) => op.value === cycle)?.label;
-			return <div className="text-left">{label}</div>;
-		},
-	},
+
 	{
 		id: "birthDate",
 		accessorKey: "birthDate",
 		header: "Data de Nascimento",
-		enableColumnFilter: true,
+		enableColumnFilter: false,
 
 		cell: ({ row }: CellContext<Member, any>) => {
 			const birthDate = row.getValue<string>("birthDate");
@@ -176,7 +162,7 @@ export const columns: ColumnDef<Member>[] = [
 		id: "cep",
 		accessorKey: "cep",
 		header: "CEP",
-		enableColumnFilter: true,
+		enableColumnFilter: false,
 
 		cell: ({ row }: CellContext<Member, any>) => (
 			<div className="text-left">{row.getValue("cep")}</div>
@@ -186,7 +172,7 @@ export const columns: ColumnDef<Member>[] = [
 		id: "city",
 		accessorKey: "city",
 		header: "Cidade",
-		enableColumnFilter: true,
+		enableColumnFilter: false,
 
 		cell: ({ row }: CellContext<Member, any>) => (
 			<div className="text-left">{row.getValue("city")}</div>
@@ -196,7 +182,7 @@ export const columns: ColumnDef<Member>[] = [
 		id: "state",
 		accessorKey: "state",
 		header: "Estado",
-		enableColumnFilter: true,
+		enableColumnFilter: false,
 
 		cell: ({ row }: CellContext<Member, any>) => (
 			<div className="text-left">{row.getValue("state")}</div>
@@ -206,7 +192,7 @@ export const columns: ColumnDef<Member>[] = [
 		id: "document",
 		accessorKey: "document",
 		header: "Documento",
-		enableColumnFilter: true,
+		enableColumnFilter: false,
 
 		cell: ({ row }: CellContext<Member, any>) => (
 			<div className="text-left">{row.getValue("document")}</div>
