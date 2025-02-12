@@ -1,14 +1,19 @@
 import { StateUF } from "./StateUF";
 
-interface BaseMember {
+interface Member {
 	id: string;
 	email: string;
 	phone?: string;
 	mobile?: string;
+	name?: string;
+	birthDate?: string;
+	corporateName?: string; // Razão Social
+	tradeName?: string; // N
 	financialStatus: "ativo" | "inativo" | "pendente";
 	billingCycle: "mensal" | "bimestral" | "trimestral" | "anual";
 	paymentGroup: "Grupo Alfa" | "Grupo Beta";
 	paymentMethod: "pix" | "boleto";
+	type: "cpf" | "cnpj";
 	password?: string;
 	cep: string;
 	street: string;
@@ -20,18 +25,4 @@ interface BaseMember {
 	document: string; // CPF or CNPJ
 }
 
-interface CPFMember extends BaseMember {
-	type: "cpf";
-	name?: string;
-	birthDate?: string;
-}
-
-interface CNPJMember extends BaseMember {
-	type: "cnpj";
-	corporateName?: string; // Razão Social
-	tradeName?: string; // Nome Fantasia
-}
-
-type Member = CPFMember | CNPJMember;
-
-export type { CPFMember, CNPJMember, Member };
+export type { Member };

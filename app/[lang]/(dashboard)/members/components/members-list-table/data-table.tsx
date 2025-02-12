@@ -41,7 +41,7 @@ export const visibilityState: VisibilityState = {
 	paymentGroup: true,
 	billingCycle: true,
 	financialStatus: true,
-
+	select: true,
 	city: false,
 	neighborhood: false,
 	cep: false,
@@ -53,12 +53,11 @@ export const visibilityState: VisibilityState = {
 	corporateName: true,
 };
 
-interface DataTableProps<TData extends Member> {
-	columns: ColumnDef<TData>[];
-	data: TData[];
+interface DataTableProps {
+	columns: ColumnDef<Member>[];
+	data: Member[];
 }
-
-export function DataTable<TData>({ columns, data }: DataTableProps<Member>) {
+export function DataTable({ columns, data }: DataTableProps) {
 	const [rowSelection, setRowSelection] = useState<RowSelectionState>({});
 	const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
 	const [sorting, setSorting] = useState<SortingState>([]);
@@ -78,8 +77,8 @@ export function DataTable<TData>({ columns, data }: DataTableProps<Member>) {
 	const table = useReactTable({
 		data,
 		columns,
-		state: { sorting, columnFilters, rowSelection, columnVisibility },
 		enableRowSelection: true,
+		state: { sorting, columnFilters, rowSelection, columnVisibility },
 		onRowSelectionChange: setRowSelection,
 		onSortingChange: setSorting,
 		onColumnFiltersChange: setColumnFilters,

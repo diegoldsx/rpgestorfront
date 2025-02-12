@@ -2,6 +2,7 @@ import { ColumnDef, CellContext } from "@tanstack/react-table";
 import { Badge } from "@/components/ui/badge";
 import { format } from "date-fns";
 import { Member } from "../../types/Member";
+import { Checkbox } from "@/components/ui/checkbox";
 
 export const financialStatusOptions = [
 	{ value: "ativo", label: "Ativo" },
@@ -21,7 +22,25 @@ export const billingCycleOptions = [
 	{ value: "anual", label: "Anual" },
 ];
 
-export const columns: ColumnDef<Member, any>[] = [
+export const columns: ColumnDef<Member>[] = [
+	{
+		id: "select-col",
+		enableSorting: false,
+		enableColumnFilter: false,
+		enableHiding: false,
+		header: ({ table }) => (
+			<Checkbox
+				checked={table.getIsAllRowsSelected()}
+				onCheckedChange={(value) => table.toggleAllRowsSelected(!!value)}
+			/>
+		),
+		cell: ({ row }) => (
+			<Checkbox
+				checked={row.getIsSelected()}
+				onCheckedChange={(value) => row.toggleSelected(!!value)}
+			/>
+		),
+	},
 	{
 		id: "id",
 		accessorKey: "id",
