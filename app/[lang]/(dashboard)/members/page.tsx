@@ -18,15 +18,14 @@ const MembersPage = () => {
 				}}
 			/>
 
-			{/* <Card className="mt-3">
+			<Card className="mt-3">
 				<CardHeader className="flex-row items-center border-none mb-0"></CardHeader>
 				<CardContent className="pt-0 px-6">
 					<div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 2xl:grid-cols-5 gap-4">
-						
 						<MembersStats />
 					</div>
 				</CardContent>
-			</Card> */}
+			</Card>
 			<Card className="mt-6">
 				<CardContent className="p-0">
 					<MembersListTable />

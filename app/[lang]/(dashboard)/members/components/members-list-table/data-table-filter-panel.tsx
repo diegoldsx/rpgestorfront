@@ -4,10 +4,9 @@ import * as React from "react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Table } from "@tanstack/react-table";
-import { ChevronDown, ChevronUp, Filter } from "lucide-react"; // Ícones de filtro e seta
+import { ChevronDown, ChevronUp, Filter, Search } from "lucide-react"; // Ícones de filtro e seta
 
 import { Member } from "../../types/Member";
-import { Separator } from "@radix-ui/react-dropdown-menu";
 
 interface DataTableFilterProps {
 	table: Table<Member>;
@@ -52,14 +51,15 @@ export const DataTableFilterPanel: React.FC<DataTableFilterProps> = ({
 	};
 
 	return (
-		<div className="w-full  p-2 mb-6 ">
-			<div className="flex items-center   ">
+		<div className="w-full mb-2  ">
+			<div className="flex items-center    ">
 				<Button
 					onClick={() => setShowFilters((prev) => !prev)}
 					variant="ghost"
-					className="flex items-center gap-2  transition-all duration-300"
+					size="sm"
+					className="flex items-center justify-between gap-2 w-[200px]  transition-all duration-300"
 				>
-					<Filter className="h-4 w-4" />
+					<Search className="h-4 w-4" />
 
 					{showFilters ? "Esconder Filtros" : "Filtros Avançados"}
 					{showFilters ? (
@@ -74,7 +74,7 @@ export const DataTableFilterPanel: React.FC<DataTableFilterProps> = ({
 					showFilters ? "max-h-[1000px] opacity-100" : "max-h-0 opacity-0"
 				}`}
 			>
-				<div className="grid grid-cols-1 md:grid-cols-4 gap-4 p-4 ">
+				<div className="grid mt-2 grid-cols-1 md:grid-cols-4 gap-6 p-6 bg-slate-50 ">
 					{table
 						.getAllColumns()
 						.filter((col) => col.getCanFilter())
