@@ -4,7 +4,7 @@ import { columns } from "./columns";
 import { DataTable } from "./data-table";
 import { generateFakeMembers } from "../../data/data";
 
-const data = generateFakeMembers(40);
+const data = generateFakeMembers();
 export default function MembersListTable() {
 	return (
 		<Fragment>

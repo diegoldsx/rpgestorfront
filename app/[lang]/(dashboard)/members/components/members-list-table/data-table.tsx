@@ -27,6 +27,7 @@ import { DataTableToolbar } from "./data-table-toolbar";
 import { DataTableFilterPanel } from "./data-table-filter-panel";
 import { Member } from "../../types/Member";
 import { DataTablePagination } from "@/app/[lang]/(dash-components)/(invoice)/invoice-list/invoice-list-table/components/data-table-pagination";
+import { ArrowDown, ArrowUp, ArrowUpDown } from "lucide-react";
 
 export const visibilityState: VisibilityState = {
 	id: false,
@@ -90,7 +91,16 @@ export function DataTable({ columns, data }: DataTableProps) {
 					{table.getHeaderGroups().map((headerGroup) => (
 						<TableRow key={headerGroup.id}>
 							{headerGroup.headers.map((header) => (
-								<TableHead key={header.id} colSpan={header.colSpan}>
+								<TableHead
+									key={header.id}
+									colSpan={header.colSpan}
+									onClick={
+										header.column.getCanSort()
+											? header.column.getToggleSortingHandler()
+											: undefined
+									}
+									className={`cursor-pointer select-none `}
+								>
 									<div className="flex items-center justify-between">
 										<span>
 											{flexRender(
@@ -98,13 +108,23 @@ export function DataTable({ columns, data }: DataTableProps) {
 												header.getContext()
 											)}
 										</span>
+										{header.column.getCanSort() && (
+											<span className="ml-2 text-zinc-400">
+												{header.column.getIsSorted() === "asc" ? (
+													<ArrowUp className="h-4 w-4 " />
+												) : header.column.getIsSorted() === "desc" ? (
+													<ArrowDown className="h-4 w-4 " />
+												) : (
+													<ArrowUpDown className="h-4 w-4 " />
+												)}
+											</span>
+										)}
 									</div>
 								</TableHead>
 							))}
 						</TableRow>
 					))}
 				</TableHeader>
-
 				<TableBody>
 					{table.getRowModel().rows?.length ? (
 						table.getRowModel().rows.map((row) => (
