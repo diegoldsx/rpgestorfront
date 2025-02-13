@@ -28,6 +28,7 @@ import { DataTableFilterPanel } from "./data-table-filter-panel";
 import { Member } from "../../types/Member";
 import { DataTablePagination } from "@/app/[lang]/(dash-components)/(invoice)/invoice-list/invoice-list-table/components/data-table-pagination";
 import { ArrowDown, ArrowUp, ArrowUpDown } from "lucide-react";
+import { ExportTable } from "./export-table";
 
 export const visibilityState: VisibilityState = {
 	id: false,

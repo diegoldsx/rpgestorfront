@@ -12,6 +12,7 @@ import {
 import { Member } from "../../types/Member";
 import { DataTableToggleColumns } from "./data-table-toggle-columns";
 import { DataTableFacetedFilter } from "./data-table-faced-filter";
+import { ExportTable } from "./export-table";
 
 export const paymentGroupOptions = [
 	{ value: "Grupo Alfa", label: "Grupo Alfa" },
