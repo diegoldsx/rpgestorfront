@@ -10,9 +10,6 @@ import {
 	SelectValue,
 } from "@/components/ui/select";
 import { Member } from "../../types/Member";
-import { DataTableViewOptions } from "@/app/[lang]/(dash-components)/(apps)/projects/project-list/components/data-table-view-options";
-import { DataTableFilter } from "./data-table-filter";
-import { Icon } from "@iconify/react";
 import { DataTableToggleColumns } from "./data-table-toggle-columns";
 import { DataTableFacetedFilter } from "./data-table-faced-filter";
 

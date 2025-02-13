@@ -39,9 +39,9 @@ export function DataTableFacetedFilter({
 		<Popover>
 			<PopoverTrigger asChild>
 				<Button
-					variant="outline"
+					variant="ghost"
 					size="sm"
-					className="w-full flex items-center justify-between  hover:text-white transition-colors"
+					className="w-full flex items-center rounded-sm justify-between  hover:text-white transition-colors"
 				>
 					<div className="flex items-center">
 						<Icon icon={iconName} className="h-5 w-5 mr-2" />

@@ -24,11 +24,7 @@ export function DataTableToggleColumns<TData>({
 	return (
 		<DropdownMenu>
 			<DropdownMenuTrigger asChild>
-				<Button
-					variant="outline"
-					size="md"
-					onClick={(e) => e.stopPropagation()}
-				>
+				<Button variant="ghost" size="md" onClick={(e) => e.stopPropagation()}>
 					<SlidersHorizontal className="ltr:mr-2 rtl:ml-2 h-5 w-5" />
 					Mostrar Colunas
 				</Button>

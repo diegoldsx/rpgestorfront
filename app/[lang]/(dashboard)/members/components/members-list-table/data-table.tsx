@@ -24,7 +24,7 @@ import {
 	TableRow,
 } from "@/components/ui/table";
 import { DataTableToolbar } from "./data-table-toolbar";
-import { DataTableFilter } from "./data-table-filter";
+import { DataTableFilterPanel } from "./data-table-filter-panel";
 import { Member } from "../../types/Member";
 import { DataTablePagination } from "@/app/[lang]/(dash-components)/(invoice)/invoice-list/invoice-list-table/components/data-table-pagination";
 
@@ -83,7 +83,7 @@ export function DataTable({ columns, data }: DataTableProps) {
 				<DataTableToolbar table={table} />
 			</div>
 			<div className="p-2">
-				<DataTableFilter table={table} />
+				<DataTableFilterPanel table={table} />
 			</div>
 			<Table>
 				<TableHeader>
