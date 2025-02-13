@@ -2,6 +2,7 @@ import { faker } from "@faker-js/faker";
 
 import { Member } from "../types/Member";
 import { StateUF } from "../types/StateUF";
+import { min } from "date-fns";
 
 const stateOptions: StateUF[] = [
 	"AC",
@@ -38,7 +39,7 @@ function generateFakeMember(): Member {
 	const type = isCPFMember ? "cpf" : "cnpj";
 
 	return {
-		id: faker.string.nanoid(5), // Substituindo faker.datatype.uuid()
+		id: faker.string.numeric({ length: 8 }), // Substituindo faker.datatype.uuid()
 		email: faker.internet.email().toLocaleLowerCase(),
 		phone: faker.phone.number(), // Usando a forma recomendada
 		mobile: faker.phone.number(),
@@ -66,7 +67,10 @@ function generateFakeMember(): Member {
 		document:
 			type === "cpf" ? faker.string.numeric(11) : faker.string.numeric(14), // Gerando CPF ou CNPJ com dígitos corretos
 		type: type,
-		name: type === "cpf" ? faker.person.fullName() : undefined,
+		name:
+			type === "cpf"
+				? faker.person.firstName() + " " + faker.person.lastName()
+				: faker.company.name().toUpperCase(),
 		birthDate:
 			type === "cpf"
 				? faker.date
@@ -74,7 +78,6 @@ function generateFakeMember(): Member {
 						.toISOString()
 						.split("T")[0]
 				: undefined,
-		corporateName: type === "cnpj" ? faker.company.name() : undefined,
 		tradeName: type === "cnpj" ? faker.company.name() : undefined,
 	};
 }

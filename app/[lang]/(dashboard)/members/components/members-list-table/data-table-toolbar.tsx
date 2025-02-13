@@ -38,6 +38,7 @@ export function DataTableToolbar({ table }: DataTableToolbarProps) {
 	const financialStatusColumn = table.getColumn("financialStatus");
 	const billingCycleColumn = table.getColumn("billingCycle");
 	const paymentGroupColumn = table.getColumn("paymentGroup");
+	const memberTypeColumn = table.getColumn("type");
 
 	return (
 		<div className="flex gap-4 p-2">
@@ -60,6 +61,17 @@ export function DataTableToolbar({ table }: DataTableToolbarProps) {
 			</div>
 
 			<div className="flex-none flex flex-col sm:flex-row sm:items-center gap-4">
+				{memberTypeColumn && (
+					<DataTableFacetedFilter
+						column={memberTypeColumn}
+						title="Tipo de cadastro"
+						iconName="mdi:tag-text-outline"
+						options={[
+							{ value: "cnpj", label: "CNPJ" },
+							{ value: "cpf", label: "CPF" },
+						]}
+					/>
+				)}
 				{financialStatusColumn && (
 					<DataTableFacetedFilter
 						iconName="mdi:cash-check"

@@ -7,7 +7,6 @@ interface Member {
 	mobile?: string;
 	name?: string;
 	birthDate?: string;
-	corporateName?: string; // Razão Social
 	tradeName?: string; // N
 	financialStatus: "ativo" | "inativo" | "pendente";
 	billingCycle: "mensal" | "bimestral" | "trimestral" | "anual";

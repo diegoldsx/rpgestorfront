@@ -44,7 +44,7 @@ export const columns: ColumnDef<Member>[] = [
 	{
 		id: "id",
 		accessorKey: "id",
-		header: "Id",
+		header: "ID",
 		cell: ({ row }: CellContext<Member, any>) => (
 			<div className="text-left px-2 py-1">{row.getValue("id")}</div>
 		),
@@ -56,7 +56,7 @@ export const columns: ColumnDef<Member>[] = [
 		enableColumnFilter: true,
 
 		cell: ({ row }: CellContext<Member, any>) => (
-			<div className="text-left px-2 py-1">{row.getValue("name")}</div>
+			<div className="text-left px-2 py-1 ">{row.getValue("name")}</div>
 		),
 	},
 	{
@@ -67,7 +67,11 @@ export const columns: ColumnDef<Member>[] = [
 
 		cell: ({ row }: CellContext<Member, any>) => {
 			const type = row.getValue<string>("type");
-			return <div className="text-left">{type === "cpf" ? "CPF" : "CNPJ"}</div>;
+			return (
+				<div className="text-left font-semibold">
+					{type === "cpf" ? "CPF" : "CNPJ"}
+				</div>
+			);
 		},
 	},
 	{
@@ -86,33 +90,22 @@ export const columns: ColumnDef<Member>[] = [
 			const label = financialStatusOptions.find(
 				(op) => op.value === status
 			)?.label;
-			const statusColors: Record<string, string> = {
-				ativo: "bg-green-500 text-white",
-				inativo: "bg-red-500 text-white",
-				pendente: "bg-orange-500 text-white",
+			const statusColors: any = {
+				ativo: "success",
+				inativo: "destructive",
+				pendente: "warning",
 			};
 			return (
-				<div className="text-left">
+				<div className="flex ">
 					<Badge
-						className={`px-2 py-1 rounded ${
-							statusColors[status] || "bg-gray-500 text-white"
-						}`}
+						color={statusColors[status]}
+						className={"p-1 font-semibold text-center rounded-sm w-20 "}
 					>
-						{label}
+						<span className="w-full">{label}</span>
 					</Badge>
 				</div>
 			);
 		},
-	},
-	{
-		id: "corporateName",
-		accessorKey: "corporateName",
-		header: "Empresa",
-		enableColumnFilter: true,
-
-		cell: ({ row }: CellContext<Member, any>) => (
-			<div className="text-left">{row.getValue("corporateName")}</div>
-		),
 	},
 	{
 		id: "billingCycle",
