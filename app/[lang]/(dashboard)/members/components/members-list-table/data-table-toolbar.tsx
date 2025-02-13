@@ -11,8 +11,10 @@ import {
 } from "@/components/ui/select";
 import { Member } from "../../types/Member";
 import { DataTableViewOptions } from "@/app/[lang]/(dash-components)/(apps)/projects/project-list/components/data-table-view-options";
-import { DataTableFacetedFilter } from "@/app/[lang]/(dash-components)/(apps)/projects/project-list/components/data-table-faceted-filter";
 import { DataTableFilter } from "./data-table-filter";
+import { Icon } from "@iconify/react";
+import { DataTableToggleColumns } from "./data-table-toggle-columns";
+import { DataTableFacetedFilter } from "./data-table-faced-filter";
 
 export const paymentGroupOptions = [
 	{ value: "Grupo Alfa", label: "Grupo Alfa" },
@@ -60,9 +62,10 @@ export function DataTableToolbar({ table }: DataTableToolbarProps) {
 				</div>
 			</div>
 
-			{/* <div className="flex-none flex flex-col sm:flex-row sm:items-center gap-4">
+			<div className="flex-none flex flex-col sm:flex-row sm:items-center gap-4">
 				{financialStatusColumn && (
 					<DataTableFacetedFilter
+						iconName="mdi:cash-check"
 						column={financialStatusColumn}
 						title="Status Financeiro"
 						options={financialStatusOptions}
@@ -72,18 +75,23 @@ export function DataTableToolbar({ table }: DataTableToolbarProps) {
 					<DataTableFacetedFilter
 						column={paymentGroupColumn}
 						title="Grupo de Pagamento"
-						options={paymentGroupOptions}
+						iconName="mdi:account-group"
+						options={[
+							{ value: "Grupo Alfa", label: "Grupo Alfa" },
+							{ value: "Grupo Beta", label: "Grupo Beta" },
+						]}
 					/>
 				)}
 				{billingCycleColumn && (
 					<DataTableFacetedFilter
 						column={billingCycleColumn}
+						iconName="mdi:calendar-sync-outline"
 						title="Ciclo de Cobrança"
 						options={billingCycleOptions}
 					/>
 				)}
-			</div> */}
-			<DataTableViewOptions table={table} />
+			</div>
+			<DataTableToggleColumns table={table} />
 		</div>
 	);
 }
