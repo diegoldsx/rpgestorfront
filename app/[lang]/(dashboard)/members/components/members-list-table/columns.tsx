@@ -3,6 +3,9 @@ import { Badge } from "@/components/ui/badge";
 import { format } from "date-fns";
 import { Member } from "../../types/Member";
 import { Checkbox } from "@/components/ui/checkbox";
+import { Button } from "@/components/ui/button";
+import Link from "next/link";
+import { Icon } from "@iconify/react";
 
 export const financialStatusOptions = [
 	{ value: "ativo", label: "Ativo" },
@@ -45,6 +48,8 @@ export const columns: ColumnDef<Member>[] = [
 		id: "id",
 		accessorKey: "id",
 		header: "ID",
+		meta: { type: "text" },
+
 		cell: ({ row }: CellContext<Member, any>) => (
 			<div className="text-left px-2 py-1">{row.getValue("id")}</div>
 		),
@@ -53,17 +58,27 @@ export const columns: ColumnDef<Member>[] = [
 		id: "name",
 		accessorKey: "name",
 		header: "Nome",
-		enableColumnFilter: true,
+		meta: { type: "text" },
 
 		cell: ({ row }: CellContext<Member, any>) => (
 			<div className="text-left px-2 py-1 ">{row.getValue("name")}</div>
 		),
 	},
 	{
+		id: "email",
+		accessorKey: "email",
+		header: "Email",
+		meta: { type: "text" },
+
+		cell: ({ row }: CellContext<Member, any>) => (
+			<div className="text-left px-2 py-1 ">{row.getValue("email")}</div>
+		),
+	},
+	{
 		id: "type",
 		accessorKey: "type",
 		header: "Tipo",
-		enableColumnFilter: false,
+		meta: { type: "select" },
 
 		cell: ({ row }: CellContext<Member, any>) => {
 			const type = row.getValue<string>("type");
@@ -78,6 +93,8 @@ export const columns: ColumnDef<Member>[] = [
 		id: "financialStatus",
 		accessorKey: "financialStatus",
 		header: "Status Financeiro",
+		meta: { type: "select" },
+
 		enableColumnFilter: true,
 
 		filterFn: (row, columnId, filterValue) => {
@@ -109,8 +126,10 @@ export const columns: ColumnDef<Member>[] = [
 	},
 	{
 		id: "billingCycle",
+		meta: { type: "select" },
+
 		accessorKey: "billingCycle",
-		header: "Cobrança",
+		header: "Ciclo de cobrança",
 		enableColumnFilter: true,
 
 		filterFn: (row, columnId, filterValue) => {
@@ -124,6 +143,8 @@ export const columns: ColumnDef<Member>[] = [
 	},
 	{
 		id: "paymentGroup",
+		meta: { type: "select" },
+
 		accessorKey: "paymentGroup",
 		header: "Grupo de Pagamento",
 		filterFn: (row, columnId, filterValue) => {
@@ -142,6 +163,8 @@ export const columns: ColumnDef<Member>[] = [
 		id: "birthDate",
 		accessorKey: "birthDate",
 		header: "Data de Nascimento",
+		meta: { type: "date" },
+
 		enableColumnFilter: false,
 
 		cell: ({ row }: CellContext<Member, any>) => {
@@ -155,7 +178,9 @@ export const columns: ColumnDef<Member>[] = [
 		id: "cep",
 		accessorKey: "cep",
 		header: "CEP",
-		enableColumnFilter: false,
+		meta: { type: "text" },
+
+		enableColumnFilter: true,
 
 		cell: ({ row }: CellContext<Member, any>) => (
 			<div className="text-left">{row.getValue("cep")}</div>
@@ -165,7 +190,9 @@ export const columns: ColumnDef<Member>[] = [
 		id: "city",
 		accessorKey: "city",
 		header: "Cidade",
-		enableColumnFilter: false,
+		meta: { type: "text" },
+
+		enableColumnFilter: true,
 
 		cell: ({ row }: CellContext<Member, any>) => (
 			<div className="text-left">{row.getValue("city")}</div>
@@ -175,6 +202,8 @@ export const columns: ColumnDef<Member>[] = [
 		id: "state",
 		accessorKey: "state",
 		header: "Estado",
+		meta: { type: "text" },
+
 		enableColumnFilter: false,
 
 		cell: ({ row }: CellContext<Member, any>) => (
@@ -185,10 +214,38 @@ export const columns: ColumnDef<Member>[] = [
 		id: "document",
 		accessorKey: "document",
 		header: "Documento",
-		enableColumnFilter: false,
+		meta: { type: "text" },
+
+		enableColumnFilter: true,
 
 		cell: ({ row }: CellContext<Member, any>) => (
 			<div className="text-left">{row.getValue("document")}</div>
+		),
+	},
+
+	{
+		id: "actions",
+		accessorKey: "actions",
+
+		header: () => (
+			<div className="sticky left-0 z-10 p-2 font-bold">Actions</div>
+		),
+		cell: ({ row }) => (
+			<div className="sticky left-0  z-10 p-2">
+				<div className="flex justify-between">
+					<Button size="icon" variant="ghost">
+						<Link href={`/members/${row.original.id}`}>
+							<Icon icon="heroicons:eye" className="w-5 h-5" />
+						</Link>
+					</Button>
+					<Button size="icon" variant="ghost">
+						<Icon icon="heroicons:pencil-square" className="w-5 h-5" />
+					</Button>
+					<Button size="icon" variant="ghost">
+						<Icon icon="heroicons:currency-dollar" className="w-5 h-5" />
+					</Button>
+				</div>
+			</div>
 		),
 	},
 ];
