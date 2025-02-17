@@ -28,29 +28,11 @@ import { DataTableFilterPanel } from "./data-table-filter-panel";
 import { Member } from "../../types/Member";
 import { DataTablePagination } from "@/app/[lang]/(dash-components)/(invoice)/invoice-list/invoice-list-table/components/data-table-pagination";
 import { ArrowDown, ArrowUp, ArrowUpDown } from "lucide-react";
-import { ExportTable } from "./export-table";
-import { ScrollArea } from "@radix-ui/react-scroll-area";
 
 export const visibilityState: VisibilityState = {
-	id: false,
-	type: true,
-	tradeName: false,
-	name: true,
 	birthDate: false,
-	email: true,
-	paymentGroup: true,
-	billingCycle: true,
-	financialStatus: true,
-	select: true,
-	city: false,
-	neighborhood: false,
-	cep: false,
-	street: false,
 	state: false,
-	number: false,
-	password: false,
-	complement: false,
-	corporateName: true,
+	cep: false,
 };
 
 interface DataTableProps {
@@ -69,7 +51,14 @@ export function DataTable({ columns, data }: DataTableProps) {
 		data,
 		columns,
 		enableRowSelection: true,
+		enableColumnPinning: true,
+		initialState: {
+			columnPinning: {
+				right: ["actions"],
+			},
+		},
 		state: { sorting, columnFilters, rowSelection, columnVisibility },
+
 		onRowSelectionChange: setRowSelection,
 		onSortingChange: setSorting,
 		onColumnFiltersChange: setColumnFilters,
@@ -89,8 +78,9 @@ export function DataTable({ columns, data }: DataTableProps) {
 				<DataTableFilterPanel table={table} />
 			</div>
 
-			<ScrollArea>
-				<Table>
+			{/* Scroll horizontal */}
+			<div className="w-full overflow-x-auto">
+				<Table className="w-full">
 					<TableHeader>
 						{table.getHeaderGroups().map((headerGroup) => (
 							<TableRow key={headerGroup.id}>
@@ -103,23 +93,29 @@ export function DataTable({ columns, data }: DataTableProps) {
 												? header.column.getToggleSortingHandler()
 												: undefined
 										}
-										className={`cursor-pointer select-none `}
+										className={`cursor-pointer select-none  ${
+											header.column.getIsPinned() === "right"
+												? "sticky right-0 bg-white z-10 "
+												: ""
+										}`}
+										style={{
+											width: `${header.column.getSize()}px`,
+										}}
 									>
-										<div className="flex items-center justify-between">
-											<span>
-												{flexRender(
-													header.column.columnDef.header,
-													header.getContext()
-												)}
-											</span>
+										<div className="flex items-center justify-center">
+											{flexRender(
+												header.column.columnDef.header,
+												header.getContext()
+											)}
+
 											{header.column.getCanSort() && (
 												<span className="ml-2 text-zinc-400">
 													{header.column.getIsSorted() === "asc" ? (
-														<ArrowUp className="h-4 w-4 " />
+														<ArrowUp className="h-4 w-4" />
 													) : header.column.getIsSorted() === "desc" ? (
-														<ArrowDown className="h-4 w-4 " />
+														<ArrowDown className="h-4 w-4" />
 													) : (
-														<ArrowUpDown className="h-4 w-4 " />
+														<ArrowUpDown className="h-4 w-4" />
 													)}
 												</span>
 											)}
@@ -130,39 +126,29 @@ export function DataTable({ columns, data }: DataTableProps) {
 						))}
 					</TableHeader>
 					<TableBody>
-						{table.getRowModel().rows?.length ? (
-							table.getRowModel().rows.map((row) => (
-								<TableRow
-									key={row.id}
-									data-state={row.getIsSelected() && "selected"}
-									className="hover:bg-default-50"
-								>
-									{row.getVisibleCells().map((cell) => (
-										<TableCell
-											key={cell.id}
-											className="text-sm text-default-600 text-left"
-										>
-											{flexRender(
-												cell.column.columnDef.cell,
-												cell.getContext()
-											)}
-										</TableCell>
-									))}
-								</TableRow>
-							))
-						) : (
-							<TableRow>
-								<TableCell
-									colSpan={columns.length}
-									className="h-24 text-center"
-								>
-									Nenhum registro encontrado.
-								</TableCell>
+						{table.getRowModel().rows.map((row) => (
+							<TableRow key={row.id} className="hover:bg-gray-50">
+								{row.getVisibleCells().map((cell) => (
+									<TableCell
+										key={cell.id}
+										className={`text-sm text-gray-600 text-left ${
+											cell.column.getIsPinned() === "right"
+												? "sticky right-0 bg-white z-0"
+												: ""
+										}`}
+										style={{
+											width: `${cell.column.getSize()}px`,
+										}}
+									>
+										{flexRender(cell.column.columnDef.cell, cell.getContext())}
+									</TableCell>
+								))}
 							</TableRow>
-						)}
+						))}
 					</TableBody>
 				</Table>
-			</ScrollArea>
+			</div>
+
 			<DataTablePagination table={table} />
 		</div>
 	);

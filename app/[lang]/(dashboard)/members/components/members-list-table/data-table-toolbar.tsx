@@ -12,7 +12,7 @@ import {
 import { Member } from "../../types/Member";
 import { DataTableToggleColumns } from "./data-table-toggle-columns";
 import { DataTableFacetedFilter } from "./data-table-faced-filter";
-import { ExportTable } from "./export-table";
+import { DataExporter } from "./data-exporter";
 
 export const paymentGroupOptions = [
 	{ value: "Grupo Alfa", label: "Grupo Alfa" },
@@ -100,8 +100,9 @@ export function DataTableToolbar({ table }: DataTableToolbarProps) {
 						options={billingCycleOptions}
 					/>
 				)}
+				<DataTableToggleColumns table={table} />
+				<DataExporter table={table} />
 			</div>
-			<DataTableToggleColumns table={table} />
 		</div>
 	);
 }

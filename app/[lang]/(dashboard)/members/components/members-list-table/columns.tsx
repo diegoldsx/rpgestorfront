@@ -59,19 +59,23 @@ export const columns: ColumnDef<Member>[] = [
 		accessorKey: "name",
 		header: "Nome",
 		meta: { type: "text" },
-
+		size: 4000, // Define largura fixa de 200px
+		minSize: 1000, // Largura mínima
+		maxSize: 1000, // Largura máxima
+		enableResizing: true,
 		cell: ({ row }: CellContext<Member, any>) => (
-			<div className="text-left px-2 py-1 ">{row.getValue("name")}</div>
+			<div className="text-left ">{row.getValue("name")}</div>
 		),
 	},
 	{
 		id: "email",
 		accessorKey: "email",
+		size: 500,
 		header: "Email",
 		meta: { type: "text" },
 
 		cell: ({ row }: CellContext<Member, any>) => (
-			<div className="text-left px-2 py-1 ">{row.getValue("email")}</div>
+			<div className="text-left  ">{row.getValue("email")}</div>
 		),
 	},
 	{
@@ -144,7 +148,8 @@ export const columns: ColumnDef<Member>[] = [
 	{
 		id: "paymentGroup",
 		meta: { type: "select" },
-
+		size: 1000,
+		enableResizing: true,
 		accessorKey: "paymentGroup",
 		header: "Grupo de Pagamento",
 		filterFn: (row, columnId, filterValue) => {
@@ -179,7 +184,7 @@ export const columns: ColumnDef<Member>[] = [
 		accessorKey: "cep",
 		header: "CEP",
 		meta: { type: "text" },
-
+		size: 400,
 		enableColumnFilter: true,
 
 		cell: ({ row }: CellContext<Member, any>) => (
@@ -225,26 +230,20 @@ export const columns: ColumnDef<Member>[] = [
 
 	{
 		id: "actions",
-		accessorKey: "actions",
-
-		header: () => (
-			<div className="sticky left-0 z-10 p-2 font-bold">Actions</div>
-		),
+		size: 200,
+		enablePinning: true,
+		header: () => <span className="inset">Ações</span>,
 		cell: ({ row }) => (
-			<div className="sticky left-0  z-10 p-2">
-				<div className="flex justify-between">
-					<Button size="icon" variant="ghost">
-						<Link href={`/members/${row.original.id}`}>
-							<Icon icon="heroicons:eye" className="w-5 h-5" />
-						</Link>
-					</Button>
-					<Button size="icon" variant="ghost">
-						<Icon icon="heroicons:pencil-square" className="w-5 h-5" />
-					</Button>
-					<Button size="icon" variant="ghost">
-						<Icon icon="heroicons:currency-dollar" className="w-5 h-5" />
-					</Button>
-				</div>
+			<div className="flex">
+				<Button size="icon" variant="ghost">
+					<Icon icon="heroicons:eye" className="w-5 h-5" />
+				</Button>
+				<Button size="icon" variant="ghost">
+					<Icon icon="heroicons:pencil-square" className="w-5 h-5" />
+				</Button>
+				<Button size="icon" variant="ghost">
+					<Icon icon="heroicons:currency-dollar" className="w-5 h-5" />
+				</Button>
 			</div>
 		),
 	},
