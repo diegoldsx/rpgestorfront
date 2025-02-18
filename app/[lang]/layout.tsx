@@ -27,7 +27,7 @@ export default function RootLayout({
 	params: { lang: string };
 }) {
 	return (
-		<html suppressHydrationWarning={true}>
+		<html>
 			<body>
 				<AuthProvider>
 					<TanstackProvider>
