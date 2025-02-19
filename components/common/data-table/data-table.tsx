@@ -35,20 +35,21 @@ interface DataTableProps<TData> {
 	rowActions?: (row: TData) => React.ReactNode;
 	emptyMessage?: string;
 	selectable?: boolean;
-	hideColumns?: string[];
+	visibilityState?: VisibilityState;
 }
 
 export function DataTable<TData>({
 	columns,
 	data,
 	facetedFilters,
+	visibilityState = {},
 	rowActions,
 	emptyMessage = "Nenhum registro encontrado.",
 	selectable = true,
 }: DataTableProps<TData>) {
 	const [rowSelection, setRowSelection] = React.useState<RowSelectionState>({});
 	const [columnVisibility, setColumnVisibility] =
-		React.useState<VisibilityState>({});
+		React.useState<VisibilityState>(visibilityState);
 	const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
 		[]
 	);
@@ -77,7 +78,7 @@ export function DataTable<TData>({
 	});
 
 	const safeFacetedFilters = facetedFilters ?? [];
-
+	console.log(table.getHeaderGroups());
 	return (
 		<div className="">
 			<header className="flex items-center justify-end gap-4 p-4">
@@ -108,7 +109,7 @@ export function DataTable<TData>({
 									{row.getVisibleCells().map((cell) => (
 										<TableCell
 											key={cell.id}
-											className="text-sm text-default-600"
+											className="text-sm  text-default-600"
 										>
 											{flexRender(
 												cell.column.columnDef.cell,

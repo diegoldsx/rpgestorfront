@@ -44,23 +44,61 @@ export type Customer = {
 	};
 };
 
-export const customerKeys: (keyof Customer)[] = [
-	"id",
-	"customerType",
-	"name",
-	"cpf",
-	"email",
-	"billingEmail",
-	"phone",
-	"mobile",
-	"userPassword",
-	"registrationDate",
-	"status",
-	"code",
-	"photo",
-	"address",
-	"companyData",
-	"billingData",
+export type CustomerColumn = {
+	key: string;
+	label: string;
+	visibility: boolean;
+};
+
+export const customerColumnsConfig: CustomerColumn[] = [
+	{ key: "id", label: "ID", visibility: false },
+	{ key: "name", label: "Nome", visibility: true },
+	{ key: "email", label: "E-mail", visibility: true },
+	{ key: "customerType", label: "Tipo", visibility: false },
+	{ key: "cpf", label: "CPF", visibility: false },
+	{ key: "phone", label: "Telefone", visibility: false },
+	{ key: "mobile", label: "Celular", visibility: false },
+	{ key: "userPassword", label: "Senha do Usuário", visibility: false },
+	{ key: "registrationDate", label: "Data de Registro", visibility: false },
+	{ key: "status", label: "Status", visibility: true },
+	{ key: "code", label: "Código", visibility: false },
+	{ key: "photo", label: "Foto", visibility: false },
+
+	{ key: "zipCode", label: "CEP", visibility: false },
+	{ key: "street", label: "Rua", visibility: false },
+	{ key: "number", label: "Número", visibility: false },
+	{ key: "complement", label: "Complemento", visibility: false },
+	{ key: "neighborhood", label: "Bairro", visibility: false },
+	{ key: "state", label: "Estado", visibility: false },
+	{ key: "city", label: "Cidade", visibility: false },
+	{ key: "phone", label: "Telefone", visibility: false },
+	{ key: "mobile", label: "Celular", visibility: false },
+
+	{
+		key: "corporateName",
+		label: "Razão Social",
+		visibility: false,
+	},
+	{ key: "tradeName", label: "Nome Fantasia", visibility: true },
+	{ key: "cnpj", label: "CNPJ", visibility: true },
+	{
+		key: "businessSegment",
+		label: "Segmento de Negócio",
+		visibility: false,
+	},
+	{
+		key: "fullAddress",
+		label: "Endereço Completo",
+		visibility: false,
+	},
+	{ key: "website", label: "Website", visibility: false },
+
+	// Flattened Billing Data
+	{ key: "billingEmail", label: "Email de cobrança", visibility: false },
+
+	{ key: "billingName", label: "Nome", visibility: false },
+	{ key: "billingPhone", label: "Telefone", visibility: false },
+	{ key: "billingMobile", label: "Celular", visibility: false },
 ];
 
 type CustomerType = "PJ" | "PF";

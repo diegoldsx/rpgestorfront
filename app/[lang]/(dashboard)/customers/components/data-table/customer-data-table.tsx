@@ -1,15 +1,15 @@
 "use client";
 
 import * as React from "react";
-import { ColumnDef } from "@tanstack/react-table";
+import { ColumnDef, VisibilityState } from "@tanstack/react-table";
 import { DataTable } from "@/components/common/data-table/data-table";
 import { columns } from "./columns";
 import {
 	Customer,
+	customerColumnsConfig,
 	customerTypeOptions,
 	statusOptions,
 } from "../../types/customer";
-import { RowModel } from "@tanstack/react-table";
 
 interface CustomersDataTableProps {
 	data: Customer[];
@@ -29,12 +29,17 @@ export function CustomersDataTable<T>({ data }: CustomersDataTableProps) {
 		},
 	];
 
+	const visibilityState = Object.fromEntries(
+		customerColumnsConfig.map((col) => [col.key, col.visibility])
+	) as VisibilityState;
+
 	return (
 		<>
 			<DataTable
 				columns={columns}
 				data={data}
 				facetedFilters={facetedFilters}
+				visibilityState={visibilityState}
 			/>
 		</>
 	);
