@@ -17,18 +17,13 @@ import {
 	useReactTable,
 } from "@tanstack/react-table";
 
-import {
-	Table,
-	TableBody,
-	TableCell,
-	TableHead,
-	TableHeader,
-	TableRow,
-} from "@/components/ui/table";
+import { Table, TableBody, TableCell, TableRow } from "@/components/ui/table";
 
-import { DataTableToolbar } from "./table-toolbar";
 import { BasePagination } from "./table-pagination";
-import { DataTableFacetedFilter } from "./table-faceted-filter";
+import { DataTableColumnToggler } from "./table-column-toggler";
+import FacetedFilters from "./faceted-filters";
+import DataTableHeader from "./data-table-header";
+import { TableDataExporter } from "./table-data-exporter";
 
 interface DataTableProps<TData> {
 	columns: ColumnDef<TData, any>[];
@@ -46,10 +41,7 @@ interface DataTableProps<TData> {
 export function DataTable<TData>({
 	columns,
 	data,
-	toolbar,
-	filterComponent,
 	facetedFilters,
-	toolbarActions,
 	rowActions,
 	emptyMessage = "Nenhum registro encontrado.",
 	selectable = true,
@@ -87,45 +79,24 @@ export function DataTable<TData>({
 	const safeFacetedFilters = facetedFilters ?? [];
 
 	return (
-		<div>
-			<div className="flex p-6 space-x-4 ">
-				{safeFacetedFilters.map((filter) => {
-					const column = table.getColumn(filter.id);
-					if (!column) return null;
+		<div className="">
+			<header className="flex items-center justify-end gap-4 p-4">
+				<div className="space-x-2">
+					<FacetedFilters filters={safeFacetedFilters} table={table} />
+				</div>
 
-					return (
-						<DataTableFacetedFilter
-							key={filter.id}
-							column={column}
-							title={filter.title}
-							options={filter.options}
-						/>
-					);
-				})}
-			</div>
+				<div className="space-x-2">
+					<DataTableColumnToggler table={table} />
+				</div>
+
+				<div className="space-x-2">
+					<TableDataExporter table={table} />
+				</div>
+			</header>
 
 			<div className="border-t border-default-200">
 				<Table>
-					<TableHeader>
-						{table.getHeaderGroups().map((headerGroup) => (
-							<TableRow key={headerGroup.id}>
-								{headerGroup.headers.map((header) => (
-									<TableHead
-										key={header.id}
-										colSpan={header.colSpan}
-										className="whitespace-nowrap h-11"
-									>
-										{header.isPlaceholder
-											? null
-											: flexRender(
-													header.column.columnDef.header,
-													header.getContext()
-											  )}
-									</TableHead>
-								))}
-							</TableRow>
-						))}
-					</TableHeader>
+					<DataTableHeader headerGroups={table.getHeaderGroups()} />
 					<TableBody>
 						{table.getRowModel().rows?.length ? (
 							table.getRowModel().rows.map((row) => (

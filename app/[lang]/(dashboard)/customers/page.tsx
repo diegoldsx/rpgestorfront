@@ -2,11 +2,10 @@
 
 import { Fragment } from "react";
 import { Card, CardContent } from "@/components/ui/card";
-
 import { HeadingPages } from "@/components/common/heading/heading-pages";
-
 import { fakeData } from "./data";
 import { CustomersDataTable } from "./components/data-table/customer-data-table";
+import MembersStats from "../members/components/members-stats";
 
 const data = fakeData();
 
@@ -22,9 +21,14 @@ const CustomerPage = () => {
 				}}
 			/>
 
-			<div>
+			<div className="flex flex-col gap-4">
+				<Card className="">
+					<CardContent className="p-1">
+						<MembersStats />
+					</CardContent>
+				</Card>
 				<Card>
-					<CardContent className="p-0">
+					<CardContent className="">
 						<CustomersDataTable data={data} />
 					</CardContent>
 				</Card>

@@ -31,8 +31,6 @@ export function CustomersDataTable<T>({ data }: CustomersDataTableProps) {
 
 	return (
 		<>
-			<h1>Tabela de clientes</h1>
-
 			<DataTable
 				columns={columns}
 				data={data}
