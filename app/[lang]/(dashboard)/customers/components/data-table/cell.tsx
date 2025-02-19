@@ -1,11 +1,11 @@
 import React, { ReactNode } from "react";
 
-type CellRendererProps = {
+type CellValueProps = {
 	children: ReactNode;
 };
 
-const Cell: React.FC<CellRendererProps> = ({ children }) => {
-	return <span>{children ?? "N/A"}</span>; //
+const Cell: React.FC<CellValueProps> = ({ children }) => {
+	return children ?? <span>N/A</span>; //
 };
 
 export default Cell;

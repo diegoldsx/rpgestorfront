@@ -3,55 +3,52 @@ import Cell from "./cell";
 import { Badge } from "@/components/ui/badge";
 import { formatDate } from "@/lib/utils";
 import { Customer } from "../../types/customer";
+import { ColumnDef } from "@tanstack/react-table";
+import { Checkbox } from "@/components/ui/checkbox";
 
-const columnHelper = createColumnHelper<Customer>();
-
-export const columns = [
-	columnHelper.accessor("id", {
+export const columns: ColumnDef<Customer>[] = [
+	{
+		id: "select",
+		enableHiding: false,
+		header: ({ table }) => (
+			<Checkbox
+				checked={table.getIsAllRowsSelected()}
+				onCheckedChange={(value) => table.toggleAllRowsSelected(!!value)}
+			/>
+		),
+		cell: ({ row }) => (
+			<Checkbox
+				checked={row.getIsSelected()}
+				onCheckedChange={(value) => row.toggleSelected(!!value)}
+			/>
+		),
+	},
+	{
+		id: "id",
+		accessorKey: "id",
 		header: "ID",
-		cell: (info) => <Cell>{info.getValue()}</Cell>,
-	}),
-	columnHelper.accessor("name", {
+		meta: { type: "text" },
+		cell: (info) => <Cell>{info.getValue() as string}</Cell>,
+	},
+	{
+		id: "name",
+		accessorKey: "name",
 		header: "Nome",
-		cell: (info) => <Cell>{info.getValue()}</Cell>,
-	}),
-	columnHelper.accessor("customerType", {
-		header: "Tipo",
-		cell: (info) => (
-			<Cell>
-				{info.getValue() === "PJ" ? "Pessoa Jurídica" : "Pessoa Física"}
-			</Cell>
-		),
-	}),
-	columnHelper.accessor("cpf", {
-		header: "CPF",
-		cell: (info) => <Cell>{info.getValue() ?? "N/A"}</Cell>,
-	}),
-	columnHelper.accessor("email", {
+		meta: { type: "text" },
+		cell: (info) => <Cell>{info.getValue() as string}</Cell>,
+	},
+	{
+		id: "email",
+		accessorKey: "email",
 		header: "Email",
-		cell: (info) => <Cell>{info.getValue()}</Cell>,
-	}),
-	columnHelper.accessor("billingEmail", {
-		header: "Email de cobrança",
-		cell: (info) => <Cell>{info.getValue() ?? "N/A"}</Cell>,
-	}),
-	columnHelper.accessor("phone", {
-		header: "Telefone",
-		cell: (info) => <Cell>{info.getValue() ?? "N/A"}</Cell>,
-	}),
-	columnHelper.accessor("mobile", {
-		header: "Celular",
-		cell: (info) => <Cell>{info.getValue() ?? "N/A"}</Cell>,
-	}),
-	columnHelper.accessor("registrationDate", {
-		header: "Data de registro",
-		cell: (info) => (
-			<Cell>{formatDate(info.getValue() as string) ?? "N/A"}</Cell>
-		),
-	}),
-	columnHelper.accessor("status", {
+		meta: { type: "text" },
+		cell: (info) => <Cell>{info.getValue() as string}</Cell>,
+	},
+	{
+		id: "status",
+		accessorKey: "status",
 		header: "Status",
-
+		meta: { type: "select" },
 		filterFn: (row, columnId, filterValue) => {
 			if (!filterValue) return true;
 			const cellValue = row.getValue(columnId);
@@ -72,61 +69,167 @@ export const columns = [
 				</Cell>
 			);
 		},
-	}),
-	columnHelper.accessor("code", {
-		header: "Código",
-		cell: (info) => <Cell>{info.getValue() ?? "N/A"}</Cell>,
-	}),
-	columnHelper.accessor((row) => row.address.zipCode, {
-		id: "zipCode",
-		header: "CEP",
-		cell: (info) => <Cell>{info.getValue()}</Cell>,
-	}),
-	columnHelper.accessor((row) => row.address.street, {
-		id: "street",
-		header: "Rua",
-		cell: (info) => <Cell>{info.getValue()}</Cell>,
-	}),
-	columnHelper.accessor((row) => row.address.number, {
-		id: "number",
-		header: "Número",
-		cell: (info) => <Cell>{info.getValue()}</Cell>,
-	}),
-	columnHelper.accessor((row) => row.address.city, {
-		id: "city",
-
-		header: "Cidade",
-		cell: (info) => <Cell>{info.getValue()}</Cell>,
-	}),
-	columnHelper.accessor((row) => row.address.state, {
-		id: "state",
-		header: "Estado",
-		cell: (info) => <Cell>{info.getValue()}</Cell>,
-	}),
-	columnHelper.accessor((row) => row.companyData?.corporateName ?? "N/A", {
-		id: "corporateName",
-		header: "Nome Empresa",
-		cell: (info) => <Cell>{info.getValue()}</Cell>,
-	}),
-	columnHelper.accessor((row) => row.companyData?.tradeName ?? "N/A", {
-		id: "tradeName",
-		header: "Nome Fantasia",
-		cell: (info) => <Cell>{info.getValue()}</Cell>,
-	}),
-	columnHelper.accessor((row) => row.companyData?.cnpj ?? "N/A", {
-		id: "cnpj",
-		header: "CNPJ",
-		cell: (info) => <Cell>{info.getValue()}</Cell>,
-	}),
-	columnHelper.accessor((row) => row.billingData?.name ?? "N/A", {
-		id: "billingName",
-		header: "Nome Cobrança",
-		cell: (info) => <Cell>{info.getValue()}</Cell>,
-	}),
-	columnHelper.accessor((row) => row.billingData?.email ?? "N/A", {
+	},
+	{
+		id: "customerType",
+		accessorKey: "customerType",
+		header: "Tipo de Conta",
+		meta: { type: "select" },
+		cell: (info) => (
+			<Cell>
+				{info.getValue() === "PJ" ? "Pessoa Jurídica" : "Pessoa Física"}
+			</Cell>
+		),
+	},
+	{
+		id: "cpf",
+		accessorKey: "cpf",
+		header: "CPF",
+		meta: { type: "text" },
+		cell: (info) => <Cell>{info.getValue() as string}</Cell>,
+	},
+	{
 		id: "billingEmail",
-
+		accessorKey: "billingEmail",
 		header: "Email de Cobrança",
-		cell: (info) => <Cell>{info.getValue()}</Cell>,
-	}),
+		meta: { type: "text" },
+		cell: (info) => <Cell>{info.getValue() as string}</Cell>,
+	},
+	{
+		id: "phone",
+		accessorKey: "phone",
+		header: "Telefone",
+		meta: { type: "text" },
+		cell: (info) => <Cell>{info.getValue() as string}</Cell>,
+	},
+	{
+		id: "mobile",
+		accessorKey: "mobile",
+		header: "Celular",
+		meta: { type: "text" },
+		cell: (info) => <Cell>{info.getValue() as string}</Cell>,
+	},
+	{
+		id: "registrationDate",
+		accessorKey: "registrationDate",
+		header: "Data de Registro",
+		meta: { type: "date" },
+		cell: (info) => (
+			<Cell>{new Date(info.getValue() as string).toLocaleDateString()}</Cell>
+		),
+	},
+
+	{
+		id: "code",
+		accessorKey: "code",
+		header: "Código",
+		meta: { type: "text" },
+		cell: (info) => <Cell>{info.getValue() as string}</Cell>,
+	},
+
+	// Address Fields
+	{
+		id: "zipCode",
+		accessorKey: "address.zipCode",
+		header: "CEP",
+		meta: { type: "text" },
+		cell: (info) => {
+			const value = info.getValue() ?? "N/A";
+			return <Cell>{value as string}</Cell>;
+		},
+	},
+	{
+		id: "street",
+		accessorKey: "address.street",
+		header: "Rua",
+		meta: { type: "text" },
+		cell: (info) => {
+			const value = info.getValue() ?? "N/A";
+			return <Cell>{value as string}</Cell>;
+		},
+	},
+	{
+		id: "number",
+		accessorKey: "address.number",
+		header: "Número",
+		meta: { type: "text" },
+		cell: (info) => {
+			const value = info.getValue() ?? "N/A";
+			return <Cell>{value as string}</Cell>;
+		},
+	},
+	{
+		id: "neighborhood",
+		accessorKey: "address.neighborhood",
+		header: "Bairro",
+		meta: { type: "text" },
+		cell: (info) => {
+			const value = info.getValue() ?? "N/A";
+			return <Cell>{value as string}</Cell>;
+		},
+	},
+	{
+		id: "city",
+		accessorKey: "address.city",
+		header: "Cidade",
+		meta: { type: "text" },
+		cell: (info) => {
+			const value = info.getValue() ?? "N/A";
+			return <Cell>{value as string}</Cell>;
+		},
+	},
+	{
+		id: "state",
+		accessorKey: "address.state",
+		header: "Estado",
+		meta: { type: "select" },
+		cell: (info) => {
+			const value = info.getValue() ?? "N/A";
+			return <Cell>{value as string}</Cell>;
+		},
+	},
+
+	// Company Data
+	{
+		id: "tradeName",
+		accessorKey: "companyData.tradeName",
+		header: "Nome Fantasia",
+		meta: { type: "text" },
+		cell: (info) => {
+			const value = info.getValue() ?? "N/A";
+			return <Cell>{value as string}</Cell>;
+		},
+	},
+	{
+		id: "cnpj",
+		accessorKey: "companyData.cnpj",
+		header: "CNPJ",
+		meta: { type: "text" },
+		cell: (info) => {
+			const value = info.getValue() ?? "N/A";
+			return <Cell>{value as string}</Cell>;
+		},
+	},
+
+	// Billing Data
+	{
+		id: "billingName",
+		accessorKey: "billingData.name",
+		header: "Nome Cobrança",
+		meta: { type: "text" },
+		cell: (info) => {
+			const value = info.getValue() ?? "N/A";
+			return <Cell>{value as string}</Cell>;
+		},
+	},
+	{
+		id: "billingEmail",
+		accessorKey: "billingData.email",
+		header: "Email Cobrança",
+		meta: { type: "text" },
+		cell: (info) => {
+			const value = info.getValue() ?? "N/A";
+			return <Cell>{value as string}</Cell>;
+		},
+	},
 ];

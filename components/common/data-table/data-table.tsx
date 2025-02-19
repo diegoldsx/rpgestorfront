@@ -24,6 +24,7 @@ import { DataTableColumnToggler } from "./table-column-toggler";
 import FacetedFilters from "./faceted-filters";
 import DataTableHeader from "./data-table-header";
 import { TableDataExporter } from "./table-data-exporter";
+import { DataTableAdvancedSearch } from "./data-table-advanced-search";
 
 interface DataTableProps<TData> {
 	columns: ColumnDef<TData, any>[];
@@ -94,6 +95,10 @@ export function DataTable<TData>({
 					<TableDataExporter table={table} />
 				</div>
 			</header>
+
+			<div>
+				<DataTableAdvancedSearch table={table} />
+			</div>
 
 			<div className="border-t border-default-200">
 				<Table>

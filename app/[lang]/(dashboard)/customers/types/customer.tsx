@@ -64,7 +64,7 @@ export const customerColumnsConfig: CustomerColumn[] = [
 	{ key: "code", label: "Código", visibility: false },
 	{ key: "photo", label: "Foto", visibility: false },
 
-	{ key: "zipCode", label: "CEP", visibility: false },
+	{ key: "zipCode", label: "CEP", visibility: true },
 	{ key: "street", label: "Rua", visibility: false },
 	{ key: "number", label: "Número", visibility: false },
 	{ key: "complement", label: "Complemento", visibility: false },
@@ -81,17 +81,6 @@ export const customerColumnsConfig: CustomerColumn[] = [
 	},
 	{ key: "tradeName", label: "Nome Fantasia", visibility: true },
 	{ key: "cnpj", label: "CNPJ", visibility: true },
-	{
-		key: "businessSegment",
-		label: "Segmento de Negócio",
-		visibility: false,
-	},
-	{
-		key: "fullAddress",
-		label: "Endereço Completo",
-		visibility: false,
-	},
-	{ key: "website", label: "Website", visibility: false },
 
 	// Flattened Billing Data
 	{ key: "billingEmail", label: "Email de cobrança", visibility: false },
