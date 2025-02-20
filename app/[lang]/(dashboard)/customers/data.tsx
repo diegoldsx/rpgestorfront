@@ -8,7 +8,7 @@ const generateCustomer = (): Customer => {
 
 	return {
 		id: faker.string.numeric({ length: 6 }),
-		customerType: isPJ ? "pj" : "pf",
+		customerType: isPJ ? "PJ" : "PF",
 		name: faker.person.fullName(),
 		cpf: isPJ ? undefined : faker.string.numeric(11),
 		email: faker.internet.email().toLowerCase(),

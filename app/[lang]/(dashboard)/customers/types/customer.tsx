@@ -90,6 +90,38 @@ export const customerColumnsConfig: CustomerColumn[] = [
 	{ key: "billingMobile", label: "Celular", visibility: false },
 ];
 
+export const CustomerKeys = [
+	"id",
+	"name",
+	"email",
+	"customerType",
+	"cpf",
+	"cnpj",
+	"phone",
+	"mobile",
+	"userPassword",
+	"registrationDate",
+	"status",
+	"code",
+	"photo",
+	"zipCode",
+	"street",
+	"number",
+	"complement",
+	"neighborhood",
+	"state",
+	"city",
+	"phone",
+	"mobile",
+	"corporateName",
+	"tradeName",
+	"cnpj",
+	"billingEmail",
+	"billingName",
+	"billingPhone",
+	"billingMobile",
+];
+
 type CustomerType = "PJ" | "PF";
 type Status = "ATIVO" | "INATIVO" | "PENDENTE";
 

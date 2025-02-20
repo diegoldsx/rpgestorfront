@@ -79,7 +79,6 @@ export function DataTable<TData>({
 	});
 
 	const safeFacetedFilters = facetedFilters ?? [];
-	console.log(table.getHeaderGroups());
 	return (
 		<div className="">
 			<header className="flex items-center justify-end gap-4 p-4">
@@ -114,7 +113,7 @@ export function DataTable<TData>({
 									{row.getVisibleCells().map((cell) => (
 										<TableCell
 											key={cell.id}
-											className="text-sm  text-default-600"
+											className="text-sm text-left  text-default-600"
 										>
 											{flexRender(
 												cell.column.columnDef.cell,
@@ -123,17 +122,17 @@ export function DataTable<TData>({
 										</TableCell>
 									))}
 									{rowActions && (
-										<TableCell className="text-right">
+										<TableCell className="text-left">
 											{rowActions(row.original)}
 										</TableCell>
 									)}
 								</TableRow>
 							))
 						) : (
-							<TableRow>
+							<TableRow className="">
 								<TableCell
 									colSpan={columns.length + (rowActions ? 1 : 0)}
-									className="h-24 text-center"
+									className="h-24 text-left outline"
 								>
 									{emptyMessage}
 								</TableCell>

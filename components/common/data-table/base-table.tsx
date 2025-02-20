@@ -1,6 +1,6 @@
-'use client';
+"use client";
 
-import * as React from 'react';
+import * as React from "react";
 import {
 	ColumnDef,
 	ColumnFiltersState,
@@ -15,7 +15,7 @@ import {
 	getPaginationRowModel,
 	getSortedRowModel,
 	useReactTable,
-} from '@tanstack/react-table';
+} from "@tanstack/react-table";
 
 import {
 	Table,
@@ -24,10 +24,10 @@ import {
 	TableHead,
 	TableHeader,
 	TableRow,
-} from '@/components/ui/table';
+} from "@/components/ui/table";
 
-import { BaseToolbar } from './table-toolbar';
-import { BasePagination } from './table-pagination';
+import { BaseToolbar } from "./table-toolbar";
+import { BasePagination } from "./table-pagination";
 
 interface BaseTableProps<TData> {
 	columns: ColumnDef<TData, any>[];
@@ -47,7 +47,7 @@ export function BaseTable<TData>({
 	filterComponent,
 	toolbarActions,
 	rowActions,
-	emptyMessage = 'Nenhum registro encontrado.',
+	emptyMessage = "Nenhum registro encontrado.",
 	selectable = true,
 }: BaseTableProps<TData>) {
 	const [rowSelection, setRowSelection] = React.useState<RowSelectionState>({});
@@ -82,7 +82,7 @@ export function BaseTable<TData>({
 
 	return (
 		<div>
-			<div className='p-6'>
+			<div className="p-6">
 				{toolbar || (
 					<BaseToolbar
 						table={table}
@@ -92,7 +92,7 @@ export function BaseTable<TData>({
 				)}
 			</div>
 
-			<div className='border-t border-default-200'>
+			<div className="border-t border-default-200">
 				<Table>
 					<TableHeader>
 						{table.getHeaderGroups().map((headerGroup) => (
@@ -101,7 +101,7 @@ export function BaseTable<TData>({
 									<TableHead
 										key={header.id}
 										colSpan={header.colSpan}
-										className='whitespace-nowrap h-11'
+										className="whitespace-nowrap h-11"
 									>
 										{header.isPlaceholder
 											? null
@@ -119,13 +119,13 @@ export function BaseTable<TData>({
 							table.getRowModel().rows.map((row) => (
 								<TableRow
 									key={row.id}
-									data-state={row.getIsSelected() && 'selected'}
-									className='hover:bg-default-50'
+									data-state={row.getIsSelected() && "selected"}
+									className="hover:bg-default-50"
 								>
 									{row.getVisibleCells().map((cell) => (
 										<TableCell
 											key={cell.id}
-											className='text-sm text-default-600'
+											className="text-sm text-default-600"
 										>
 											{flexRender(
 												cell.column.columnDef.cell,
@@ -134,9 +134,7 @@ export function BaseTable<TData>({
 										</TableCell>
 									))}
 									{rowActions && (
-										<TableCell className='text-right'>
-											{rowActions(row.original)}
-										</TableCell>
+										<TableCell>{rowActions(row.original)}</TableCell>
 									)}
 								</TableRow>
 							))
@@ -144,7 +142,7 @@ export function BaseTable<TData>({
 							<TableRow>
 								<TableCell
 									colSpan={columns.length + (rowActions ? 1 : 0)}
-									className='h-24 text-center'
+									className="h-24"
 								>
 									{emptyMessage}
 								</TableCell>

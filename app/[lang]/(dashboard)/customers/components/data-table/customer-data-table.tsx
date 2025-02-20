@@ -7,6 +7,7 @@ import { columns } from "./columns";
 import {
 	Customer,
 	customerColumnsConfig,
+	CustomerKeys,
 	customerTypeOptions,
 	statusOptions,
 } from "../../types/customer";
@@ -29,9 +30,10 @@ export function CustomersDataTable<T>({ data }: CustomersDataTableProps) {
 		},
 	];
 
-	const visibilityState = Object.fromEntries(
-		customerColumnsConfig.map((col) => [col.key, col.visibility])
-	) as VisibilityState;
+	const visibleColumns = ["name", "email", "cpf", "cnpj", "state", "status"];
+	const visibilityState: VisibilityState = Object.fromEntries(
+		CustomerKeys.map((key) => [key, visibleColumns.includes(key)])
+	);
 
 	return (
 		<>

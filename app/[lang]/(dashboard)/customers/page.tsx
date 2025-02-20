@@ -28,7 +28,7 @@ const CustomerPage = () => {
 					</CardContent>
 				</Card>
 				<Card>
-					<CardContent className="">
+					<CardContent>
 						<CustomersDataTable data={data} />
 					</CardContent>
 				</Card>
