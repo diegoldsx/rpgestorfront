@@ -85,7 +85,11 @@ export const columns: ColumnDef<Expense>[] = [
 		accessorKey: "observations",
 		header: "Observações",
 		meta: { type: "text" },
-		cell: (info) => <Cell>{info.getValue() as string}</Cell>,
+		cell: (info) => (
+			<Cell className="min-w-[250px] truncate whitespace-nowrap overflow-hidden">
+				{info.getValue() as string}
+			</Cell>
+		),
 	},
 	{
 		id: "status",

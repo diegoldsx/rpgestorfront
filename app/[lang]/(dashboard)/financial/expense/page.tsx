@@ -5,10 +5,10 @@ import { Card, CardContent } from "@/components/ui/card";
 import { HeadingPages } from "@/components/common/heading/heading-pages";
 import { ActionCard } from "@/components/common/promotional/action-card";
 import ExpenseStats from "./components/expenses-stats";
-import { FAKE_EXPENSES } from "@/app/mock/data";
+import { fakeExpenses } from "@/app/mock/data";
 import { ExpensesDataTable } from "./components/data-table";
 import { columns } from "./components/data-table/columns";
-const data = FAKE_EXPENSES;
+const data = fakeExpenses;
 const ExpensePage = () => {
 	return (
 		<Fragment>

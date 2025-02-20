@@ -3,14 +3,12 @@
 import { Fragment } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { HeadingPages } from "@/components/common/heading/heading-pages";
-import { ActionCard } from "@/components/common/promotional/action-card";
 import IncomeStats from "./components/income-stats";
-import { IncomesDataTable } from "./components/data-table/income-data-table";
+import { ProvisionDataTable } from "./components/data-table";
 import { columns } from "./components/data-table/columns";
-import { fakeIncomes } from "@/app/mock/data";
-
-const data = fakeIncomes;
-const IncomePage = () => {
+import { fakeProvisions } from "@/app/mock/data";
+const data = fakeProvisions;
+const ProvisionPage = () => {
 	return (
 		<Fragment>
 			<HeadingPages
@@ -39,7 +37,7 @@ const IncomePage = () => {
 
 				<Card>
 					<CardContent>
-						<IncomesDataTable data={data} columns={columns} />
+						<ProvisionDataTable data={data} columns={columns} />
 					</CardContent>
 				</Card>
 			</div>
@@ -47,4 +45,4 @@ const IncomePage = () => {
 	);
 };
 
-export default IncomePage;
+export default ProvisionPage;

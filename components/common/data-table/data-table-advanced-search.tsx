@@ -15,6 +15,13 @@ export const DataTableAdvancedSearch = <TData,>({ table }: Props<TData>) => {
 		Record<string, string>
 	>({});
 
+	const filterableColumns = table
+		.getAllColumns()
+		.filter((col) => col.columnDef?.meta?.type === "text");
+
+	console.log(filterableColumns);
+	if (!filterableColumns.length) return;
+
 	const handleInputChange = (columnId: string, value: string) => {
 		setFilterValues((prev) => ({ ...prev, [columnId]: value }));
 	};
@@ -42,6 +49,7 @@ export const DataTableAdvancedSearch = <TData,>({ table }: Props<TData>) => {
 			<Filter className="absolute left-3 top-2.5 h-4 w-4 text-zinc-300" />
 		</div>
 	);
+	console.log(filterValues);
 
 	return (
 		<div className="w-full mb-2">
@@ -65,17 +73,14 @@ export const DataTableAdvancedSearch = <TData,>({ table }: Props<TData>) => {
 				}`}
 			>
 				<div className="grid mt-2 grid-cols-1 md:grid-cols-4  gap-6 p-6">
-					{table
-						.getAllColumns()
-						.filter((col) => col.columnDef.meta?.type === "text") // Apenas colunas com meta.type === "text"
-						.map((col) => (
-							<div key={col.id}>
-								<label className="block text-xs font-bold uppercase mb-1 text-primary">
-									{col.columnDef.header as string}
-								</label>
-								{renderFilterField(col.id)}
-							</div>
-						))}
+					{filterableColumns.map((col) => (
+						<div key={col.id}>
+							<label className="block text-xs font-bold uppercase mb-1 text-primary">
+								{col.columnDef.header as string}
+							</label>
+							{renderFilterField(col.id)}
+						</div>
+					))}
 				</div>
 				<div className=" p-4 col-span-1 md:col-span-2 flex justify-end gap-4 ">
 					<Button onClick={handleClearFilters} variant={"outline"}>
