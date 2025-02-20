@@ -1,9 +1,9 @@
 import Cell from "./cell";
 import { formatDate } from "@/lib/utils";
 import { ColumnDef } from "@tanstack/react-table";
-import { Provision } from "../../types/Provision";
+import { Transfer } from "../../types/Transfer";
 
-export const columns: ColumnDef<Provision>[] = [
+export const columns: ColumnDef<Transfer>[] = [
 	{
 		id: "id",
 		accessorKey: "id",

@@ -54,7 +54,7 @@ export const menusConfig = {
 					{ title: "Despesa", href: "/financial/expense" },
 					{ title: "Provisionamento", href: "/financial/provision" },
 					{ title: "Parcela por Grupo", href: "#" },
-					{ title: "Transferência", href: "#" },
+					{ title: "Transferência", href: "/financial/transfer" },
 					{ title: "Conciliação", href: "#" },
 					{ title: "Importar", href: "#" },
 					{ title: "Balancete", href: "#" },

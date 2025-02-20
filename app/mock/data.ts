@@ -2,6 +2,7 @@ import { faker } from "@faker-js/faker";
 import { Income } from "../[lang]/(dashboard)/financial/income/types/Income";
 import { Expense } from "../[lang]/(dashboard)/financial/expense/types/Expense";
 import { Provision } from "../[lang]/(dashboard)/financial/provision/types/Provision";
+import { Transfer } from "../[lang]/(dashboard)/financial/transfer/types/Transfer";
 
 const LENGTH = 30;
 
@@ -78,3 +79,11 @@ export const fakeProvisions: Provision[] = Array.from(
 		status: faker.helpers.arrayElement(["APROVADO", "REPROVADO", "PENDENTE"]),
 	})
 );
+
+export const fakeTransfers: Transfer[] = Array.from({ length: LENGTH }, () => ({
+	id: faker.helpers.rangeToNumber({ min: 1, max: 999 }),
+	origin: faker.helpers.arrayElement(["CAIXA", "BRADESCO"]),
+	destination: faker.helpers.arrayElement(["CAIXA", "BRADESCO"]),
+	date: faker.date.recent().toISOString().split("T")[0].toString(),
+	amount: faker.helpers.rangeToNumber({ min: 100, max: 4000 }),
+}));
