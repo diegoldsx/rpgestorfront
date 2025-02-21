@@ -2,22 +2,21 @@
 
 import { useForm } from "react-hook-form";
 import { Button } from "@/components/ui/button";
-import { CPFMember } from "../../types/Member";
+import { Member } from "../../types/Member";
 import SelectField from "@/components/select-field";
 import TextField from "@/components/text-field";
 import Section from "./Section";
 import states from "../../types/states";
 
-export default function CPFMemberForm() {
+export default function MemberForm() {
 	const {
 		handleSubmit,
 		reset,
 		control,
 		formState: { errors },
-	} = useForm<CPFMember>();
+	} = useForm<Member>();
 
-	const onSubmit = (data: CPFMember) => {
-		console.log("CPF Member Data:", data);
+	const onSubmit = (data: Member) => {
 		reset();
 	};
 

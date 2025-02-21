@@ -19,7 +19,6 @@ export const DataTableAdvancedSearch = <TData,>({ table }: Props<TData>) => {
 		.getAllColumns()
 		.filter((col) => col.columnDef?.meta?.type === "text");
 
-	console.log(filterableColumns);
 	if (!filterableColumns.length) return;
 
 	const handleInputChange = (columnId: string, value: string) => {
@@ -49,7 +48,6 @@ export const DataTableAdvancedSearch = <TData,>({ table }: Props<TData>) => {
 			<Filter className="absolute left-3 top-2.5 h-4 w-4 text-zinc-300" />
 		</div>
 	);
-	console.log(filterValues);
 
 	return (
 		<div className="w-full mb-2">

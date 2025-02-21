@@ -35,22 +35,7 @@ const AssociadosMap = () => {
 		<div className="grid grid-cols-12 sm:gap-6 gap-4">
 			{/* Mapa do Brasil */}
 			<div className="col-span-12 md:col-span-8">
-				<div className="w-full h-[329px]">
-					<VectorMap
-						{...brasilMap}
-						className="h-full w-full object-fill RPGestor-codeVmapWhite"
-						checkedLayers={["BR-SP", "BR-RJ", "BR-MG", "BR-PR", "BR-RS"]}
-						layerProps={{
-							onClick: (event) => {},
-							onMouseEnter: (event) => {},
-							onMouseLeave: (event) => {},
-							className: cn(
-								"transition-colors duration-300",
-								"fill-primary/20 hover:fill-primary/40 cursor-pointer"
-							),
-						}}
-					/>
-				</div>
+				<div className="w-full h-[329px]"></div>
 			</div>
 
 			{/* Lista de estados */}
@@ -73,12 +58,12 @@ const AssociadosMap = () => {
 							className="flex justify-between items-center flex-wrap pb-3.5"
 						>
 							<div className="flex items-center gap-3">
-								<div className="rounded-full overflow-hidden w-9 h-9 inline-block bg-primary/10 flex items-center justify-center">
+								<div className="rounded-full overflow-hidden w-9 h-9  bg-primary/10 flex items-center justify-center">
 									<span className="text-xs font-medium text-primary">
 										{estado.nome.substring(0, 2)}
 									</span>
 								</div>
-								<span className="inline-block text-default-600 text-sm font-medium">
+								<span className=" text-default-600 text-sm font-medium">
 									{estado.nome}
 								</span>
 							</div>

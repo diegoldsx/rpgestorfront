@@ -304,7 +304,6 @@ const DifferentTypeToast = () => {
           toast("Event has been created", {
             action: {
               label: "Undo",
-              onClick: () => console.log("Undo"),
             },
           })
         }

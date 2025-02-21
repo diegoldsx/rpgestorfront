@@ -91,7 +91,6 @@ const treeData = [
 ];
 
 const handleSelect = (selectedNode) => {
-  console.log("Selected Node:", selectedNode);
 };
 
 const HandleDataTree = () => {
@@ -160,7 +159,6 @@ const treeData = [
   },
 ];
 const handleCheck = (checkedKeys) => {
-  console.log("ami on check Keys:", checkedKeys);
 };
 
 const CheckboxTree = () => {
