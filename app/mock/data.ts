@@ -3,6 +3,7 @@ import { Income } from "../[lang]/(dashboard)/financial/income/types/Income";
 import { Expense } from "../[lang]/(dashboard)/financial/expense/types/Expense";
 import { Provision } from "../[lang]/(dashboard)/financial/provision/types/Provision";
 import { Transfer } from "../[lang]/(dashboard)/financial/transfer/types/Transfer";
+import { PaymentGroup } from "../[lang]/(dashboard)/settings/payment-groups/types/PaymentGroup";
 
 const LENGTH = 30;
 
@@ -16,10 +17,10 @@ export const fakeIncomes: Income[] = Array.from({ length: LENGTH }, () => ({
 	costCenter: faker.helpers.arrayElement(["ADMINISTRATIVO", "OUTROS"]),
 	category: faker.helpers.arrayElement(["MENSALIDADE", "ASSOCIADOS"]),
 	taxApplied: faker.datatype.boolean(),
-	value: faker.number.float({ min: 50, max: 1000, precision: 0.01 }),
+	value: faker.number.float({ min: 50, max: 1000, multipleOf: 0.01 }),
 	discountType: faker.helpers.arrayElement(["%", "R$"]) as "%" | "R$",
-	paidValue: faker.number.float({ min: 50, max: 1000, precision: 0.01 }),
-	discountPercentage: faker.number.float({ min: 5, max: 50, precision: 0.01 }),
+	paidValue: faker.number.float({ min: 50, max: 1000, multipleOf: 0.01 }),
+	discountPercentage: faker.number.float({ min: 5, max: 50, multipleOf: 0.01 }),
 	discountExpirationDate: faker.date.future().toISOString().split("T")[0],
 	discountDescription: faker.lorem.sentence(),
 	observations: faker.lorem.sentence(),
@@ -37,32 +38,32 @@ export const fakeExpenses: Expense[] = Array.from({ length: LENGTH }, () => ({
 	costCenter: faker.helpers.arrayElement(["ADMINISTRATIVO", "OUTROS"]),
 	category: faker.helpers.arrayElement(["ENERGY", "WATER", "SYSTEM"]),
 	paymentMethod: faker.helpers.arrayElement(["DINHEIRO", "BOLETO"]),
-	baseDocument: faker.datatype.uuid(),
+	baseDocument: faker.string.uuid(),
 	account: faker.helpers.arrayElement(["CAIXA", "BRADESCO"]),
 	tax: faker.datatype.boolean(),
-	amount: faker.datatype.number({ min: 100, max: 10000 }),
+	amount: faker.number.int({ min: 100, max: 10000 }),
 	description: faker.lorem.sentence(),
 	observations: faker.lorem.paragraph(),
 	status: faker.helpers.arrayElement(["PENDING", "PAID", "CANCELLED"]),
 	paymentDate: faker.date.future().toISOString().split("T")[0],
 	paymentClearingDate: faker.date.future().toISOString().split("T")[0],
-	discounts: faker.datatype.number({ min: 0, max: 100 }),
-	addition: faker.datatype.number({ min: 0, max: 100 }),
-	totalPaid: faker.datatype.number({ min: 100, max: 10000 }),
-	totalClearing: faker.datatype.number({ min: 100, max: 10000 }),
-	installments: faker.datatype.number({ min: 1, max: 12 }),
+	discounts: faker.number.int({ min: 0, max: 100 }),
+	addition: faker.number.int({ min: 0, max: 100 }),
+	totalPaid: faker.number.int({ min: 100, max: 10000 }),
+	totalClearing: faker.number.int({ min: 100, max: 10000 }),
+	installments: faker.number.int({ min: 1, max: 12 }),
 	installmentType: faker.helpers.arrayElement(["REPEAT", "DIVIDE"]),
-	itemPayer: faker.name.fullName(),
+	itemPayer: faker.person.fullName(),
 	itemCategory: faker.helpers.arrayElement(["ENERGY", "WATER"]),
 	itemCostCenter: faker.helpers.arrayElement(["ADMINISTRATIVO", "OUTROS"]),
-	itemBaseDocument: faker.datatype.uuid(),
+	itemBaseDocument: faker.string.uuid(),
 	itemDueDate: faker.date.future().toISOString().split("T")[0],
 	itemDescription: faker.lorem.sentence(),
-	itemAmount: faker.datatype.number({ min: 100, max: 10000 }),
-	taxISS: faker.datatype.number({ min: 0, max: 100 }),
-	taxCSSL: faker.datatype.number({ min: 0, max: 100 }),
-	taxPIS: faker.datatype.number({ min: 0, max: 100 }),
-	taxCONFINS: faker.datatype.number({ min: 0, max: 100 }),
+	itemAmount: faker.number.int({ min: 100, max: 10000 }),
+	taxISS: faker.number.int({ min: 0, max: 100 }),
+	taxCSSL: faker.number.int({ min: 0, max: 100 }),
+	taxPIS: faker.number.int({ min: 0, max: 100 }),
+	taxCONFINS: faker.number.int({ min: 0, max: 100 }),
 }));
 
 export const fakeProvisions: Provision[] = Array.from(
@@ -87,3 +88,20 @@ export const fakeTransfers: Transfer[] = Array.from({ length: LENGTH }, () => ({
 	date: faker.date.recent().toISOString().split("T")[0].toString(),
 	amount: faker.helpers.rangeToNumber({ min: 100, max: 4000 }),
 }));
+
+export const fakePaymentGroups: PaymentGroup[] = Array.from(
+	{ length: LENGTH },
+	() => ({
+		id: faker.number.int(),
+		name: faker.lorem.words(2),
+		defaultAmount: faker.number.float({ min: 10, max: 1000, multipleOf: 0.01 }),
+		emailModel: faker.helpers.arrayElement([
+			"campanhaMobile",
+			"carteirinha",
+			"carteirinhaSocio",
+			"taxaAssociativa",
+		]),
+		cycle: faker.helpers.arrayElement(["ANUAL", "MENSAL"]),
+		status: faker.helpers.arrayElement(["ATIVO", "INATIVO"]),
+	})
+);

@@ -5,6 +5,7 @@ import { formatDate } from "@/lib/utils";
 import { Customer } from "../../types/customer";
 import { ColumnDef } from "@tanstack/react-table";
 import { Checkbox } from "@/components/ui/checkbox";
+import { exactFilter } from "@/components/common/data-table/columnUtils";
 
 export const columns: ColumnDef<Customer>[] = [
 	{
@@ -49,11 +50,8 @@ export const columns: ColumnDef<Customer>[] = [
 		accessorKey: "status",
 		header: "Status",
 		meta: { type: "select" },
-		filterFn: (row, columnId, filterValue) => {
-			if (!filterValue) return true;
-			const cellValue = row.getValue(columnId);
-			return filterValue.includes(cellValue);
-		},
+		filterFn: (row, columnId, filterValue) =>
+			exactFilter(row, columnId, filterValue),
 		cell: (info) => {
 			const values = {
 				ATIVO: { color: "success", label: "Ativo" },
