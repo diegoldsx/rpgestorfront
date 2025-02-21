@@ -2,7 +2,7 @@
 
 import { useForm } from "react-hook-form";
 import { Button } from "@/components/ui/button";
-import { CNPJMember } from "../../types/Member";
+import { Member } from "../../types/Member";
 import SelectField from "@/components/select-field";
 import TextField from "@/components/text-field";
 import Section from "./Section";
@@ -14,10 +14,9 @@ export default function CNPJMemberForm() {
 		reset,
 		control,
 		formState: { errors },
-	} = useForm<CNPJMember>();
+	} = useForm<Member>();
 
-	const onSubmit = (data: CNPJMember) => {
-		console.log("CNPJ Member Data:", data); // Imprimindo os dados do CNPJ no console
+	const onSubmit = (data: Member) => {
 		reset();
 	};
 
