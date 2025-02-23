@@ -4,7 +4,7 @@ import { Expense } from "../[lang]/(dashboard)/financial/expense/types/Expense";
 import { Provision } from "../[lang]/(dashboard)/financial/provision/types/Provision";
 import { Transfer } from "../[lang]/(dashboard)/financial/transfer/types/Transfer";
 import { PaymentGroup } from "../[lang]/(dashboard)/settings/payment-groups/types/PaymentGroup";
-import {} from "../[lang]/(dashboard)/financial/remittance/types/Connections";
+import {} from "../[lang]/(dashboard)/financial/remittance/types/Remittance";
 import { faker } from "@faker-js/faker";
 
 const LENGTH = 30;

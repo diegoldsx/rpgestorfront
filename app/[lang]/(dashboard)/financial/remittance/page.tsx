@@ -7,12 +7,10 @@ import IncomeStats from "./components/income-stats";
 import { RemittanceDataTable } from "./components/data-table";
 import { columns } from "./components/data-table/columns";
 import { fakeRemittances } from "@/app/mock/data";
-import { remittanceConfig } from "./types/Connections";
+import { getSelectableFields } from "./types/Remittance";
 
 const data = fakeRemittances;
-const filters = remittanceConfig
-	.filter((item) => item.options)
-	.map((item) => ({ ...item }));
+const filters = getSelectableFields();
 
 const RemittancePage = () => {
 	return (

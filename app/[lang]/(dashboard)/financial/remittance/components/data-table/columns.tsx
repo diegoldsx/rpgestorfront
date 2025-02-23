@@ -1,6 +1,6 @@
 import Cell from "./cell";
 import { ColumnDef } from "@tanstack/react-table";
-import { Remittance } from "../../types/Connections";
+import { getLabelFromValue, Remittance } from "../../types/Remittance";
 
 export const columns: ColumnDef<Remittance>[] = [
 	{
@@ -11,18 +11,17 @@ export const columns: ColumnDef<Remittance>[] = [
 	{
 		accessorKey: "bank",
 		header: "Banco",
-		cell: (info) => <Cell>{info.getValue() as string}</Cell>,
-	},
-	{
-		accessorKey: "search",
-		header: "Buscar",
-		cell: (info) => <Cell>{info.getValue() as string}</Cell>,
+		cell: (info) => {
+			const label = getLabelFromValue("bank", info.getValue() as string);
+			return <Cell>{label}</Cell>;
+		},
 	},
 	{
 		accessorKey: "searchFor",
-		header: "Busca por",
+		header: "Buscar Por",
 		cell: (info) => <Cell>{info.getValue() as string}</Cell>,
 	},
+
 	{
 		accessorKey: "amount",
 		header: "Valor",
@@ -41,7 +40,14 @@ export const columns: ColumnDef<Remittance>[] = [
 	{
 		accessorKey: "dateCategory",
 		header: "Tipo de Data",
-		cell: (info) => <Cell>{info.getValue() as string}</Cell>,
+		cell: (info) => {
+			const label = getLabelFromValue(
+				"dateCategory",
+				info.getValue() as string
+			);
+
+			return <Cell>{label}</Cell>;
+		},
 	},
 	{
 		accessorKey: "limit",
@@ -51,6 +57,9 @@ export const columns: ColumnDef<Remittance>[] = [
 	{
 		accessorKey: "type",
 		header: "Tipo",
-		cell: (info) => <Cell>{info.getValue() as string}</Cell>,
+		cell: (info) => {
+			const label = getLabelFromValue("type", info.getValue() as string);
+			return <Cell>{label}</Cell>;
+		},
 	},
 ];

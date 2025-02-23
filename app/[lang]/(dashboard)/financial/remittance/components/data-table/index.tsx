@@ -3,12 +3,12 @@
 import * as React from "react";
 import { DataTable } from "@/components/common/data-table/data-table";
 import { ColumnDef } from "@tanstack/react-table";
-import { Remittance } from "../../types/Connections";
+import { Remittance } from "../../types/Remittance";
 
 interface RemittanceDataTable {
 	data: Remittance[];
 	columns: ColumnDef<Remittance>[];
-	filters: any;
+	filters?: any;
 }
 
 export function RemittanceDataTable<T>({
