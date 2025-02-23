@@ -1,11 +1,32 @@
-import { faker } from "@faker-js/faker";
+import { array, int, words } from "./faker";
 import { Income } from "../[lang]/(dashboard)/financial/income/types/Income";
 import { Expense } from "../[lang]/(dashboard)/financial/expense/types/Expense";
 import { Provision } from "../[lang]/(dashboard)/financial/provision/types/Provision";
 import { Transfer } from "../[lang]/(dashboard)/financial/transfer/types/Transfer";
 import { PaymentGroup } from "../[lang]/(dashboard)/settings/payment-groups/types/PaymentGroup";
+import {} from "../[lang]/(dashboard)/financial/remittance/types/Connections";
+import { faker } from "@faker-js/faker";
 
 const LENGTH = 30;
+
+export const fake_returns: any[] = Array.from({ length: LENGTH }, () => ({
+	id: int(),
+	account: array(["CAIXA", "BRADESCO"]),
+	file: words(1) + ".doc",
+}));
+
+export const fakeRemittances: any[] = Array.from({ length: LENGTH }, () => ({
+	id: faker.number.int(),
+	bank: faker.helpers.arrayElement(["CAIXA", "BRADESCO"]),
+	search: faker.lorem.words(2),
+	searchFor: faker.helpers.arrayElement(["code", "name", "cpf", "cnpj"]),
+	amount: faker.number.int(),
+	startDate: faker.date.future().toISOString().split("T")[0],
+	finalDate: faker.date.future().toISOString().split("T")[0],
+	dateCategory: faker.helpers.arrayElement(["dueDate", "paymentDate"]),
+	limit: faker.lorem.words(2),
+	type: faker.helpers.arrayElement(["adimplente", "inadimplente"]),
+}));
 
 export const fakeIncomes: Income[] = Array.from({ length: LENGTH }, () => ({
 	payer: faker.person.fullName(),

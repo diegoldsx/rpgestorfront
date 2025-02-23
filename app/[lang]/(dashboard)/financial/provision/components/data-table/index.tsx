@@ -14,16 +14,12 @@ export function ProvisionDataTable<T>({
 	data,
 	columns,
 }: ProvisionDataTableProps) {
-	const provisionFacetedFilters = provisionConfig
-		.filter((prov) => prov.options)
-		.map((prov) => ({ ...prov }));
-
 	return (
 		<>
 			<DataTable
 				columns={columns}
 				data={data}
-				facetedFilters={provisionFacetedFilters}
+				//facetedFilters={provisionFacetedFilters}
 			/>
 		</>
 	);
