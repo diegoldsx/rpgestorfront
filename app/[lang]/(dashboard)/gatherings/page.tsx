@@ -11,6 +11,9 @@ import { config } from "./types/Gathering";
 
 const data = FAKE_GATHERINGS;
 const filters = getFieldsWithOptions(config);
+
+console.log(filters);
+
 const visibleColumns = getVisibilityState([
 	"id",
 	"category",
