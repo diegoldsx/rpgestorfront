@@ -18,6 +18,7 @@ import {
 	email,
 } from "./faker";
 import { Gathering } from "../[lang]/(dashboard)/gatherings/types/Gathering";
+import { Category } from "../[lang]/(dashboard)/gatherings/categories/types/Category";
 
 const LENGTH = 30;
 
@@ -42,6 +43,15 @@ export const FAKE_COURSES: Course[] = Array.from({ length: LENGTH }, () => ({
 	inviteConfirmation: boolean(),
 	status: arrayElement(["ativo", "inativo"]),
 }));
+
+export const FAKE_CATEGORIES: Category[] = Array.from(
+	{ length: LENGTH },
+	() => ({
+		id: int(),
+		name: words(2),
+		status: arrayElement(["ativo", "inativo"]),
+	})
+);
 
 export const FAKE_GATHERINGS: Gathering[] = Array.from(
 	{ length: LENGTH },

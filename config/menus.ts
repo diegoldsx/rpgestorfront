@@ -80,6 +80,7 @@ export const menusConfig = {
 				child: [
 					{ title: "Eventos", href: "/gatherings" },
 					{ title: "Cursos", href: "/gatherings/courses" },
+					{ title: "Categorias", href: "/gatherings/categories" },
 				],
 			},
 			{

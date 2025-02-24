@@ -4,30 +4,23 @@ import { Fragment } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { HeadingPages } from "@/components/common/heading/heading-pages";
 import { columns, getVisibilityState } from "./components/data-table/columns";
-import { FAKE_GATHERINGS } from "@/app/mock/data";
 import { DataTable } from "@/components/common/data-table/data-table";
+
+import { categoryConfig } from "./types/Category";
 import { getFieldsWithOptions } from "@/app/types/FieldConfig";
-import { config } from "./types/Gathering";
+import { FAKE_CATEGORIES as data } from "@/app/mock/data";
 
-const data = FAKE_GATHERINGS;
-const filters = getFieldsWithOptions(config);
+const filters = getFieldsWithOptions(categoryConfig);
 
-const visibleColumns = getVisibilityState([
-	"id",
-	"category",
-	"name",
-	"startDate",
-	"endDate",
-	"status",
-]);
-const GatheringPage = () => {
+const visibleColumns = getVisibilityState(["id", "name", "status"]);
+const CategoriesPage = () => {
 	return (
 		<Fragment>
 			<HeadingPages
-				title="Eventos"
+				title="Categorias"
 				breadcrumbs={{
-					title: "Eventos",
-					href: "/gatherings",
+					title: "Categorias",
+					href: "/gatherings/categories",
 				}}
 			/>
 
@@ -35,8 +28,8 @@ const GatheringPage = () => {
 				<Card>
 					<CardContent>
 						<DataTable
-							data={data}
 							columns={columns}
+							data={data}
 							facetedFilters={filters}
 							visibilityState={visibleColumns}
 						/>
@@ -47,4 +40,4 @@ const GatheringPage = () => {
 	);
 };
 
-export default GatheringPage;
+export default CategoriesPage;
