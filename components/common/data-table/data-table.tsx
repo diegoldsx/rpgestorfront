@@ -25,8 +25,6 @@ import FacetedFilters from "./faceted-filters";
 import DataTableHeader from "./data-table-header";
 import { TableDataExporter } from "./table-data-exporter";
 import { DataTableAdvancedSearch } from "./data-table-advanced-search";
-import { Option } from "@/app/types/new/FieldConfig";
-import { Course } from "@/app/[lang]/(dashboard)/courses/types/Course";
 
 export type FacetedFilter = {
 	id: string;
