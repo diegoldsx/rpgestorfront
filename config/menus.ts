@@ -81,6 +81,7 @@ export const menusConfig = {
 					{ title: "Eventos", href: "/gatherings" },
 					{ title: "Cursos", href: "/gatherings/courses" },
 					{ title: "Categorias", href: "/gatherings/categories" },
+					{ title: "Submissões", href: "/gatherings/submissions" },
 				],
 			},
 			{

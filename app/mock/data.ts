@@ -12,13 +12,16 @@ import {
 	arrayElement,
 	date,
 	sentence,
+	name,
 	boolean,
 	float,
 	words,
 	email,
+	link,
 } from "./faker";
 import { Gathering } from "../[lang]/(dashboard)/gatherings/types/Gathering";
 import { Category } from "../[lang]/(dashboard)/gatherings/categories/types/Category";
+import { Submission } from "../[lang]/(dashboard)/gatherings/submissions/types/Submission";
 
 const LENGTH = 30;
 
@@ -43,6 +46,29 @@ export const FAKE_COURSES: Course[] = Array.from({ length: LENGTH }, () => ({
 	inviteConfirmation: boolean(),
 	status: arrayElement(["ativo", "inativo"]),
 }));
+
+export const FAKE_SUBMISSIONS: Submission[] = Array.from(
+	{ length: LENGTH },
+	() => ({
+		id: int(),
+		packagingName: words(2),
+		strategicPartners: name(),
+		area: "concurso",
+		authors: name(),
+		institution: words(1),
+		date: date(),
+		event: arrayElement(["premioEmbalagem", "cursoNeurociencia"]),
+		submitedBy: arrayElement(["user1", "user2"]),
+		packageReleaseDate: date(),
+		packageDesignAgency: "Agencia",
+		presentationLink: link(),
+		comments: sentence(),
+		number: int(),
+		presentationDate: date(),
+		roomContent: arrayElement(["content1", "content2"]),
+		status: arrayElement(["aprovado", "reprovado"]),
+	})
+);
 
 export const FAKE_CATEGORIES: Category[] = Array.from(
 	{ length: LENGTH },

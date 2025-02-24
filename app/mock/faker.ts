@@ -9,3 +9,5 @@ export const sentence = () => faker.lorem.sentence();
 export const arrayElement = <T>(arr: T[]) => faker.helpers.arrayElement(arr);
 export const boolean = () => faker.datatype.boolean();
 export const email = () => faker.internet.email().toLowerCase();
+export const name = () => faker.person.fullName();
+export const link = () => faker.internet.domainName();
