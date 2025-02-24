@@ -77,7 +77,10 @@ export const menusConfig = {
 				title: "Eventos",
 				icon: Calendar,
 				href: "/gatherings",
-				child: [{ title: "Eventos", href: "/gatherings" }],
+				child: [
+					{ title: "Eventos", href: "/gatherings" },
+					{ title: "Cursos", href: "/gatherings/courses" },
+				],
 			},
 			{
 				title: "Assembleia",

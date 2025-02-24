@@ -2,7 +2,7 @@ import { Income } from "../[lang]/(dashboard)/financial/income/types/Income";
 import { Expense } from "../[lang]/(dashboard)/financial/expense/types/Expense";
 import { Provision } from "../[lang]/(dashboard)/financial/provision/types/Provision";
 import { Transfer } from "../[lang]/(dashboard)/financial/transfer/types/Transfer";
-import { Course } from "../[lang]/(dashboard)/courses/types/Course";
+import { Course } from "../[lang]/(dashboard)/gatherings/courses/types/Course";
 
 import { PaymentGroup } from "../[lang]/(dashboard)/settings/payment-groups/types/PaymentGroup";
 import {} from "../[lang]/(dashboard)/financial/remittance/types/Remittance";

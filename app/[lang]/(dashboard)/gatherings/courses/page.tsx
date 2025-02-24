@@ -6,7 +6,7 @@ import { HeadingPages } from "@/components/common/heading/heading-pages";
 import IncomeStats from "./components/income-stats";
 import { columns, getVisibilityState } from "./components/data-table/columns";
 import { FAKE_COURSES } from "@/app/mock/data";
-import { getFieldsWithOptions } from "@/app/types/new/FieldConfig";
+import { getFieldsWithOptions } from "@/app/types/FieldConfig";
 import { courseConfig } from "./types/Course";
 import { DataTable } from "@/components/common/data-table/data-table";
 
