@@ -76,13 +76,8 @@ export const menusConfig = {
 			{
 				title: "Eventos",
 				icon: Calendar,
-				href: "/events/calendar",
-				child: [
-					{ title: "Eventos", href: "/events/calendar" },
-					{ title: "Cursos", href: "#" },
-					{ title: "Certificados", href: "#" },
-					{ title: "Submissões", href: "#" },
-				],
+				href: "/conferences",
+				child: [{ title: "Eventos", href: "/conferences" }],
 			},
 			{
 				title: "Assembleia",

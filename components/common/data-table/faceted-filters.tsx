@@ -15,7 +15,7 @@ export default function FacetedFilters<TData>({
 		<>
 			{filters.map((filter) => {
 				const column = table.getColumn(filter.id);
-				return column ? (
+				return column && column.getIsVisible() ? (
 					<DataTableFacetedFilter
 						key={filter.id}
 						column={column}

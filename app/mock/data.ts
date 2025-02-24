@@ -1,17 +1,80 @@
-import { array, int, words } from "./faker";
 import { Income } from "../[lang]/(dashboard)/financial/income/types/Income";
 import { Expense } from "../[lang]/(dashboard)/financial/expense/types/Expense";
 import { Provision } from "../[lang]/(dashboard)/financial/provision/types/Provision";
 import { Transfer } from "../[lang]/(dashboard)/financial/transfer/types/Transfer";
+import { Course } from "../[lang]/(dashboard)/courses/types/Course";
+
 import { PaymentGroup } from "../[lang]/(dashboard)/settings/payment-groups/types/PaymentGroup";
 import {} from "../[lang]/(dashboard)/financial/remittance/types/Remittance";
 import { faker } from "@faker-js/faker";
+import { Conference } from "../[lang]/(dashboard)/conferences/types/Conference";
+import {
+	int,
+	arrayElement,
+	date,
+	sentence,
+	boolean,
+	float,
+	words,
+	email,
+} from "./faker";
 
 const LENGTH = 30;
 
+export const FAKE_COURSES: Course[] = Array.from({ length: LENGTH }, () => ({
+	category: arrayElement(["curso1", "curso2"]),
+	name: words(2),
+	startDate: date(),
+	endDate: date(),
+	registrationDeadline: date(),
+	participantLimit: int(),
+	instructors: arrayElement(["user1", "user2"]),
+	description: sentence(),
+	permissions: arrayElement(["venda", "cliente"]),
+	value: float(),
+	costCenter: arrayElement(["administrativo", "outras"]),
+	billing: arrayElement(["mensalidade", "associados"]),
+	account: arrayElement(["caixa", "bradesco"]),
+	enrollment: arrayElement(["evento1", "evento2"]),
+	paymentConfirmation: boolean(),
+	exemption: boolean(),
+	cancellation: boolean(),
+	inviteConfirmation: boolean(),
+	status: arrayElement(["ativo", "inativo"]),
+}));
+
+export const fake_conferences: Conference[] = Array.from(
+	{ length: LENGTH },
+	() => ({
+		id: int(),
+		category: arrayElement(["event1", "event2"]),
+		name: words(2),
+		startDate: date(),
+		endDate: date(),
+		registrationEndDate: date(),
+		participantLimit: int(),
+		responsible: arrayElement(["option1", "option2"]),
+		description: sentence(),
+		sponsors: "sponsors",
+		permission: arrayElement(["VENDA", "OUTRO"]),
+		value: float(),
+		costCenter: arrayElement(["center1", "center2"]),
+		eventCategory: "event",
+		account: arrayElement(["associados", "outros"]),
+		allowSubmission: boolean(),
+		submissionDeadline: date(),
+		registration: arrayElement(["event", "outro"]),
+		paymentConfirmation: arrayElement(["option1", "option2"]),
+		exemption: arrayElement(["option1", "option2"]),
+		cancellation: arrayElement(["option1", "option2"]),
+		inviteConfirmation: email(),
+		status: arrayElement(["ATIVO", "INATIVO"]),
+	})
+);
+
 export const fake_returns: any[] = Array.from({ length: LENGTH }, () => ({
 	id: int(),
-	account: array(["CAIXA", "BRADESCO"]),
+	account: arrayElement(["CAIXA", "BRADESCO"]),
 	file: words(1) + ".doc",
 }));
 
