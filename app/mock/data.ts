@@ -22,8 +22,26 @@ import {
 import { Gathering } from "../[lang]/(dashboard)/gatherings/types/Gathering";
 import { Category } from "../[lang]/(dashboard)/gatherings/categories/types/Category";
 import { Submission } from "../[lang]/(dashboard)/gatherings/submissions/types/Submission";
+import { Assembly } from "../[lang]/(dashboard)/assemblies/Assembly";
 
 const LENGTH = 30;
+
+export const FAKE_ASSEMBLIES: Assembly[] = Array.from(
+	{ length: LENGTH },
+	() => ({
+		id: int(),
+		name: words(2),
+		status: arrayElement(["ativo", "inativo"]),
+		startDate: date(),
+		endDate: date(),
+		resultDate: date(),
+		description: sentence(),
+		type: arrayElement(["unica", "multipla"]),
+		allowChangeVote: boolean(),
+		displayMode: arrayElement(["padrao", "assembleia"]),
+		videoConference: boolean(),
+	})
+);
 
 export const FAKE_COURSES: Course[] = Array.from({ length: LENGTH }, () => ({
 	category: arrayElement(["curso1", "curso2"]),
