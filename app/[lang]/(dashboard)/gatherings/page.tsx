@@ -8,6 +8,7 @@ import { FAKE_GATHERINGS } from "@/app/mock/data";
 import { DataTable } from "@/components/common/data-table/data-table";
 import { getFieldsWithOptions } from "@/app/types/FieldConfig";
 import { config } from "./types/Gathering";
+import { SortingState } from "@tanstack/react-table";
 
 const data = FAKE_GATHERINGS;
 const filters = getFieldsWithOptions(config);
@@ -20,6 +21,9 @@ const visibleColumns = getVisibilityState([
 	"endDate",
 	"status",
 ]);
+
+const sortBy: SortingState = [{ id: "startDate", desc: false }];
+
 const GatheringPage = () => {
 	return (
 		<Fragment>
@@ -39,6 +43,7 @@ const GatheringPage = () => {
 							columns={columns}
 							facetedFilters={filters}
 							visibilityState={visibleColumns}
+							sortBy={sortBy}
 						/>
 					</CardContent>
 				</Card>

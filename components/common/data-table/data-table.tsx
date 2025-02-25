@@ -42,6 +42,7 @@ interface DataTableProps<TData> {
 	emptyMessage?: string;
 	selectable?: boolean;
 	visibilityState?: VisibilityState;
+	sortBy?: SortingState;
 }
 
 export function DataTable<TData>({
@@ -52,6 +53,7 @@ export function DataTable<TData>({
 	rowActions,
 	emptyMessage = "Nenhum registro encontrado.",
 	selectable = true,
+	sortBy = [],
 }: DataTableProps<TData>) {
 	const [rowSelection, setRowSelection] = React.useState<RowSelectionState>({});
 	const [columnVisibility, setColumnVisibility] =
@@ -59,7 +61,7 @@ export function DataTable<TData>({
 	const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
 		[]
 	);
-	const [sorting, setSorting] = React.useState<SortingState>([]);
+	const [sorting, setSorting] = React.useState<SortingState>(sortBy);
 
 	const table = useReactTable({
 		data,
