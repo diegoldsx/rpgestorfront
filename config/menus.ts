@@ -78,6 +78,7 @@ export const menusConfig = {
 				title: "Conteúdo",
 				icon: FileText,
 				href: "/content",
+				child: [{ title: "Tipo", href: "/content/content-type" }],
 			},
 			{
 				title: "Agenda",
