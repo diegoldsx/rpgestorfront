@@ -93,14 +93,11 @@ export const menusConfig = {
 				title: "Convênios",
 				icon: Gift,
 				child: [
-					{ title: "Convênios", href: "#" },
-					{ title: "Consultar", href: "#" },
-					{ title: "Indicação", href: "#" },
-					{
-						title: "Relatório Utilização",
-						href: "#",
-					},
-					{ title: "Configurações", href: "#" },
+					{ title: "Convênios", href: "/partnership" },
+					{ title: "Tipos", href: "/partnership/settings/types" },
+					{ title: "Desconto", href: "/partnership/settings/discount" },
+					{ title: "Pagamento", href: "/partnership/settings/payment" },
+					{ title: "Serviço", href: "/partnership/settings/service" },
 				],
 			},
 			{

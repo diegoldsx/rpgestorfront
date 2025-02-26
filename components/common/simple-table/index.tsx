@@ -5,12 +5,12 @@ import { ColumnDef, flexRender, getCoreRowModel, useReactTable } from "@tanstack
 
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 
-interface BaseTableProps<TData> {
+interface SimpleTableProps<TData> {
 	columns: ColumnDef<TData, any>[];
 	data: TData[];
 }
 
-export function BaseTable<TData>({ columns, data }: BaseTableProps<TData>) {
+export function SimpleTable<TData>({ columns, data }: SimpleTableProps<TData>) {
 	const table = useReactTable({
 		data,
 		columns,
@@ -25,7 +25,7 @@ export function BaseTable<TData>({ columns, data }: BaseTableProps<TData>) {
 						{table.getHeaderGroups().map((headerGroup) => (
 							<TableRow key={headerGroup.id}>
 								{headerGroup.headers.map((header) => (
-									<TableHead key={header.id} colSpan={header.colSpan} className="whitespace-nowrap h-11">
+									<TableHead key={header.id} colSpan={header.colSpan} className="whitespace-nowrap h-11 text-left">
 										{header.isPlaceholder ? null : flexRender(header.column.columnDef.header, header.getContext())}
 									</TableHead>
 								))}
