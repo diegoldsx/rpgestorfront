@@ -1,19 +1,4 @@
-import {
-	Home,
-	Users,
-	DollarSign,
-	Calendar,
-	FileText,
-	Clock,
-	Gift,
-	User,
-	Settings,
-	MessageSquare,
-	Vote,
-	Contact,
-	Mail,
-	LayoutDashboard,
-} from "lucide-react";
+import { Home, Users, DollarSign, Calendar, FileText, Clock, Gift, User, Settings, MessageSquare, Vote, Contact, Mail, LayoutDashboard } from "lucide-react";
 
 export const menusConfig = {
 	sidebarNav: {
@@ -92,7 +77,7 @@ export const menusConfig = {
 			{
 				title: "Conteúdo",
 				icon: FileText,
-				href: "#",
+				href: "/content",
 			},
 			{
 				title: "Agenda",

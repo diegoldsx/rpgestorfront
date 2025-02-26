@@ -7,10 +7,9 @@ import IncomeStats from "./components/income-stats";
 import { RemittanceDataTable } from "./components/data-table";
 import { columns } from "./components/data-table/columns";
 import { fakeRemittances } from "@/app/mock/data";
-import { getSelectableFields } from "./types/Remittance";
+import { facetedFilters } from "./types/Remittance";
 
 const data = fakeRemittances;
-const filters = getSelectableFields();
 
 const RemittancePage = () => {
 	return (
@@ -30,11 +29,7 @@ const RemittancePage = () => {
 
 				<Card>
 					<CardContent>
-						<RemittanceDataTable
-							data={data}
-							columns={columns}
-							filters={filters}
-						/>
+						<RemittanceDataTable data={data} columns={columns} filters={facetedFilters} />
 					</CardContent>
 				</Card>
 			</div>

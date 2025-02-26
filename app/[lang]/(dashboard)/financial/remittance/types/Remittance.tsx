@@ -1,4 +1,5 @@
 import { FieldConfig, Option } from "@/app/types/FieldConfig";
+import { VisibilityState } from "@tanstack/react-table";
 
 export type Remittance = {
 	id: number;
@@ -13,79 +14,41 @@ export type Remittance = {
 	type: "adimplente" | "inadimplente";
 };
 
-export const config: FieldConfig[] = [
-	{
-		id: "id",
-		title: "ID",
-	},
-	{
-		id: "search",
-		title: "Busca",
-	},
-	{
-		id: "amount",
-		title: "Valor",
-	},
-	{
-		id: "startDate",
-		title: "Data início",
-	},
-	{
-		id: "finalDate",
-		title: "Data fim",
-	},
-	{
-		id: "limit",
-		title: "Limite",
-	},
-	{
-		id: "searchFor",
-		title: "Busca Por",
-		options: [
-			{ value: "code", label: "Código" },
-			{ value: "cpf", label: "CPF" },
-			{ value: "cnpj", label: "CNPJ" },
-			{ value: "name", label: "Nome" },
-		],
-	},
-	{
-		id: "type",
-		title: "Tipo",
-		options: [
-			{ value: "adimplente", label: "Adimplente" },
-			{ value: "inadimplente", label: "Inadimplente" },
-		],
-	},
-	{
-		id: "bank",
-		title: "Banco",
-		options: [
-			{ value: "CAIXA", label: "Caixa" },
-			{ value: "BRADESCO", label: "Bradesco" },
-		],
-	},
+export const options = {
+	bank: [
+		{ value: "CAIXA", label: "Caixa" },
+		{ value: "BRADESCO", label: "Bradesco" },
+	],
+	searchFor: [
+		{ value: "code", label: "Código" },
+		{ value: "name", label: "Nome" },
+		{ value: "cpf", label: "CPF" },
+		{ value: "cnpj", label: "CNPJ" },
+	],
+	dateCategory: [
+		{ value: "dueDate", label: "Data de vencimento" },
+		{ value: "paymentDate", label: "Data de pagamento" },
+	],
+	type: [
+		{ value: "adimplent", label: "Adimplente" },
+		{ value: "inadimpent", label: "Inadimplate" },
+	],
+};
 
-	{
-		id: "dateCategory",
-		title: "Categoria",
-		options: [
-			{ value: "dueDate", label: "Data de vencimento" },
-			{ value: "paymentDate", label: "Data de pagamento" },
-		],
-	},
+export const remittanceFields: FieldConfig<Remittance>[] = [
+	{ id: "id", title: "ID" },
+	{ id: "bank", title: "Situação", options: options.bank },
+	{ id: "search", title: "Busca" },
+	{ id: "searchFor", title: "Buscar por", options: options.searchFor },
+	{ id: "amount", title: "Valor" },
+	{ id: "startDate", title: "Data de início" },
+	{ id: "finalDate", title: "Data final", options: options.dateCategory },
+	{ id: "dateCategory", title: "Data categoria" },
+	{ id: "limit", title: "Limite" },
+	{ id: "type", title: "Tipo", options: options.type },
 ];
 
-export const getSelectableFields = (): FieldConfig[] => {
-	const items = config.filter((c) => c.options).map((item) => ({ ...item }));
+let hideColumns: string[] = ["id", "limit"];
 
-	return items;
-};
-
-export const getLabelFromValue = (id: string, value: string): string => {
-	const options = config.find((field) => field.id === id)?.options;
-
-	const option = options?.find((op) => op.value === value);
-	if (!option) return "";
-
-	return option.label || "";
-};
+export const visibilityState: VisibilityState = Object.fromEntries(remittanceFields.map((key) => [key.id, !hideColumns.includes(key.id)]));
+export const facetedFilters: any[] = remittanceFields.filter((field: any) => field.options);
