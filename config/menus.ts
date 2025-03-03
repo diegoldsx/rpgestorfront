@@ -78,10 +78,7 @@ export const menusConfig = {
 				title: "Conteúdo",
 				icon: FileText,
 				href: "/content",
-				child: [
-					{ title: "Conteúdo", href: "/content" },
-					{ title: "Tipo", href: "/content/content-type" },
-				],
+				child: [{ title: "Tipo", href: "/content/content-type" }],
 			},
 			{
 				title: "Agenda",
@@ -107,10 +104,10 @@ export const menusConfig = {
 				title: "Email Marketing",
 				icon: Mail,
 				child: [
-					{ title: "Comunicados", href: "/crm/announcements" },
-					{ title: "Mensagens", href: "/crm/messages" },
-					{ title: "Grupo", href: "/crm/groups" },
-					{ title: "Emails", href: "/crm/emails" },
+					{ title: "Mensagens", href: "#" },
+					{ title: "Grupos", href: "#" },
+					{ title: "Emails", href: "#" },
+					{ title: "Importar", href: "#" },
 				],
 			},
 			{
