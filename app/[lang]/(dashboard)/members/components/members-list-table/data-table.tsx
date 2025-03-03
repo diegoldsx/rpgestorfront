@@ -15,11 +15,18 @@ import {
 	useReactTable,
 } from "@tanstack/react-table";
 
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
-import { TablePagination } from "@/components/common/data-table/table-pagination";
+import {
+	Table,
+	TableBody,
+	TableCell,
+	TableHead,
+	TableHeader,
+	TableRow,
+} from "@/components/ui/table";
 import { DataTableToolbar } from "./data-table-toolbar";
 import { DataTableFilterPanel } from "./data-table-filter-panel";
 import { Member } from "../../types/Member";
+import { DataTablePagination } from "@/app/[lang]/(dash-components)/(invoice)/invoice-list/invoice-list-table/components/data-table-pagination";
 import { ArrowDown, ArrowUp, ArrowUpDown } from "lucide-react";
 
 export const visibilityState: VisibilityState = {
@@ -37,7 +44,8 @@ export function DataTable({ columns, data }: DataTableProps) {
 	const [rowSelection, setRowSelection] = useState<RowSelectionState>({});
 	const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
 	const [sorting, setSorting] = useState<SortingState>([]);
-	const [columnVisibility, setColumnVisibility] = useState<VisibilityState>(visibilityState);
+	const [columnVisibility, setColumnVisibility] =
+		useState<VisibilityState>(visibilityState);
 
 	const table = useReactTable({
 		data,
@@ -80,14 +88,25 @@ export function DataTable({ columns, data }: DataTableProps) {
 									<TableHead
 										key={header.id}
 										colSpan={header.colSpan}
-										onClick={header.column.getCanSort() ? header.column.getToggleSortingHandler() : undefined}
-										className={`cursor-pointer select-none  ${header.column.getIsPinned() === "right" ? "sticky right-0 bg-white z-10 " : ""}`}
+										onClick={
+											header.column.getCanSort()
+												? header.column.getToggleSortingHandler()
+												: undefined
+										}
+										className={`cursor-pointer select-none  ${
+											header.column.getIsPinned() === "right"
+												? "sticky right-0 bg-white z-10 "
+												: ""
+										}`}
 										style={{
 											width: `${header.column.getSize()}px`,
 										}}
 									>
 										<div className="flex items-center justify-center">
-											{flexRender(header.column.columnDef.header, header.getContext())}
+											{flexRender(
+												header.column.columnDef.header,
+												header.getContext()
+											)}
 
 											{header.column.getCanSort() && (
 												<span className="ml-2 text-zinc-400">
@@ -112,7 +131,11 @@ export function DataTable({ columns, data }: DataTableProps) {
 								{row.getVisibleCells().map((cell) => (
 									<TableCell
 										key={cell.id}
-										className={`text-sm text-gray-600 text-left ${cell.column.getIsPinned() === "right" ? "sticky right-0 bg-white z-0" : ""}`}
+										className={`text-sm text-gray-600 text-left ${
+											cell.column.getIsPinned() === "right"
+												? "sticky right-0 bg-white z-0"
+												: ""
+										}`}
 										style={{
 											width: `${cell.column.getSize()}px`,
 										}}
@@ -126,7 +149,7 @@ export function DataTable({ columns, data }: DataTableProps) {
 				</Table>
 			</div>
 
-			<TablePagination table={table} />
+			<DataTablePagination table={table} />
 		</div>
 	);
 }

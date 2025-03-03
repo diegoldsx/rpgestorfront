@@ -19,7 +19,7 @@ import {
 
 import { Table, TableBody, TableCell, TableRow } from "@/components/ui/table";
 
-import { TablePagination } from "./table-pagination";
+import { BasePagination } from "./table-pagination";
 import { DataTableColumnToggler } from "./table-column-toggler";
 import FacetedFilters from "./faceted-filters";
 import DataTableHeader from "./data-table-header";
@@ -56,8 +56,11 @@ export function DataTable<TData>({
 	sortBy = [],
 }: DataTableProps<TData>) {
 	const [rowSelection, setRowSelection] = React.useState<RowSelectionState>({});
-	const [columnVisibility, setColumnVisibility] = React.useState<VisibilityState>(visibilityState);
-	const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>([]);
+	const [columnVisibility, setColumnVisibility] =
+		React.useState<VisibilityState>(visibilityState);
+	const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
+		[]
+	);
 	const [sorting, setSorting] = React.useState<SortingState>(sortBy);
 
 	const table = useReactTable({
@@ -109,18 +112,35 @@ export function DataTable<TData>({
 					<TableBody>
 						{table.getRowModel().rows?.length ? (
 							table.getRowModel().rows.map((row) => (
-								<TableRow key={row.id} data-state={row.getIsSelected() && "selected"} className="hover:bg-default-50">
+								<TableRow
+									key={row.id}
+									data-state={row.getIsSelected() && "selected"}
+									className="hover:bg-default-50"
+								>
 									{row.getVisibleCells().map((cell) => (
-										<TableCell key={cell.id} className="text-sm text-left  text-default-600">
-											{flexRender(cell.column.columnDef.cell, cell.getContext())}
+										<TableCell
+											key={cell.id}
+											className="text-sm text-left  text-default-600"
+										>
+											{flexRender(
+												cell.column.columnDef.cell,
+												cell.getContext()
+											)}
 										</TableCell>
 									))}
-									{rowActions && <TableCell className="text-left">{rowActions(row.original)}</TableCell>}
+									{rowActions && (
+										<TableCell className="text-left">
+											{rowActions(row.original)}
+										</TableCell>
+									)}
 								</TableRow>
 							))
 						) : (
 							<TableRow className="">
-								<TableCell colSpan={columns.length + (rowActions ? 1 : 0)} className="h-24 text-left outline">
+								<TableCell
+									colSpan={columns.length + (rowActions ? 1 : 0)}
+									className="h-24 text-left outline"
+								>
 									{emptyMessage}
 								</TableCell>
 							</TableRow>
@@ -128,7 +148,7 @@ export function DataTable<TData>({
 					</TableBody>
 				</Table>
 			</div>
-			<TablePagination table={table} />
+			<BasePagination table={table} />
 		</div>
 	);
 }
