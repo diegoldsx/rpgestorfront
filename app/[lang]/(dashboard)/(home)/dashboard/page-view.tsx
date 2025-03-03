@@ -24,7 +24,6 @@ interface DashboardPageViewProps {
 const DashboardPageView = ({ trans }: DashboardPageViewProps) => {
 	return (
 		<div className="space-y-6">
-			OIOIOIOI
 			{/* <div className='flex items-center flex-wrap justify-between gap-4'>
 				<div className='text-2xl font-medium text-default-800 '>
 					RPGestor {trans?.dashboard}
