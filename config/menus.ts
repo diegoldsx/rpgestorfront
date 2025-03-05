@@ -104,10 +104,10 @@ export const menusConfig = {
 				title: "Email Marketing",
 				icon: Mail,
 				child: [
-					{ title: "Mensagens", href: "#" },
-					{ title: "Grupos", href: "#" },
-					{ title: "Emails", href: "#" },
-					{ title: "Importar", href: "#" },
+					{ title: "Mensagens", href: "/email-marketing/messages" },
+					{ title: "Grupos", href: "/email-marketing/groups" },
+					{ title: "Emails", href: "/email-marketing/email" },
+					{ title: "Setor", href: "/email-marketing/sector" },
 				],
 			},
 			{
