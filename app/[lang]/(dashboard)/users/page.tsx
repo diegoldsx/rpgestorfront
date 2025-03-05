@@ -6,17 +6,17 @@ import { HeadingPages } from "@/components/common/heading/heading-pages";
 import { columns } from "./columns";
 import { FAKE_DATA } from "./data";
 import { DataTable } from "@/components/common/data-table/data-table";
-import { visibilityState } from "./utils/visibility";
-import { facetedFilters } from "./utils/filters";
+import { visibilityState } from "./config/visibility";
+import { facetedFilters } from "./config/filters";
 
 const Page = () => {
 	return (
 		<Fragment>
 			<HeadingPages
-				title="Mensagens"
+				title="Usuários"
 				breadcrumbs={{
 					title: "Usuários",
-					href: "/Partnership",
+					href: "/users",
 				}}
 			/>
 

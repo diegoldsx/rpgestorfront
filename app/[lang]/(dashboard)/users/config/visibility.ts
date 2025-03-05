@@ -1,5 +1,5 @@
 import { VisibilityState } from "@tanstack/react-table";
-import { fields } from "../config/fields";
+import { fields } from "./fields";
 
 const visibleColumns: ReadonlyArray<string> = ["*"];
 

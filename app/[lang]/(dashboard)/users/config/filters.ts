@@ -1,3 +1,3 @@
-import { fields } from "../config/fields";
+import { fields } from "./fields";
 
 export const facetedFilters = fields.filter(({ options }) => !!options);
