@@ -1,6 +1,5 @@
 "use client";
 
-import { Inter } from "next/font/google";
 import { useThemeStore } from "@/store";
 import { ThemeProvider } from "next-themes";
 import { AppProgressBar as ProgressBar } from "next-nprogress-bar";
@@ -8,8 +7,6 @@ import { cn } from "@/lib/utils";
 import { Toaster } from "@/components/ui/toaster";
 import { usePathname } from "next/navigation";
 import { useMemo } from "react";
-
-const inter = Inter({ subsets: ["latin"] });
 
 const Providers = ({ children }: { children: React.ReactNode }) => {
 	const { theme, radius } = useThemeStore();

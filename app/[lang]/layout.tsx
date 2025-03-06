@@ -8,9 +8,12 @@ import TanstackProvider from "@/provider/providers.client";
 import AuthProvider from "@/provider/auth.provider";
 import "flatpickr/dist/themes/light.css";
 import DirectionProvider from "@/provider/direction.provider";
+import { Toaster } from "sonner";
 
-const inter = Inter({ subsets: ["latin"] });
-
+const inter = Inter({
+	subsets: ["latin"],
+	weight: ["400", "700", "800"],
+});
 export const metadata = {
 	title: {
 		default: siteConfig.name,
@@ -21,7 +24,7 @@ export const metadata = {
 
 export default function RootLayout({ children, params: { lang } }: { children: React.ReactNode; params: { lang: string } }) {
 	return (
-		<html>
+		<html className={inter.className}>
 			<body className={"rpgestor-app"}>
 				<AuthProvider>
 					<TanstackProvider>
@@ -30,6 +33,7 @@ export default function RootLayout({ children, params: { lang } }: { children: R
 						</Providers>
 					</TanstackProvider>
 				</AuthProvider>
+				<Toaster />
 			</body>
 		</html>
 	);

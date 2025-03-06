@@ -1,27 +1,32 @@
 "use client";
-import React, { useEffect } from "react";
-
+import React from "react";
+import GenericForm from "@/components/form/GenericForm";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { userSchema, UserSchemaType } from "../validation/userSchema";
-import { submitUserAction } from "@/action/users/submitUsersAction";
-import GenericForm from "@/components/form/GenericForm";
+import { createUser } from "@/action/user-action";
 import { userFields } from "../config/userField";
-import { UserCircle } from "lucide-react";
+import { CheckCircleIcon, UserCircleIcon } from "lucide-react";
+import { toast } from "sonner";
+import { useRouter } from "next/navigation";
 
-export const handleSubmit = async (data: UserSchemaType) => {
-	console.log(data);
-	await submitUserAction(data);
-};
-export default function CreatePage() {
+export default function CreateUserPage() {
+	const router = useRouter();
+	const handleSubmit = async (data: UserSchemaType) => {
+		createUser(data);
+		toast.success("Usuário criado com sucesso!");
+
+		router.push("/users");
+	};
 	return (
 		<div>
 			<Card className="p-6 rounded">
 				<CardHeader>
-					<div className="flex items-center  space-x-2">
-						<UserCircle />
-						<CardTitle>Criar Usuário</CardTitle>
+					<div className="flex items-center text-primary font-extrabold space-x-2">
+						<UserCircleIcon size={32} className="text-primary" />
+						<CardTitle>Criar novo usuário</CardTitle>
 					</div>
 				</CardHeader>
+
 				<CardContent className="space-y-6">
 					<GenericForm fields={userFields} schema={userSchema} onSubmit={handleSubmit} />
 				</CardContent>

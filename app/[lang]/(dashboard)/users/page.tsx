@@ -2,7 +2,6 @@
 import { Fragment } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { HeadingPages } from "@/components/common/heading/heading-pages";
-import { FAKE_DATA } from "./data";
 import { DataTable } from "@/components/common/data-table/data-table";
 import { columns } from "./config/columns";
 import { facetedFilters, visibilityState } from "./config/userField";
@@ -10,7 +9,7 @@ import { useQuery } from "@tanstack/react-query";
 import { fetchAllUsers } from "@/action/user-action";
 import { User } from "./types/user";
 
-export default function Page({ searchParams }: { searchParams: { page: string; pageSize: string } }) {
+export default function UsersPage({ searchParams }: { searchParams: { page: string; pageSize: string } }) {
 	const page = parseInt(searchParams.page || "1", 10);
 	const pageSize = parseInt(searchParams.pageSize || "10", 10);
 
