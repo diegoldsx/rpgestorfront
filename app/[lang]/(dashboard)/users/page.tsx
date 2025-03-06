@@ -3,11 +3,10 @@
 import { Fragment } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { HeadingPages } from "@/components/common/heading/heading-pages";
-import { columns } from "./columns";
 import { FAKE_DATA } from "./data";
 import { DataTable } from "@/components/common/data-table/data-table";
-import { visibilityState } from "./config/visibility";
-import { facetedFilters } from "./config/filters";
+import { columns } from "./config/columns";
+import { facetedFilters, visibilityState } from "./config/userField";
 
 const Page = () => {
 	return (

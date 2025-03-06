@@ -3,7 +3,7 @@ export interface Option<T> {
 	label: string;
 }
 
-type FieldType = "text" | "date" | "select" | "number" | "boolean";
+type FieldType = "text" | "date" | "select" | "number" | "boolean" | "hidden";
 
 export interface FieldConfig<T> {
 	id: keyof T;
@@ -14,7 +14,7 @@ export interface FieldConfig<T> {
 
 export function generateFieldConfig<T>(
 	fieldName: keyof T,
-	title?: string,
+	title: string,
 	type?: "text" | "date" | "select" | "number" | "boolean",
 	options?: { value: T[keyof T]; label: string }[]
 ): FieldConfig<T> {
