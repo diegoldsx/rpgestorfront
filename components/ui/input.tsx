@@ -5,12 +5,11 @@ import { InputColor, InputVariant, Radius, Shadow } from "@/lib/type";
 
 //py-[10px]
 export const inputVariants = cva(
-	" w-full   bg-background  border-default-300 dark:border-700  px-3 h-9   text-sm  file:border-0 file:bg-transparent file:text-sm file:font-medium  read-only:leading-9 read-only:bg-background  disabled:cursor-not-allowed disabled:opacity-50  transition duration-300 ",
+	" w-full   bg-background  border-default-300 dark:border-700  px-3 h-9   text-md  file:border-0 file:bg-transparent file:text-sm file:font-medium  read-only:leading-9 read-only:bg-background  disabled:cursor-not-allowed disabled:opacity-50  transition duration-300 ",
 	{
 		variants: {
 			color: {
-				default:
-					"border-default-300 text-default-500 focus:outline-none focus:border-primary disabled:bg-default-200  placeholder:text-accent-foreground/50",
+				default: "border-default-300 text-black focus:outline-none focus:border-primary disabled:bg-default-200  placeholder:text-accent-foreground/50",
 				primary:
 					"border-primary text-primary focus:outline-none focus:border-primary-700 disabled:bg-primary/30 disabled:placeholder:text-primary  placeholder:text-primary/70",
 				info: "border-info/50 text-info focus:outline-none focus:border-info-700 disabled:bg-info/30 disabled:placeholder:text-info  placeholder:text-info/70",
@@ -80,8 +79,7 @@ export const inputVariants = cva(
 			{
 				variant: "faded",
 				color: "primary",
-				className:
-					"bg-primary/10 border-primary/30 read-only:bg-primary/10 border-primary/30",
+				className: "bg-primary/10 border-primary/30 read-only:bg-primary/10 border-primary/30",
 			},
 			{
 				variant: "faded",
@@ -114,9 +112,7 @@ export const inputVariants = cva(
 	}
 );
 
-export interface InputProps
-	extends React.InputHTMLAttributes<HTMLInputElement>,
-		VariantProps<typeof inputVariants> {
+export interface InputProps extends React.InputHTMLAttributes<HTMLInputElement>, VariantProps<typeof inputVariants> {
 	removeWrapper?: boolean;
 	color?: InputColor;
 	variant?: InputVariant;
@@ -126,41 +122,12 @@ export interface InputProps
 }
 
 const Input = React.forwardRef<HTMLInputElement, InputProps>(
-	(
-		{
-			className,
-			type,
-			size,
-			color,
-			radius,
-			variant,
-			shadow,
-			removeWrapper = false,
-			...props
-		},
-		ref
-	) => {
+	({ className, type, size, color, radius, variant, shadow, removeWrapper = false, ...props }, ref) => {
 		return removeWrapper ? (
-			<input
-				type={type}
-				className={cn(
-					inputVariants({ color, size, radius, variant, shadow }),
-					className
-				)}
-				ref={ref}
-				{...props}
-			/>
+			<input type={type} className={cn(inputVariants({ color, size, radius, variant, shadow }), className)} ref={ref} {...props} />
 		) : (
 			<div className="flex-1 w-full">
-				<input
-					type={type}
-					className={cn(
-						inputVariants({ color, size, radius, variant, shadow }),
-						className
-					)}
-					ref={ref}
-					{...props}
-				/>
+				<input type={type} className={cn(inputVariants({ color, size, radius, variant, shadow }), className)} ref={ref} {...props} />
 			</div>
 		);
 	}
