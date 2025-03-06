@@ -1,13 +1,12 @@
-// components/GenericForm.tsx
-import { useForm, SubmitHandler, Path, FormProvider } from "react-hook-form";
+import Select from "../Select";
+import { useForm, Path, FormProvider } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
-import Select from "../Select";
+
 import { FieldConfig } from "@/app/types/FieldConfig";
 import { Label } from "../ui/label";
 import { Input } from "../ui/input";
 import { Button } from "../ui/button";
-import { useEffect, useState } from "react";
 
 interface GenericFormProps<T extends Record<string, z.ZodTypeAny>, U> {
 	schema: z.ZodObject<T>;
@@ -59,21 +58,6 @@ const GenericForm = <T extends Record<string, z.ZodTypeAny>, U>({ schema, onSubm
 			</form>
 		</FormProvider>
 	);
-};
-
-// Componente de mensagem de erro com animação
-interface ErrorMessageProps {
-	message: string;
-}
-
-const ErrorMessage: React.FC<ErrorMessageProps> = ({ message }) => {
-	const [isVisible, setIsVisible] = useState(false);
-
-	useEffect(() => {
-		setIsVisible(true);
-	}, [message]);
-
-	return <p className={`text-red-500 text-sm mt-1 transition-opacity duration-300 ease-in-out ${isVisible ? "opacity-100" : "opacity-0"}`}>{message}</p>;
 };
 
 export default GenericForm;

@@ -3,14 +3,14 @@ import React, { useEffect } from "react";
 
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { userSchema, UserSchemaType } from "../validation/userSchema";
-import { handleUserSubmit } from "@/action/submitAction";
+import { submitUserAction } from "@/action/users/submitUsersAction";
 import GenericForm from "@/components/form/GenericForm";
 import { userFields } from "../config/userField";
 import { UserCircle } from "lucide-react";
 
 export const handleSubmit = async (data: UserSchemaType) => {
 	console.log(data);
-	await handleUserSubmit(data);
+	await submitUserAction(data);
 };
 export default function CreatePage() {
 	return (
