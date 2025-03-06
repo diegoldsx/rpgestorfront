@@ -22,7 +22,7 @@ export const metadata = {
 export default function RootLayout({ children, params: { lang } }: { children: React.ReactNode; params: { lang: string } }) {
 	return (
 		<html>
-			<body className={inter.className}>
+			<body className={"rpgestor-app"}>
 				<AuthProvider>
 					<TanstackProvider>
 						<Providers>
