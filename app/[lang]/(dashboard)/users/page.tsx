@@ -3,11 +3,11 @@ import { Fragment } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { HeadingPages } from "@/components/common/heading/heading-pages";
 import { DataTable } from "@/components/common/data-table/data-table";
-import { columns } from "./config/columns";
-import { facetedFilters, visibilityState } from "./config/userField";
+import { columns } from "./lib/config/columns";
+import { facetedFilters, visibilityState } from "./lib/config/userField";
 import { useQuery } from "@tanstack/react-query";
 import { fetchAllUsers } from "@/action/user-action";
-import { User } from "./types/user";
+import { User } from "./lib/types/user";
 
 export default function UsersPage({ searchParams }: { searchParams: { page: string; pageSize: string } }) {
 	const page = parseInt(searchParams.page || "1", 10);

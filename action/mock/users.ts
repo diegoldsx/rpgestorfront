@@ -1,4 +1,4 @@
-import { User } from "@/app/[lang]/(dashboard)/users/types/user";
+import { User } from "@/app/[lang]/(dashboard)/users/lib/types/user";
 import { faker } from "@faker-js/faker";
 
 export const FAKE_USERS: User[] = Array.from({ length: 30 }, () => ({

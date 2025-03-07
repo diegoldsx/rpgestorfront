@@ -2,9 +2,9 @@
 import React from "react";
 import GenericForm from "@/components/form/GenericForm";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { userSchema, UserSchemaType } from "../validation/userSchema";
+import { userSchema, UserSchemaType } from "../lib/validation/userSchema";
 import { createUser } from "@/action/user-action";
-import { userFields } from "../config/userField";
+import { userFields } from "../lib/config/userField";
 import { CheckCircleIcon, UserCircleIcon } from "lucide-react";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
