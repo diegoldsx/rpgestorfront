@@ -25,7 +25,7 @@ export const metadata = {
 export default function RootLayout({ children, params: { lang } }: { children: React.ReactNode; params: { lang: string } }) {
 	return (
 		<html className={inter.className}>
-			<body className={"rpgestor-app"}>
+			<body suppressHydrationWarning={true} className="rpgestor-app">
 				<AuthProvider>
 					<TanstackProvider>
 						<Providers>
