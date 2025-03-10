@@ -6,15 +6,18 @@ import { createUserAction, editUserAction, fetchUserAction } from "@/action/user
 import { userFields } from "../lib/config/userField";
 import { UserCircleIcon } from "lucide-react";
 import { toast } from "sonner";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import Form from "@/components/form/Form";
 
-export default function UserFormPage({ searchParams }: { searchParams: { id: string } }) {
+export default function UserFormPage() {
 	const router = useRouter();
-	const userId = searchParams.id;
+	const params = useSearchParams();
+
+	const userId = params.get("id");
+
+	console.log({ userId });
 
 	const [defaultValue, setUserData] = useState<UserSchemaType>();
-
 	useEffect(() => {
 		const fetchUser = async () => {
 			if (!userId) return;
@@ -52,7 +55,7 @@ export default function UserFormPage({ searchParams }: { searchParams: { id: str
 				<CardHeader>
 					<div className="flex items-center text-primary font-extrabold space-x-2">
 						<UserCircleIcon size={32} className="text-primary" />
-						<CardTitle>{userId ? "Criar novo usuário" : "Editar usuário"}</CardTitle>
+						<CardTitle>{userId ? "Editar usuário" : "Criar novo usuário"}</CardTitle>
 					</div>
 				</CardHeader>
 
