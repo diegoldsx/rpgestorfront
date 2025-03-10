@@ -14,6 +14,7 @@ export interface FieldConfig<T> {
 }
 
 export const userFields: FieldConfig<User>[] = [
+	{ id: "id", type: "text", title: "Id" },
 	{ id: "name", type: "text", title: "Nome" },
 	{ id: "email", type: "text", title: "Email" },
 	{ id: "username", type: "text", title: "Nome de usuário" },

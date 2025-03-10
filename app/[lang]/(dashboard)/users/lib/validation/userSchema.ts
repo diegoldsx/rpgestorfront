@@ -1,6 +1,7 @@
 import { z } from "zod";
 
-export const userSchema = z.object({
+export const UserSchema = z.object({
+	id: z.string(),
 	name: z.string().min(3, "O nome é obrigatório"),
 	email: z.string().email("O email é obrigatório"),
 	status: z.enum(["active", "inactive"], { required_error: "Selecione um status" }),
@@ -16,4 +17,4 @@ export const userSchema = z.object({
 		.regex(/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]+$/, "O nome de usuário deve conter letras e números"),
 });
 
-export type UserSchemaType = z.infer<typeof userSchema>;
+export type UserSchemaType = z.infer<typeof UserSchema>;

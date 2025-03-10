@@ -1,8 +1,7 @@
-// components/Select.tsx
 import * as SelectPrimitive from "@radix-ui/react-select";
-import { forwardRef } from "react";
+import { forwardRef, useEffect } from "react";
 import { Path, useFormContext } from "react-hook-form";
-import { ChevronDown } from "lucide-react"; // Importe o ícone
+import { ChevronDown } from "lucide-react";
 import { Option } from "@/app/types/FieldConfig";
 
 interface SelectProps<T> {
@@ -10,26 +9,35 @@ interface SelectProps<T> {
 	name: Path<T>;
 	options: Option<string>[];
 	placeholder?: string;
+	value?: string;
+	onChange?: (value: string) => void;
 }
 
-const Select = forwardRef<HTMLButtonElement, SelectProps<any>>(({ id, name, options, placeholder = "Selecione uma opção" }, ref) => {
-	const {
-		register,
-		setValue,
-		watch,
-		formState: { errors },
-	} = useFormContext();
-	const value = watch(name);
+const Select = forwardRef<HTMLButtonElement, SelectProps<any>>(({ id, name, options, placeholder = "Selecione uma opção", value, onChange }, ref) => {
+	const { setValue, watch } = useFormContext();
+	const selectedValue = value ?? watch(name) ?? ""; // Usa o valor do Controller se disponível
+
+	useEffect(() => {
+		if (!selectedValue && options.length > 0) {
+			setValue(name, options[0].value);
+		}
+	}, [selectedValue, options, setValue, name]);
 
 	return (
-		<SelectPrimitive.Root onValueChange={(newValue) => setValue(name, newValue)} defaultValue={value}>
+		<SelectPrimitive.Root
+			value={selectedValue}
+			onValueChange={(newValue) => {
+				setValue(name, newValue);
+				onChange?.(newValue);
+			}}
+		>
 			<SelectPrimitive.Trigger
 				ref={ref}
 				id={id}
 				aria-label={id}
-				className="inline-flex items-center justify-between rounded-sm px-4 py-2 text-sm font-medium ring-offset-background  focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 data-[placeholder]:text-muted-foreground w-full bg-white border border-gray-300  hover:bg-gray-50 transition-all duration-200"
+				className="inline-flex items-center justify-between rounded-sm px-4 py-2 text-sm font-medium ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 w-full bg-white border border-gray-300 hover:bg-gray-50 transition-all duration-200"
 			>
-				<SelectPrimitive.Value placeholder={placeholder} className="text-black" />
+				<SelectPrimitive.Value className="text-black">{options.find((option) => option.value === selectedValue)?.label || placeholder}</SelectPrimitive.Value>
 				<SelectPrimitive.Icon asChild>
 					<ChevronDown className="w-4 h-4 text-black transition-transform duration-200 group-data-[state=open]:rotate-180" />
 				</SelectPrimitive.Icon>
