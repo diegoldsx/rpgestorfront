@@ -1,61 +1,40 @@
-import React, { useEffect, useState } from "react";
+"use client";
+
+import { useEffect, useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { schemaType, schema } from "../utils/User";
-import { createUserAction, editUserAction, fetchUserAction } from "@/action/users-actions";
-import { columnFields } from "../utils/columnConfig";
 import { UserCircleIcon } from "lucide-react";
-import { toast } from "sonner";
-import { useRouter, useSearchParams } from "next/navigation";
-import Form from "@/components/form/Form";
+import CustomForm from "@/components/form/CustomForm";
+import { FormField, FormItem, FormLabel, FormControl, FormMessage } from "@/components/ui/form";
+import { Input } from "@/components/ui/input";
+import { Select, SelectTrigger, SelectValue, SelectContent, SelectItem } from "@/components/ui/select";
+import { upsertUserAction, fetchUserAction } from "@/action/users-actions";
+import { columnFields } from "../utils/columnConfig";
+import { userSchema } from "../utils/User";
 
-export const submitAction = async (form: FormData) => {
-	"use server";
-	console.log("Enviado ao servidor", form);
-};
+interface UserFormPageProps {
+	searchParams: { id?: string | null };
+}
 
-export const fetchAction = async (form: FormData) => {
-	"use server";
-	console.log("Enviado ao servidor", form);
-};
+export default function UserFormPage({ searchParams }: UserFormPageProps) {
+	const userId = searchParams?.id ?? undefined;
+	const [initialValues, setInitialValues] = useState<Record<string, any>>({});
 
-export default function UserFormPage() {
-	const router = useRouter();
-	const params = useSearchParams();
-
-	const userId = params.get("id");
-
-	console.log({ userId });
-
-	const [defaultValue, setUserData] = useState<schemaType>();
 	useEffect(() => {
-		const fetchUser = async () => {
+		const fetchUserData = async () => {
 			if (!userId) return;
-
-			try {
-				const { data, status, message } = await fetchUserAction(userId);
-				if (status === 200) {
-					setUserData(data as schemaType);
-				} else {
-					console.error(message);
-				}
-			} catch (error) {
-				console.error("Erro ao buscar usuário:", error);
+			const { data, status } = await fetchUserAction(userId);
+			if (status === 200) {
+				setInitialValues(data);
 			}
 		};
 
-		fetchUser();
+		fetchUserData();
 	}, [userId]);
 
-	const handleSubmit = async (data: schemaType) => {
-		if (userId) {
-			const user = await editUserAction(data);
-			toast.success("Usuário modificado com sucesso");
-		} else {
-			const { message } = await createUserAction(data);
-			toast.success(message);
-		}
-
-		router.push("/users");
+	const handleSubmit = async (data: Record<string, any>) => {
+		const formData = new FormData();
+		Object.entries(data).forEach(([key, value]) => formData.append(key, String(value)));
+		await upsertUserAction(formData);
 	};
 
 	return (
@@ -69,7 +48,38 @@ export default function UserFormPage() {
 				</CardHeader>
 
 				<CardContent className="space-y-6">
-					<Form fields={columnFields} schema={schema} onSubmit={handleSubmit} initialValues={defaultValue} />
+					<CustomForm userId={userId} defaultValues={initialValues} schema={userSchema} onSubmit={handleSubmit}>
+						{columnFields.map((field) => (
+							<FormField
+								key={String(field.id)}
+								name={field.id as any}
+								render={({ field: fieldProps }) => (
+									<FormItem>
+										<FormLabel>{field.title}</FormLabel>
+										<FormControl>
+											{field.type === "select" && field.options ? (
+												<Select onValueChange={(val) => fieldProps.onChange(val)} defaultValue={fieldProps.value ?? ""}>
+													<SelectTrigger>
+														<SelectValue placeholder="Selecione uma opção" />
+													</SelectTrigger>
+													<SelectContent>
+														{field.options.map((option) => (
+															<SelectItem key={option.value} value={option.value ?? ""}>
+																{option.label}
+															</SelectItem>
+														))}
+													</SelectContent>
+												</Select>
+											) : (
+												<Input type={field.type === "number" ? "number" : "text"} placeholder={`Digite ${field.title.toLowerCase()}`} {...fieldProps} />
+											)}
+										</FormControl>
+										<FormMessage />
+									</FormItem>
+								)}
+							/>
+						))}
+					</CustomForm>
 				</CardContent>
 			</Card>
 		</div>

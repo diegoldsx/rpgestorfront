@@ -11,18 +11,15 @@ import { useMemo, useEffect, useState } from "react";
 const Providers = ({ children }: { children: React.ReactNode }) => {
 	const [hydrated, setHydrated] = useState(false);
 	const pathname = usePathname();
+	const { theme, radius } = useThemeStore();
 
-	// Aguarda a hidratação antes de acessar Zustand
 	useEffect(() => {
 		setHydrated(true);
 	}, []);
 
-	const { theme, radius } = useThemeStore();
-
-	// Impede renderização até o estado ser carregado no cliente
-	if (!hydrated) return null;
-
 	const isHome = useMemo(() => pathname === "/", [pathname]);
+
+	if (!hydrated) return <div className="opacity-0">Carregando...</div>;
 
 	return (
 		<ThemeProvider attribute="class" enableSystem={false} defaultTheme="light">
