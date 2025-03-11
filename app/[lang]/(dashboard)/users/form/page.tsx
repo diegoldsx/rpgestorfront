@@ -1,13 +1,22 @@
-"use client";
 import React, { useEffect, useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { UserSchema, UserSchemaType } from "../lib/validation/userSchema";
+import { schemaType, schema } from "../utils/User";
 import { createUserAction, editUserAction, fetchUserAction } from "@/action/users-actions";
-import { userFields } from "../lib/config/userField";
+import { columnFields } from "../utils/columnConfig";
 import { UserCircleIcon } from "lucide-react";
 import { toast } from "sonner";
 import { useRouter, useSearchParams } from "next/navigation";
 import Form from "@/components/form/Form";
+
+export const submitAction = async (form: FormData) => {
+	"use server";
+	console.log("Enviado ao servidor", form);
+};
+
+export const fetchAction = async (form: FormData) => {
+	"use server";
+	console.log("Enviado ao servidor", form);
+};
 
 export default function UserFormPage() {
 	const router = useRouter();
@@ -17,7 +26,7 @@ export default function UserFormPage() {
 
 	console.log({ userId });
 
-	const [defaultValue, setUserData] = useState<UserSchemaType>();
+	const [defaultValue, setUserData] = useState<schemaType>();
 	useEffect(() => {
 		const fetchUser = async () => {
 			if (!userId) return;
@@ -25,7 +34,7 @@ export default function UserFormPage() {
 			try {
 				const { data, status, message } = await fetchUserAction(userId);
 				if (status === 200) {
-					setUserData(data as UserSchemaType);
+					setUserData(data as schemaType);
 				} else {
 					console.error(message);
 				}
@@ -37,7 +46,7 @@ export default function UserFormPage() {
 		fetchUser();
 	}, [userId]);
 
-	const handleSubmit = async (data: UserSchemaType) => {
+	const handleSubmit = async (data: schemaType) => {
 		if (userId) {
 			const user = await editUserAction(data);
 			toast.success("Usuário modificado com sucesso");
@@ -60,7 +69,7 @@ export default function UserFormPage() {
 				</CardHeader>
 
 				<CardContent className="space-y-6">
-					<Form fields={userFields} schema={UserSchema} onSubmit={handleSubmit} initialValues={defaultValue} />
+					<Form fields={columnFields} schema={schema} onSubmit={handleSubmit} initialValues={defaultValue} />
 				</CardContent>
 			</Card>
 		</div>
