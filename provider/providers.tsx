@@ -6,11 +6,21 @@ import { AppProgressBar as ProgressBar } from "next-nprogress-bar";
 import { cn } from "@/lib/utils";
 import { Toaster } from "@/components/ui/toaster";
 import { usePathname } from "next/navigation";
-import { useMemo } from "react";
+import { useMemo, useEffect, useState } from "react";
 
 const Providers = ({ children }: { children: React.ReactNode }) => {
-	const { theme, radius } = useThemeStore();
+	const [hydrated, setHydrated] = useState(false);
 	const pathname = usePathname();
+
+	// Aguarda a hidratação antes de acessar Zustand
+	useEffect(() => {
+		setHydrated(true);
+	}, []);
+
+	const { theme, radius } = useThemeStore();
+
+	// Impede renderização até o estado ser carregado no cliente
+	if (!hydrated) return null;
 
 	const isHome = useMemo(() => pathname === "/", [pathname]);
 
