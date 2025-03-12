@@ -1,18 +1,7 @@
 import { z } from "zod";
 import { User } from "./User";
 import { VisibilityState } from "@tanstack/react-table";
-export interface Option<T> {
-	value: T;
-	label: string;
-}
-type FieldType = "text" | "date" | "select" | "number" | "boolean" | "hidden";
-
-export interface FieldConfig<T> {
-	id: keyof T;
-	title: string;
-	type?: FieldType;
-	options?: Option<T[keyof T]>[]; // Options agora é genérico
-}
+import { FieldConfig } from "@/app/types/FieldConfig";
 
 export const columnFields: FieldConfig<User>[] = [
 	{ id: "id", type: "text", title: "Id" },

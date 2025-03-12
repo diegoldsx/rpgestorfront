@@ -10,6 +10,7 @@ import { Select, SelectTrigger, SelectValue, SelectContent, SelectItem } from "@
 import { upsertUserAction, fetchUserAction } from "@/action/users-actions";
 import { columnFields } from "../utils/columnConfig";
 import { userSchema } from "../utils/User";
+import { renderField } from "@/components/form/utils/formFieldRender";
 
 interface UserFormPageProps {
 	searchParams: { id?: string | null };
@@ -49,36 +50,7 @@ export default function UserFormPage({ searchParams }: UserFormPageProps) {
 
 				<CardContent className="space-y-6">
 					<CustomForm userId={userId} defaultValues={initialValues} schema={userSchema} onSubmit={handleSubmit}>
-						{columnFields.map((field) => (
-							<FormField
-								key={String(field.id)}
-								name={field.id as any}
-								render={({ field: fieldProps }) => (
-									<FormItem>
-										<FormLabel>{field.title}</FormLabel>
-										<FormControl>
-											{field.type === "select" && field.options ? (
-												<Select onValueChange={(val) => fieldProps.onChange(val)} defaultValue={fieldProps.value ?? ""}>
-													<SelectTrigger>
-														<SelectValue placeholder="Selecione uma opção" />
-													</SelectTrigger>
-													<SelectContent>
-														{field.options.map((option) => (
-															<SelectItem key={option.value} value={option.value ?? ""}>
-																{option.label}
-															</SelectItem>
-														))}
-													</SelectContent>
-												</Select>
-											) : (
-												<Input type={field.type === "number" ? "number" : "text"} placeholder={`Digite ${field.title.toLowerCase()}`} {...fieldProps} />
-											)}
-										</FormControl>
-										<FormMessage />
-									</FormItem>
-								)}
-							/>
-						))}
+						{columnFields.map((field) => renderField<typeof userSchema._type>(field))}
 					</CustomForm>
 				</CardContent>
 			</Card>
