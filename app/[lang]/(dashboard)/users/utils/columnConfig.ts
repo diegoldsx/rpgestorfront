@@ -3,6 +3,13 @@ import { User } from "./User";
 import { VisibilityState } from "@tanstack/react-table";
 import { FieldConfig } from "@/app/types/FieldConfig";
 
+export const userOptions = {
+	status: [
+		{ value: "active", label: "Ativo" },
+		{ value: "inactive", label: "Inativo" },
+	],
+};
+
 export const columnFields: FieldConfig<User>[] = [
 	{ id: "id", type: "text", title: "Id" },
 	{ id: "name", type: "text", title: "Nome" },
@@ -13,10 +20,7 @@ export const columnFields: FieldConfig<User>[] = [
 		id: "status",
 		type: "select",
 		title: "Situação",
-		options: [
-			{ value: "active", label: "Ativo" },
-			{ value: "inactive", label: "Inativo" },
-		],
+		options: userOptions.status,
 	},
 ];
 

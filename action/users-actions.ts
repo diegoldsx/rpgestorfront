@@ -1,6 +1,7 @@
 "use server";
 
 import { FAKE_DATA } from "@/app/[lang]/(dashboard)/users/utils/data";
+import { UserSchemaType } from "@/app/[lang]/(dashboard)/users/utils/User";
 
 export async function upsertUserAction(formData: FormData) {
 	try {
@@ -19,12 +20,31 @@ export async function upsertUserAction(formData: FormData) {
 	}
 }
 
-export async function fetchUserAction(id: string | null) {
-	if (id) {
-		return { data: FAKE_DATA.find((d) => d.id === id), status: 200 };
+export async function fetchUserAction(id: string | undefined): Promise<UserSchemaType | null> {
+	if (!id) {
+		return null; // Retorna null se o ID for undefined
 	}
 
-	return { status: 201, message: "Usuário não encontrado" };
+	// Simulação de uma chamada à API
+	const users: UserSchemaType[] = [
+		{
+			id: "1",
+			name: "John Doe",
+			email: "john@example.com",
+			status: "active",
+			username: "johndoe123",
+		},
+		{
+			id: "2",
+			name: "Jane Doe",
+			email: "jane@example.com",
+			status: "inactive",
+			username: "janedoe456",
+		},
+	];
+
+	const user = users.find((user) => user.id === id);
+	return (user as UserSchemaType) || null;
 }
 
 export async function fetchAllUsersAction(id: string | null) {

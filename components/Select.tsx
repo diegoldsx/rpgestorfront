@@ -1,73 +1,49 @@
-import * as SelectPrimitive from "@radix-ui/react-select";
-import { forwardRef, useEffect } from "react";
-import { Path, useFormContext } from "react-hook-form";
-import { ChevronDown } from "lucide-react";
-import { Option } from "@/app/types/FieldConfig";
+import React from "react";
+import * as RadixSelect from "@radix-ui/react-select";
+import { ChevronDown, Check } from "lucide-react";
 
-interface SelectProps<T> {
-	id: string;
-	name: Path<T>;
-	options: Option<string>[];
+interface SelectProps {
+	options: { value: string; label: string }[];
+	value?: string; // 🔹 Permite que o valor inicial seja indefinido
+	onChange: (value: string) => void;
 	placeholder?: string;
-	value?: string;
-	onChange?: (value: string) => void;
 }
 
-const Select = forwardRef<HTMLButtonElement, SelectProps<any>>(({ id, name, options, placeholder = "Selecione uma opção", value, onChange }, ref) => {
-	const { setValue, watch } = useFormContext();
-	const selectedValue = value ?? watch(name) ?? ""; // Usa o valor do Controller se disponível
-
-	useEffect(() => {
-		if (!selectedValue && options.length > 0) {
-			setValue(name, options[0].value);
-		}
-	}, [selectedValue, options, setValue, name]);
-
+const Select = React.forwardRef<HTMLButtonElement, SelectProps>(({ options, value, onChange, placeholder }, ref) => {
 	return (
-		<SelectPrimitive.Root
-			value={selectedValue}
-			onValueChange={(newValue) => {
-				setValue(name, newValue);
-				onChange?.(newValue);
-			}}
-		>
-			<SelectPrimitive.Trigger
+		<RadixSelect.Root value={value} onValueChange={onChange}>
+			<RadixSelect.Trigger
 				ref={ref}
-				id={id}
-				aria-label={id}
-				className="inline-flex items-center justify-between rounded-sm px-4 py-2 text-sm font-medium ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 w-full bg-white border border-gray-300 hover:bg-gray-50 transition-all duration-200"
+				className="flex items-center justify-between w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm bg-white focus:outline-none focus:ring-2 focus:ring-blue-500"
 			>
-				<SelectPrimitive.Value className="text-black">
-					{options.find((option) => String(option.value) === String(selectedValue))?.label || placeholder}
-				</SelectPrimitive.Value>
+				<RadixSelect.Value placeholder={placeholder || "Selecione..."} />
+				<RadixSelect.Icon>
+					<ChevronDown className="h-4 w-4 text-gray-500" />
+				</RadixSelect.Icon>
+			</RadixSelect.Trigger>
 
-				<SelectPrimitive.Icon asChild>
-					<ChevronDown className="w-4 h-4 text-black transition-transform duration-200 group-data-[state=open]:rotate-180" />
-				</SelectPrimitive.Icon>
-			</SelectPrimitive.Trigger>
-			<SelectPrimitive.Portal>
-				<SelectPrimitive.Content
-					className="overflow-hidden rounded-md bg-white text-black shadow-lg border border-gray-200 min-w-[var(--radix-select-trigger-width)]"
-					sideOffset={5}
-				>
-					<SelectPrimitive.Viewport className="p-1">
+			<RadixSelect.Portal>
+				<RadixSelect.Content className="bg-white border border-gray-300 rounded-md shadow-lg" position="popper">
+					<RadixSelect.Viewport className="p-2">
 						{options.map((option) => (
-							<SelectPrimitive.Item
+							<RadixSelect.Item
 								key={option.value}
 								value={option.value}
-								textValue={option.label}
-								className="relative flex cursor-default select-none items-center rounded-sm px-3 py-2 text-sm outline-none data-[highlighted]:bg-gray-100 data-[highlighted]:text-black data-[disabled]:pointer-events-none data-[disabled]:opacity-50 hover:bg-gray-50 transition-colors duration-200"
+								className="flex items-center px-3 py-2 text-sm rounded-md cursor-pointer hover:bg-gray-100 focus:bg-gray-100 focus:outline-none"
 							>
-								<SelectPrimitive.ItemText className="flex-1">{option.label}</SelectPrimitive.ItemText>
-							</SelectPrimitive.Item>
+								<RadixSelect.ItemText>{option.label}</RadixSelect.ItemText>
+								<RadixSelect.ItemIndicator className="ml-auto">
+									<Check className="h-4 w-4 text-blue-500" />
+								</RadixSelect.ItemIndicator>
+							</RadixSelect.Item>
 						))}
-					</SelectPrimitive.Viewport>
-				</SelectPrimitive.Content>
-			</SelectPrimitive.Portal>
-		</SelectPrimitive.Root>
+					</RadixSelect.Viewport>
+				</RadixSelect.Content>
+			</RadixSelect.Portal>
+		</RadixSelect.Root>
 	);
 });
 
-Select.displayName = "Select";
+Select.displayName = "Select"; // 🔹 Importante para debugging com ForwardRef
 
 export default Select;
