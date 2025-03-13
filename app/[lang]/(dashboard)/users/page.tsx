@@ -5,9 +5,8 @@ import { HeadingPages } from "@/components/common/heading/heading-pages";
 import { DataTable } from "@/components/common/data-table/data-table";
 import { columns } from "./utils/columns";
 import { facetedFilters, visibilityState } from "./utils/columnConfig";
-import { User } from "./utils/User";
-
-import { FAKE_DATA } from "./utils/data";
+import { FAKE_USER_DATA } from "@/data/userData";
+import { User } from "@/types/user";
 
 export default function UsersPage() {
 	return (
@@ -24,7 +23,7 @@ export default function UsersPage() {
 			<div className="mt-3 space-y-6">
 				<Card>
 					<CardContent>
-						<DataTable data={FAKE_DATA as User[]} columns={columns} facetedFilters={facetedFilters} visibilityState={visibilityState} />
+						<DataTable data={FAKE_USER_DATA as User[]} columns={columns} facetedFilters={facetedFilters} visibilityState={visibilityState} />
 					</CardContent>
 				</Card>
 			</div>

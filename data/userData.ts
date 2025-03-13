@@ -1,4 +1,4 @@
-export const FAKE_DATA: any[] = [
+export const FAKE_USER_DATA: any[] = [
 	{
 		id: "1",
 		name: "Holly Runolfsdottir",

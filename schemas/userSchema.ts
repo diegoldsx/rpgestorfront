@@ -1,15 +1,6 @@
 import { z } from "zod";
 
-export type User = {
-	id?: string;
-	name: string;
-	email: string;
-	status: "active" | "inactive";
-	redirectUrl?: string;
-	username: string;
-};
-
-export const UserSchema = z
+export const userSchema = z
 	.object({
 		id: z.string().optional(),
 		name: z.string().min(3, "O nome é obrigatório"),
@@ -23,4 +14,4 @@ export const UserSchema = z
 	})
 	.partial();
 
-export type UserSchemaType = z.infer<typeof UserSchema>;
+export type UserSchemaType = z.infer<typeof userSchema>;

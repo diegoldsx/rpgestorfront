@@ -1,55 +1,32 @@
 "use server";
 
-import { FAKE_DATA } from "@/app/[lang]/(dashboard)/users/utils/data";
-import { UserSchemaType } from "@/app/[lang]/(dashboard)/users/utils/User";
+import { FAKE_USER_DATA } from "@/data/userData";
+import { UserSchemaType } from "@/schemas/userSchema";
 
-export async function upsertUserAction(formData: FormData) {
-	try {
-		const data = Object.fromEntries(formData.entries());
-
-		if (data.id) {
-			console.log(`Atualizando usuário ${data.id} com os dados:`, data);
-			return { status: 200, message: "Usuário atualizado com sucesso" };
-		} else {
-			console.log("Criando novo usuário com os dados:", data);
-			return { status: 201, message: "Usuário criado com sucesso" };
-		}
-	} catch (error) {
-		console.error("Erro ao processar ação:", error);
-		return { status: 500, message: "Erro ao processar solicitação" };
+export async function upsertUserAction(user: UserSchemaType) {
+	if (user.id) {
+		// Se o usuário tem um ID, é uma atualização
+		console.log("Update user:", user);
+		// Aqui você pode adicionar a lógica para atualizar o usuário no banco de dados
+	} else {
+		// Se o usuário não tem um ID, é uma criação
+		console.log("New user:", user);
+		// Aqui você pode adicionar a lógica para criar um novo usuário no banco de dados
 	}
 }
 
 export async function fetchUserAction(id: string | undefined): Promise<UserSchemaType | null> {
-	if (!id) {
-		return null; // Retorna null se o ID for undefined
-	}
+	if (!id) return null;
 
-	// Simulação de uma chamada à API
-	const users: UserSchemaType[] = [
-		{
-			id: "1",
-			name: "John Doe",
-			email: "john@example.com",
-			status: "active",
-			username: "johndoe123",
-		},
-		{
-			id: "2",
-			name: "Jane Doe",
-			email: "jane@example.com",
-			status: "inactive",
-			username: "janedoe456",
-		},
-	];
+	const user = FAKE_USER_DATA.find((user) => user.id === id);
+	if (!user) return null;
 
-	const user = users.find((user) => user.id === id);
-	return (user as UserSchemaType) || null;
+	return user;
 }
 
 export async function fetchAllUsersAction(id: string | null) {
 	if (id) {
-		return { data: FAKE_DATA, status: 200 };
+		return { data: FAKE_USER_DATA, status: 200 };
 	}
 
 	return { status: 201, message: "Usuário não encontrado" };
