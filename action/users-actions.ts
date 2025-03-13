@@ -4,14 +4,12 @@ import { FAKE_USER_DATA } from "@/data/userData";
 import { UserSchemaType } from "@/schemas/userSchema";
 
 export async function upsertUserAction(user: UserSchemaType) {
+	await new Promise((resolve) => setTimeout(resolve, 2000));
+
 	if (user.id) {
-		// Se o usuário tem um ID, é uma atualização
 		console.log("Update user:", user);
-		// Aqui você pode adicionar a lógica para atualizar o usuário no banco de dados
 	} else {
-		// Se o usuário não tem um ID, é uma criação
 		console.log("New user:", user);
-		// Aqui você pode adicionar a lógica para criar um novo usuário no banco de dados
 	}
 }
 

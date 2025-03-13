@@ -10,6 +10,7 @@ import { Button } from "@/components/ui/button";
 import Select from "@/components/Select";
 import { userOptions } from "../utils/columnConfig";
 import { useEffect } from "react";
+import { FaSpinner } from "react-icons/fa"; // Importe o ícone de spinner
 
 // Schema de validação do usuário
 const UserSchema = z.object({
@@ -58,7 +59,7 @@ export function UserForm({ onSubmit, user }: UserFormProps) {
 	const {
 		handleSubmit,
 		control,
-		formState: { errors },
+		formState: { errors, isSubmitting }, // Extraia o estado isSubmitting
 		reset,
 	} = methods;
 
@@ -67,105 +68,109 @@ export function UserForm({ onSubmit, user }: UserFormProps) {
 			reset(user);
 		}
 	}, [user, reset]);
+
 	return (
-		<Card className="max-w-5xl mx-auto p-6 shadow-lg rounded-md bg-white">
-			<CardHeader>
-				<CardTitle className="text-xl font-semibold">{user ? "Editar Usuário" : "Criar Usuário"}</CardTitle>
-			</CardHeader>
+		<FormProvider {...methods}>
+			<Form
+				onSubmit={(event) => {
+					event.preventDefault();
+					handleSubmit(onSubmit)(event);
+				}}
+				className="grid grid-cols-1 md:grid-cols-2 gap-4"
+			>
+				{/* Campo Nome */}
+				<FormField name="name">
+					<FormLabel>Nome</FormLabel>
+					<Controller
+						name="name"
+						control={control}
+						render={({ field }) => (
+							<FormControl asChild>
+								<Input {...field} placeholder="Digite seu nome" />
+							</FormControl>
+						)}
+					/>
+					{errors.name && <FormMessage className="text-red-500">{errors.name.message}</FormMessage>}
+				</FormField>
 
-			<CardContent>
-				<FormProvider {...methods}>
-					<Form
-						onSubmit={(event) => {
-							event.preventDefault();
-							handleSubmit(onSubmit)(event);
-						}}
-						className="grid grid-cols-1 md:grid-cols-2 gap-4"
-					>
-						{/* Campo Nome */}
-						<FormField name="name">
-							<FormLabel>Nome</FormLabel>
-							<Controller
-								name="name"
-								control={control}
-								render={({ field }) => (
-									<FormControl asChild>
-										<Input {...field} placeholder="Digite seu nome" />
-									</FormControl>
-								)}
-							/>
-							{errors.name && <FormMessage className="text-red-500">{errors.name.message}</FormMessage>}
-						</FormField>
+				{/* Campo Email */}
+				<FormField name="email">
+					<FormLabel>Email</FormLabel>
+					<Controller
+						name="email"
+						control={control}
+						render={({ field }) => (
+							<FormControl asChild>
+								<Input {...field} placeholder="Digite seu email" type="email" />
+							</FormControl>
+						)}
+					/>
+					{errors.email && <FormMessage className="text-red-500">{errors.email.message}</FormMessage>}
+				</FormField>
 
-						{/* Campo Email */}
-						<FormField name="email">
-							<FormLabel>Email</FormLabel>
-							<Controller
-								name="email"
-								control={control}
-								render={({ field }) => (
-									<FormControl asChild>
-										<Input {...field} placeholder="Digite seu email" type="email" />
-									</FormControl>
-								)}
-							/>
-							{errors.email && <FormMessage className="text-red-500">{errors.email.message}</FormMessage>}
-						</FormField>
+				{/* Campo Username */}
+				<FormField name="username">
+					<FormLabel>Nome de Usuário</FormLabel>
+					<Controller
+						name="username"
+						control={control}
+						render={({ field }) => (
+							<FormControl asChild>
+								<Input {...field} placeholder="Digite seu username" />
+							</FormControl>
+						)}
+					/>
+					{errors.username && <FormMessage className="text-red-500">{errors.username.message}</FormMessage>}
+				</FormField>
 
-						{/* Campo Username */}
-						<FormField name="username">
-							<FormLabel>Nome de Usuário</FormLabel>
-							<Controller
-								name="username"
-								control={control}
-								render={({ field }) => (
-									<FormControl asChild>
-										<Input {...field} placeholder="Digite seu username" />
-									</FormControl>
-								)}
-							/>
-							{errors.username && <FormMessage className="text-red-500">{errors.username.message}</FormMessage>}
-						</FormField>
+				{/* Campo Status (Select) */}
+				<FormField name="status">
+					<FormLabel>Status</FormLabel>
+					<Controller
+						name="status"
+						control={control}
+						render={({ field }) => (
+							<FormControl asChild>
+								<Select options={userOptions.status} value={field.value} onChange={field.onChange} placeholder="Selecione o status" />
+							</FormControl>
+						)}
+					/>
+					{errors.status && <FormMessage className="text-red-500">{errors.status.message}</FormMessage>}
+				</FormField>
 
-						{/* Campo Status (Select) */}
-						<FormField name="status">
-							<FormLabel>Status</FormLabel>
-							<Controller
-								name="status"
-								control={control}
-								render={({ field }) => (
-									<FormControl asChild>
-										<Select options={userOptions.status} value={field.value} onChange={field.onChange} placeholder="Selecione o status" />
-									</FormControl>
-								)}
-							/>
-							{errors.status && <FormMessage className="text-red-500">{errors.status.message}</FormMessage>}
-						</FormField>
+				{/* Campo Redirect URL */}
+				<div className="md:col-span-2">
+					<FormField name="redirectUrl">
+						<FormLabel>URL de Redirecionamento</FormLabel>
+						<Controller
+							name="redirectUrl"
+							control={control}
+							render={({ field }) => (
+								<FormControl asChild>
+									<Input {...field} placeholder="Digite a URL de redirecionamento" />
+								</FormControl>
+							)}
+						/>
+						{errors.redirectUrl && <FormMessage className="text-red-500">{errors.redirectUrl.message}</FormMessage>}
+					</FormField>
+				</div>
 
-						{/* Campo Redirect URL */}
-						<div className="md:col-span-2">
-							<FormField name="redirectUrl">
-								<FormLabel>URL de Redirecionamento</FormLabel>
-								<Controller
-									name="redirectUrl"
-									control={control}
-									render={({ field }) => (
-										<FormControl asChild>
-											<Input {...field} placeholder="Digite a URL de redirecionamento" />
-										</FormControl>
-									)}
-								/>
-								{errors.redirectUrl && <FormMessage className="text-red-500">{errors.redirectUrl.message}</FormMessage>}
-							</FormField>
-						</div>
-
-						{/* Botão de Submit */}
-						<div className="md:col-span-2 mt-6 flex justify-end">
-							<Button type="submit">{user ? "Atualizar" : "Criar"}</Button>
-						</div>
-					</Form>
-				</FormProvider>
-			</CardContent>
-		</Card>
+				{/* Botão de Submit */}
+				<div className="md:col-span-2 mt-6 flex justify-end">
+					<Button type="submit" disabled={isSubmitting}>
+						{isSubmitting ? (
+							<div className="flex items-center gap-2">
+								<FaSpinner className="animate-spin" /> {/* Spinner */}
+								{user ? "Atualizando..." : "Criando..."}
+							</div>
+						) : user ? (
+							"Atualizar"
+						) : (
+							"Criar"
+						)}
+					</Button>
+				</div>
+			</Form>
+		</FormProvider>
 	);
 }

@@ -1,25 +1,14 @@
 "use client";
 
-import { useEffect, useState } from "react";
 import { UserForm } from "./UserForm";
 import { UserSchemaType } from "@/schemas/userSchema";
 import { SubmitHandler } from "react-hook-form";
-import { fetchUserAction, upsertUserAction } from "@/action/users-actions";
+import { upsertUserAction } from "@/action/users-actions";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { useFetchUser } from "@/hooks/useFetchUser";
 
-export default function UserPage({ searchParams }: { searchParams: { id?: string } }) {
-	const [user, setUser] = useState<UserSchemaType | null>(null);
-	console.log(user);
-	useEffect(() => {
-		if (searchParams.id) {
-			const fetchUser = async () => {
-				const fetchedUser = await fetchUserAction(searchParams.id);
-				if (fetchedUser) {
-					setUser(fetchedUser);
-				}
-			};
-			fetchUser();
-		}
-	}, [searchParams.id]);
+export default function UserFormPage({ searchParams }: { searchParams: { id?: string } }) {
+	const user = useFetchUser({ id: searchParams.id });
 
 	const handleSubmit: SubmitHandler<UserSchemaType> = async (data) => {
 		await upsertUserAction(data);
@@ -27,7 +16,15 @@ export default function UserPage({ searchParams }: { searchParams: { id?: string
 
 	return (
 		<div>
-			<UserForm onSubmit={handleSubmit} user={user || undefined} />
+			<Card className="max-w-5xl mx-auto p-6 shadow-lg rounded-md bg-white">
+				<CardHeader>
+					<CardTitle className="text-xl font-semibold">{user ? "Editar Usuário" : "Criar Usuário"}</CardTitle>
+				</CardHeader>
+
+				<CardContent>
+					<UserForm onSubmit={handleSubmit} user={user || undefined} />
+				</CardContent>
+			</Card>
 		</div>
 	);
 }
