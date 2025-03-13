@@ -5,7 +5,7 @@ import { ChevronDown, Check } from "lucide-react";
 interface SelectProps {
 	options: { value: string; label: string }[];
 	value?: string; // 🔹 Permite que o valor inicial seja indefinido
-	onChange: (value: string) => void;
+	onChange?: (value: string) => void;
 	placeholder?: string;
 }
 

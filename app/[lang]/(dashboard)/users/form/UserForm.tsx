@@ -4,47 +4,34 @@ import { useForm, SubmitHandler, FormProvider, Controller } from "react-hook-for
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Form, FormField, FormLabel, FormControl, FormMessage } from "@radix-ui/react-form";
 import { z } from "zod";
-import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import Select from "@/components/Select";
 import { userOptions } from "../utils/columnConfig";
 import { useEffect } from "react";
-import { FaSpinner } from "react-icons/fa"; // Importe o ícone de spinner
+import { FaSpinner } from "react-icons/fa";
+import { userSchema } from "@/schemas/userSchema";
+import { FormFieldComponent } from "@/components/FormFieldComponent";
+import { SubmitButton } from "@/components/SubmitButton";
 
-// Schema de validação do usuário
-const UserSchema = z.object({
-	id: z.string().optional(),
-	name: z.string().min(3, "O nome é obrigatório"),
-	email: z.string().email("O email é obrigatório"),
-	status: z.enum(["active", "inactive"], { required_error: "Selecione um status" }),
-	redirectUrl: z.string().url("A URL fornecida é inválida").optional(),
-	username: z
-		.string()
-		.min(6, "O nome de usuário deve ter pelo menos 6 caracteres")
-		.regex(/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]+$/, "O nome de usuário deve conter letras e números"),
-});
+type UserSchemaType = z.infer<typeof userSchema>;
 
-type UserSchemaType = z.infer<typeof UserSchema>;
-
-// Props do componente
 interface UserFormProps {
-	onSubmit: SubmitHandler<UserSchemaType>; // Função de submissão
-	user?: Partial<UserSchemaType>; // Dados do usuário para edição (opcional)
+	onSubmit: SubmitHandler<UserSchemaType>;
+	user?: Partial<UserSchemaType>;
 }
 
-// Componente UserForm
 export function UserForm({ onSubmit, user }: UserFormProps) {
 	const methods = useForm<UserSchemaType>({
-		resolver: zodResolver(UserSchema),
+		resolver: zodResolver(userSchema),
 		defaultValues: user
 			? {
 					id: user.id,
-					name: user.name || "", // Garante que name não seja undefined
-					email: user.email || "", // Garante que email não seja undefined
-					status: user.status || "active", // Garante que status não seja undefined
+					name: user.name || "",
+					email: user.email || "",
+					status: user.status || "active",
 					redirectUrl: user.redirectUrl,
-					username: user.username || "", // Garante que username não seja undefined
+					username: user.username || "",
 			  }
 			: {
 					id: undefined,
@@ -59,7 +46,7 @@ export function UserForm({ onSubmit, user }: UserFormProps) {
 	const {
 		handleSubmit,
 		control,
-		formState: { errors, isSubmitting }, // Extraia o estado isSubmitting
+		formState: { errors, isSubmitting },
 		reset,
 	} = methods;
 
@@ -78,97 +65,26 @@ export function UserForm({ onSubmit, user }: UserFormProps) {
 				}}
 				className="grid grid-cols-1 md:grid-cols-2 gap-4"
 			>
-				{/* Campo Nome */}
-				<FormField name="name">
-					<FormLabel>Nome</FormLabel>
-					<Controller
-						name="name"
-						control={control}
-						render={({ field }) => (
-							<FormControl asChild>
-								<Input {...field} placeholder="Digite seu nome" />
-							</FormControl>
-						)}
-					/>
-					{errors.name && <FormMessage className="text-red-500">{errors.name.message}</FormMessage>}
-				</FormField>
+				<FormFieldComponent name="name" label="Nome" control={control} errors={errors} placeholder="Digite seu nome" />
 
-				{/* Campo Email */}
-				<FormField name="email">
-					<FormLabel>Email</FormLabel>
-					<Controller
-						name="email"
-						control={control}
-						render={({ field }) => (
-							<FormControl asChild>
-								<Input {...field} placeholder="Digite seu email" type="email" />
-							</FormControl>
-						)}
-					/>
-					{errors.email && <FormMessage className="text-red-500">{errors.email.message}</FormMessage>}
-				</FormField>
+				<FormFieldComponent name="email" label="Email" control={control} errors={errors} placeholder="Digite seu email" type="email" />
 
-				{/* Campo Username */}
-				<FormField name="username">
-					<FormLabel>Nome de Usuário</FormLabel>
-					<Controller
-						name="username"
-						control={control}
-						render={({ field }) => (
-							<FormControl asChild>
-								<Input {...field} placeholder="Digite seu username" />
-							</FormControl>
-						)}
-					/>
-					{errors.username && <FormMessage className="text-red-500">{errors.username.message}</FormMessage>}
-				</FormField>
+				<FormFieldComponent name="username" label="Nome de Usuário" control={control} errors={errors} placeholder="Digite seu username" />
 
-				{/* Campo Status (Select) */}
-				<FormField name="status">
-					<FormLabel>Status</FormLabel>
-					<Controller
-						name="status"
-						control={control}
-						render={({ field }) => (
-							<FormControl asChild>
-								<Select options={userOptions.status} value={field.value} onChange={field.onChange} placeholder="Selecione o status" />
-							</FormControl>
-						)}
-					/>
-					{errors.status && <FormMessage className="text-red-500">{errors.status.message}</FormMessage>}
-				</FormField>
+				<FormFieldComponent name="status" label="Status" control={control} errors={errors} placeholder="Selecione o status">
+					<Select options={userOptions.status} />
+				</FormFieldComponent>
 
-				{/* Campo Redirect URL */}
-				<div className="md:col-span-2">
-					<FormField name="redirectUrl">
-						<FormLabel>URL de Redirecionamento</FormLabel>
-						<Controller
-							name="redirectUrl"
-							control={control}
-							render={({ field }) => (
-								<FormControl asChild>
-									<Input {...field} placeholder="Digite a URL de redirecionamento" />
-								</FormControl>
-							)}
-						/>
-						{errors.redirectUrl && <FormMessage className="text-red-500">{errors.redirectUrl.message}</FormMessage>}
-					</FormField>
-				</div>
+				<FormFieldComponent
+					name="redirectUrl"
+					label="URL de Redirecionamento"
+					control={control}
+					errors={errors}
+					placeholder="Digite a URL de redirecionamento"
+				/>
 
-				{/* Botão de Submit */}
 				<div className="md:col-span-2 mt-6 flex justify-end">
-					<Button type="submit" disabled={isSubmitting}>
-						{isSubmitting ? (
-							<div className="flex items-center gap-2">
-								<FaSpinner className="animate-spin" /> {/* Spinner */}
-								{user ? "Atualizando..." : "Criando..."}
-							</div>
-						) : user ? (
-							"Atualizar"
-						) : (
-							"Criar"
-						)}
-					</Button>
+					<SubmitButton isSubmitting={isSubmitting} isUpdate={!!user} />
 				</div>
 			</Form>
 		</FormProvider>
