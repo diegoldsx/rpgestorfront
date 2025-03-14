@@ -1,4 +1,4 @@
-export type Message = {
+export type Email = {
 	id: number;
 	email: string;
 	status: string;

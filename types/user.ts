@@ -2,7 +2,7 @@ export type User = {
 	id?: string;
 	name: string;
 	email: string;
-	status: "active" | "inactive";
+	status: string;
 	redirectUrl?: string;
 	username: string;
 };
