@@ -3,11 +3,11 @@
 import { Fragment } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { HeadingPages } from "@/components/common/heading/heading-pages";
-import { columns } from "./columns";
-import { FAKE_DATA } from "./data";
+import { columns } from "./utils/columns";
 import { DataTable } from "@/components/common/data-table/data-table";
-import { visibilityState } from "./utils/visibility";
-import { facetedFilters } from "./utils/filters";
+
+import { FAKE_DATA } from "@/data/noticesData";
+import { facetedFilters, visibilityState } from "./utils/columnConfig";
 
 const Page = () => {
 	return (
@@ -17,6 +17,9 @@ const Page = () => {
 				breadcrumbs={{
 					title: "Conteúdo",
 					href: "/Partnership",
+				}}
+				actions={{
+					secondary: { text: "Cadastrar novo grupo", href: "/email-marketing/notices/form" },
 				}}
 			/>
 
