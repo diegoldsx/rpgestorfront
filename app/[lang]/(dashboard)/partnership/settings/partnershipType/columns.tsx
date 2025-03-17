@@ -8,11 +8,11 @@ import { BadgeStatus, getBadgeStatus } from "@/components/badge/badgeStatus";
 import Link from "next/link";
 import { Icon } from "@iconify/react";
 import { useParams } from "next/navigation";
-import { Payment } from "@/types/partnership/payment";
+import { PartnershipType } from "@/types/partnership/partnershipType";
 
-const editUrl = "partnership/settings/discount/form";
+const editUrl = "partnership/settings/partnershipType/form";
 
-export const columns: ColumnDef<Payment>[] = [
+export const columns: ColumnDef<PartnershipType>[] = [
 	...columnConfig.map((field) => ({
 		id: field.id,
 		accessorKey: field.id,

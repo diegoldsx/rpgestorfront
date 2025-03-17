@@ -12,7 +12,7 @@ const PartnershipPage = () => {
 	return (
 		<Fragment>
 			<HeadingPages
-				title="Conteúdo"
+				title="Convênios"
 				breadcrumbs={{
 					title: "Conteúdo",
 					href: "/Partnership",

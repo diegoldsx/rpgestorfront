@@ -44,3 +44,20 @@ export const visibilityState: VisibilityState = Object.fromEntries(
 	PartnershipFields.map((key) => [key.id, visibleColumns.includes(key.id) || visibleColumns[0] === "*"])
 );
 export const facetedFilters: any[] = PartnershipFields.filter((field: any) => field.options);
+
+import { z } from "zod";
+
+export const PartnershipSchema = z.object({
+	id: z.number(),
+	name: z.string(),
+	benefits: z.string(),
+	contact: z.string(),
+	email: z.string().email(),
+	mobile: z.string(),
+	type: z.enum(["user1", "user2"]),
+	phone: z.string(),
+	local: z.string(),
+	status: z.enum(["active", "inactive"]),
+});
+
+export type PartnershipSchemaType = z.infer<typeof PartnershipSchema>;

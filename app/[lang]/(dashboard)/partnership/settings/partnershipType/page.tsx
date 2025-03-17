@@ -6,20 +6,20 @@ import { HeadingPages } from "@/components/common/heading/heading-pages";
 import { columns } from "./columns";
 import { DataTable } from "@/components/common/data-table/data-table";
 
-import { FAKE_DATA } from "@/data/paymentData";
+import { FAKE_DATA } from "@/data/serviceData";
 import { facetedFilters, visibilityState } from "./columnConfig";
 
 const Page = () => {
 	return (
 		<Fragment>
 			<HeadingPages
-				title="Pagamento"
+				title="Tipo de convênio"
 				breadcrumbs={{
 					title: "Conteúdo",
 					href: "/Partnership",
 				}}
 				actions={{
-					secondary: { text: "Cadastrar novo grupo", href: "/partnership/settings/form" },
+					secondary: { text: "Cadastrar novo grupo", href: "/partnership/settings/type/form" },
 				}}
 			/>
 

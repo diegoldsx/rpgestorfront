@@ -1,7 +1,7 @@
 import { words, arrayElement as arr, date, sentence, boolean, int, name } from "@/app/mock/faker";
 import { Partnership } from "./Partnership";
 
-export const FAKE_DATA: Partnership[] = Array.from({ length: 30 }, () => ({
+export const FAKE_DATA: Partnership[] = Array.from({ length: 15 }, () => ({
 	id: int(),
 	name: words(2),
 	benefits: sentence(),
@@ -13,3 +13,4 @@ export const FAKE_DATA: Partnership[] = Array.from({ length: 30 }, () => ({
 	local: words(3),
 	status: arr(["active", "inactive"]),
 }));
+console.log(FAKE_DATA);

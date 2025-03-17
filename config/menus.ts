@@ -94,7 +94,7 @@ export const menusConfig = {
 				icon: Gift,
 				child: [
 					{ title: "Convênios", href: "/partnership" },
-					{ title: "Tipos", href: "/partnership/settings/types" },
+					{ title: "Tipos", href: "/partnership/settings/partnershipType" },
 					{ title: "Desconto", href: "/partnership/settings/discount" },
 					{ title: "Pagamento", href: "/partnership/settings/payment" },
 					{ title: "Serviço", href: "/partnership/settings/service" },

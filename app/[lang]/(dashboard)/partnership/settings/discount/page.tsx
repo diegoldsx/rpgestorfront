@@ -4,24 +4,29 @@ import { Fragment } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { HeadingPages } from "@/components/common/heading/heading-pages";
 import { columns } from "./columns";
-import { FAKE_DATA } from "./data";
-import { SimpleTable } from "@/components/common/simple-table";
+import { DataTable } from "@/components/common/data-table/data-table";
 
-const DiscountPage = () => {
+import { FAKE_DATA } from "@/data/discountData";
+import { facetedFilters, visibilityState } from "./columnConfig";
+
+const Page = () => {
 	return (
 		<Fragment>
 			<HeadingPages
-				title="Tipos de desconto"
+				title="Grupos"
 				breadcrumbs={{
-					title: "Convênios",
-					href: "/partnership",
+					title: "Conteúdo",
+					href: "/Partnership",
+				}}
+				actions={{
+					secondary: { text: "Cadastrar novo grupo", href: "/partnership/settings/form" },
 				}}
 			/>
 
-			<div className="mt-3">
+			<div className="mt-3 space-y-6">
 				<Card>
 					<CardContent>
-						<SimpleTable data={FAKE_DATA} columns={columns} />
+						<DataTable data={FAKE_DATA} columns={columns} facetedFilters={facetedFilters} visibilityState={visibilityState} />
 					</CardContent>
 				</Card>
 			</div>
@@ -29,4 +34,4 @@ const DiscountPage = () => {
 	);
 };
 
-export default DiscountPage;
+export default Page;

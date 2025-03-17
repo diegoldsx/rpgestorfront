@@ -4,24 +4,29 @@ import { Fragment } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { HeadingPages } from "@/components/common/heading/heading-pages";
 import { columns } from "./columns";
-import { FAKE_DATA } from "./data";
-import { SimpleTable } from "@/components/common/simple-table";
+import { DataTable } from "@/components/common/data-table/data-table";
 
-const ServicePage = () => {
+import { FAKE_DATA } from "@/data/serviceData";
+import { facetedFilters, visibilityState } from "./columnConfig";
+
+const Page = () => {
 	return (
 		<Fragment>
 			<HeadingPages
-				title="Tipos de serviço"
+				title="Serviços"
 				breadcrumbs={{
-					title: "Convênio",
-					href: "/partnership/",
+					title: "Conteúdo",
+					href: "/Partnership",
+				}}
+				actions={{
+					secondary: { text: "Cadastrar novo grupo", href: "/partnership/settings/service/form" },
 				}}
 			/>
 
-			<div className="mt-3">
+			<div className="mt-3 space-y-6">
 				<Card>
 					<CardContent>
-						<SimpleTable data={FAKE_DATA} columns={columns} />
+						<DataTable data={FAKE_DATA} columns={columns} facetedFilters={facetedFilters} visibilityState={visibilityState} />
 					</CardContent>
 				</Card>
 			</div>
@@ -29,4 +34,4 @@ const ServicePage = () => {
 	);
 };
 
-export default ServicePage;
+export default Page;
