@@ -1,29 +1,64 @@
-import { getOptionsById } from "@/app/types/FieldConfig";
+"use client";
 import { ColumnDef } from "@tanstack/react-table";
 import { exactFilter } from "@/components/common/data-table/columnUtils";
 import Cell from "@/app/types/Cell";
-import { Assembly, assemblyConfig } from "./Assembly";
+import { columnConfig } from "./columnConfig";
+import { Badge } from "@/components/ui/badge";
+import { BadgeStatus, getBadgeStatus } from "@/components/badge/badgeStatus";
+import Link from "next/link";
+import { Icon } from "@iconify/react";
+import { useParams } from "next/navigation";
+import { Assembly } from "@/types/assembly/assembly";
 
-export const columns: ColumnDef<Assembly>[] = assemblyConfig.map((field) => ({
-	id: field.id,
-	accessorKey: field.id,
-	header: field.title,
-	filterFn: exactFilter,
-	enableColumnFilter: true,
-	cell: (info) => {
-		if (field.type === "select") {
-			const options = getOptionsById(assemblyConfig, field.id);
-			const label = options?.find(
-				(option) => option.value === info.getValue()
-			)?.label;
-			return <Cell>{label}</Cell>;
-		}
+const editUrl = "assemblies/form";
 
-		return <Cell>{info.getValue() as string}</Cell>;
+export const columns: ColumnDef<Assembly>[] = [
+	...columnConfig.map((field) => ({
+		id: field.id,
+		accessorKey: field.id,
+		header: field.title,
+		filterFn: exactFilter,
+		cell: (info: any) => {
+			const value = info.getValue() as string;
+
+			if (field.id === "status" && field.options) {
+				const option = field.options.find((option) => option.value === value);
+				const badgeStyle = getBadgeStatus(option?.value as BadgeStatus);
+
+				return (
+					<Cell>
+						<Badge color={badgeStyle}>{option?.label}</Badge>
+					</Cell>
+				);
+			}
+
+			if (field.options) {
+				const option = field.options.find((option) => option.value === value);
+
+				return (
+					<Cell>
+						<span>{option?.label}</span>
+					</Cell>
+				);
+			}
+
+			return <Cell>{value}</Cell>;
+		},
+	})),
+	{
+		id: "actions",
+		header: "Ações",
+		cell: ({ row }) => {
+			const id = row.original.id;
+			const params = useParams();
+			return (
+				<Cell className="flex gap-2">
+					<Link href={`/${editUrl}?id=${id}`}>
+						<Icon icon="heroicons:pencil-square" className="w-5 h-5" />
+					</Link>
+				</Cell>
+			);
+		},
+		size: 150,
 	},
-}));
-
-export const getVisibilityState = (visibleColumnIds: string[]) =>
-	Object.fromEntries(
-		assemblyConfig.map((key) => [key.id, visibleColumnIds.includes(key.id)])
-	);
+];

@@ -6,20 +6,20 @@ import { HeadingPages } from "@/components/common/heading/heading-pages";
 import { columns } from "./columns";
 import { DataTable } from "@/components/common/data-table/data-table";
 
-import { FAKE_DATA } from "@/data/discountData";
+import { FAKE_DATA } from "@/data/assembliesData";
 import { facetedFilters, visibilityState } from "./columnConfig";
 
 const Page = () => {
 	return (
 		<Fragment>
 			<HeadingPages
-				title="Grupos"
+				title="Assembléia"
 				breadcrumbs={{
 					title: "Conteúdo",
 					href: "/Partnership",
 				}}
 				actions={{
-					secondary: { text: "Cadastrar novo grupo", href: "/partnership/settings/form" },
+					secondary: { text: "Cadastrar novo grupo", href: "/assemblies/form" },
 				}}
 			/>
 

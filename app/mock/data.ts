@@ -13,7 +13,7 @@ import { Category } from "../[lang]/(dashboard)/gatherings/categories/types/Cate
 import { Submission } from "../[lang]/(dashboard)/gatherings/submissions/types/Submission";
 import { Assembly } from "../[lang]/(dashboard)/assemblies/Assembly";
 
-const LENGTH = 30;
+const LENGTH = 15;
 
 export const FAKE_DATA: Assembly[] = Array.from({ length: LENGTH }, () => ({
 	id: int(),
@@ -28,6 +28,8 @@ export const FAKE_DATA: Assembly[] = Array.from({ length: LENGTH }, () => ({
 	displayMode: arrayElement(["padrao", "assembleia"]),
 	videoConference: boolean(),
 }));
+
+console.log(FAKE_DATA);
 
 export const FAKE_COURSES: Course[] = Array.from({ length: LENGTH }, () => ({
 	category: arrayElement(["curso1", "curso2"]),

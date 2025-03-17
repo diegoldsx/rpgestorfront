@@ -3,42 +3,29 @@
 import { Fragment } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { HeadingPages } from "@/components/common/heading/heading-pages";
-import { columns, getVisibilityState } from "./columns";
-import { FAKE_ASSEMBLIES } from "@/app/mock/data";
+import { columns } from "./columns";
 import { DataTable } from "@/components/common/data-table/data-table";
-import { getFieldsWithOptions } from "@/app/types/FieldConfig";
-import { assemblyConfig } from "./Assembly";
+import { FAKE_DATA } from "@/data/assembliesData";
+import { facetedFilters, visibilityState } from "./columnConfig";
 
-const data = FAKE_ASSEMBLIES;
-const filters = getFieldsWithOptions(assemblyConfig);
-
-const visibleColumns = getVisibilityState([
-	"name",
-	"status",
-	"startDate",
-	"endDate",
-]);
-
-const AssembliesPage = () => {
+const Page = () => {
 	return (
 		<Fragment>
 			<HeadingPages
-				title="Assembléia"
+				title="Assembléias"
 				breadcrumbs={{
-					title: "Assembléia",
-					href: "/assemblies",
+					title: "Conteúdo",
+					href: "/Partnership",
+				}}
+				actions={{
+					secondary: { text: "Cadastrar novo grupo", href: "/assemblies/form" },
 				}}
 			/>
 
 			<div className="mt-3 space-y-6">
 				<Card>
 					<CardContent>
-						<DataTable
-							data={data}
-							columns={columns}
-							facetedFilters={filters}
-							visibilityState={visibleColumns}
-						/>
+						<DataTable data={FAKE_DATA} columns={columns} facetedFilters={facetedFilters} visibilityState={visibilityState} />
 					</CardContent>
 				</Card>
 			</div>
@@ -46,4 +33,4 @@ const AssembliesPage = () => {
 	);
 };
 
-export default AssembliesPage;
+export default Page;
