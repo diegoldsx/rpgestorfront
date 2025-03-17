@@ -27,15 +27,5 @@
 		}
 	},
 	"include": ["next-env.d.ts", ".next/types/**/*.ts", "**/*.ts", "**/*.tsx"],
-	"exclude": [
-		"node_modules",
-		"dist",
-		".next",
-		"build",
-		"public",
-		"**/*.test.ts",
-		"**/*.spec.ts",
-		"app/[lang]/(dash-components)/**/*.ts",
-		"app/[lang]/(dash-components)/**/*.tsx"
-	]
+	"exclude": ["node_modules", "dist", ".next", "build", "public", "**/*.test.ts", "**/*.spec.ts"]
 }

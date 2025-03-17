@@ -2,18 +2,19 @@
 import { ColumnDef } from "@tanstack/react-table";
 import { exactFilter } from "@/components/common/data-table/columnUtils";
 import Cell from "@/app/types/Cell";
-import { columnFields } from "./columnConfig";
+import { columnConfig } from "./columnConfig";
 import { Badge } from "@/components/ui/badge";
 import { BadgeStatus, getBadgeStatus } from "@/components/badge/badgeStatus";
 import Link from "next/link";
 import { Icon } from "@iconify/react";
 import { useParams } from "next/navigation";
 import { User } from "@/types/user";
+import { Message } from "@/types/email-marketing/message";
 
-const editUrl = "/users/form";
+const editUrl = "email-marketing/messages/form";
 
-export const columns: ColumnDef<User>[] = [
-	...columnFields.map((field) => ({
+export const columns: ColumnDef<Message>[] = [
+	...columnConfig.map((field) => ({
 		id: field.id,
 		accessorKey: field.id,
 		header: field.title,
@@ -51,10 +52,9 @@ export const columns: ColumnDef<User>[] = [
 		cell: ({ row }) => {
 			const id = row.original.id;
 			const params = useParams();
-			const lang = params.lang as string;
 			return (
 				<Cell className="flex gap-2">
-					<Link href={`/${lang}${editUrl}?id=${id}`}>
+					<Link href={`/${editUrl}?id=${id}`}>
 						<Icon icon="heroicons:pencil-square" className="w-5 h-5" />
 					</Link>
 				</Cell>

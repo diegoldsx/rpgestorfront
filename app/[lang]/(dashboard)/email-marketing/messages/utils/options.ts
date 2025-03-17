@@ -7,4 +7,4 @@ export const options = {
 		{ value: "active", label: "Ativo" },
 		{ value: "inactive", label: "Inativo" },
 	],
-} as const;
+};
