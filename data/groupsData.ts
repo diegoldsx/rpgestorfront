@@ -1,17 +1,14 @@
 export const FAKE_DATA: any[] = [
 	{
 		id: "1",
-		name: "group 1",
-		total: "34",
+		name: "sector 1 ",
 	},
 	{
 		id: "2",
-		name: "group 3",
-		total: "4",
+		name: "sector 3",
 	},
 	{
 		id: "3",
-		name: "group 3",
-		total: "3",
+		name: "secotr 3",
 	},
 ];
