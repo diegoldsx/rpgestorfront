@@ -9,7 +9,7 @@ import { useEffect } from "react";
 import { FormFieldComponent } from "@/components/FormFieldComponent";
 import { SubmitButton } from "@/components/SubmitButton";
 import { options } from "../options";
-import { DiscountSchemaType, DiscountSchema } from "@/schemas/partnership/discountSchema";
+import { DiscountSchemaType, DiscountSchema } from "@/schemas/partnership/discount";
 
 interface Props {
 	onSubmit: SubmitHandler<DiscountSchemaType>;

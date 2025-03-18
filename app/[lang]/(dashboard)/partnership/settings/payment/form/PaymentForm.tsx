@@ -9,7 +9,7 @@ import { useEffect } from "react";
 import { FormFieldComponent } from "@/components/FormFieldComponent";
 import { SubmitButton } from "@/components/SubmitButton";
 import { options } from "../options";
-import { PaymentSchema, PaymentSchemaType } from "@/schemas/partnership/paymentSchema";
+import { PaymentSchema, PaymentSchemaType } from "@/schemas/partnership/payment";
 
 interface Props {
 	onSubmit: SubmitHandler<PaymentSchemaType>;

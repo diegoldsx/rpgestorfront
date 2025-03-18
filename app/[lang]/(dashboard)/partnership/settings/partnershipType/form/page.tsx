@@ -5,7 +5,7 @@ import { SubmitHandler } from "react-hook-form";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { FAKE_DATA } from "@/data/partnershipTypeData";
 import { useEffect, useState } from "react";
-import { PartnershipSchemaType } from "@/schemas/partnership/partnershipTypeSchema";
+import { PartnershipSchemaType } from "@/schemas/partnership/partnerType";
 
 export default function PartnershipTypeFormPage({ searchParams }: { searchParams: { id?: string } }) {
 	const id = searchParams.id;

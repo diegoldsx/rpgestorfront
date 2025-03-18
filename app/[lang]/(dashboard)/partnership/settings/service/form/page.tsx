@@ -5,7 +5,7 @@ import { SubmitHandler } from "react-hook-form";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { FAKE_DATA } from "@/data/discountData";
 import { useEffect, useState } from "react";
-import { ServiceSchemaType, ServiceSchema } from "@/schemas/partnership/serviceSchema";
+import { ServiceSchemaType, ServiceSchema } from "@/schemas/partnership/service";
 
 export default function PaymentFormPage({ searchParams }: { searchParams: { id?: string } }) {
 	const id = searchParams.id;

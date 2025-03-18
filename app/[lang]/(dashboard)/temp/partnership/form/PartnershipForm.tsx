@@ -10,7 +10,7 @@ import Select from "@/components/Select";
 import { userOptions } from "../utils/columnConfig";
 import { useEffect } from "react";
 import { FaSpinner } from "react-icons/fa";
-import { userSchema } from "@/schemas/userSchema";
+import { userSchema } from "@/schemas/users/user";
 import { FormFieldComponent } from "@/components/FormFieldComponent";
 import { SubmitButton } from "@/components/SubmitButton";
 

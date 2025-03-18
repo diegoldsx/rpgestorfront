@@ -8,7 +8,7 @@ import Select from "@/components/Select";
 import { useEffect } from "react";
 import { FormFieldComponent } from "@/components/FormFieldComponent";
 import { SubmitButton } from "@/components/SubmitButton";
-import { noticeSchema, NoticeSchemaType } from "@/schemas/noticeSchema";
+import { noticeSchema, NoticeSchemaType } from "@/schemas/email-marketing/sector";
 
 interface noticeFormProps {
 	onSubmit: SubmitHandler<NoticeSchemaType>;

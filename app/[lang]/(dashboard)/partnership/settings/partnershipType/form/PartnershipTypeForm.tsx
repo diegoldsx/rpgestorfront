@@ -9,7 +9,7 @@ import { useEffect } from "react";
 import { FormFieldComponent } from "@/components/FormFieldComponent";
 import { SubmitButton } from "@/components/SubmitButton";
 import { options } from "../options";
-import { PartnershipSchemaType, PartnershipTypeSchema } from "@/schemas/partnership/partnershipTypeSchema";
+import { PartnershipSchemaType, PartnershipTypeSchema } from "@/schemas/partnership/partnerType";
 
 interface Props {
 	onSubmit: SubmitHandler<PartnershipSchemaType>;

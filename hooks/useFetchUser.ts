@@ -1,5 +1,5 @@
 import { fetchUserAction } from "@/action/users-actions";
-import { UserSchemaType } from "@/schemas/userSchema";
+import { UserSchemaType } from "@/schemas/users/user";
 import { useState, useEffect } from "react";
 
 interface UseFetchUserProps {

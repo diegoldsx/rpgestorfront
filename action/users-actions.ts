@@ -1,7 +1,7 @@
 "use server";
 
 import { FAKE_USER_DATA } from "@/data/userData";
-import { UserSchemaType } from "@/schemas/userSchema";
+import { UserSchemaType } from "@/schemas/users/user";
 
 export async function upsertUserAction(user: UserSchemaType) {
 	await new Promise((resolve) => setTimeout(resolve, 2000));

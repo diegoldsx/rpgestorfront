@@ -1,7 +1,7 @@
 "use client";
 
 import { UserForm } from "./UserForm";
-import { UserSchemaType } from "@/schemas/userSchema";
+import { UserSchemaType } from "@/schemas/users/user";
 import { SubmitHandler } from "react-hook-form";
 import { upsertUserAction } from "@/action/users-actions";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";

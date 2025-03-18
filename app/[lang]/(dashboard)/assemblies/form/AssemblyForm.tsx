@@ -8,7 +8,7 @@ import Select from "@/components/Select";
 import { useEffect } from "react";
 import { FormFieldComponent } from "@/components/FormFieldComponent";
 import { SubmitButton } from "@/components/SubmitButton";
-import { AssemblySchema, AssemblySchemaType } from "@/schemas/assemblySchema";
+import { AssemblySchema, AssemblySchemaType } from "@/schemas/assemblies/assembly";
 import { options } from "../columnConfig";
 
 interface Props {

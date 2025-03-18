@@ -5,7 +5,7 @@ import { SubmitHandler } from "react-hook-form";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { FAKE_DATA } from "@/data/assembliesData";
 import { useEffect, useState } from "react";
-import { AssemblySchema, AssemblySchemaType } from "@/schemas/assemblySchema";
+import { AssemblySchema, AssemblySchemaType } from "@/schemas/assemblies/assembly";
 
 export default function AssemblyFormPage({ searchParams }: { searchParams: { id?: string } }) {
 	const id = searchParams.id;

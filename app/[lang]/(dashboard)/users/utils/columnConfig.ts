@@ -1,7 +1,7 @@
 import { z } from "zod";
 import { VisibilityState } from "@tanstack/react-table";
 import { FieldConfig } from "@/app/types/FieldConfig";
-import { User } from "@/types/user";
+import { User } from "@/types/user/user";
 import { userOptions } from "./options";
 
 export const columnFields: FieldConfig<User>[] = [

@@ -5,7 +5,7 @@ import { SubmitHandler } from "react-hook-form";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { FAKE_DATA } from "@/data/noticesData";
 import { useEffect, useState } from "react";
-import { NoticeSchemaType, noticeSchema } from "@/schemas/noticeSchema";
+import { NoticeSchemaType, noticeSchema } from "@/schemas/email-marketing/sector";
 
 export default function NoticeFormPage({ searchParams }: { searchParams: { id?: string } }) {
 	const id = searchParams.id;

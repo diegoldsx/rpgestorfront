@@ -9,7 +9,7 @@ import { useEffect } from "react";
 import { FormFieldComponent } from "@/components/FormFieldComponent";
 import { SubmitButton } from "@/components/SubmitButton";
 import { options } from "../utils/options";
-import { groupSchema, GroupSchemaType } from "@/schemas/groupSchema";
+import { groupSchema, GroupSchemaType } from "@/schemas/email-marketing/group";
 
 interface GroupFormProps {
 	onSubmit: SubmitHandler<GroupSchemaType>;

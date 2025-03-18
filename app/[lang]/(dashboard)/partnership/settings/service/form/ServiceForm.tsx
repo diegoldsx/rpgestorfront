@@ -9,7 +9,7 @@ import { useEffect } from "react";
 import { FormFieldComponent } from "@/components/FormFieldComponent";
 import { SubmitButton } from "@/components/SubmitButton";
 import { options } from "../options";
-import { ServiceSchema, ServiceSchemaType } from "@/schemas/partnership/serviceSchema";
+import { ServiceSchema, ServiceSchemaType } from "@/schemas/partnership/service";
 
 interface Props {
 	onSubmit: SubmitHandler<ServiceSchemaType>;

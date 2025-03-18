@@ -6,7 +6,7 @@ import { DataTable } from "@/components/common/data-table/data-table";
 import { columns } from "./utils/columns";
 import { facetedFilters, visibilityState } from "./utils/columnConfig";
 import { FAKE_USER_DATA } from "@/data/userData";
-import { User } from "@/types/user";
+import { User } from "@/types/user/user";
 
 export default function UsersPage() {
 	return (

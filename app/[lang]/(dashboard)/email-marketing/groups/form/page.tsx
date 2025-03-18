@@ -5,7 +5,7 @@ import { SubmitHandler } from "react-hook-form";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { FAKE_DATA } from "@/data/groupsData";
 import { useEffect, useState } from "react";
-import { GroupSchemaType, groupSchema } from "@/schemas/groupSchema";
+import { GroupSchemaType, groupSchema } from "@/schemas/email-marketing/group";
 
 export default function GroupFormPage({ searchParams }: { searchParams: { id?: string } }) {
 	const id = searchParams.id;
