@@ -7,7 +7,18 @@ import { Course } from "../[lang]/(dashboard)/gatherings/courses/types/Course";
 import { PaymentGroup } from "../[lang]/(dashboard)/settings/payment-groups/types/PaymentGroup";
 import {} from "../[lang]/(dashboard)/financial/remittance/types/Remittance";
 import { faker } from "@faker-js/faker";
-import { int, arrayElement, date, sentence, name, boolean, float, words, email, link } from "./faker";
+import {
+	int,
+	arrayElement,
+	date,
+	sentence,
+	name,
+	boolean,
+	float,
+	words,
+	email,
+	link,
+} from "./faker";
 import { Gathering } from "../[lang]/(dashboard)/gatherings/types/Gathering";
 import { Category } from "../[lang]/(dashboard)/gatherings/categories/types/Category";
 import { Submission } from "../[lang]/(dashboard)/gatherings/submissions/types/Submission";
@@ -53,54 +64,63 @@ export const FAKE_COURSES: Course[] = Array.from({ length: LENGTH }, () => ({
 	status: arrayElement(["ativo", "inativo"]),
 }));
 
-export const FAKE_SUBMISSIONS: Submission[] = Array.from({ length: LENGTH }, () => ({
-	id: int(),
-	packagingName: words(2),
-	strategicPartners: name(),
-	area: "concurso",
-	authors: name(),
-	institution: words(1),
-	date: date(),
-	event: arrayElement(["premioEmbalagem", "cursoNeurociencia"]),
-	submitedBy: arrayElement(["user1", "user2"]),
-	packageReleaseDate: date(),
-	packageDesignAgency: "Agencia",
-	presentationLink: link(),
-	comments: sentence(),
-	number: int(),
-	presentationDate: date(),
-	roomContent: arrayElement(["content1", "content2"]),
-	status: arrayElement(["aprovado", "reprovado"]),
-}));
+export const FAKE_SUBMISSIONS: Submission[] = Array.from(
+	{ length: LENGTH },
+	() => ({
+		id: int(),
+		packagingName: words(2),
+		strategicPartners: name(),
+		area: "concurso",
+		authors: name(),
+		institution: words(1),
+		date: date(),
+		event: arrayElement(["premioEmbalagem", "cursoNeurociencia"]),
+		submitedBy: arrayElement(["user1", "user2"]),
+		packageReleaseDate: date(),
+		packageDesignAgency: "Agencia",
+		presentationLink: link(),
+		comments: sentence(),
+		number: int(),
+		presentationDate: date(),
+		roomContent: arrayElement(["content1", "content2"]),
+		status: arrayElement(["aproved", "reproved"]),
+	})
+);
+console.log({ FAKE_SUBMISSIONS });
+export const FAKE_CATEGORIES: Category[] = Array.from(
+	{ length: LENGTH },
+	() => ({
+		id: int(),
+		name: words(2),
+		status: arrayElement(["ativo", "inativo"]),
+	})
+);
 
-export const FAKE_CATEGORIES: Category[] = Array.from({ length: LENGTH }, () => ({
-	id: int(),
-	name: words(2),
-	status: arrayElement(["ativo", "inativo"]),
-}));
-
-export const FAKE_GATHERINGS: Gathering[] = Array.from({ length: LENGTH }, () => ({
-	id: int(),
-	category: arrayElement(["event1", "event2"]),
-	name: words(2),
-	startDate: date(),
-	endDate: date(),
-	registrationEndDate: date(),
-	participantLimit: int(),
-	responsible: arrayElement(["option1", "option2"]),
-	description: sentence(),
-	sponsors: "sponsors",
-	permission: arrayElement(["VENDA", "OUTRO"]),
-	value: float(),
-	costCenter: arrayElement(["center1", "center2"]),
-	eventCategory: "event",
-	account: arrayElement(["associados", "outros"]),
-	allowSubmission: boolean(),
-	submissionDeadline: date(),
-	registration: arrayElement(["event", "outro"]),
-	paymentConfirmation: arrayElement(["option1", "option2"]),
-	status: arrayElement(["ativo", "inativo"]),
-}));
+export const FAKE_GATHERINGS: Gathering[] = Array.from(
+	{ length: LENGTH },
+	() => ({
+		id: int(),
+		category: arrayElement(["event1", "event2"]),
+		name: words(2),
+		startDate: date(),
+		endDate: date(),
+		registrationEndDate: date(),
+		participantLimit: int(),
+		responsible: arrayElement(["option1", "option2"]),
+		description: sentence(),
+		sponsors: "sponsors",
+		permission: arrayElement(["VENDA", "OUTRO"]),
+		value: float(),
+		costCenter: arrayElement(["center1", "center2"]),
+		eventCategory: "event",
+		account: arrayElement(["associados", "outros"]),
+		allowSubmission: boolean(),
+		submissionDeadline: date(),
+		registration: arrayElement(["event", "outro"]),
+		paymentConfirmation: arrayElement(["option1", "option2"]),
+		status: arrayElement(["ativo", "inativo"]),
+	})
+);
 
 export const fake_returns: any[] = Array.from({ length: LENGTH }, () => ({
 	id: int(),
@@ -180,17 +200,20 @@ export const fakeExpenses: Expense[] = Array.from({ length: LENGTH }, () => ({
 	taxCONFINS: faker.number.int({ min: 0, max: 100 }),
 }));
 
-export const fakeProvisions: Provision[] = Array.from({ length: LENGTH }, () => ({
-	id: faker.helpers.rangeToNumber({ min: 1, max: 999 }),
-	ammount: faker.helpers.rangeToNumber({ min: 100, max: 400 }),
-	description: faker.lorem.sentence(),
-	documentDate: faker.date.recent().toISOString().split("T")[0],
-	dueDate: faker.date.future().toISOString().split("T")[0],
-	observations: faker.lorem.paragraph(),
-	type: faker.helpers.arrayElement(["DESPESA", "OUTROS"]),
-	registeredBy: faker.helpers.arrayElement(["Maria", "João", "José"]),
-	status: faker.helpers.arrayElement(["APROVADO", "REPROVADO", "PENDENTE"]),
-}));
+export const fakeProvisions: Provision[] = Array.from(
+	{ length: LENGTH },
+	() => ({
+		id: faker.helpers.rangeToNumber({ min: 1, max: 999 }),
+		ammount: faker.helpers.rangeToNumber({ min: 100, max: 400 }),
+		description: faker.lorem.sentence(),
+		documentDate: faker.date.recent().toISOString().split("T")[0],
+		dueDate: faker.date.future().toISOString().split("T")[0],
+		observations: faker.lorem.paragraph(),
+		type: faker.helpers.arrayElement(["DESPESA", "OUTROS"]),
+		registeredBy: faker.helpers.arrayElement(["Maria", "João", "José"]),
+		status: faker.helpers.arrayElement(["APROVADO", "REPROVADO", "PENDENTE"]),
+	})
+);
 
 export const fakeTransfers: Transfer[] = Array.from({ length: LENGTH }, () => ({
 	id: faker.helpers.rangeToNumber({ min: 1, max: 999 }),
@@ -200,11 +223,19 @@ export const fakeTransfers: Transfer[] = Array.from({ length: LENGTH }, () => ({
 	amount: faker.helpers.rangeToNumber({ min: 100, max: 4000 }),
 }));
 
-export const fakePaymentGroups: PaymentGroup[] = Array.from({ length: LENGTH }, () => ({
-	id: faker.number.int(),
-	name: faker.lorem.words(2),
-	defaultAmount: faker.number.float({ min: 10, max: 1000, multipleOf: 0.01 }),
-	emailModel: faker.helpers.arrayElement(["campanhaMobile", "carteirinha", "carteirinhaSocio", "taxaAssociativa"]),
-	cycle: faker.helpers.arrayElement(["ANUAL", "MENSAL"]),
-	status: faker.helpers.arrayElement(["ATIVO", "INATIVO"]),
-}));
+export const fakePaymentGroups: PaymentGroup[] = Array.from(
+	{ length: LENGTH },
+	() => ({
+		id: faker.number.int(),
+		name: faker.lorem.words(2),
+		defaultAmount: faker.number.float({ min: 10, max: 1000, multipleOf: 0.01 }),
+		emailModel: faker.helpers.arrayElement([
+			"campanhaMobile",
+			"carteirinha",
+			"carteirinhaSocio",
+			"taxaAssociativa",
+		]),
+		cycle: faker.helpers.arrayElement(["ANUAL", "MENSAL"]),
+		status: faker.helpers.arrayElement(["ATIVO", "INATIVO"]),
+	})
+);

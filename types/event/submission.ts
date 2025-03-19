@@ -1,5 +1,5 @@
 export type Submission = {
-	id?: string;
+	id: string;
 	packagingName: string;
 	strategicPartners: string;
 	area: string;
@@ -13,7 +13,7 @@ export type Submission = {
 	status: string;
 	presentationLink: string;
 	comments: string;
-	number: string;
+	number: number;
 	presentationDate: string;
 	roomContent: string;
 };
