@@ -1,11 +1,11 @@
 import { z } from "zod";
 
 export const RemittanceSchema = z.object({
-	id: z.number(),
+	id: z.string().optional(),
 	bank: z.string(),
 	search: z.string(),
 	searchFor: z.string(),
-	amount: z.number(),
+	amount: z.string(),
 	startDate: z.string(),
 	finalDate: z.string(),
 	dateCategory: z.string(),
@@ -13,4 +13,4 @@ export const RemittanceSchema = z.object({
 	type: z.string(),
 });
 
-export type Remittance = z.infer<typeof RemittanceSchema>;
+export type RemittanceSchemaType = z.infer<typeof RemittanceSchema>;

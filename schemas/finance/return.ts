@@ -1,9 +1,9 @@
 import { z } from "zod";
 
 export const ReturnSchema = z.object({
-	id: z.number(),
+	id: z.string().optional(),
 	account: z.string(),
-	file: z.instanceof(File),
+	file: z.string(),
 });
 
-export type Return = z.infer<typeof ReturnSchema>;
+export type ReturnSchemaType = z.infer<typeof ReturnSchema>;

@@ -9,6 +9,7 @@ import { fakeExpenses } from "@/app/mock/data";
 import { ExpensesDataTable } from "./components/data-table";
 import { columns } from "./components/data-table/columns";
 const data = fakeExpenses;
+console.log({ fakeExpenses });
 const ExpensePage = () => {
 	return (
 		<Fragment>

@@ -1,9 +1,9 @@
 export type Remittance = {
-	id: number;
+	id?: string;
 	bank: string;
 	search: string;
 	searchFor: string;
-	amount: number; // "Valor"
+	amount: string; // "Valor"
 	startDate: string;
 	finalDate: string;
 	dateCategory: string;

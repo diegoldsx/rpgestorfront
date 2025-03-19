@@ -1,29 +1,30 @@
 import { z } from "zod";
 
 export const ExpenseSchema = z.object({
-	payer: z.string(),
+	id: z.string().optional(),
+	payer: z.string().min(1, "O pagador é obrigatório."),
 	competenceDate: z.string().optional(),
-	dueDate: z.string(),
-	costCenter: z.string(),
-	category: z.string(),
-	paymentMethod: z.string(),
+	dueDate: z.string().min(1, "A data de vencimento é obrigatória."),
+	costCenter: z.string().min(1, "O centro de custo é obrigatório."),
+	category: z.string().min(1, "A categoria é obrigatória."),
+	paymentMethod: z.string().min(1, "O método de pagamento é obrigatório."),
 	baseDocument: z.string().optional(),
-	account: z.string(),
-	tax: z.boolean(),
-	amount: z.number(),
+	account: z.string().min(1, "A conta é obrigatória."),
+	tax: z.boolean({ required_error: "O campo 'tax' é obrigatório." }),
+	amount: z.string().min(1, "O valor é obrigatório."),
 	description: z.string().optional(),
 	observations: z.string().optional(),
-	status: z.string(),
+	status: z.string().min(1, "O status é obrigatório."),
 
 	paymentDate: z.string().optional(),
 	paymentClearingDate: z.string().optional(),
-	discounts: z.number().optional(),
-	addition: z.number().optional(),
-	totalPaid: z.number().optional(),
-	totalClearing: z.number().optional(),
+	discounts: z.string().optional(),
+	addition: z.string().optional(),
+	totalPaid: z.string().optional(),
+	totalClearing: z.string().optional(),
 
-	installments: z.number().optional(),
-	installmentType: z.string(),
+	installments: z.string().optional(),
+	installmentType: z.string().min(1, "O tipo de parcela é obrigatório."),
 
 	itemPayer: z.string().optional(),
 	itemCategory: z.string().optional(),
@@ -31,12 +32,12 @@ export const ExpenseSchema = z.object({
 	itemBaseDocument: z.string().optional(),
 	itemDueDate: z.string().optional(),
 	itemDescription: z.string().optional(),
-	itemAmount: z.number().optional(),
+	itemAmount: z.string().optional(),
 
-	taxISS: z.number().optional(),
-	taxCSSL: z.number().optional(),
-	taxPIS: z.number().optional(),
-	taxCONFINS: z.number().optional(),
+	taxISS: z.string().optional(),
+	taxCSSL: z.string().optional(),
+	taxPIS: z.string().optional(),
+	taxCONFINS: z.string().optional(),
 });
 
-export type Expense = z.infer<typeof ExpenseSchema>;
+export type ExpenseSchemaType = z.infer<typeof ExpenseSchema>;

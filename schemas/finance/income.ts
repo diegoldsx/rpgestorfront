@@ -1,6 +1,7 @@
 import { z } from "zod";
 
 export const IncomeSchema = z.object({
+	id: z.string().optional(),
 	payer: z.string(),
 	description: z.string(),
 	competenceDate: z.string().optional(),
@@ -10,18 +11,18 @@ export const IncomeSchema = z.object({
 	costCenter: z.string(),
 	category: z.string(),
 	taxApplied: z.boolean(),
-	value: z.number(),
-	paidValue: z.number(),
+	value: z.string(),
+	paidValue: z.string(),
 	discountType: z.string().optional(),
-	discountPercentage: z.number().optional(),
+	discountPercentage: z.string().optional(),
 	discountExpirationDate: z.string().optional(),
 	discountDescription: z.string().optional(),
 	observations: z.string().optional(),
 	status: z.string(),
-	totalInstallments: z.number(),
+	totalInstallments: z.string(),
 	installmentType: z.string(),
 	invoiceInstructions: z.string(),
 	sampleMessage: z.string(),
 });
 
-export type Income = z.infer<typeof IncomeSchema>;
+export type IncomeSchemaType = z.infer<typeof IncomeSchema>;

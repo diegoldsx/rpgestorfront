@@ -1,4 +1,5 @@
 export type Income = {
+	id?: string;
 	payer: string; // "Pagador"
 	description: string;
 	competenceDate?: string; // "Competência" (optional)
@@ -7,16 +8,15 @@ export type Income = {
 	paymentMethod: string;
 	costCenter: string;
 	category: string;
-	taxApplied: boolean; // "Imposto" (Sim/Não)
-	value: number; // "Valor"
-	paidValue: number;
+	value: string; // "Valor"
+	paidValue: string;
 	discountType?: string;
-	discountPercentage?: number; // "Percentual Desconto(%)" (if % is selected)
+	discountPercentage?: string; // "Percentual Desconto(%)" (if % is selected)
 	discountExpirationDate?: string; // "Data limite desconto" (optional)
 	discountDescription?: string; // "Descrição"
 	observations?: string; // "Observações"
 	status: string;
-	totalInstallments: number;
+	totalInstallments: string;
 	installmentType: string;
 	invoiceInstructions: string;
 	sampleMessage: string;

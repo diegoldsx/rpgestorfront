@@ -10,6 +10,7 @@ import { columns } from "./components/data-table/columns";
 import { fakeIncomes } from "@/app/mock/data";
 
 const data = fakeIncomes;
+console.log({ fakeIncomes });
 const IncomePage = () => {
 	return (
 		<Fragment>

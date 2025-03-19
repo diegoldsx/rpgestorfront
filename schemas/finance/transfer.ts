@@ -1,11 +1,11 @@
 import { z } from "zod";
 
 export const TransferSchema = z.object({
-	id: z.number(),
-	origin: z.string(),
-	destination: z.string(),
-	date: z.string(),
-	amount: z.number(),
+	id: z.string().optional(),
+	origin: z.string().min(1, "A origem é obrigatória."),
+	destination: z.string().min(1, "O destino é obrigatório."),
+	date: z.string().min(1, "A data é obrigatória."),
+	amount: z.string().min(1, "O valor é obrigatório."),
 });
 
-export type Transfer = z.infer<typeof TransferSchema>;
+export type TransferSchemaType = z.infer<typeof TransferSchema>;
