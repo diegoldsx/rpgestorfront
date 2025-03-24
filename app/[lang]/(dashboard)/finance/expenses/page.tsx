@@ -6,17 +6,17 @@ import { HeadingPages } from "@/components/common/heading/heading-pages";
 import { columns } from "./columns";
 import { DataTable } from "@/components/common/data-table/data-table";
 import { FAKE_DATA } from "@/data/expensesData";
-import { expenseFacetedFilters, expenseVisibilityState } from "./columnConfig";
+import { expenseFacetedFilters, expenseVisibilityState } from "./columnHelper";
 
 const title = "Despesas";
 const breadcrumbs = {
 	title: "Financeiro",
-	href: "/financial",
+	href: "/finance",
 };
 const actions = {
 	secondary: {
 		text: "Cadastrar nova despesa",
-		href: "/financial/expenses/form",
+		href: "/finance/expenses/details",
 	},
 };
 

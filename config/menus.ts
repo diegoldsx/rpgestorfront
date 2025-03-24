@@ -48,14 +48,14 @@ export const menusConfig = {
 			{
 				title: "Financeiro",
 				icon: DollarSign,
-				href: "/financial/income",
+				href: "/finance/income",
 				child: [
-					{ title: "Receita", href: "/financial/incomes" },
-					{ title: "Despesa", href: "/financial/expenses" },
-					{ title: "Provisionamento", href: "/financial/provisions" },
+					{ title: "Receita", href: "/finance/incomes" },
+					{ title: "Despesa", href: "/finance/expenses" },
+					{ title: "Provisionamento", href: "/finance/provisions" },
 					{ title: "Parcela por Grupo", href: "#" },
-					{ title: "Transferência", href: "/financial/transfers" },
-					{ title: "Remessa", href: "/financial/remittances" },
+					{ title: "Transferência", href: "/finance/transfers" },
+					{ title: "Remessa", href: "/finance/remittances" },
 
 					{ title: "Importar", href: "#" },
 					{ title: "Balancete", href: "#" },
