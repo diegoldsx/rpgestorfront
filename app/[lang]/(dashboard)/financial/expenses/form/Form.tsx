@@ -7,8 +7,8 @@ import Select from "@/components/Select";
 import { useEffect } from "react";
 import { FormFieldComponent } from "@/components/FormFieldComponent";
 import { SubmitButton } from "@/components/SubmitButton";
-import { columnConfig, defaultValues, options } from "../columnConfig";
-import { ExpenseSchemaType, ExpenseSchema } from "@/schemas/finance/expense";
+import { columnConfig, defaultValues } from "../columnConfig";
+import { ExpenseSchemaType, ExpenseSchema } from "@/types/finance/expense";
 
 interface Props {
 	onSubmit: SubmitHandler<ExpenseSchemaType>;

@@ -1,4 +1,19 @@
-import { Home, Users, DollarSign, Calendar, FileText, Clock, Gift, User, Settings, MessageSquare, Vote, Contact, Mail, LayoutDashboard } from "lucide-react";
+import {
+	Home,
+	Users,
+	DollarSign,
+	Calendar,
+	FileText,
+	Clock,
+	Gift,
+	User,
+	Settings,
+	MessageSquare,
+	Vote,
+	Contact,
+	Mail,
+	LayoutDashboard,
+} from "lucide-react";
 
 export const menusConfig = {
 	sidebarNav: {
@@ -35,13 +50,12 @@ export const menusConfig = {
 				icon: DollarSign,
 				href: "/financial/income",
 				child: [
-					{ title: "Receita", href: "/financial/income" },
-					{ title: "Despesa", href: "/financial/expense" },
-					{ title: "Provisionamento", href: "/financial/provision" },
+					{ title: "Receita", href: "/financial/incomes" },
+					{ title: "Despesa", href: "/financial/expenses" },
+					{ title: "Provisionamento", href: "/financial/provisions" },
 					{ title: "Parcela por Grupo", href: "#" },
-					{ title: "Transferência", href: "/financial/transfer" },
-					{ title: "Remessa", href: "/financial/remittance" },
-					{ title: "Retorno", href: "/financial/return" },
+					{ title: "Transferência", href: "/financial/transfers" },
+					{ title: "Remessa", href: "/financial/remittances" },
 
 					{ title: "Importar", href: "#" },
 					{ title: "Balancete", href: "#" },

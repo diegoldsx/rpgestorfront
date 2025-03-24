@@ -1,31 +1,40 @@
-import { useState, useEffect, useCallback } from "react";
+import { useEffect, useState } from "react";
 
-export function useFetchData<T>(url: string, options?: RequestInit) {
+export function useFetchData<T>(
+	id: string | undefined,
+	fetcher: (id: string) => Promise<T> | T
+) {
 	const [data, setData] = useState<T | null>(null);
-	const [loading, setLoading] = useState<boolean>(true);
-	const [error, setError] = useState<string | null>(null);
-
-	const fetchData = useCallback(async () => {
-		setLoading(true);
-		setError(null);
-		try {
-			const response = await fetch(url, options);
-			if (!response.ok)
-				throw new Error(`Erro: ${response.status} - ${response.statusText}`);
-			const result: T = await response.json();
-			setData(result);
-		} catch (err) {
-			setError((err as Error).message);
-		} finally {
-			setLoading(false);
-		}
-	}, [url, options]);
+	const [loading, setLoading] = useState(true);
+	const [error, setError] = useState<unknown>(null);
 
 	useEffect(() => {
-		fetchData();
-	}, [fetchData]);
+		if (!id) {
+			setData(null);
+			setLoading(false);
+			return;
+		}
 
-	const refresh = () => fetchData();
+		let mounted = true;
+		setLoading(true);
 
-	return { data, loading, error, refresh };
+		const load = async () => {
+			try {
+				const result = await Promise.resolve(fetcher(id));
+				if (mounted) setData(result);
+			} catch (err) {
+				if (mounted) setError(err);
+			} finally {
+				if (mounted) setLoading(false);
+			}
+		};
+
+		load();
+
+		return () => {
+			mounted = false;
+		};
+	}, [id]);
+
+	return { data, loading, error };
 }

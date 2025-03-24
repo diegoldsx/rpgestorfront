@@ -3,34 +3,19 @@
 import { ExpensesForm } from "./Form";
 import { SubmitHandler } from "react-hook-form";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { useEffect, useState } from "react";
 import { FAKE_DATA } from "@/data/expensesData";
-import { ExpenseSchemaType } from "@/schemas/finance/expense";
-import { Expense } from "@/types/finance/expense";
+import { ExpenseSchemaType } from "@/types/finance/expense";
+import { useFetchData } from "@/hooks/useFetchData";
+import { PageParams } from "@/types/commons/PageParams";
 
-export default function ExpensesFormPage({
-	searchParams,
-}: {
-	searchParams: { id?: string };
-}) {
+export default function ExpensesFormPage({ searchParams }: PageParams) {
 	const id = searchParams.id;
-	const [data, setData] = useState<ExpenseSchemaType | null>(null);
 
-	useEffect(() => {
-		if (id) {
-			const fetchMessage = async () => {
-				const data: ExpenseSchemaType | undefined = FAKE_DATA.find(
-					(data) => data.id === id
-				);
+	const { data, loading } = useFetchData(id, (id) => {
+		console.log(loading);
+		return FAKE_DATA.find((d) => d.id === id);
+	});
 
-				console.log(data);
-				if (data) {
-					setData(data);
-				}
-			};
-			fetchMessage();
-		}
-	}, [id]);
 	const handleSubmit: SubmitHandler<ExpenseSchemaType> = async (data) => {
 		console.log("Submit", data);
 	};
@@ -40,10 +25,6 @@ export default function ExpensesFormPage({
 			<Card className="max-w-5xl mx-auto p-6 shadow-lg rounded-md bg-white">
 				<CardHeader>
 					<CardTitle className="text-xl font-semibold">
-						<ExpensesForm
-							data={data as ExpenseSchemaType}
-							onSubmit={handleSubmit}
-						/>
 						{data ? "Editar despesa" : "Criar Despesa"}
 					</CardTitle>
 				</CardHeader>

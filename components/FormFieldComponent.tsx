@@ -28,7 +28,7 @@ export const FormFieldComponent: React.FC<FormFieldComponentProps> = ({
 	type = "text",
 	children,
 }) => {
-	if (["id", "actions"].includes(name)) return;
+	if (["id", "actions"].includes(name)) return null;
 	return (
 		<FormField name={name}>
 			<FormLabel>{label}</FormLabel>

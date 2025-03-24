@@ -6,7 +6,7 @@ import { HeadingPages } from "@/components/common/heading/heading-pages";
 import { columns } from "./columns";
 import { DataTable } from "@/components/common/data-table/data-table";
 import { FAKE_DATA } from "@/data/expensesData";
-import { facetedFilters, visibilityState } from "./columnConfig";
+import { expenseFacetedFilters, expenseVisibilityState } from "./columnConfig";
 
 const title = "Despesas";
 const breadcrumbs = {
@@ -16,7 +16,7 @@ const breadcrumbs = {
 const actions = {
 	secondary: {
 		text: "Cadastrar nova despesa",
-		href: "/events/expenses/form",
+		href: "/financial/expenses/form",
 	},
 };
 
@@ -31,8 +31,8 @@ export const Page = () => {
 						<DataTable
 							data={FAKE_DATA}
 							columns={columns}
-							facetedFilters={facetedFilters}
-							visibilityState={visibilityState}
+							facetedFilters={expenseFacetedFilters}
+							visibilityState={expenseVisibilityState}
 						/>
 					</CardContent>
 				</Card>
