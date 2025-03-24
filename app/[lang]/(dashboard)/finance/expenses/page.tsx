@@ -3,10 +3,13 @@
 import { Fragment } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { HeadingPages } from "@/components/common/heading/heading-pages";
-import { columns } from "./columns";
+import { columns } from "./components/columns";
 import { DataTable } from "@/components/common/data-table/data-table";
 import { FAKE_DATA } from "@/data/expensesData";
-import { expenseFacetedFilters, expenseVisibilityState } from "./columnHelper";
+import {
+	expenseFacetedFilters,
+	expenseVisibilityState,
+} from "./components/columnHelper";
 
 const title = "Despesas";
 const breadcrumbs = {
