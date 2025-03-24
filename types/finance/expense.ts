@@ -1,4 +1,5 @@
 export type Expense = {
+	id?: string;
 	payer: string; // "Pagador"
 	competenceDate?: string; // "Competência" (optional)
 	dueDate: string; // "Vencimento"

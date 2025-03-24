@@ -1,5 +1,6 @@
 export const FAKE_DATA: any[] = [
 	{
+		id: "1",
 		payer: "Blanche Botsford",
 		competenceDate: "2024-06-07",
 		dueDate: "2025-06-21",
@@ -11,8 +12,7 @@ export const FAKE_DATA: any[] = [
 		tax: true,
 		amount: "9432",
 		description: "Tyrannus sopor carcer sui cornu.",
-		observations:
-			"Considero dolorem templum. Somnus conculco creber acquiro varietas cultellus tardus ambitus. Solutio texo illum claustrum templum nostrum attonbitus.",
+		observations: "Somnus conculco creber.",
 		status: "CANCELLED",
 		paymentDate: "2025-10-28",
 		paymentClearingDate: "2025-04-06",
@@ -35,6 +35,7 @@ export const FAKE_DATA: any[] = [
 		taxCONFINS: "74",
 	},
 	{
+		id: "2",
 		payer: "Kenny Larson",
 		competenceDate: "2024-12-12",
 		dueDate: "2025-08-16",
@@ -46,8 +47,7 @@ export const FAKE_DATA: any[] = [
 		tax: false,
 		amount: "1496",
 		description: "Sollers substantia turpis crux ancilla sui quidem trans.",
-		observations:
-			"Valeo vae corroboro cursim ultra. Anser synagoga acquiro vulgus adeo. Adflicto angelus convoco vergo bellicus adfectus.",
+		observations: "Anser synagoga acquiro.",
 		status: "PENDING",
 		paymentDate: "2026-02-26",
 		paymentClearingDate: "2025-07-17",
@@ -70,6 +70,7 @@ export const FAKE_DATA: any[] = [
 		taxCONFINS: "60",
 	},
 	{
+		id: "3",
 		payer: "Cesar Funk Jr.",
 		competenceDate: "2024-07-21",
 		dueDate: "2025-11-09",
@@ -80,10 +81,8 @@ export const FAKE_DATA: any[] = [
 		account: "BRADESCO",
 		tax: true,
 		amount: "582",
-		description:
-			"Quas patruus amplitudo comminor auditor cotidie vereor tergo confero.",
-		observations:
-			"Cogito depulso audacia comparo trepide admoneo terror combibo perferendis et. Clibanus terebro vetus thymbra coruscus coniecto apostolus ullam commodo. Defaeco sumptus creo vulpes deduco arbustum rem tenax circumvenio patruus.",
+		description: "Quas patruus amplitudo comminor auditor cotidie vereor tergo confero.",
+		observations: "Cogito depulso audacia.",
 		status: "CANCELLED",
 		paymentDate: "2025-07-30",
 		paymentClearingDate: "2025-12-06",
@@ -106,6 +105,7 @@ export const FAKE_DATA: any[] = [
 		taxCONFINS: "15",
 	},
 	{
+		id: "4",
 		payer: "Dr. Leticia Marvin",
 		competenceDate: "2024-07-06",
 		dueDate: "2026-01-24",
@@ -117,8 +117,7 @@ export const FAKE_DATA: any[] = [
 		tax: true,
 		amount: "2838",
 		description: "Saepe cernuus toties comminor amita absum cibo.",
-		observations:
-			"Expedita voluptatibus ventito bardus degusto. Doloribus volutabrum deputo tempus. Esse demulceo averto tristis cohaero.",
+		observations: "Expedita voluptatibus ventito.",
 		status: "PAID",
 		paymentDate: "2025-05-21",
 		paymentClearingDate: "2025-04-30",
@@ -133,8 +132,7 @@ export const FAKE_DATA: any[] = [
 		itemCostCenter: "OUTROS",
 		itemBaseDocument: "188f8631-d90d-45f3-8030-ee1365261c56",
 		itemDueDate: "2025-07-06",
-		itemDescription:
-			"Tabula sum excepturi libero asporto cognomen sulum adduco.",
+		itemDescription: "Tabula sum excepturi libero asporto cognomen sulum adduco.",
 		itemAmount: "498",
 		taxISS: "48",
 		taxCSSL: "49",
@@ -142,6 +140,7 @@ export const FAKE_DATA: any[] = [
 		taxCONFINS: "58",
 	},
 	{
+		id: "5",
 		payer: "Candace Beatty",
 		competenceDate: "2024-09-08",
 		dueDate: "2026-01-28",
@@ -153,8 +152,7 @@ export const FAKE_DATA: any[] = [
 		tax: true,
 		amount: "3662",
 		description: "Molestiae cibus praesentium claudeo beatus.",
-		observations:
-			"Delego hic arbitro derelinquo claustrum eveniet ventito caveo sulum talio. Vere ducimus venustas absconditus depereo terebro confugo tempora. Vergo consuasor addo arguo virtus arbustum argentum tenetur.",
+		observations: "Delego hic arbitro derelinquo.",
 		status: "CANCELLED",
 		paymentDate: "2025-06-30",
 		paymentClearingDate: "2025-06-02",
@@ -177,6 +175,7 @@ export const FAKE_DATA: any[] = [
 		taxCONFINS: "58",
 	},
 	{
+		id: "6",
 		payer: "Bryan O'Kon",
 		competenceDate: "2024-12-08",
 		dueDate: "2026-03-09",
@@ -188,8 +187,7 @@ export const FAKE_DATA: any[] = [
 		tax: false,
 		amount: "8130",
 		description: "Cornu depulso tantillus aeneus solutio certe crebro.",
-		observations:
-			"Cunctatio coniuratio custodia tamdiu spectaculum careo cedo. Repellat rerum nulla rem consequuntur. Aspicio ciminatio volo arx somniculosus a cunabula.",
+		observations: "Cunctatio coniuratio custodia.",
 		status: "CANCELLED",
 		paymentDate: "2025-09-30",
 		paymentClearingDate: "2025-06-11",
@@ -212,6 +210,7 @@ export const FAKE_DATA: any[] = [
 		taxCONFINS: "61",
 	},
 	{
+		id: "7",
 		payer: "Francisco Muller",
 		competenceDate: "2024-10-31",
 		dueDate: "2025-07-09",
@@ -223,8 +222,7 @@ export const FAKE_DATA: any[] = [
 		tax: false,
 		amount: "9271",
 		description: "Cura clarus patior aegrus alioqui spargo blandior volva.",
-		observations:
-			"Vereor tot sollicito. Aliquid demonstro vigor solitudo universe celer teres sit pecto. Ulciscor censura textilis desparatus torqueo cervus adinventitias.",
+		observations: "Vereor tot sollicito.",
 		status: "PENDING",
 		paymentDate: "2026-02-12",
 		paymentClearingDate: "2026-03-10",
@@ -239,8 +237,7 @@ export const FAKE_DATA: any[] = [
 		itemCostCenter: "OUTROS",
 		itemBaseDocument: "eb7fa73f-c5e6-4046-aa43-9ab731ad2cf2",
 		itemDueDate: "2025-05-28",
-		itemDescription:
-			"Audio avaritia celebrer alveus truculenter animi vel valetudo cur.",
+		itemDescription: "Audio avaritia celebrer alveus truculenter animi vel valetudo cur.",
 		itemAmount: "4351",
 		taxISS: "4",
 		taxCSSL: "49",
@@ -248,6 +245,7 @@ export const FAKE_DATA: any[] = [
 		taxCONFINS: "66",
 	},
 	{
+		id: "8",
 		payer: "Wilbert Farrell Jr.",
 		competenceDate: "2024-08-24",
 		dueDate: "2025-11-07",
@@ -258,10 +256,8 @@ export const FAKE_DATA: any[] = [
 		account: "BRADESCO",
 		tax: false,
 		amount: "6048",
-		description:
-			"Calculus aureus crastinus subseco provident ab sapiente quis.",
-		observations:
-			"Aqua comedo torqueo tego succurro unus. Earum stipes volva arceo cum una dens tabernus itaque damno. Tergeo bibo crepusculum quam animadverto tergiversatio capio asperiores.",
+		description: "Calculus aureus crastinus subseco provident ab sapiente quis.",
+		observations: "Aqua comedo torqueo tego.",
 		status: "PENDING",
 		paymentDate: "2025-09-24",
 		paymentClearingDate: "2025-09-12",
