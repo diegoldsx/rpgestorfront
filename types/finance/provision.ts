@@ -1,11 +1,19 @@
 export type Provision = {
-	id: number;
-	ammount: number;
-	description: string;
+	id: string;
+	ammount: string;
 	documentDate?: string;
-	dueDate: string;
+	description: string;
 	observations?: string;
-	type?: string;
-	registeredBy: string;
-	status: string;
 };
+
+import { z } from "zod";
+
+export const ProvisionSchema = z.object({
+	id: z.string(),
+	ammount: z.string().min(1, "O valor é obrigatório."),
+	documentDate: z.string().optional(),
+	description: z.string().min(1, "A descrição é obrigatória."),
+	observations: z.string().optional(),
+});
+
+export type ProvisionSchemaType = z.infer<typeof ProvisionSchema>;

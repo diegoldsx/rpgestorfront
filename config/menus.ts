@@ -53,7 +53,7 @@ export const menusConfig = {
 					{ title: "Receita", href: "/finance/incomes" },
 					{ title: "Despesa", href: "/finance/expenses" },
 					{ title: "Provisionamento", href: "/finance/provisions" },
-					{ title: "Parcela por Grupo", href: "#" },
+					{ title: "Parcela por Grupo", href: "/finance/instalments" },
 					{ title: "Transferência", href: "/finance/transfers" },
 					{ title: "Remessa", href: "/finance/remittances" },
 
