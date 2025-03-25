@@ -55,8 +55,8 @@ export const menusConfig = {
 					{ title: "Provisionamento", href: "/finance/provisions" },
 					{ title: "Parcela por Grupo", href: "/finance/instalments" },
 					{ title: "Transferência", href: "/finance/transfers" },
-					{ title: "Remessa", href: "/finance/remittances" },
-
+					{ title: "Remessa", href: "/finance/connection/remittances" },
+					{ title: "Retornos", href: "/finance/connection/returns" },
 					{ title: "Importar", href: "#" },
 					{ title: "Balancete", href: "#" },
 					{ title: "Fluxo de Caixa", href: "#" },

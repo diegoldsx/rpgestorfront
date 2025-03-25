@@ -1,22 +1,22 @@
 "use client";
 
-import { TransferForm } from "./Form";
+import { FormComponent } from "./Form";
 import { SubmitHandler } from "react-hook-form";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { TransferSchemaType } from "@/types/finance/transfer";
+import { ReturnSchemaType } from "@/types/finance/return";
 import { useFetchData } from "@/hooks/useFetchData";
 import { PageParams } from "@/types/commons/PageParams";
-import { DATA_TRANSFERS } from "@/data/fake";
+import { DATA_RETURNS } from "@/data/fake";
 
 export default function InstallmentFormPage({ searchParams }: PageParams) {
 	const id = searchParams.id;
 
 	const { data, loading } = useFetchData(id, (id) => {
 		console.log(loading);
-		return DATA_TRANSFERS.find((d: any) => d.id === id);
+		return DATA_RETURNS.find((d: any) => d.id === id);
 	});
 
-	const handleSubmit: SubmitHandler<TransferSchemaType> = async (data) => {
+	const handleSubmit: SubmitHandler<ReturnSchemaType> = async (data) => {
 		console.table(data);
 		alert(JSON.stringify(data, null, 4));
 	};
@@ -31,7 +31,7 @@ export default function InstallmentFormPage({ searchParams }: PageParams) {
 				</CardHeader>
 
 				<CardContent>
-					<TransferForm onSubmit={handleSubmit} data={data || undefined} />
+					<FormComponent onSubmit={handleSubmit} data={data || undefined} />
 				</CardContent>
 			</Card>
 		</div>

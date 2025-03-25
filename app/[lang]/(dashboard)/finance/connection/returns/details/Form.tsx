@@ -8,16 +8,16 @@ import { useEffect } from "react";
 import { FormFieldComponent } from "@/components/FormFieldComponent";
 import { SubmitButton } from "@/components/SubmitButton";
 import { columnConfig, defaultValues } from "../components/columnHelper";
-import { TransferSchema, TransferSchemaType } from "@/types/finance/transfer";
+import { ReturnSchema, ReturnSchemaType } from "@/types/finance/return";
 
 interface Props {
-	onSubmit: SubmitHandler<TransferSchemaType>;
-	data?: Partial<TransferSchemaType>;
+	onSubmit: SubmitHandler<ReturnSchemaType>;
+	data?: Partial<ReturnSchemaType>;
 }
 
-export function TransferForm({ onSubmit, data }: Props) {
-	const methods = useForm<TransferSchemaType>({
-		resolver: zodResolver(TransferSchema),
+export function FormComponent({ onSubmit, data }: Props) {
+	const methods = useForm<ReturnSchemaType>({
+		resolver: zodResolver(ReturnSchema),
 		defaultValues: data ? { ...defaultValues, ...data } : defaultValues,
 	});
 

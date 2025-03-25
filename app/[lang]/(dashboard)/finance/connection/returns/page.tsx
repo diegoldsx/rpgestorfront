@@ -6,9 +6,9 @@ import { HeadingPages } from "@/components/common/heading/heading-pages";
 import { columns } from "./components/columns";
 import { DataTable } from "@/components/common/data-table/data-table";
 import { facetedFilters, visibilityState } from "./components/columnHelper";
-import { DATA_TRANSFERS } from "@/data/fake";
+import { DATA_RETURNS } from "@/data/fake";
 
-const title = "Gerar Parcela";
+const title = "Retornos";
 const breadcrumbs = {
 	title: "Financeiro",
 	href: "/finance",
@@ -16,7 +16,7 @@ const breadcrumbs = {
 const actions = {
 	secondary: {
 		text: "Cadastrar nova Receita",
-		href: "/finance/transfers/details",
+		href: "/finance/connection/returns/details",
 	},
 };
 
@@ -29,7 +29,7 @@ export const Page = () => {
 				<Card>
 					<CardContent>
 						<DataTable
-							data={DATA_TRANSFERS}
+							data={DATA_RETURNS}
 							columns={columns}
 							facetedFilters={facetedFilters}
 							visibilityState={visibilityState}

@@ -9,7 +9,7 @@ import { useParams } from "next/navigation";
 
 import { Transfer } from "@/types/finance/transfer";
 
-const editUrl = "pt/finance/transfers/details";
+const editUrl = "pt/finance/connection/remittances/details";
 
 export const columns: ColumnDef<Transfer>[] = [
 	...columnConfig.map((field) => ({

@@ -109,3 +109,21 @@ export const DATA_TRANSFERS: any[] = [
 		amount: "610.30",
 	},
 ];
+
+export const DATA_RETURNS: any[] = [
+	{
+		id: "1",
+		account: "cx",
+		filePath: "/uploads/returns/caixa_2024_12_01.txt",
+	},
+	{
+		id: "2",
+		account: "br",
+		filePath: "/uploads/returns/bradesco_2024_12_02.txt",
+	},
+	{
+		id: "3",
+		account: "cx",
+		filePath: "/uploads/returns/caixa_2025_01_10.txt",
+	},
+];

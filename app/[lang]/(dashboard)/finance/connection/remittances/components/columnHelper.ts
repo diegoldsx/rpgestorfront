@@ -1,31 +1,38 @@
 import { VisibilityState } from "@tanstack/react-table";
 import { FieldConfig } from "@/app/types/FieldConfig";
-import { TransferSchemaType } from "@/types/finance/transfer";
+import { RemittanceSchemaType } from "@/types/finance/remittance";
 
-const field = (id: keyof TransferSchemaType, title: string, options?: any) => ({
+const field = (
+	id: keyof RemittanceSchemaType,
+	title: string,
+	options?: any
+) => ({
 	id,
 	title,
 	defaultValue: "",
 	...(options && { options }),
 });
 
-export const columnConfig: FieldConfig<TransferSchemaType>[] = [
+export const columnConfig: FieldConfig<RemittanceSchemaType>[] = [
 	field("id", "ID"),
-	field("destination", "Grupo", [
+	field("bank", "Banco", [
 		{ value: "caixa", label: "Caixa" },
 		{ value: "bradesco", label: "Bradesco" },
 	]),
-	field("origin", "Origem", [
-		{ value: "caixa", label: "Caixa" },
-		{ value: "bradesco", label: "Bradesco" },
+	field("search", "Busca"),
+	field("searchFor", "Busca por"),
+	field("dueDate", "Vencimento"),
+	field("finalDate", "Final"),
+	field("dateType", "Tipo"),
+	field("type", "Tipo", [
+		{ value: "all", label: "Todos" },
+		{ value: "other", label: "Outros" },
 	]),
-	field("date", "Data"),
-	field("amount", "Quantia"),
 ];
 
 export const defaultValues = Object.fromEntries(
 	columnConfig.map(({ id, defaultValue }) => [id, defaultValue])
-) as Partial<TransferSchemaType>;
+) as Partial<RemittanceSchemaType>;
 
 export const facetedFilters = columnConfig.filter((f) => !!f.options);
 
