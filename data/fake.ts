@@ -36,3 +36,76 @@ export const INSTALMENT_DATA: any[] = [
 		invoiceInstruction: "invoice instructions",
 	},
 ];
+
+export const DATA_TRANSFERS: any[] = [
+	{
+		id: "1",
+		origin: "caixa",
+		destination: "bradesco",
+		date: "2025-03-20",
+		amount: "150.75",
+	},
+	{
+		id: "2",
+		origin: "bradesco",
+		destination: "caixa",
+		date: "2025-03-15",
+		amount: "50.00",
+	},
+	{
+		id: "3",
+		origin: "caixa",
+		destination: "bradesco",
+		date: "2025-03-22",
+		amount: "230.50",
+	},
+	{
+		id: "4",
+		origin: "caixa",
+		destination: "bradesco",
+		date: "2025-03-10",
+		amount: "88.99",
+	},
+	{
+		id: "5",
+		origin: "caixa",
+		destination: "bradesco",
+		date: "2025-03-24",
+		amount: "1200.00",
+	},
+	{
+		id: "6",
+		origin: "caixa",
+		destination: "bradesco",
+		date: "2025-03-18",
+		amount: "34.20",
+	},
+	{
+		id: "7",
+		origin: "caixa",
+		destination: "bradesco",
+		date: "2025-03-12",
+		amount: "456.78",
+	},
+	{
+		id: "8",
+		origin: "caixa",
+		destination: "bradesco",
+		date: "2025-03-23",
+		amount: "75.00",
+	},
+	{
+		id: "9",
+		origin: "caixa",
+		destination: "bradesco",
+		date: "2025-03-17",
+		amount: "92.15",
+	},
+	{
+		id: "20",
+		origin: "caixa",
+		destination: "bradesco",
+		date: "2025-03-25",
+		amount: "610.30",
+	},
+];
