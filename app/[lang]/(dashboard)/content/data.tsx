@@ -1,4 +1,11 @@
-import { words, arrayElement as arr, date, sentence, boolean, int } from "@/app/mock/faker";
+import {
+	words,
+	arrayElement as arr,
+	date,
+	sentence,
+	boolean,
+	int,
+} from "@/app/mock/faker";
 import { Content } from "./Content";
 
 export const FAKE_DATA: Content[] = Array.from({ length: 30 }, () => ({
@@ -14,3 +21,5 @@ export const FAKE_DATA: Content[] = Array.from({ length: 30 }, () => ({
 	customHtml: "<html>Customizado</html>",
 	responsible: arr(["user1", "user2"]),
 }));
+
+console.log("Content", FAKE_DATA);

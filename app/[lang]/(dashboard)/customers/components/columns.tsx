@@ -2,17 +2,16 @@
 import { ColumnDef } from "@tanstack/react-table";
 import { exactFilter } from "@/components/common/data-table/columnUtils";
 import Cell from "@/app/types/Cell";
-import { columnConfig } from "./columnConfig";
-import { Badge } from "@/components/ui/badge";
-import { BadgeStatus, getBadgeStatus } from "@/components/badge/badgeStatus";
+import { columnConfig } from "./columnHelper";
 import Link from "next/link";
 import { Icon } from "@iconify/react";
 import { useParams } from "next/navigation";
-import { Assembly } from "@/types/assembly/assembly";
 
-const editUrl = "assemblies/form";
+import { Customer } from "@/types/customer/customer";
 
-export const columns: ColumnDef<Assembly>[] = [
+const editUrl = "pt/customers/details";
+
+export const columns: ColumnDef<Customer>[] = [
 	...columnConfig.map((field) => ({
 		id: field.id,
 		accessorKey: field.id,
@@ -20,17 +19,6 @@ export const columns: ColumnDef<Assembly>[] = [
 		filterFn: exactFilter,
 		cell: (info: any) => {
 			const value = info.getValue() as string;
-
-			if (field.id === "status" && field.options) {
-				const option = field.options.find((option) => option.value === value);
-				const badgeStyle = getBadgeStatus(option?.value as BadgeStatus);
-
-				return (
-					<Cell>
-						<Badge color={badgeStyle}>{option?.label}</Badge>
-					</Cell>
-				);
-			}
 
 			if (field.options) {
 				const option = field.options.find((option) => option.value === value);

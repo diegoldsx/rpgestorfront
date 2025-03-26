@@ -6,7 +6,8 @@ export const FAKE_DATA: any[] = [
 		startDate: "2025-06-11",
 		endDate: "2026-02-28",
 		resultDate: "2024-07-01",
-		description: "Carbo aequitas dapifer templum arceo sumptus uter capto solum caterva.",
+		description:
+			"Carbo aequitas dapifer templum arceo sumptus uter capto solum caterva.",
 		type: "multipla",
 		allowChangeVote: false,
 		displayMode: "assembleia",
@@ -19,7 +20,8 @@ export const FAKE_DATA: any[] = [
 		startDate: "2025-03-06",
 		endDate: "2024-11-14",
 		resultDate: "2024-09-29",
-		description: "Voveo caste tristis hic votum quae aegre celebrer autem benigne.",
+		description:
+			"Voveo caste tristis hic votum quae aegre celebrer autem benigne.",
 		type: "multipla",
 		allowChangeVote: false,
 		displayMode: "assembleia",
@@ -84,7 +86,8 @@ export const FAKE_DATA: any[] = [
 		startDate: "2026-03-07",
 		endDate: "2024-11-12",
 		resultDate: "2026-02-28",
-		description: "Degenero vulgus pauper benigne eaque sonitus confugo tam amicitia strenuus.",
+		description:
+			"Degenero vulgus pauper benigne eaque sonitus confugo tam amicitia strenuus.",
 		type: "unica",
 		allowChangeVote: true,
 		displayMode: "padrao",
@@ -123,7 +126,8 @@ export const FAKE_DATA: any[] = [
 		startDate: "2025-06-11",
 		endDate: "2024-10-25",
 		resultDate: "2025-05-18",
-		description: "Adipiscor coerceo admiratio conforto casus anser ullus dedico aestas eius.",
+		description:
+			"Adipiscor coerceo admiratio conforto casus anser ullus dedico aestas eius.",
 		type: "unica",
 		allowChangeVote: false,
 		displayMode: "assembleia",
@@ -136,7 +140,8 @@ export const FAKE_DATA: any[] = [
 		startDate: "2024-09-27",
 		endDate: "2025-05-07",
 		resultDate: "2024-12-15",
-		description: "Administratio defaeco annus admoneo absorbeo appono asporto synagoga sulum assumenda.",
+		description:
+			"Administratio defaeco annus admoneo absorbeo appono asporto synagoga sulum assumenda.",
 		type: "unica",
 		allowChangeVote: false,
 		displayMode: "padrao",
@@ -195,3 +200,4 @@ export const FAKE_DATA: any[] = [
 		videoConference: false,
 	},
 ];
+console.log("assembly", FAKE_DATA);

@@ -1,0 +1,3 @@
+Utilize como referência o componente de assemblies
+Utilize a pasta @/types como referência para localizar os tipos
+O Type deve ser o type e um schema zod, assim como um schemaType

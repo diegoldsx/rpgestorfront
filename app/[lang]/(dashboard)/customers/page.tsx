@@ -3,33 +3,37 @@
 import { Fragment } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { HeadingPages } from "@/components/common/heading/heading-pages";
-import { fakeData } from "./data";
-import { CustomersDataTable } from "./components/data-table/customer-data-table";
-import MembersStats from "../members/components/members-stats";
+import { columns } from "./components/columns";
+import { DataTable } from "@/components/common/data-table/data-table";
+import { facetedFilters, visibilityState } from "./components/columnHelper";
+import { CUSTOMER_DATA } from "@/types/customer/customer";
 
-const data = fakeData();
+const title = "Cliente";
+const breadcrumbs = {
+	title: "Financeiro",
+	href: "/finance",
+};
+const actions = {
+	secondary: {
+		text: "Cadastrar nova Cliente",
+		href: "/customers/details",
+	},
+};
 
-const CustomerPage = () => {
+export const Page = () => {
 	return (
 		<Fragment>
-			<HeadingPages
-				title="Clientes"
-				breadcrumbs={{ title: "Clientes", href: "/customers" }}
-				actions={{
-					primary: { text: "Importar", href: "/customers/import" },
-					secondary: { text: "Cadastrar cliente", href: "/customers/create" },
-				}}
-			/>
+			<HeadingPages title={title} breadcrumbs={breadcrumbs} actions={actions} />
 
-			<div className="flex flex-col gap-4">
-				<Card className="">
-					<CardContent className="p-1">
-						<MembersStats />
-					</CardContent>
-				</Card>
+			<div className="mt-3 space-y-6">
 				<Card>
 					<CardContent>
-						<CustomersDataTable data={data} />
+						<DataTable
+							data={CUSTOMER_DATA}
+							columns={columns}
+							facetedFilters={facetedFilters}
+							visibilityState={visibilityState}
+						/>
 					</CardContent>
 				</Card>
 			</div>
@@ -37,4 +41,4 @@ const CustomerPage = () => {
 	);
 };
 
-export default CustomerPage;
+export default Page;
