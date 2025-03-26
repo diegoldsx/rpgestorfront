@@ -1,3 +1,3 @@
-Utilize como referência o componente de assemblies
+Utilize como referência o componente de member, quando for fazer cópias de componentes
 Utilize a pasta @/types como referência para localizar os tipos
-O Type deve ser o type e um schema zod, assim como um schemaType
+O Type deve ser o type e um schema zod, assim como um schemaType e mock com 5 exemplos básicos

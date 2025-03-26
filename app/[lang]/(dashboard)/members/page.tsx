@@ -1,35 +1,47 @@
 "use client";
 
 import { Fragment } from "react";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import MembersStats from "./components/members-stats";
-import MembersListTable from "./components/members-list-table";
+import { Card, CardContent } from "@/components/ui/card";
 import { HeadingPages } from "@/components/common/heading/heading-pages";
-import { Checkbox } from "@/components/ui/checkbox";
-const MembersPage = () => {
+import { columns } from "./components/columns";
+import { DataTable } from "@/components/common/data-table/data-table";
+import {
+	memberFacetedFilters,
+	memberVisibilityState,
+} from "./components/columnHelper";
+import { FAKE_MEMBERS } from "@/types/member/data";
+
+const title = "Members";
+const breadcrumbs = {
+	title: "Finance",
+	href: "/members",
+};
+const actions = {
+	secondary: {
+		text: "Criar novo Associado",
+		href: "/members/details",
+	},
+};
+
+export const Page = () => {
 	return (
 		<Fragment>
-			<HeadingPages
-				title="Associados"
-				breadcrumbs={{ title: "Associados", href: "/members" }}
-				actions={{
-					primary: { text: "Importar", href: "/members/import" },
-					secondary: { text: "Cadastrar Associado", href: "/members/register" },
-				}}
-			/>
+			<HeadingPages title={title} breadcrumbs={breadcrumbs} actions={actions} />
 
-			<Card className="">
-				<CardContent className="p-1">
-					<MembersStats />
-				</CardContent>
-			</Card>
-			<Card className="mt-6">
-				<CardContent className="p-0">
-					<MembersListTable />
-				</CardContent>
-			</Card>
+			<div className="mt-3 space-y-6">
+				<Card>
+					<CardContent>
+						<DataTable
+							data={FAKE_MEMBERS}
+							columns={columns}
+							facetedFilters={memberFacetedFilters}
+							visibilityState={memberVisibilityState}
+						/>
+					</CardContent>
+				</Card>
+			</div>
 		</Fragment>
 	);
 };
 
-export default MembersPage;
+export default Page;
