@@ -1,6 +1,6 @@
 "use client";
 
-import { ServiceDeskForm } from "../components/Form";
+import { ServiceDeskForm } from "../components/form";
 import { SubmitHandler } from "react-hook-form";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 

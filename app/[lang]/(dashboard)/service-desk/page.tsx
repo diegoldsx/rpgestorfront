@@ -3,18 +3,18 @@
 import { Fragment } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { HeadingPages } from "@/components/common/heading/heading-pages";
-import { columns } from "./components/datatable/columns";
+import { columns } from "./components/columns";
 import { DataTable } from "@/components/common/data-table/data-table";
 import {
 	getFieldsWithOptions,
 	getVisibilityState,
-} from "./components/form/fieldsMetadata";
+} from "./types/fieldsMetadata";
 import { SERVICE_DESK_DATA } from "./types/data";
 
 const serviceFieldsWithOptions = getFieldsWithOptions();
 const serviceDeskVisibilityState = getVisibilityState();
 
-const title = "Assemblies";
+const title = "Atendimento";
 const breadcrumbs = {
 	title: "Atendimento",
 	href: "/service-desk",
