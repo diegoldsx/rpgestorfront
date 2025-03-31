@@ -66,11 +66,8 @@ export const menusConfig = {
 			{
 				title: "Atendimento",
 				icon: MessageSquare,
-				child: [
-					{ title: "Agendamento", href: "#" },
-					{ title: "Eventos", href: "#" },
-					{ title: "Local", href: "#" },
-				],
+
+				child: [{ title: "Agendamento", href: "/service-desk" }],
 			},
 			{
 				title: "Eventos",

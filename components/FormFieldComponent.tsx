@@ -1,4 +1,4 @@
-import React from "react";
+import React, { ReactNode } from "react";
 import { Controller } from "react-hook-form";
 import {
 	FormField,
@@ -7,7 +7,6 @@ import {
 	FormMessage,
 } from "@radix-ui/react-form";
 import { Input } from "@/components/ui/input";
-import { ReactNode } from "react";
 
 interface FormFieldComponentProps {
 	name: string;
@@ -29,6 +28,7 @@ export const FormFieldComponent: React.FC<FormFieldComponentProps> = ({
 	children,
 }) => {
 	if (["id", "actions"].includes(name)) return null;
+
 	return (
 		<FormField name={name}>
 			<FormLabel>{label}</FormLabel>
