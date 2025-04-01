@@ -1,7 +1,7 @@
 "use client";
 import { ColumnDef } from "@tanstack/react-table";
 import { exactFilter } from "@/components/common/data-table/columnUtils";
-import Cell from "@/app/types/Cell";
+import Cell from "@/components/data-table/Cell";
 import { columnFields } from "./columnConfig";
 import { Badge } from "@/components/ui/badge";
 import { BadgeStatus, getBadgeStatus } from "@/components/badge/badgeStatus";

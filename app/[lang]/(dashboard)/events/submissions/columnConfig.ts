@@ -83,7 +83,7 @@ export const columnConfig: FieldConfig<Submission>[] = (
 export const defaultValues: Partial<SubmissionSchemaType> = columnConfig.reduce(
 	(acc, field) => {
 		acc[field.id] =
-			field.type === "number"
+			field.type === "text"
 				? String(field.defaultValue) // Converte números para string
 				: field.defaultValue;
 

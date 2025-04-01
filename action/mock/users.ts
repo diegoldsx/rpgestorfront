@@ -1,5 +1,4 @@
-import { User } from "@/app/[lang]/(dashboard)/users/lib/types/user";
-import { UserSchemaType } from "@/app/[lang]/(dashboard)/users/lib/validation/userSchema";
+import { User , UserSchemaType} from "@/types/user/user";
 import { faker } from "@faker-js/faker";
 // export const FAKE_USERS: UserSchemaType[] = Array.from({ length: 30 }, (_, index) => ({
 // 	id: String(index + 1),

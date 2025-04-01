@@ -1,20 +1,27 @@
 "use client";
 
-import { useForm, SubmitHandler, FormProvider, Controller } from "react-hook-form";
+import {
+	useForm,
+	SubmitHandler,
+	FormProvider,
+	Controller,
+} from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Form, FormField, FormLabel, FormControl, FormMessage } from "@radix-ui/react-form";
+import { Form } from "@radix-ui/react-form";
 import { z } from "zod";
-import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
+
 import Select from "@/components/Select";
-import { userOptions } from "../utils/columnConfig";
 import { useEffect } from "react";
-import { FaSpinner } from "react-icons/fa";
 import { userSchema } from "@/schemas/users/user";
 import { FormFieldComponent } from "@/components/FormFieldComponent";
 import { SubmitButton } from "@/components/SubmitButton";
+import { columnFields } from "../utils/columnConfig";
 
 type UserSchemaType = z.infer<typeof userSchema>;
+
+const statusOptions = columnFields
+	.filter((f) => f.options)
+	.find(({ id }) => id === "status")?.options;
 
 interface UserFormProps {
 	onSubmit: SubmitHandler<UserSchemaType>;
@@ -65,14 +72,39 @@ export function UserForm({ onSubmit, user }: UserFormProps) {
 				}}
 				className="grid grid-cols-1 md:grid-cols-2 gap-4"
 			>
-				<FormFieldComponent name="name" label="Nome" control={control} errors={errors} placeholder="Digite seu nome" />
+				<FormFieldComponent
+					name="name"
+					label="Nome"
+					control={control}
+					errors={errors}
+					placeholder="Digite seu nome"
+				/>
 
-				<FormFieldComponent name="email" label="Email" control={control} errors={errors} placeholder="Digite seu email" type="email" />
+				<FormFieldComponent
+					name="email"
+					label="Email"
+					control={control}
+					errors={errors}
+					placeholder="Digite seu email"
+					type="email"
+				/>
 
-				<FormFieldComponent name="username" label="Nome de Usuário" control={control} errors={errors} placeholder="Digite seu username" />
+				<FormFieldComponent
+					name="username"
+					label="Nome de Usuário"
+					control={control}
+					errors={errors}
+					placeholder="Digite seu username"
+				/>
 
-				<FormFieldComponent name="status" label="Status" control={control} errors={errors} placeholder="Selecione o status">
-					<Select options={userOptions.status} />
+				<FormFieldComponent
+					name="status"
+					label="Status"
+					control={control}
+					errors={errors}
+					placeholder="Selecione o status"
+				>
+					<Select options={statusOptions || []} />
 				</FormFieldComponent>
 
 				<FormFieldComponent

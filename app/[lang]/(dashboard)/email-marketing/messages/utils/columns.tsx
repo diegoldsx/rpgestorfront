@@ -22,23 +22,13 @@ export const columns: ColumnDef<Message>[] = [
 		cell: (info: any) => {
 			const value = info.getValue() as string;
 
-			if (field.id === "status" && field.options) {
+			if (field.options) {
 				const option = field.options.find((option) => option.value === value);
 				const badgeStyle = getBadgeStatus(option?.value as BadgeStatus);
 
 				return (
 					<Cell>
 						<Badge color={badgeStyle}>{option?.label}</Badge>
-					</Cell>
-				);
-			}
-
-			if (field.options) {
-				const option = field.options.find((option) => option.value === value);
-
-				return (
-					<Cell>
-						<span>{option?.label}</span>
 					</Cell>
 				);
 			}

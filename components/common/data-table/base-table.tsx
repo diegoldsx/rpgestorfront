@@ -26,7 +26,7 @@ import {
 	TableRow,
 } from "@/components/ui/table";
 
-import { BaseToolbar } from "./table-toolbar";
+import { DataTableToolbar } from "./table-toolbar";
 import { BasePagination } from "./table-pagination";
 
 interface BaseTableProps<TData> {
@@ -84,7 +84,7 @@ export function BaseTable<TData>({
 		<div>
 			<div className="p-6">
 				{toolbar || (
-					<BaseToolbar
+					<DataTableToolbar
 						table={table}
 						filterComponent={filterComponent}
 						actions={toolbarActions}

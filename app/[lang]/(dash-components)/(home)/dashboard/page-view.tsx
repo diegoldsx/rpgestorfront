@@ -1,19 +1,15 @@
-'use client';
+"use client";
 
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import ReportsSnapshot from './components/reports-snapshot';
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import ReportsSnapshot from "./components/reports-snapshot";
 
-import UserStats from './components/user-stats-chart';
-import AssociadosStat from './components/associados-stat';
-import ReportsArea from './components/reports-area';
-import DashboardSelect from '@/components/dasboard-select';
+import UserStats from "./components/user-stats-chart";
+import AssociadosStat from "./components/associados-stat";
+import ReportsArea from "./components/reports-area";
 
-import DatePickerWithRange from '@/components/date-picker-with-range';
-import TipoAssociadoReport from './components/tipo-associado-report';
-import UltimosEventos from './components/ultimos-eventos';
-import UltimosComunicados from './components/ultimos-comunicados';
-import AssociadosMap from './components/associados-map';
-import CountryMap from './components/country-map';
+import TipoAssociadoReport from "./components/tipo-associado-report";
+import UltimosEventos from "./components/ultimos-eventos";
+import UltimosComunicados from "./components/ultimos-comunicados";
 
 interface DashboardPageViewProps {
 	trans: {
@@ -23,7 +19,7 @@ interface DashboardPageViewProps {
 
 const DashboardPageView = ({ trans }: DashboardPageViewProps) => {
 	return (
-		<div className='space-y-6'>
+		<div className="space-y-6">
 			{/* <div className='flex items-center flex-wrap justify-between gap-4'>
 				<div className='text-2xl font-medium text-default-800 '>
 					RPGestor {trans?.dashboard}
@@ -32,23 +28,23 @@ const DashboardPageView = ({ trans }: DashboardPageViewProps) => {
 			</div> */}
 
 			{/* Área de métricas principais */}
-			<div className='grid grid-cols-12 gap-6'>
-				<div className='col-span-12 lg:col-span-8'>
+			<div className="grid grid-cols-12 gap-6">
+				<div className="col-span-12 lg:col-span-8">
 					<ReportsSnapshot /> {/* Adaptado para mostrar receitas x despesas */}
 				</div>
-				<div className='col-span-12 lg:col-span-4'>
+				<div className="col-span-12 lg:col-span-4">
 					<AssociadosStat /> {/* Métricas de associados */}
 				</div>
 			</div>
 
 			{/* Métricas secundárias */}
-			<div className='grid grid-cols-1 lg:grid-cols-3 gap-6'>
-				<div className='grid grid-cols-1 sm:grid-cols-2 gap-4'>
+			<div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+				<div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
 					<ReportsArea /> {/* Indicadores financeiros */}
 				</div>
 				<Card>
-					<CardHeader className='border-none p-6 pt-5 mb-0'>
-						<CardTitle className='text-lg font-semibold text-default-900 p-0'>
+					<CardHeader className="border-none p-6 pt-5 mb-0">
+						<CardTitle className="text-lg font-semibold text-default-900 p-0">
 							Status dos Associados
 						</CardTitle>
 					</CardHeader>
@@ -57,13 +53,13 @@ const DashboardPageView = ({ trans }: DashboardPageViewProps) => {
 					</CardContent>
 				</Card>
 				<Card>
-					<CardHeader className='border-none p-6 pt-5 mb-0'>
-						<CardTitle className='text-lg font-semibold text-default-900 p-0'>
+					<CardHeader className="border-none p-6 pt-5 mb-0">
+						<CardTitle className="text-lg font-semibold text-default-900 p-0">
 							Tipos de Associado
 						</CardTitle>
 					</CardHeader>
 					<CardContent>
-						<div className='dashtail-legend'>
+						<div className="dashtail-legend">
 							<TipoAssociadoReport />
 						</div>
 					</CardContent>
@@ -90,16 +86,16 @@ const DashboardPageView = ({ trans }: DashboardPageViewProps) => {
 			</div> */}
 
 			{/* Últimas atividades */}
-			<div className='grid grid-cols-12 gap-6'>
-				<div className='col-span-12 lg:col-span-4'>
+			<div className="grid grid-cols-12 gap-6">
+				<div className="col-span-12 lg:col-span-4">
 					<UltimosEventos />
 				</div>
-				<div className='col-span-12 lg:col-span-8'>
+				<div className="col-span-12 lg:col-span-8">
 					<Card>
-						<CardHeader className='border-none pb-0'>
-							<CardTitle className='pt-2.5'>Últimos Comunicados</CardTitle>
+						<CardHeader className="border-none pb-0">
+							<CardTitle className="pt-2.5">Últimos Comunicados</CardTitle>
 						</CardHeader>
-						<CardContent className='px-0'>
+						<CardContent className="px-0">
 							<UltimosComunicados />
 						</CardContent>
 					</Card>

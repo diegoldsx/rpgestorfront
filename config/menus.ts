@@ -15,7 +15,7 @@ import {
 	LayoutDashboard,
 } from "lucide-react";
 
-export const menusConfig = {
+export const menusConfig: any = {
 	sidebarNav: {
 		classic: [
 			{

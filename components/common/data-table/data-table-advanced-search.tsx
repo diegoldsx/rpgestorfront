@@ -15,9 +15,7 @@ export const DataTableAdvancedSearch = <TData,>({ table }: Props<TData>) => {
 		Record<string, string>
 	>({});
 
-	const filterableColumns = table
-		.getAllColumns()
-		.filter((col) => col.columnDef?.meta?.type === "text");
+	const filterableColumns = table.getAllColumns();
 
 	if (!filterableColumns.length) return;
 

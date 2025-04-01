@@ -14,11 +14,16 @@ export const columnFields: FieldConfig<User>[] = [
 		id: "status",
 		type: "select",
 		title: "Situação",
-		options: userOptions.status,
+		options: [...userOptions.status],
 	},
 ];
 
 export const facetedFilters = columnFields.filter(({ options }) => !!options);
 
 const visibleColumns: ReadonlyArray<string> = ["*"];
-export const visibilityState: VisibilityState = Object.fromEntries(columnFields.map(({ id }) => [id, ["*"].includes(id) || visibleColumns[0] === "*"]));
+export const visibilityState: VisibilityState = Object.fromEntries(
+	columnFields.map(({ id }) => [
+		id,
+		["*"].includes(id) || visibleColumns[0] === "*",
+	])
+);

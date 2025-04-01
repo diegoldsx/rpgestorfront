@@ -9,11 +9,11 @@ import Link from "next/link";
 import { Icon } from "@iconify/react";
 import { useParams } from "next/navigation";
 
-import { Installment } from "@/types/finance/installment";
+import { Instalment } from "@/types/finance/instalment";
 
 const editUrl = "pt/finance/installments/details";
 
-export const columns: ColumnDef<Installment>[] = [
+export const columns: ColumnDef<Instalment>[] = [
 	...columnConfig.map((field) => ({
 		id: field.id,
 		accessorKey: field.id,

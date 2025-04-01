@@ -1,10 +1,10 @@
-'use client';
+"use client";
 
-import dynamic from 'next/dynamic';
-const Chart = dynamic(() => import('react-apexcharts'), { ssr: false });
-import { useThemeStore } from '@/store';
-import { useTheme } from 'next-themes';
-import { themes } from '@/config/thems';
+import dynamic from "next/dynamic";
+const Chart = dynamic(() => import("react-apexcharts"), { ssr: false });
+import { useThemeStore } from "@/store";
+import { useTheme } from "next-themes";
+import { themes } from "@/config/thems";
 
 const UserStats = ({ height = 250 }) => {
 	const { theme: config, setTheme: setConfig, isRtl } = useThemeStore();
@@ -18,20 +18,20 @@ const UserStats = ({ height = 250 }) => {
 				show: false,
 			},
 		},
-		labels: ['Ativos', 'Pendentes', 'Inadimplentes'],
+		labels: ["Ativos", "Pendentes", "Inadimplentes"],
 		dataLabels: {
 			enabled: false,
 		},
 		colors: [
-			`hsl(${theme?.cssVars[mode === 'dark' ? 'dark' : 'light'].success})`, // Verde para ativos
-			`hsl(${theme?.cssVars[mode === 'dark' ? 'dark' : 'light'].warning})`, // Laranja para pendentes
-			`hsl(${theme?.cssVars[mode === 'dark' ? 'dark' : 'light'].destructive})`, // Vermelho para inadimplentes
+			`hsl(${theme?.cssVars[mode === "dark" ? "dark" : "light"].success})`, // Verde para ativos
+			`hsl(${theme?.cssVars[mode === "dark" ? "dark" : "light"].warning})`, // Laranja para pendentes
+			`hsl(${theme?.cssVars[mode === "dark" ? "dark" : "light"].destructive})`, // Vermelho para inadimplentes
 		],
 		tooltip: {
-			theme: mode === 'dark' ? 'dark' : 'light',
+			theme: mode === "dark" ? "dark" : "light",
 			y: {
-				formatter: function (value) {
-					return value + ' associados';
+				formatter: function (value: number) {
+					return value + " associados";
 				},
 			},
 		},
@@ -45,52 +45,46 @@ const UserStats = ({ height = 250 }) => {
 						show: true,
 						name: {
 							show: true,
-							fontSize: '14px',
+							fontSize: "14px",
 							fontWeight: 600,
 							color: `hsl(${
 								theme?.cssVars[
-									mode === 'dark' || mode === 'system' ? 'dark' : 'light'
+									mode === "dark" || mode === "system" ? "dark" : "light"
 								].chartLabel
 							})`,
 						},
 						value: {
 							show: true,
-							label: 'Associados',
-							fontSize: '14px',
+							label: "Associados",
+							fontSize: "14px",
 							fontWeight: 600,
 							color: `hsl(${
 								theme?.cssVars[
-									mode === 'dark' || mode === 'system' ? 'dark' : 'light'
+									mode === "dark" || mode === "system" ? "dark" : "light"
 								].chartLabel
 							})`,
 						},
 						total: {
 							show: true,
-							label: 'Total Geral',
-							fontSize: '16px',
+							label: "Total Geral",
+							fontSize: "16px",
 							fontWeight: 600,
 							color: `hsl(${
 								theme?.cssVars[
-									mode === 'dark' || mode === 'system' ? 'dark' : 'light'
+									mode === "dark" || mode === "system" ? "dark" : "light"
 								].chartLabel
 							})`,
-							formatter: function (w) {
-								return (
-									w.globals.seriesTotals.reduce((a, b) => a + b, 0) +
-									' associados'
-								);
-							},
 						},
 					},
 				},
 			},
 		},
 		legend: {
-			position: 'bottom',
+			position: "bottom",
 			labels: {
 				colors: `hsl(${
 					theme?.cssVars[
-						mode === 'dark' || mode === 'system' ? 'dark' : 'light'
+						mode === "dark" || mode === "system" ? "dark" : "light"
 					].chartLabel
 				})`,
 			},
@@ -104,9 +98,6 @@ const UserStats = ({ height = 250 }) => {
 				radius: 10,
 				offsetX: isRtl ? 5 : -5,
 			},
-			formatter: function (seriesName, opts) {
-				return [seriesName, ' - ', opts.w.globals.series[opts.seriesIndex]];
-			},
 		},
 		responsive: [
 			{
@@ -116,7 +107,7 @@ const UserStats = ({ height = 250 }) => {
 						height: 200,
 					},
 					legend: {
-						position: 'bottom',
+						position: "bottom",
 						offsetY: 0,
 					},
 				},
@@ -134,9 +125,9 @@ const UserStats = ({ height = 250 }) => {
 		<Chart
 			options={options}
 			series={series}
-			type='donut'
+			type="donut"
 			height={height}
-			width={'100%'}
+			width={"100%"}
 		/>
 	);
 };

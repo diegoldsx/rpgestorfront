@@ -25,7 +25,6 @@ import FacetedFilters from "./faceted-filters";
 import DataTableHeader from "./data-table-header";
 import { TableDataExporter } from "./table-data-exporter";
 import { DataTableAdvancedSearch } from "./data-table-advanced-search";
-import { DataTableRowActions } from "./table-row-actions";
 
 export type FacetedFilter = {
 	id: string;
@@ -57,8 +56,11 @@ export function DataTable<TData>({
 	sortBy = [],
 }: DataTableProps<TData>) {
 	const [rowSelection, setRowSelection] = React.useState<RowSelectionState>({});
-	const [columnVisibility, setColumnVisibility] = React.useState<VisibilityState>(visibilityState);
-	const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>([]);
+	const [columnVisibility, setColumnVisibility] =
+		React.useState<VisibilityState>(visibilityState);
+	const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
+		[]
+	);
 	const [sorting, setSorting] = React.useState<SortingState>(sortBy);
 
 	const table = useReactTable({
@@ -110,17 +112,30 @@ export function DataTable<TData>({
 					<TableBody>
 						{table.getRowModel().rows?.length ? (
 							table.getRowModel().rows.map((row) => (
-								<TableRow key={row.id} data-state={row.getIsSelected() && "selected"} className="hover:bg-default-50">
+								<TableRow
+									key={row.id}
+									data-state={row.getIsSelected() && "selected"}
+									className="hover:bg-default-50"
+								>
 									{row.getVisibleCells().map((cell) => (
-										<TableCell key={cell.id} className="text-sm text-left text-default-600">
-											{flexRender(cell.column.columnDef.cell, cell.getContext())}
+										<TableCell
+											key={cell.id}
+											className="text-sm text-left text-default-600"
+										>
+											{flexRender(
+												cell.column.columnDef.cell,
+												cell.getContext()
+											)}
 										</TableCell>
 									))}
 								</TableRow>
 							))
 						) : (
 							<TableRow>
-								<TableCell colSpan={columns.length + (rowActions ? 1 : 0)} className="h-24 text-left">
+								<TableCell
+									colSpan={columns.length + (rowActions ? 1 : 0)}
+									className="h-24 text-left"
+								>
 									{emptyMessage}
 								</TableCell>
 							</TableRow>

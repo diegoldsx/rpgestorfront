@@ -1,25 +1,27 @@
 import { ColumnDef } from "@tanstack/react-table";
 import { exactFilter } from "@/components/common/data-table/columnUtils";
-import Cell from "@/app/types/Cell";
+import Cell from "@/components/data-table/Cell";
 import { Partnership, PartnershipFields } from "./Partnership";
 
-export const columns: ColumnDef<Partnership>[] = PartnershipFields.map((field) => ({
-	id: field.id,
-	accessorKey: field.id,
-	header: field.title,
-	filterFn: exactFilter,
-	cell: (info) => {
-		const value = info.getValue() as string;
-		if (field.options) {
-			const option = field.options.find((option) => option.value === value);
+export const columns: ColumnDef<Partnership>[] = PartnershipFields.map(
+	(field) => ({
+		id: field.id,
+		accessorKey: field.id,
+		header: field.title,
+		filterFn: exactFilter,
+		cell: (info) => {
+			const value = info.getValue() as string;
+			if (field.options) {
+				const option = field.options.find((option) => option.value === value);
 
-			return (
-				<Cell>
-					<span>{option?.label}</span>
-				</Cell>
-			);
-		}
+				return (
+					<Cell>
+						<span>{option?.label}</span>
+					</Cell>
+				);
+			}
 
-		return <Cell>{value}</Cell>;
-	},
-}));
+			return <Cell>{value}</Cell>;
+		},
+	})
+);

@@ -1,11 +1,3 @@
-import { Income } from "../[lang]/(dashboard)/financial/income/types/Income";
-import { Expense } from "../[lang]/(dashboard)/financial/expense/types/Expense";
-import { Provision } from "../[lang]/(dashboard)/financial/provision/types/Provision";
-import { Transfer } from "../[lang]/(dashboard)/financial/transfer/types/Transfer";
-import { Course } from "../[lang]/(dashboard)/gatherings/courses/types/Course";
-
-import { PaymentGroup } from "../[lang]/(dashboard)/settings/payment-groups/types/PaymentGroup";
-import {} from "../[lang]/(dashboard)/financial/remittance/types/Remittance";
 import { faker } from "@faker-js/faker";
 import {
 	int,
@@ -19,26 +11,35 @@ import {
 	email,
 	link,
 } from "./faker";
-import { Gathering } from "../[lang]/(dashboard)/gatherings/types/Gathering";
-import { Category } from "../[lang]/(dashboard)/gatherings/categories/types/Category";
-import { Submission } from "../[lang]/(dashboard)/gatherings/submissions/types/Submission";
-import { Assembly } from "../[lang]/(dashboard)/assemblies/Assembly";
+import { Assembly } from "@/types/assembly/assembly";
+import { Course } from "@/types/event/course";
+import { Submission } from "@/types/event/submission";
+import { Expense } from "@/types/finance/expense";
+import { Income } from "@/types/finance/income";
+import { Provision } from "@/types/finance/provision";
+import { Transfer } from "@/types/finance/transfer";
+import { PaymentGroup } from "../[lang]/(dashboard)/settings/payment-groups/types/PaymentGroup";
+import { Category } from "@/types/event/category";
+import { Event } from "@/types/event/event";
 
 const LENGTH = 30;
 
-export const FAKE_DATA: Assembly[] = Array.from({ length: LENGTH }, () => ({
-	id: int(),
-	name: words(2),
-	status: arrayElement(["ativo", "inativo"]),
-	startDate: date(),
-	endDate: date(),
-	resultDate: date(),
-	description: sentence(),
-	type: arrayElement(["unica", "multipla"]),
-	allowChangeVote: boolean(),
-	displayMode: arrayElement(["padrao", "assembleia"]),
-	videoConference: boolean(),
-}));
+export const FAKE_ASSEMBLIES: Assembly[] = Array.from(
+	{ length: LENGTH },
+	() => ({
+		id: int().toString(),
+		name: words(2),
+		status: arrayElement(["ativo", "inativo"]),
+		startDate: date(),
+		endDate: date(),
+		resultDate: date(),
+		description: sentence(),
+		type: arrayElement(["unica", "multipla"]),
+		allowChangeVote: boolean(),
+		displayMode: arrayElement(["padrao", "assembleia"]),
+		videoConference: boolean(),
+	})
+);
 
 export const FAKE_COURSES: Course[] = Array.from({ length: LENGTH }, () => ({
 	category: arrayElement(["curso1", "curso2"]),
@@ -65,7 +66,7 @@ export const FAKE_COURSES: Course[] = Array.from({ length: LENGTH }, () => ({
 export const FAKE_SUBMISSIONS: Submission[] = Array.from(
 	{ length: LENGTH },
 	() => ({
-		id: int(),
+		id: int().toString(),
 		packagingName: words(2),
 		strategicPartners: name(),
 		area: "concurso",
@@ -94,31 +95,28 @@ export const FAKE_CATEGORIES: Category[] = Array.from(
 	})
 );
 
-export const FAKE_GATHERINGS: Gathering[] = Array.from(
-	{ length: LENGTH },
-	() => ({
-		id: int(),
-		category: arrayElement(["event1", "event2"]),
-		name: words(2),
-		startDate: date(),
-		endDate: date(),
-		registrationEndDate: date(),
-		participantLimit: int(),
-		responsible: arrayElement(["option1", "option2"]),
-		description: sentence(),
-		sponsors: "sponsors",
-		permission: arrayElement(["VENDA", "OUTRO"]),
-		value: float(),
-		costCenter: arrayElement(["center1", "center2"]),
-		eventCategory: "event",
-		account: arrayElement(["associados", "outros"]),
-		allowSubmission: boolean(),
-		submissionDeadline: date(),
-		registration: arrayElement(["event", "outro"]),
-		paymentConfirmation: arrayElement(["option1", "option2"]),
-		status: arrayElement(["ativo", "inativo"]),
-	})
-);
+export const FAKE_EVENTS: Event[] = Array.from({ length: LENGTH }, () => ({
+	id: int(),
+	category: arrayElement(["event1", "event2"]),
+	name: words(2),
+	startDate: date(),
+	endDate: date(),
+	registrationEndDate: date(),
+	participantLimit: int(),
+	responsible: arrayElement(["option1", "option2"]),
+	description: sentence(),
+	sponsors: "sponsors",
+	permission: arrayElement(["VENDA", "OUTRO"]),
+	value: float(),
+	costCenter: arrayElement(["center1", "center2"]),
+	eventCategory: "event",
+	account: arrayElement(["associados", "outros"]),
+	allowSubmission: boolean(),
+	submissionDeadline: date(),
+	registration: arrayElement(["event", "outro"]),
+	paymentConfirmation: arrayElement(["option1", "option2"]),
+	status: arrayElement(["ativo", "inativo"]),
+}));
 
 export const fake_returns: any[] = Array.from({ length: LENGTH }, () => ({
 	id: int(),
@@ -139,31 +137,32 @@ export const fakeRemittances: any[] = Array.from({ length: LENGTH }, () => ({
 	type: faker.helpers.arrayElement(["adimplente", "inadimplente"]),
 }));
 
-export const fakeIncomes: Income[] = Array.from({ length: LENGTH }, () => ({
+export const fakeIncomes: any[] = Array.from({ length: LENGTH }, () => ({
+	id: faker.string.uuid(),
 	payer: faker.person.fullName(),
 	description: faker.lorem.sentence(),
 	competenceDate: faker.date.anytime().toISOString().split("T")[0],
 	dueDate: faker.date.soon({ days: 30 }).toISOString().split("T")[0],
-	account: faker.helpers.arrayElement(["CAIXA", "BRADESCO"]),
-	paymentMethod: faker.helpers.arrayElement(["DINHEIRO", "BOLETO"]),
-	costCenter: faker.helpers.arrayElement(["ADMINISTRATIVO", "OUTROS"]),
-	category: faker.helpers.arrayElement(["MENSALIDADE", "ASSOCIADOS"]),
+	account: faker.string.alphanumeric(),
+	paymentMethod: faker.string.alphanumeric(),
+	costCenter: faker.string.alphanumeric(),
+	category: faker.string.alphanumeric(),
 	taxApplied: faker.datatype.boolean(),
 	value: faker.number.float({ min: 50, max: 1000, multipleOf: 0.01 }),
-	discountType: faker.helpers.arrayElement(["%", "R$"]) as "%" | "R$",
+	discountType: faker.string.alphanumeric(),
 	paidValue: faker.number.float({ min: 50, max: 1000, multipleOf: 0.01 }),
 	discountPercentage: faker.number.float({ min: 5, max: 50, multipleOf: 0.01 }),
 	discountExpirationDate: faker.date.future().toISOString().split("T")[0],
 	discountDescription: faker.lorem.sentence(),
 	observations: faker.lorem.sentence(),
-	status: faker.helpers.arrayElement(["PENDING", "PAID", "CANCELLED"]),
+	status: faker.string.alphanumeric(),
 	totalInstallments: faker.number.int({ min: 1, max: 12 }),
-	installmentType: faker.helpers.arrayElement(["REPETE", "DIVIDE"]),
+	installmentType: faker.string.alphanumeric(),
 	invoiceInstructions: faker.lorem.sentence(),
 	sampleMessage: faker.lorem.sentence(),
 }));
 
-export const fakeExpenses: Expense[] = Array.from({ length: LENGTH }, () => ({
+export const fakeExpenses: any[] = Array.from({ length: LENGTH }, () => ({
 	payer: faker.person.fullName(),
 	competenceDate: faker.date.past().toISOString().split("T")[0],
 	dueDate: faker.date.future().toISOString().split("T")[0],
@@ -198,22 +197,19 @@ export const fakeExpenses: Expense[] = Array.from({ length: LENGTH }, () => ({
 	taxCONFINS: faker.number.int({ min: 0, max: 100 }),
 }));
 
-export const fakeProvisions: Provision[] = Array.from(
-	{ length: LENGTH },
-	() => ({
-		id: faker.helpers.rangeToNumber({ min: 1, max: 999 }),
-		ammount: faker.helpers.rangeToNumber({ min: 100, max: 400 }),
-		description: faker.lorem.sentence(),
-		documentDate: faker.date.recent().toISOString().split("T")[0],
-		dueDate: faker.date.future().toISOString().split("T")[0],
-		observations: faker.lorem.paragraph(),
-		type: faker.helpers.arrayElement(["DESPESA", "OUTROS"]),
-		registeredBy: faker.helpers.arrayElement(["Maria", "João", "José"]),
-		status: faker.helpers.arrayElement(["APROVADO", "REPROVADO", "PENDENTE"]),
-	})
-);
+export const fakeProvisions: any[] = Array.from({ length: LENGTH }, () => ({
+	id: faker.helpers.rangeToNumber({ min: 1, max: 999 }),
+	ammount: faker.helpers.rangeToNumber({ min: 100, max: 400 }),
+	description: faker.lorem.sentence(),
+	documentDate: faker.date.recent().toISOString().split("T")[0],
+	dueDate: faker.date.future().toISOString().split("T")[0],
+	observations: faker.lorem.paragraph(),
+	type: faker.helpers.arrayElement(["DESPESA", "OUTROS"]),
+	registeredBy: faker.helpers.arrayElement(["Maria", "João", "José"]),
+	status: faker.helpers.arrayElement(["APROVADO", "REPROVADO", "PENDENTE"]),
+}));
 
-export const fakeTransfers: Transfer[] = Array.from({ length: LENGTH }, () => ({
+export const fakeTransfers: any[] = Array.from({ length: LENGTH }, () => ({
 	id: faker.helpers.rangeToNumber({ min: 1, max: 999 }),
 	origin: faker.helpers.arrayElement(["CAIXA", "BRADESCO"]),
 	destination: faker.helpers.arrayElement(["CAIXA", "BRADESCO"]),

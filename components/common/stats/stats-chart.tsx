@@ -1,10 +1,10 @@
-'use client';
-import dynamic from 'next/dynamic';
-const Chart = dynamic(() => import('react-apexcharts'), { ssr: false });
-import { useThemeStore } from '@/store';
-import { useTheme } from 'next-themes';
-import { themes } from '@/config/thems';
-import { StatsColor } from './stats-card';
+"use client";
+import dynamic from "next/dynamic";
+const Chart = dynamic(() => import("react-apexcharts"), { ssr: false });
+import { useThemeStore } from "@/store";
+import { useTheme } from "next-themes";
+import { themes } from "@/config/thems";
+import { StatsColor } from "./stats-card";
 
 interface StatsChartProps {
 	series: ApexAxisChartSeries;
@@ -27,28 +27,28 @@ const StatsChart = ({
 	const getColor = (color: StatsColor) => {
 		const colors = {
 			primary: `hsl(${
-				theme?.cssVars[mode === 'dark' ? 'dark' : 'light'].primary
+				theme?.cssVars[mode === "dark" ? "dark" : "light"].primary
 			})`,
 			success: `hsl(${
-				theme?.cssVars[mode === 'dark' ? 'dark' : 'light'].success
+				theme?.cssVars[mode === "dark" ? "dark" : "light"].success
 			})`,
 			warning: `hsl(${
-				theme?.cssVars[mode === 'dark' ? 'dark' : 'light'].warning
+				theme?.cssVars[mode === "dark" ? "dark" : "light"].warning
 			})`,
-			info: `hsl(${theme?.cssVars[mode === 'dark' ? 'dark' : 'light'].info})`,
+			info: `hsl(${theme?.cssVars[mode === "dark" ? "dark" : "light"].info})`,
 			destructive: `hsl(${
-				theme?.cssVars[mode === 'dark' ? 'dark' : 'light'].destructive
+				theme?.cssVars[mode === "dark" ? "dark" : "light"].destructive
 			})`,
 		};
 
-		return colors[color];
+		return null;
 	};
 
 	const chartColor = getColor(color);
 
 	const options: ApexCharts.ApexOptions = {
 		chart: {
-			type: 'area',
+			type: "area",
 			toolbar: {
 				show: false,
 			},
@@ -57,16 +57,15 @@ const StatsChart = ({
 			},
 			animations: {
 				enabled: true,
-				easing: 'easeinout',
 				speed: 800,
 			},
 		},
 		stroke: {
-			curve: 'smooth',
+			curve: "smooth",
 			width: 2,
 		},
 		fill: {
-			type: 'gradient',
+			type: "gradient",
 			gradient: {
 				shadeIntensity: 0.6,
 				opacityFrom: 0.5,
@@ -76,11 +75,11 @@ const StatsChart = ({
 		},
 		colors: [chartColor],
 		tooltip: {
-			theme: mode === 'dark' ? 'dark' : 'light',
+			theme: mode === "dark" ? "dark" : "light",
 			x: { show: false },
 			y: {
 				title: {
-					formatter: () => '',
+					formatter: () => "",
 				},
 			},
 			marker: { show: false },
@@ -112,7 +111,7 @@ const StatsChart = ({
 		<Chart
 			options={options}
 			series={series}
-			type='area'
+			type="area"
 			height={height}
 			width={width}
 		/>
