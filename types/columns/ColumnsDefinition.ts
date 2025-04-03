@@ -6,7 +6,7 @@ export type Option<T = string> = {
 export interface Column<T extends Record<string, any> = any> {
 	id: string;
 	title: string;
-	type: "text" | "select" | "hidden" | "id" | "checkbox";
+	type: "text" | "select" | "hidden" | "id" | "checkbox" | "badge" | "date";
 	options?: Option[];
 	defaultValue: T[keyof T];
 	isVisible?: boolean;

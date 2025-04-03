@@ -1,9 +1,23 @@
-export type BadgeStatus = "active" | "inactive" | "pending" | "ativo" | "inativo" | "aproved" | "disaproved";
-type Status = BadgeStatus | undefined;
+export type BadgeStatus =
+	| "active"
+	| "inactive"
+	| "pending"
+	| "ativo"
+	| "inativo"
+	| "aproved"
+	| "disaproved";
+type Status = BadgeStatus;
 
-type Colors = "default" | "destructive" | "success" | "info" | "warning" | "dark" | "secondary";
+type Colors =
+	| "default"
+	| "destructive"
+	| "success"
+	| "info"
+	| "warning"
+	| "dark"
+	| "secondary";
 
-const statusColors: Record<BadgeStatus, Colors> = {
+const statusColors: Record<string, Colors> = {
 	active: "success",
 	inactive: "destructive",
 	inativo: "destructive",
@@ -13,7 +27,7 @@ const statusColors: Record<BadgeStatus, Colors> = {
 	disaproved: "destructive",
 };
 
-export const getBadgeStatus = (status: Status): Colors => {
+export const getBadgeStatus = (status: string): Colors => {
 	if (status === undefined) {
 		return "default";
 	}

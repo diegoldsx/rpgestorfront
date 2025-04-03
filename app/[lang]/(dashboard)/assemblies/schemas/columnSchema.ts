@@ -20,7 +20,7 @@ export const columnSchema: Array<ColumnSchema<AssemblySchemaType>> = [
 	{
 		id: "status",
 		title: "Situação",
-		type: "select",
+		type: "badge",
 		defaultValue: "active",
 		isVisible: true,
 		options: [
@@ -31,21 +31,21 @@ export const columnSchema: Array<ColumnSchema<AssemblySchemaType>> = [
 	{
 		id: "startDate",
 		title: "Data de início",
-		type: "text",
+		type: "date",
 		defaultValue: "",
 		isVisible: true,
 	},
 	{
 		id: "endDate",
 		title: "Data fim",
-		type: "text",
+		type: "date",
 		defaultValue: "",
 		isVisible: true,
 	},
 	{
 		id: "resultDate",
 		title: "Data resultado",
-		type: "text",
+		type: "date",
 		defaultValue: "",
 		isVisible: true,
 	},
@@ -80,7 +80,7 @@ export const columnSchema: Array<ColumnSchema<AssemblySchemaType>> = [
 	{
 		id: "videoConference",
 		title: "Conferência de vídeo",
-		type: "text",
+		type: "checkbox",
 		defaultValue: "",
 		isVisible: true,
 	},
