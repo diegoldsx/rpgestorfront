@@ -7,8 +7,7 @@ import { DataTable } from "@/components/common/data-table/data-table";
 import { getFieldsWithOptions, getVisibilityState } from "./types/metadata";
 import { SERVICE_DESK_DATA } from "./types/data";
 import { page } from "./utils/labels";
-
-const servicedeskColumns = generateColumns(fieldsMetadata);
+import { columns } from "./components/columns";
 
 export const Page = () => {
 	return (

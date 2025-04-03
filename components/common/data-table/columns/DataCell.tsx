@@ -1,8 +1,8 @@
 // components/common/data-table/DataCell.tsx
 "use client";
-import Cell from "@/app/types/Cell";
 import { Badge } from "@/components/badge/badge";
 import { getBadgeStatus } from "@/components/badge/badgeStatus";
+import Cell from "@/components/data-table/Cell";
 
 type Option = {
 	label: string;
@@ -23,7 +23,7 @@ export default function DataCell<T>({
 	const value = String(getValue());
 
 	if (type === "checkbox") {
-		return <Cell>{value ? "Sim" : "Não"}</Cell>;
+		return <Cell className={"text-center"}>{value ? "Sism" : "Nãso"}</Cell>;
 	}
 
 	if (type === "date") {

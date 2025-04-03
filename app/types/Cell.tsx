@@ -8,7 +8,7 @@ type CellValueProps = {
 
 const Cell: React.FC<CellValueProps> = ({ children, className, title }) => {
 	return (
-		<p title={title} className={className}>
+		<p title={title} className={className + " w-full outline"}>
 			{children ?? "N/A"}
 		</p>
 	); //
