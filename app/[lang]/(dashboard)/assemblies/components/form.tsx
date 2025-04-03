@@ -2,12 +2,13 @@
 
 import { useForm, SubmitHandler, FormProvider } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Form } from "@radix-ui/react-form";
 import { useEffect } from "react";
-import { FormFieldComponent } from "@/components/FormFieldComponent";
 import { SubmitButton } from "@/components/SubmitButton";
-import { columnConfig, defaultValues } from "../components/columnHelper";
-import { AssemblySchemaType, AssemblySchema } from "@/types/assembly/assembly";
+import { FormFieldComponent } from "@/components/FormFieldComponent";
+import { Form } from "@radix-ui/react-form";
+import Select from "@/components/Select";
+import { AssemblySchema, AssemblySchemaType } from "../schemas/schema";
+import { columnSchema, defaultValues } from "../schemas/columnSchema";
 
 interface Props {
 	onSubmit: SubmitHandler<AssemblySchemaType>;
@@ -32,6 +33,7 @@ export function AssemblyForm({ onSubmit, data }: Props) {
 			reset({ ...defaultValues, ...data });
 		}
 	}, [data, reset]);
+
 	return (
 		<FormProvider {...methods}>
 			<Form
@@ -41,15 +43,18 @@ export function AssemblyForm({ onSubmit, data }: Props) {
 				}}
 				className="grid grid-cols-1 md:grid-cols-2 gap-4"
 			>
-				{columnConfig.map(({ id, title, options }) => (
+				{columnSchema.map(({ id, title, options }) => (
 					<FormFieldComponent
 						key={id}
 						name={id}
 						label={title}
 						control={control}
 						errors={errors}
-					/>
+					>
+						{options && <Select options={options} />}
+					</FormFieldComponent>
 				))}
+
 				<SubmitButton
 					isSubmitting={isSubmitting}
 					isUpdate={data !== undefined}

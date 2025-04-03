@@ -3,7 +3,7 @@ import Cell from "@/app/types/Cell";
 import Link from "next/link";
 import { ColumnDef } from "@tanstack/react-table";
 import { exactFilter } from "@/components/common/data-table/columnUtils";
-import { fieldsMetadata } from "../types/fieldsMetadata";
+import { fieldsMetadata } from "../types/metadata";
 import { ServiceDeskSchemaType } from "../types/schema";
 
 const editUrl = "service-desk/details";

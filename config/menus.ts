@@ -86,6 +86,11 @@ export const menusConfig: any = {
 				href: "/assemblies",
 			},
 			{
+				title: "Assembleias",
+				icon: Vote,
+				href: "/assembliess",
+			},
+			{
 				title: "Conteúdo",
 				icon: FileText,
 				href: "/content",

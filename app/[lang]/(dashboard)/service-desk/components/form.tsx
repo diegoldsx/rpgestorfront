@@ -5,7 +5,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useEffect } from "react";
 import { SubmitButton } from "@/components/SubmitButton";
 import { ServiceDeskSchema, ServiceDeskSchemaType } from "../types/schema";
-import { fieldsMetadata, defaultValues } from "../types/fieldsMetadata";
+import { fieldsMetadata, defaultValues } from "../types/metadata";
 import { FormFieldComponent } from "@/components/FormFieldComponent";
 import { Form } from "@radix-ui/react-form";
 import Select from "@/components/Select";

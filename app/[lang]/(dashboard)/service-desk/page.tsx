@@ -3,33 +3,29 @@
 import { Fragment } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { HeadingPages } from "@/components/common/heading/heading-pages";
-import { columns } from "./components/columns";
 import { DataTable } from "@/components/common/data-table/data-table";
-import {
-	getFieldsWithOptions,
-	getVisibilityState,
-} from "./types/fieldsMetadata";
+import { getFieldsWithOptions, getVisibilityState } from "./types/metadata";
 import { SERVICE_DESK_DATA } from "./types/data";
+import { page } from "./utils/labels";
 
-const serviceFieldsWithOptions = getFieldsWithOptions();
-const serviceDeskVisibilityState = getVisibilityState();
-
-const title = "Atendimento";
-const breadcrumbs = {
-	title: "Atendimento",
-	href: "/service-desk",
-};
-const actions = {
-	secondary: {
-		text: "Registrar novo atendimento",
-		href: "/service-desk/details",
-	},
-};
+const servicedeskColumns = generateColumns(fieldsMetadata);
 
 export const Page = () => {
 	return (
 		<Fragment>
-			<HeadingPages title={title} breadcrumbs={breadcrumbs} actions={actions} />
+			<HeadingPages
+				title={page.title}
+				breadcrumbs={{
+					title: page.title,
+					href: page.href,
+				}}
+				actions={{
+					secondary: {
+						text: page.actions.text,
+						href: page.actions.href,
+					},
+				}}
+			/>
 
 			<div className="mt-3 space-y-6">
 				<Card>
@@ -37,8 +33,8 @@ export const Page = () => {
 						<DataTable
 							data={SERVICE_DESK_DATA}
 							columns={columns}
-							facetedFilters={serviceFieldsWithOptions}
-							visibilityState={serviceDeskVisibilityState}
+							facetedFilters={getFieldsWithOptions()}
+							visibilityState={getVisibilityState()}
 						/>
 					</CardContent>
 				</Card>

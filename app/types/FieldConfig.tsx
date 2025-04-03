@@ -1,8 +1,7 @@
-type FieldType = "text" | "select" | "hidden" | "id";
 export interface FieldConfig<U extends Record<string, any>> {
 	id: keyof U;
 	title: string;
-	type?: FieldType;
+	type?: "text" | "select" | "hidden" | "id";
 	options?: Option<string>[];
 	defaultValue?: any;
 	isVisible?: boolean;
