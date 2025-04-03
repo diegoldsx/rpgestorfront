@@ -43,6 +43,7 @@ interface DataTableProps<TData> {
 	selectable?: boolean;
 	visibilityState?: VisibilityState;
 	sortBy?: SortingState;
+	columnResizeMode?: "onChange" | "onEnd";
 }
 
 export function DataTable<TData>({
@@ -66,6 +67,7 @@ export function DataTable<TData>({
 	const table = useReactTable({
 		data,
 		columns,
+		columnResizeMode: "onEnd",
 		state: {
 			sorting,
 			columnVisibility,
@@ -120,7 +122,8 @@ export function DataTable<TData>({
 									{row.getVisibleCells().map((cell) => (
 										<TableCell
 											key={cell.id}
-											className="text-sm text-left text-default-600"
+											className="text-sm  text-default-600"
+											style={{ width: cell.column.getSize() }}
 										>
 											{flexRender(
 												cell.column.columnDef.cell,

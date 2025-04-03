@@ -17,8 +17,9 @@ export default function TableHeader<TData>({
 						<TableHead
 							key={header.id}
 							colSpan={header.colSpan}
-							className="whitespace-nowrap h-11 cursor-pointer select-none"
+							className="  cursor-pointer select-none"
 							onClick={header.column.getToggleSortingHandler()}
+							style={{ width: header.getSize() }} // ← ESSENCIAL
 						>
 							{header.isPlaceholder ? null : (
 								<div className="flex items-center gap-2">

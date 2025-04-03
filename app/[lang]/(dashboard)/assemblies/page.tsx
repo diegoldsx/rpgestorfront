@@ -37,6 +37,7 @@ export const Page = () => {
 							columns={columns}
 							facetedFilters={getFieldsWithOptions()}
 							visibilityState={getVisibilityState()}
+							columnResizeMode="onChange"
 						/>
 					</CardContent>
 				</Card>

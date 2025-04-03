@@ -9,6 +9,7 @@ export const columnSchema: Array<ColumnSchema<AssemblySchemaType>> = [
 		type: "id",
 		defaultValue: "",
 		isVisible: true,
+		size: 100,
 	},
 	{
 		id: "name",
@@ -16,6 +17,7 @@ export const columnSchema: Array<ColumnSchema<AssemblySchemaType>> = [
 		type: "text",
 		defaultValue: "",
 		isVisible: true,
+		size: 600,
 	},
 	{
 		id: "status",
@@ -23,6 +25,7 @@ export const columnSchema: Array<ColumnSchema<AssemblySchemaType>> = [
 		type: "badge",
 		defaultValue: "active",
 		isVisible: true,
+		size: 150,
 		options: [
 			{ value: "active", label: "Ativo" },
 			{ value: "inactive", label: "Inativo" },
@@ -34,6 +37,7 @@ export const columnSchema: Array<ColumnSchema<AssemblySchemaType>> = [
 		type: "date",
 		defaultValue: "",
 		isVisible: true,
+		size: 180,
 	},
 	{
 		id: "endDate",
@@ -41,6 +45,7 @@ export const columnSchema: Array<ColumnSchema<AssemblySchemaType>> = [
 		type: "date",
 		defaultValue: "",
 		isVisible: true,
+		size: 180,
 	},
 	{
 		id: "resultDate",
@@ -48,13 +53,15 @@ export const columnSchema: Array<ColumnSchema<AssemblySchemaType>> = [
 		type: "date",
 		defaultValue: "",
 		isVisible: true,
+		size: 180,
 	},
 	{
 		id: "description",
 		title: "Descrição",
-		type: "text",
+		type: "textarea",
 		defaultValue: "",
 		isVisible: true,
+		size: 200,
 	},
 	{
 		id: "type",
@@ -62,6 +69,7 @@ export const columnSchema: Array<ColumnSchema<AssemblySchemaType>> = [
 		type: "text",
 		defaultValue: "",
 		isVisible: true,
+		size: 200,
 	},
 	{
 		id: "allowChangeVote",
@@ -69,6 +77,7 @@ export const columnSchema: Array<ColumnSchema<AssemblySchemaType>> = [
 		type: "checkbox",
 		defaultValue: "",
 		isVisible: true,
+		size: 300,
 	},
 	{
 		id: "displayMode",
@@ -76,6 +85,7 @@ export const columnSchema: Array<ColumnSchema<AssemblySchemaType>> = [
 		type: "text",
 		defaultValue: "",
 		isVisible: true,
+		size: 200,
 	},
 	{
 		id: "videoConference",
@@ -83,6 +93,7 @@ export const columnSchema: Array<ColumnSchema<AssemblySchemaType>> = [
 		type: "checkbox",
 		defaultValue: "",
 		isVisible: true,
+		size: 220,
 	},
 ];
 

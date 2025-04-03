@@ -13,11 +13,12 @@ const editUrl = "assemblies/details";
 export const columns: ColumnDef<AssemblySchemaType>[] = [
 	...columnSchema
 		.filter((item) => item.isVisible !== false)
-		.map(({ id, title, options, type }) => ({
+		.map(({ id, title, options, type, size = 0 }) => ({
 			id,
 			accessorKey: id,
 			header: title,
 			filterFn: exactFilter,
+			size: size,
 			cell: (props: { getValue: () => any }) => (
 				<DataCell getValue={props.getValue} type={type} options={options} />
 			),

@@ -31,6 +31,17 @@ export default function DataCell<T>({
 		return <Cell>{formatted}</Cell>;
 	}
 
+	if (type === "textarea") {
+		return (
+			<Cell
+				title={value}
+				className="line-clamp-2 max-w-full overflow-hidden text-ellipsis whitespace-pre-wrap"
+			>
+				{String(value)}
+			</Cell>
+		);
+	}
+
 	if (options) {
 		const option = options.find((opt) => opt.value === value);
 
