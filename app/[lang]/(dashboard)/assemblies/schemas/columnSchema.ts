@@ -22,7 +22,7 @@ export const columnSchema: Array<ColumnSchema<AssemblySchemaType>> = [
 	{
 		id: "status",
 		title: "Situação",
-		type: "select",
+		type: "badge",
 		defaultValue: "active",
 		isVisible: true,
 		size: 150,

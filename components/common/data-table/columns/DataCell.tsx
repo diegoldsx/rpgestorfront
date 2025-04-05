@@ -20,21 +20,25 @@ export default function DataCell<T>({
 	options,
 	type,
 }: DataCellProps<T>) {
-	const value = String(getValue());
+	const value = getValue();
 
 	if (type === "checkbox") {
-		return <Cell><p className="w-full text-center">{value ? "Sim" : "Não"}</p></Cell>;
+		return (
+			<Cell>
+				<p className="w-full text-center">{value ? "Sim" : "Não"}</p>
+			</Cell>
+		);
 	}
 
 	if (type === "date") {
-		const formatted = new Date(value).toLocaleDateString("pt-BR");
+		const formatted = new Date(String(value)).toLocaleDateString("pt-BR");
 		return <Cell>{formatted}</Cell>;
 	}
 
 	if (type === "textarea") {
 		return (
 			<Cell
-				title={value}
+				title={String(value)}
 				className="line-clamp-2 max-w-full overflow-hidden text-ellipsis whitespace-pre-wrap"
 			>
 				{String(value)}
