@@ -1,27 +1,21 @@
-import { Button } from "@/components/ui/button";
-import { FaSpinner } from "react-icons/fa";
-
 interface SubmitButtonProps {
 	isSubmitting: boolean;
-	isUpdate: boolean;
+	isUpdate?: boolean;
+	label?: string; // ✅ adiciona isso
 }
 
-export const SubmitButton: React.FC<SubmitButtonProps> = ({
+export function SubmitButton({
 	isSubmitting,
-	isUpdate,
-}) => {
+	isUpdate = false,
+	label = "Salvar",
+}: SubmitButtonProps) {
 	return (
-		<Button className="w-32" type="submit" disabled={isSubmitting}>
-			{isSubmitting ? (
-				<div className="flex items-center gap-2">
-					<FaSpinner className="animate-spin" />
-					{isUpdate ? "Atualizando..." : "Criando..."}
-				</div>
-			) : isUpdate ? (
-				"Atualizar"
-			) : (
-				"Criar"
-			)}
-		</Button>
+		<button
+			type="submit"
+			disabled={isSubmitting}
+			className="px-4 py-2 bg-primary text-white rounded disabled:opacity-50"
+		>
+			{isSubmitting ? "Enviando..." : label}
+		</button>
 	);
-};
+}

@@ -1,19 +1,19 @@
 "use client";
 
-import { AssemblyForm } from "../components/form";
 import { SubmitHandler } from "react-hook-form";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-
-import { AssemblySchemaType } from "../schemas/schema";
+import { AssemblySchema, AssemblySchemaType } from "../schemas/schema";
 import { FAKE_ASSEMBLY } from "../types/data";
 
 import { useFetchData } from "@/hooks/useFetchData";
 import { PageParams } from "@/types/commons/PageParams";
+import { GenericForm } from "@/components/form/GenericForm";
+import { columnSchema, defaultValues } from "../schemas/columnSchema";
 
 export default function DetailsPage({ searchParams }: PageParams) {
 	const id = searchParams.id;
 
-	const { data, loading } = useFetchData(id, (id) => {
+	const { data } = useFetchData(id, (id) => {
 		return FAKE_ASSEMBLY.find((d) => d.id === id);
 	});
 
@@ -31,7 +31,14 @@ export default function DetailsPage({ searchParams }: PageParams) {
 				</CardHeader>
 
 				<CardContent>
-					<AssemblyForm onSubmit={handleSubmit} data={data || undefined} />
+					<GenericForm<AssemblySchemaType>
+						schema={AssemblySchema}
+						defaultValues={defaultValues}
+						columns={columnSchema}
+						onSubmit={handleSubmit}
+						data={data || undefined}
+						submitLabel="Salvar Assembleia"
+					/>
 				</CardContent>
 			</Card>
 		</div>

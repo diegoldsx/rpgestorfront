@@ -1,25 +1,42 @@
 "use client";
 
-import { useForm, SubmitHandler, FormProvider } from "react-hook-form";
+import {
+	useForm,
+	FormProvider,
+	SubmitHandler,
+	FieldValues,
+	DefaultValues,
+} from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { Form } from "@radix-ui/react-form";
 import { useEffect } from "react";
+import { z, ZodType } from "zod";
 import { SubmitButton } from "@/components/SubmitButton";
 import { FormFieldComponent } from "@/components/FormFieldComponent";
-import { Form } from "@radix-ui/react-form";
 import Select from "@/components/Select";
-import { AssemblySchema, AssemblySchemaType } from "../schemas/schema";
-import { columnSchema, defaultValues } from "../schemas/columnSchema";
 import { Input } from "@/components/ui/input";
 import { Checkbox } from "@/components/Checkbox";
+import { ColumnSchema } from "@/types/columns/ColumnsDefinition";
 
-interface Props {
-	onSubmit: SubmitHandler<AssemblySchemaType>;
-	data?: Partial<AssemblySchemaType>;
+interface GenericFormProps<T extends FieldValues> {
+	schema: ZodType<T>;
+	defaultValues: DefaultValues<T>;
+	columns: ColumnSchema[];
+	onSubmit: SubmitHandler<T>;
+	data?: Partial<T>;
+	submitLabel?: string;
 }
 
-export function AssemblyForm({ onSubmit, data }: Props) {
-	const methods = useForm<AssemblySchemaType>({
-		resolver: zodResolver(AssemblySchema),
+export function GenericForm<T extends FieldValues>({
+	schema,
+	defaultValues,
+	columns,
+	onSubmit,
+	data,
+	submitLabel = "Salvar",
+}: GenericFormProps<T>) {
+	const methods = useForm<T>({
+		resolver: zodResolver(schema),
 		defaultValues: data ? { ...defaultValues, ...data } : defaultValues,
 	});
 
@@ -34,19 +51,19 @@ export function AssemblyForm({ onSubmit, data }: Props) {
 		if (data) {
 			reset({ ...defaultValues, ...data });
 		}
-	}, [data, reset]);
+	}, [data, reset, defaultValues]);
 
 	return (
 		<FormProvider {...methods}>
 			<Form
 				noValidate
-				onSubmit={(event) => {
-					event.preventDefault();
-					handleSubmit(onSubmit)(event);
+				onSubmit={(e) => {
+					e.preventDefault();
+					handleSubmit(onSubmit)(e);
 				}}
 			>
 				<div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-					{columnSchema.map(({ id, title, options, type }) => (
+					{columns.map(({ id, title, options, type }) => (
 						<FormFieldComponent
 							key={id}
 							name={id}
@@ -69,11 +86,9 @@ export function AssemblyForm({ onSubmit, data }: Props) {
 						</FormFieldComponent>
 					))}
 				</div>
+
 				<div className="w-full flex justify-end mt-10">
-					<SubmitButton
-						isSubmitting={isSubmitting}
-						isUpdate={data !== undefined}
-					/>
+					<SubmitButton isSubmitting={isSubmitting} label={submitLabel} />
 				</div>
 			</Form>
 		</FormProvider>
