@@ -18,6 +18,7 @@ interface DatePickerProps extends React.HTMLAttributes<HTMLDivElement> {
 	placeholder?: string;
 	selectedDate?: Date;
 	onDateChange?: (date: Date | undefined) => void;
+	displayFormat?: string;
 }
 
 export const DatePicker = React.forwardRef<HTMLDivElement, DatePickerProps>(
@@ -28,6 +29,8 @@ export const DatePicker = React.forwardRef<HTMLDivElement, DatePickerProps>(
 			placeholder = "Selecione uma data",
 			selectedDate,
 			onDateChange,
+			displayFormat = "dd/MM/yyyy",
+
 			...rest
 		},
 		ref
@@ -54,8 +57,8 @@ export const DatePicker = React.forwardRef<HTMLDivElement, DatePickerProps>(
 						>
 							<div className="flex items-center gap-4 text-default-600">
 								<CalendarIcon className="w-5 h-4 text-muted-foreground" />
-								{internalDate
-									? format(internalDate, "dd/MM/yyyy")
+								{selectedDate
+									? format(selectedDate, displayFormat)
 									: placeholder}
 							</div>
 						</Button>

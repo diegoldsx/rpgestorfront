@@ -104,11 +104,13 @@ export function GenericForm<T extends FieldValues>({
 						case "date":
 							fieldComponent = (
 								<DatePicker
-									selectedDate={
-										methods.watch(id as Path<T>)
-											? new Date(methods.watch(id as Path<T>))
-											: undefined
-									}
+									displayFormat="dd/MM/yyyy"
+									selectedDate={(() => {
+										const value = methods.getValues(id as Path<T>);
+										if (!value) return undefined;
+										const date = new Date(value as string);
+										return isNaN(date.getTime()) ? undefined : date;
+									})()}
 									onDateChange={(date) =>
 										methods.setValue(
 											id as Path<T>,
