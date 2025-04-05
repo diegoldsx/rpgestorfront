@@ -75,7 +75,7 @@ export const columnSchema: Array<ColumnSchema<AssemblySchemaType>> = [
 		id: "allowChangeVote",
 		title: "Permite mudar voto",
 		type: "checkbox",
-		defaultValue: "",
+		defaultValue: false,
 		isVisible: true,
 		size: 300,
 	},
@@ -91,17 +91,18 @@ export const columnSchema: Array<ColumnSchema<AssemblySchemaType>> = [
 		id: "videoConference",
 		title: "Conferência de vídeo",
 		type: "checkbox",
-		defaultValue: "",
+		defaultValue: false,
 		isVisible: true,
 		size: 220,
 	},
 ];
 
-export const defaultValues: Record<string, any> = columnSchema.map(
-	({ id, defaultValue, options }) => ({
-		id,
-		value: options && options.length > 0 ? options[0].value : defaultValue,
-	})
+export const defaultValues: Record<string, any> = columnSchema.reduce(
+	(acc, { id, defaultValue, options }) => {
+		acc[id] = options?.length ? options[0].value : defaultValue ?? "";
+		return acc;
+	},
+	{} as Record<string, any>
 );
 
 export function getVisibilityState(

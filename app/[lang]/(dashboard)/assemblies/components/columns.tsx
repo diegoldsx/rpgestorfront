@@ -3,7 +3,7 @@
 import { ColumnDef } from "@tanstack/react-table";
 import { exactFilter } from "@/components/common/data-table/columnUtils";
 import { columnSchema } from "../schemas/columnSchema";
-
+import Link from "next/link";
 import { AssemblySchemaType } from "../schemas/schema";
 import DataCell from "@/components/common/data-table/columns/DataCell";
 import ActionsCell from "@/components/common/data-table/columns/ActionCell";
@@ -27,6 +27,10 @@ export const columns: ColumnDef<AssemblySchemaType>[] = [
 		id: "actions",
 		header: "Actions",
 		size: 150,
-		cell: ({ row }) => <ActionsCell row={row} editUrl={editUrl} label="Edit" />,
+		cell: ({ row }) => (
+			<Link href={editUrl}>
+				<ActionsCell row={row} editUrl={editUrl} label="Edit" />
+			</Link>
+		),
 	},
 ];

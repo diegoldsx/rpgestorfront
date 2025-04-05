@@ -9,6 +9,8 @@ import { Form } from "@radix-ui/react-form";
 import Select from "@/components/Select";
 import { AssemblySchema, AssemblySchemaType } from "../schemas/schema";
 import { columnSchema, defaultValues } from "../schemas/columnSchema";
+import { Input } from "@/components/ui/input";
+import { Checkbox } from "@/components/Checkbox";
 
 interface Props {
 	onSubmit: SubmitHandler<AssemblySchemaType>;
@@ -37,28 +39,42 @@ export function AssemblyForm({ onSubmit, data }: Props) {
 	return (
 		<FormProvider {...methods}>
 			<Form
+				noValidate
 				onSubmit={(event) => {
 					event.preventDefault();
 					handleSubmit(onSubmit)(event);
 				}}
-				className="grid grid-cols-1 md:grid-cols-2 gap-4"
 			>
-				{columnSchema.map(({ id, title, options }) => (
-					<FormFieldComponent
-						key={id}
-						name={id}
-						label={title}
-						control={control}
-						errors={errors}
-					>
-						{options && <Select options={options} />}
-					</FormFieldComponent>
-				))}
-
-				<SubmitButton
-					isSubmitting={isSubmitting}
-					isUpdate={data !== undefined}
-				/>
+				<div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+					{columnSchema.map(({ id, title, options, type }) => (
+						<FormFieldComponent
+							key={id}
+							name={id}
+							label={title}
+							control={control}
+							errors={errors}
+						>
+							{(() => {
+								switch (type) {
+									case "text":
+										return <Input type="text" />;
+									case "select":
+										return <Select options={options || []} />;
+									case "checkbox":
+										return <Checkbox className="mt-2" />;
+									default:
+										return <Input type="text" />;
+								}
+							})()}
+						</FormFieldComponent>
+					))}
+				</div>
+				<div className="w-full flex justify-end mt-10">
+					<SubmitButton
+						isSubmitting={isSubmitting}
+						isUpdate={data !== undefined}
+					/>
+				</div>
 			</Form>
 		</FormProvider>
 	);

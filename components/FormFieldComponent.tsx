@@ -1,21 +1,12 @@
-import React, { ReactNode } from "react";
+import React from "react";
 import { Controller } from "react-hook-form";
-import {
-	FormField,
-	FormLabel,
-	FormControl,
-	FormMessage,
-} from "@radix-ui/react-form";
-import { Input } from "@/components/ui/input";
 
 interface FormFieldComponentProps {
 	name: string;
 	label: string;
 	control: any;
 	errors: any;
-	placeholder?: string;
-	type?: string;
-	children?: ReactNode;
+	children: React.ReactElement;
 }
 
 export const FormFieldComponent: React.FC<FormFieldComponentProps> = ({
@@ -23,33 +14,38 @@ export const FormFieldComponent: React.FC<FormFieldComponentProps> = ({
 	label,
 	control,
 	errors,
-	placeholder,
-	type = "text",
 	children,
 }) => {
 	if (["id", "actions"].includes(name)) return null;
-
 	return (
-		<FormField name={name}>
-			<FormLabel>{label}</FormLabel>
+		<div className="flex flex-col gap-1">
+			<label htmlFor={name} className="font-medium text-sm">
+				{label}
+			</label>
+
 			<Controller
 				name={name}
 				control={control}
-				render={({ field }) => (
-					<FormControl asChild>
-						{children ? (
-							React.cloneElement(children as React.ReactElement, { ...field })
-						) : (
-							<Input {...field} placeholder={placeholder} type={type} />
-						)}
-					</FormControl>
-				)}
+				render={({ field }) =>
+					React.cloneElement(children, {
+						...field,
+						id: name,
+						...(children.props.type === "checkbox"
+							? {
+									checked: field.value,
+									onChange: (val: boolean) => field.onChange(val),
+							  }
+							: {
+									value: field.value,
+									onChange: field.onChange,
+							  }),
+					})
+				}
 			/>
-			{errors[name] && (
-				<FormMessage className="text-red-500">
-					{errors[name].message}
-				</FormMessage>
+
+			{errors[name]?.message && (
+				<span className="text-sm text-red-500">{errors[name].message}</span>
 			)}
-		</FormField>
+		</div>
 	);
 };
