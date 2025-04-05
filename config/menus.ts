@@ -81,14 +81,9 @@ export const menusConfig: any = {
 				],
 			},
 			{
-				title: "Assembleia",
+				title: "Assembléia",
 				icon: Vote,
 				href: "/assemblies",
-			},
-			{
-				title: "Assembleias",
-				icon: Vote,
-				href: "/assembliess",
 			},
 			{
 				title: "Conteúdo",

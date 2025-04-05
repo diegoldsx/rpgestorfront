@@ -23,7 +23,7 @@ export default function DataCell<T>({
 	const value = String(getValue());
 
 	if (type === "checkbox") {
-		return <Cell className={"text-center"}>{value ? "Sism" : "Nãso"}</Cell>;
+		return <Cell><p className="w-full text-center">{value ? "Sim" : "Não"}</p></Cell>;
 	}
 
 	if (type === "date") {
