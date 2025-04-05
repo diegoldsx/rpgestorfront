@@ -1,27 +1,37 @@
 "use client";
 
+import React, { useEffect } from "react";
 import {
 	useForm,
 	FormProvider,
 	SubmitHandler,
 	FieldValues,
+	Path,
+	PathValue,
 	DefaultValues,
 } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Form } from "@radix-ui/react-form";
-import { useEffect } from "react";
-import { z, ZodType } from "zod";
-import { SubmitButton } from "@/components/SubmitButton";
+import { ZodType } from "zod";
+
 import { FormFieldComponent } from "@/components/FormFieldComponent";
-import Select from "@/components/Select";
+import { SubmitButton } from "@/components/SubmitButton";
 import { Input } from "@/components/ui/input";
+import Select from "@/components/Select";
 import { Checkbox } from "@/components/Checkbox";
-import { ColumnSchema } from "@/types/columns/ColumnsDefinition";
+import { DatePicker } from "@/components/date-picker";
+
+interface ColumnSchema<T extends FieldValues> {
+	id: keyof T;
+	title: string;
+	type: string;
+	options?: { label: string; value: string }[];
+	defaultValue?: any;
+}
 
 interface GenericFormProps<T extends FieldValues> {
 	schema: ZodType<T>;
 	defaultValues: DefaultValues<T>;
-	columns: ColumnSchema[];
+	columns: ColumnSchema<T>[];
 	onSubmit: SubmitHandler<T>;
 	data?: Partial<T>;
 	submitLabel?: string;
@@ -51,46 +61,84 @@ export function GenericForm<T extends FieldValues>({
 		if (data) {
 			reset({ ...defaultValues, ...data });
 		}
-	}, [data, reset, defaultValues]);
+	}, [data, reset]);
 
 	return (
 		<FormProvider {...methods}>
-			<Form
-				noValidate
+			<form
 				onSubmit={(e) => {
 					e.preventDefault();
 					handleSubmit(onSubmit)(e);
 				}}
+				noValidate
+				className="grid grid-cols-1 md:grid-cols-2 gap-4"
 			>
-				<div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-					{columns.map(({ id, title, options, type }) => (
+				{columns.map(({ id, title, type, options }) => {
+					if (!["text", "select", "checkbox", "date"].includes(type))
+						return null;
+
+					let fieldComponent: React.ReactElement;
+
+					switch (type) {
+						case "text":
+							fieldComponent = <Input type="text" />;
+							break;
+						case "select":
+							fieldComponent = <Select options={options || []} />;
+							break;
+						case "checkbox":
+							fieldComponent = (
+								<Checkbox
+									checked={methods.watch(id as Path<T>)}
+									onCheckedChange={(val) => {
+										if (typeof val === "boolean") {
+											methods.setValue(
+												id as Path<T>,
+												val as PathValue<T, Path<T>>
+											);
+										}
+									}}
+								/>
+							);
+							break;
+						case "date":
+							fieldComponent = (
+								<DatePicker
+									selectedDate={
+										methods.watch(id as Path<T>)
+											? new Date(methods.watch(id as Path<T>))
+											: undefined
+									}
+									onDateChange={(date) =>
+										methods.setValue(
+											id as Path<T>,
+											(date ? date.toISOString() : "") as PathValue<T, Path<T>>
+										)
+									}
+								/>
+							);
+							break;
+						default:
+							return null;
+					}
+
+					return (
 						<FormFieldComponent
-							key={id}
-							name={id}
+							key={String(id)}
+							name={String(id)}
 							label={title}
 							control={control}
 							errors={errors}
 						>
-							{(() => {
-								switch (type) {
-									case "text":
-										return <Input type="text" />;
-									case "select":
-										return <Select options={options || []} />;
-									case "checkbox":
-										return <Checkbox className="mt-2" />;
-									default:
-										return <Input type="text" />;
-								}
-							})()}
+							{fieldComponent}
 						</FormFieldComponent>
-					))}
-				</div>
+					);
+				})}
 
-				<div className="w-full flex justify-end mt-10">
+				<div className="w-full md:col-span-2 flex justify-end mt-4">
 					<SubmitButton isSubmitting={isSubmitting} label={submitLabel} />
 				</div>
-			</Form>
+			</form>
 		</FormProvider>
 	);
 }

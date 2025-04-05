@@ -4,7 +4,7 @@ export type Option<T = string> = {
 };
 
 export interface Column<T extends Record<string, any> = any> {
-	id: string;
+	id: keyof T;
 	title: string;
 	type:
 		| "text"
@@ -14,7 +14,8 @@ export interface Column<T extends Record<string, any> = any> {
 		| "checkbox"
 		| "badge"
 		| "date"
-		| "textarea";
+		| "textarea"
+		| "badge";
 	options?: Option[];
 	defaultValue: T[keyof T];
 	isVisible?: boolean;

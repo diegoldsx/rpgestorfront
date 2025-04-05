@@ -12,11 +12,15 @@ interface CheckboxProps {
 }
 
 export const Checkbox = React.forwardRef<HTMLButtonElement, CheckboxProps>(
-	({ checked, onCheckedChange, disabled, className = "" }, ref) => (
+	({ checked = false, onCheckedChange, disabled, className = "" }, ref) => (
 		<CheckboxPrimitive.Root
 			ref={ref}
 			checked={checked}
-			onCheckedChange={onCheckedChange}
+			onCheckedChange={(val) => {
+				if (typeof val === "boolean" && onCheckedChange) {
+					onCheckedChange(val);
+				}
+			}}
 			disabled={disabled}
 			className={`w-5 h-5 border border-gray-400 rounded flex items-center justify-center data-[state=checked]:bg-primary data-[state=checked]:text-white focus:outline-none focus:ring-0 ${
 				disabled ? "cursor-default" : "cursor-pointer"

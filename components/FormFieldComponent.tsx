@@ -1,3 +1,5 @@
+"use client";
+
 import React from "react";
 import { Controller } from "react-hook-form";
 
@@ -17,6 +19,7 @@ export const FormFieldComponent: React.FC<FormFieldComponentProps> = ({
 	children,
 }) => {
 	if (["id", "actions"].includes(name)) return null;
+
 	return (
 		<div className="flex flex-col gap-1">
 			<label htmlFor={name} className="font-medium text-sm">
@@ -26,21 +29,36 @@ export const FormFieldComponent: React.FC<FormFieldComponentProps> = ({
 			<Controller
 				name={name}
 				control={control}
-				render={({ field }) =>
-					React.cloneElement(children, {
+				render={({ field }) => {
+					const type = children.type;
+					const displayName =
+						typeof type === "function" && "displayName" in type
+							? type.displayName
+							: null;
+
+					return React.cloneElement(children, {
 						...field,
 						id: name,
-						...(children.props.type === "checkbox"
+						...(children.props?.type === "checkbox" ||
+						displayName === "Checkbox"
 							? {
 									checked: field.value,
-									onChange: (val: boolean) => field.onChange(val),
+									onCheckedChange: (val: boolean | "indeterminate") => {
+										if (typeof val === "boolean") field.onChange(val);
+									},
+							  }
+							: displayName === "DatePicker"
+							? {
+									selectedDate: field.value ? new Date(field.value) : undefined,
+									onDateChange: (date: Date | undefined) =>
+										field.onChange(date ? date.toISOString() : ""),
 							  }
 							: {
 									value: field.value,
 									onChange: field.onChange,
 							  }),
-					})
-				}
+					});
+				}}
 			/>
 
 			{errors[name]?.message && (
