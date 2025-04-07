@@ -2,7 +2,6 @@ import { ColumnDef } from "@tanstack/react-table";
 import { exactFilter } from "@/components/common/data-table/columnUtils";
 import Cell from "@/app/types/Cell";
 import { Content, contentFields } from "./Content";
-console.log(contentFields);
 export const columns: ColumnDef<Content>[] = contentFields.map((field) => ({
 	id: field.id,
 	accessorKey: field.id,

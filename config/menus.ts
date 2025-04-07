@@ -72,12 +72,12 @@ export const menusConfig: any = {
 			{
 				title: "Eventos",
 				icon: Calendar,
-				href: "/gatherings",
+				href: "/events",
 				child: [
-					{ title: "Eventos", href: "/gatherings" },
-					{ title: "Cursos", href: "/gatherings/courses" },
-					{ title: "Categorias", href: "/gatherings/categories" },
-					{ title: "Submissões", href: "/gatherings/submissions" },
+					{ title: "Eventos", href: "/events" },
+					{ title: "Cursos", href: "/events/courses" },
+					{ title: "Categorias", href: "/events/categories" },
+					{ title: "Submissões", href: "/events/submissions" },
 				],
 			},
 			{

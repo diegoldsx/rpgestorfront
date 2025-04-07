@@ -1,11 +1,11 @@
-import DashBoardLayoutProvider from '@/provider/dashboard.layout.provider';
-import { authOptions } from '@/lib/auth';
-import { getServerSession, NextAuthOptions } from 'next-auth';
-import { redirect } from 'next/navigation';
-import { getDictionary } from '@/app/dictionaries';
+import DashBoardLayoutProvider from "@/provider/dashboard.layout.provider";
+import { authOptions } from "@/lib/auth";
+import { getServerSession, NextAuthOptions } from "next-auth";
+import { redirect } from "next/navigation";
+import { getDictionary } from "@/app/dictionaries";
 
 export const metadata = {
-	title: 'Associados',
+	title: "Associados",
 };
 
 const layout = async ({
@@ -18,10 +18,12 @@ const layout = async ({
 	const session = await getServerSession(authOptions as NextAuthOptions);
 
 	if (!session?.user?.email) {
-		redirect('/auth/login');
+		redirect("/auth/login");
 	}
 
 	const trans = await getDictionary(lang);
+
+	console.log(session);
 
 	return (
 		<DashBoardLayoutProvider trans={trans}>{children}</DashBoardLayoutProvider>

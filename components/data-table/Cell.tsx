@@ -7,11 +7,7 @@ type CellValueProps = {
 };
 
 const Cell: React.FC<CellValueProps> = ({ children, className, title }) => {
-	return (
-		<p title={title} className={className}>
-			{children ?? "N/A"}
-		</p>
-	); //
+	return <div className={className} >{children ?? "N/A"}</div>; //
 };
 
 export default Cell;

@@ -7,6 +7,7 @@ import Link from "next/link";
 import { AssemblySchemaType } from "../schemas/schema";
 import DataCell from "@/components/common/data-table/columns/DataCell";
 import ActionsCell from "@/components/common/data-table/columns/ActionCell";
+import { Input } from "@/components/ui/input";
 
 const editUrl = "assemblies/details";
 
