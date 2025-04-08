@@ -1,8 +1,9 @@
 export const FAKE_MESSAGES: any[] = [
 	{
 		id: "427",
-		name: "beatus acerbitas",
-		benefits: "Aegrotatio ancilla audacia subiungo terra theatrum adicio repudiandae tero.",
+		name: "betus acerbitas",
+		benefits:
+			"Aegrotatio ancilla audacia subiungo terra theatrum adicio repudiandae tero.",
 		contact: "Dustin Mraz V",
 		email: "email@empresa.com",
 		mobile: "(99) 9999-99999",

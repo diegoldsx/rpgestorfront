@@ -1,36 +1,44 @@
 "use client";
 
-import { Fragment } from "react";
-import { Card, CardContent } from "@/components/ui/card";
 import { HeadingPages } from "@/components/common/heading/heading-pages";
-import { columns } from "./utils/columns";
+import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { DataTable } from "@/components/common/data-table/data-table";
-
-import { FAKE_DATA } from "@/data/groupsData";
-import { facetedFilters, visibilityState } from "./utils/columnConfig";
+import {
+	getFieldsWithOptions,
+	getVisibilityState,
+} from "./schemas/columnSchema";
+import { FAKE_GROUPS } from "./types/data";
+import { columns } from "./components/columns";
 
 const Page = () => {
 	return (
-		<Fragment>
-			<HeadingPages
-				title="Grupos"
-				breadcrumbs={{
-					title: "Conteúdo",
-					href: "/Partnership",
-				}}
-				actions={{
-					secondary: { text: "Cadastrar novo grupo", href: "/email-marketing/groupss/form" },
-				}}
-			/>
+		<Card>
+			<CardHeader>
+				<HeadingPages
+					title="Assembléias"
+					breadcrumbs={{
+						title: "Assembléias",
+						href: "/groups",
+					}}
+					actions={{
+						secondary: {
+							text: "Registrar assembléia",
+							href: "groups/details",
+						},
+					}}
+				/>
+			</CardHeader>
 
-			<div className="mt-3 space-y-6">
-				<Card>
-					<CardContent>
-						<DataTable data={FAKE_DATA} columns={columns} facetedFilters={facetedFilters} visibilityState={visibilityState} />
-					</CardContent>
-				</Card>
-			</div>
-		</Fragment>
+			<CardContent>
+				<DataTable
+					data={FAKE_GROUPS}
+					columns={columns}
+					facetedFilters={getFieldsWithOptions()}
+					visibilityState={getVisibilityState()}
+					columnResizeMode="onChange"
+				/>
+			</CardContent>
+		</Card>
 	);
 };
 

@@ -1,36 +1,44 @@
 "use client";
 
-import { Fragment } from "react";
-import { Card, CardContent } from "@/components/ui/card";
 import { HeadingPages } from "@/components/common/heading/heading-pages";
-import { columns } from "./utils/columns";
+import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { DataTable } from "@/components/common/data-table/data-table";
-
-import { FAKE_MESSAGES } from "@/data/messagesData";
-import { facetedFilters, visibilityState } from "./utils/columnConfig";
+import {
+	getFieldsWithOptions,
+	getVisibilityState,
+} from "./schemas/columnSchema";
+import { FAKE_MESSAGES } from "./types/data";
+import { columns } from "./components/columns";
 
 const Page = () => {
 	return (
-		<Fragment>
-			<HeadingPages
-				title="Mensagens"
-				breadcrumbs={{
-					title: "Conteúdo",
-					href: "/Partnership",
-				}}
-				actions={{
-					secondary: { text: "Cadastrar Nova Mensagem", href: "/email-marketing/messages/form" },
-				}}
-			/>
+		<Card>
+			<CardHeader>
+				<HeadingPages
+					title="Assembléias"
+					breadcrumbs={{
+						title: "Assembléias",
+						href: "/messages",
+					}}
+					actions={{
+						secondary: {
+							text: "Registrar mensagem",
+							href: "messages/details",
+						},
+					}}
+				/>
+			</CardHeader>
 
-			<div className="mt-3 space-y-6">
-				<Card>
-					<CardContent>
-						<DataTable data={FAKE_MESSAGES} columns={columns} facetedFilters={facetedFilters} visibilityState={visibilityState} />
-					</CardContent>
-				</Card>
-			</div>
-		</Fragment>
+			<CardContent>
+				<DataTable
+					data={FAKE_MESSAGES}
+					columns={columns}
+					facetedFilters={getFieldsWithOptions()}
+					visibilityState={getVisibilityState()}
+					columnResizeMode="onChange"
+				/>
+			</CardContent>
+		</Card>
 	);
 };
 
