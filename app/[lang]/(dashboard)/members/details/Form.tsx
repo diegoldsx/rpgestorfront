@@ -53,8 +53,8 @@ export function MemberForm({ onSubmit, data }: Props) {
 						control={control}
 						errors={errors}
 					>
-						{options && <Select options={options} />}
-					</FormFieldComponent>
+						{options ? <Select options={options} /> : <></>}
+						</FormFieldComponent>
 				))}
 				<SubmitButton isSubmitting={isSubmitting} isUpdate={!!data} />
 			</Form>

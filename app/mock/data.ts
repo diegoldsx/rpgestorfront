@@ -86,14 +86,7 @@ export const FAKE_SUBMISSIONS: Submission[] = Array.from(
 	})
 );
 
-export const FAKE_CATEGORIES: Category[] = Array.from(
-	{ length: LENGTH },
-	() => ({
-		id: int(),
-		name: words(2),
-		status: arrayElement(["ativo", "inativo"]),
-	})
-);
+
 
 export const FAKE_EVENTS: Event[] = Array.from({ length: LENGTH }, () => ({
 	id: int(),

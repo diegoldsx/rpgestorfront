@@ -53,8 +53,8 @@ export function ProvisionForm({ onSubmit, data }: Props) {
 						control={control}
 						errors={errors}
 					>
-						{options && <Select options={options} />}
-					</FormFieldComponent>
+						{options ? <Select options={options} /> : <></>}
+						</FormFieldComponent>
 				))}
 
 				<div className="md:col-span-2 mt-6 flex justify-end">

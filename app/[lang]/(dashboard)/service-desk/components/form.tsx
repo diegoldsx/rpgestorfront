@@ -51,7 +51,7 @@ export function ServiceDeskForm({ onSubmit, data }: Props) {
 						control={control}
 						errors={errors}
 					>
-						{options && <Select options={options} />}
+						{options ? <Select options={options} /> : <></>}
 					</FormFieldComponent>
 				))}
 

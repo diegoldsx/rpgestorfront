@@ -78,7 +78,9 @@ export function UserForm({ onSubmit, user }: UserFormProps) {
 					control={control}
 					errors={errors}
 					placeholder="Digite seu nome"
-				/>
+				>
+					<input type="text" />
+				</FormFieldComponent>
 
 				<FormFieldComponent
 					name="email"
@@ -86,8 +88,9 @@ export function UserForm({ onSubmit, user }: UserFormProps) {
 					control={control}
 					errors={errors}
 					placeholder="Digite seu email"
-					type="email"
-				/>
+				>
+					<input type="text" />
+				</FormFieldComponent>
 
 				<FormFieldComponent
 					name="username"
@@ -95,7 +98,9 @@ export function UserForm({ onSubmit, user }: UserFormProps) {
 					control={control}
 					errors={errors}
 					placeholder="Digite seu username"
-				/>
+				>
+					<input type="text" />
+				</FormFieldComponent>
 
 				<FormFieldComponent
 					name="status"
@@ -113,7 +118,9 @@ export function UserForm({ onSubmit, user }: UserFormProps) {
 					control={control}
 					errors={errors}
 					placeholder="Digite a URL de redirecionamento"
-				/>
+				>
+					<input type="text" />
+				</FormFieldComponent>
 
 				<div className="md:col-span-2 mt-6 flex justify-end">
 					<SubmitButton isSubmitting={isSubmitting} isUpdate={!!user} />

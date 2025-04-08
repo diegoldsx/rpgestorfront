@@ -54,7 +54,9 @@ export function PartnerTypeForm({ onSubmit, data }: Props) {
 				}}
 				className="grid grid-cols-1 md:grid-cols-2 gap-4"
 			>
-				<FormFieldComponent name="name" label="Nome" control={control} errors={errors} />
+				<FormFieldComponent name="name" label="Nome" control={control} errors={errors} placeholder="Digite o nome">
+					<input type="text" />
+				</FormFieldComponent>
 
 				<FormFieldComponent name="status" label="Status" control={control} errors={errors} placeholder="Selecione o status">
 					<Select options={options.status} />
