@@ -2,13 +2,14 @@
 
 import { SubmitHandler } from "react-hook-form";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { ContentTypeSchema, ContentTypeSchemaType } from "../../schemas/schema";
-import { FAKE_CONTENT_TYPE } from "../../types/data";
+
+import { FAKE_CONTENT_TYPE } from "../types/data";
 
 import { useFetchData } from "@/hooks/useFetchData";
 import { PageParams } from "@/types/commons/PageParams";
 import { GenericForm } from "@/components/form/GenericForm";
-import { columnSchema, defaultValues } from "../../schemas/columnSchema";
+import { columnSchema, defaultValues } from "../schemas/columnSchema";
+import { ContentTypeSchemaType, ContentTypeSchema } from "../schemas/schema";
 
 export default function DetailsPage({ searchParams }: PageParams) {
 	const id = searchParams.id;
