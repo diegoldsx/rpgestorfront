@@ -23,7 +23,6 @@ const layout = async ({
 
 	const trans = await getDictionary(lang);
 
-	console.log(session);
 
 	return (
 		<DashBoardLayoutProvider trans={trans}>{children}</DashBoardLayoutProvider>

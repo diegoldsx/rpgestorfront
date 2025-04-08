@@ -88,8 +88,7 @@ export const menusConfig: any = {
 			{
 				title: "Conteúdo",
 				icon: FileText,
-				href: "/content",
-				child: [{ title: "Tipo", href: "/content/content-type" }],
+				child: [{ title: "Tipo", href: "/content/content-type" }, { title: "Conteúdo", href: "/content" }],
 			},
 			{
 				title: "Agenda",

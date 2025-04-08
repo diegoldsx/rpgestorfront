@@ -8,7 +8,6 @@ import {
 	getVisibilityState,
 } from "./schemas/columnSchema";
 import { FAKE_ASSEMBLY } from "./types/data";
-import { page } from "./utils/labels";
 import { columns } from "./components/columns";
 
 const Page = () => {

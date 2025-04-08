@@ -1,33 +1,45 @@
 "use client";
 
-import { Fragment } from "react";
-import { Card, CardContent } from "@/components/ui/card";
 import { HeadingPages } from "@/components/common/heading/heading-pages";
-import { columns } from "./columns";
-import { FAKE_DATA } from "./data";
+import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { DataTable } from "@/components/common/data-table/data-table";
-import { visibilityState, facetedFilters } from "./Content";
+import {
+	getFieldsWithOptions,
+	getVisibilityState,
+} from "./schemas/columnSchema";
+import { FAKE_CONTENT } from "./types/data";
+import { columns } from "./components/columns";
 
-const ContentPage = () => {
+const Page = () => {
 	return (
-		<Fragment>
-			<HeadingPages
-				title="Conteúdo"
-				breadcrumbs={{
-					title: "Conteúdo",
-					href: "/content",
-				}}
-			/>
+		<Card>
+			<CardHeader>
+				<HeadingPages
+					title="Conteúdos"
+					breadcrumbs={{
+						title: "Conteúdos",
+						href: "/contents",
+					}}
+					actions={{
+						secondary: {
+							text: "Registrar conteúdo",
+							href: "contents/details",
+						},
+					}}
+				/>
+			</CardHeader>
 
-			<div className="mt-3 space-y-6">
-				<Card>
-					<CardContent>
-						<DataTable data={FAKE_DATA} columns={columns} facetedFilters={facetedFilters} visibilityState={visibilityState} />
-					</CardContent>
-				</Card>
-			</div>
-		</Fragment>
+			<CardContent>
+				<DataTable
+					data={FAKE_CONTENT}
+					columns={columns}
+					facetedFilters={getFieldsWithOptions()}
+					visibilityState={getVisibilityState()}
+					columnResizeMode="onChange"
+				/>
+			</CardContent>
+		</Card>
 	);
 };
 
-export default ContentPage;
+export default Page;
