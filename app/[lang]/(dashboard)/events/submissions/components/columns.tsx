@@ -4,14 +4,14 @@ import { ColumnDef } from "@tanstack/react-table";
 import { exactFilter } from "@/components/common/data-table/columnUtils";
 import { columnSchema } from "../schemas/columnSchema";
 import Link from "next/link";
-import { GroupSchemaType } from "../schemas/schema";
+import { SubmissionSchemaType } from "../schemas/schema";
 import DataCell from "@/components/common/data-table/columns/DataCell";
 import ActionsCell from "@/components/common/data-table/columns/ActionCell";
 import { Input } from "@/components/ui/input";
 
-const editUrl = "groups/details-page";
+const editUrl = "submissions/details-page";
 
-export const columns: ColumnDef<GroupSchemaType>[] = [
+export const columns: ColumnDef<SubmissionSchemaType>[] = [
 	...columnSchema
 		.filter((item) => item.isVisible !== false)
 		.map(({ id, title, options, type, size = 0 }) => ({

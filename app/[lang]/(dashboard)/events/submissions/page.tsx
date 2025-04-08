@@ -1,44 +1,44 @@
 "use client";
 
-import { Fragment } from "react";
-import { Card, CardContent } from "@/components/ui/card";
 import { HeadingPages } from "@/components/common/heading/heading-pages";
-import { columns } from "./columns";
+import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { DataTable } from "@/components/common/data-table/data-table";
-import { FAKE_DATA } from "@/data/submissionsData";
-import { facetedFilters, visibilityState } from "./columnConfig";
-import { SubmissionSchemaType } from "@/schemas/events/submission";
+import {
+	getFieldsWithOptions,
+	getVisibilityState,
+} from "./schemas/columnSchema";
+import { FAKE_SUBMISSIONS } from "./types/data";
+import { columns } from "./components/columns";
 
-const title = "Submissões";
-const breadcrumbs = {
-	title: "Eventos",
-	href: "/events",
-};
-const actions = {
-	secondary: {
-		text: "Cadastrar nova submissão",
-		href: "/events/submissions/form",
-	},
-};
-
-export const Page = () => {
+const Page = () => {
 	return (
-		<Fragment>
-			<HeadingPages title={title} breadcrumbs={breadcrumbs} actions={actions} />
+		<Card>
+			<CardHeader>
+				<HeadingPages
+					title="Submissões"
+					breadcrumbs={{
+						title: "Submissões",
+						href: "/submissions",
+					}}
+					actions={{
+						secondary: {
+							text: "Registrar submissão",
+							href: "submissions/details-page",
+						},
+					}}
+				/>
+			</CardHeader>
 
-			<div className="mt-3 space-y-6">
-				<Card>
-					<CardContent>
-						<DataTable
-							data={FAKE_DATA}
-							columns={columns}
-							facetedFilters={facetedFilters}
-							visibilityState={visibilityState}
-						/>
-					</CardContent>
-				</Card>
-			</div>
-		</Fragment>
+			<CardContent>
+				<DataTable
+					data={FAKE_SUBMISSIONS}
+					columns={columns}
+					facetedFilters={getFieldsWithOptions()}
+					visibilityState={getVisibilityState()}
+					columnResizeMode="onChange"
+				/>
+			</CardContent>
+		</Card>
 	);
 };
 

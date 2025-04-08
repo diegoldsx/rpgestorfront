@@ -9,6 +9,7 @@ interface FormFieldComponentProps {
 	control: any;
 	errors: any;
 	children: React.ReactElement;
+	placeholder?: string;
 }
 
 export const FormFieldComponent: React.FC<FormFieldComponentProps> = ({
@@ -17,6 +18,7 @@ export const FormFieldComponent: React.FC<FormFieldComponentProps> = ({
 	control,
 	errors,
 	children,
+	placeholder,
 }) => {
 	if (["id", "actions"].includes(name)) return null;
 
@@ -39,6 +41,7 @@ export const FormFieldComponent: React.FC<FormFieldComponentProps> = ({
 					return React.cloneElement(children, {
 						...field,
 						id: name,
+						placeholder,
 						...(children.props?.type === "checkbox" ||
 						displayName === "Checkbox"
 							? {

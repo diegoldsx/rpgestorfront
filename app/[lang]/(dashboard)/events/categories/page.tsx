@@ -1,42 +1,44 @@
 "use client";
 
-import { Fragment } from "react";
-import { Card, CardContent } from "@/components/ui/card";
 import { HeadingPages } from "@/components/common/heading/heading-pages";
-import { columns } from "./columns";
+import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { DataTable } from "@/components/common/data-table/data-table";
-import { FAKE_DATA } from "@/data/assembliesData";
-import { facetedFilters, visibilityState } from "./columnConfig";
-
-const title = "Submissões";
-const breadcrumbs = { title: "Eventos", href: "/events" };
-const action = {
-	text: "Cadastrar novo Submissão",
-	href: "/events/submissions/form",
-};
+import {
+	getFieldsWithOptions,
+	getVisibilityState,
+} from "./schemas/columnSchema";
+import { FAKE_CATEGORIES } from "./types/data";
+import { columns } from "./components/columns";
 
 const Page = () => {
 	return (
-		<Fragment>
-			<HeadingPages
-				title={title}
-				breadcrumbs={breadcrumbs}
-				actions={{ secondary: action }}
-			/>
+		<Card>
+			<CardHeader>
+				<HeadingPages
+					title="Categorias"
+					breadcrumbs={{
+						title: "Categorias",
+						href: "/categories",
+					}}
+					actions={{
+						secondary: {
+							text: "Registrar categoria",
+							href: "categories/details-page",
+						},
+					}}
+				/>
+			</CardHeader>
 
-			<div className="mt-3 space-y-6">
-				<Card>
-					<CardContent>
-						<DataTable
-							data={FAKE_DATA}
-							columns={columns}
-							facetedFilters={facetedFilters}
-							visibilityState={visibilityState}
-						/>
-					</CardContent>
-				</Card>
-			</div>
-		</Fragment>
+			<CardContent>
+				<DataTable
+					data={FAKE_CATEGORIES}
+					columns={columns}
+					facetedFilters={getFieldsWithOptions()}
+					visibilityState={getVisibilityState()}
+					columnResizeMode="onChange"
+				/>
+			</CardContent>
+		</Card>
 	);
 };
 
