@@ -19,14 +19,8 @@ import { Input } from "@/components/ui/input";
 import Select from "@/components/Select";
 import { Checkbox } from "@/components/Checkbox";
 import { DatePicker } from "@/components/date-picker";
-
-interface ColumnSchema<T extends FieldValues> {
-	id: keyof T;
-	title: string;
-	type: string;
-	options?: { label: string; value: string }[];
-	defaultValue?: any;
-}
+import { ColumnSchema } from "@/types/columns/ColumnsDefinition";
+import { ColumnDef } from "@tanstack/react-table";
 
 interface GenericFormProps<T extends FieldValues> {
 	schema: ZodType<T>;
