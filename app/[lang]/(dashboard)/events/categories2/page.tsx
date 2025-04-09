@@ -3,23 +3,28 @@
 import { HeadingPages } from "@/components/common/heading/heading-pages";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { DataTable } from "@/components/common/data-table/data-table";
-import { fake_data } from "./types";
-import { columns, getFieldsWithOptions, getVisibilityState } from "./columns";
+import { Category, CategorySchema } from "./types";
+import { dataTableColumns, getFieldsWithOptions, getVisibilityState } from "./columns";
+import { pageStrings } from "./labels";
+import { getFakeData } from "@/utils/getFakeData";
+
+export const fake_categories = getFakeData(CategorySchema, 10);
+
 
 const Page = () => {
 	return (
 		<Card>
 			<CardHeader>
 				<HeadingPages
-					title="Categorias"
+					title={pageStrings.title}
 					breadcrumbs={{
-						title: "Categorias",
-						href: "/categories",
+						title: pageStrings.title,
+						href: pageStrings.href,
 					}}
 					actions={{
 						secondary: {
-							text: "Registrar categoria",
-							href: "categories/details-page",
+							text: "Registrar " + pageStrings.name,
+							href: pageStrings.details,
 						},
 					}}
 				/>
@@ -27,8 +32,8 @@ const Page = () => {
 
 			<CardContent>
 				<DataTable
-					data={fake_data}
-					columns={columns}
+					data={fake_categories as Category[]}
+					columns={dataTableColumns}
 					facetedFilters={getFieldsWithOptions()}
 					visibilityState={getVisibilityState()}
 					columnResizeMode="onChange"

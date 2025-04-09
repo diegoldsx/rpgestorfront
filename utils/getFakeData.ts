@@ -8,7 +8,7 @@ export function getFakeData<T extends ZodObject<any>>(
 
 	return Array.from({ length: count }, (_, i) =>
 		keys.reduce((acc, key) => {
-			acc[key] = `${key}-${i}`;
+			acc[key] = `${key} - ${i}`;
 			return acc;
 		}, {} as any)
 	) as Array<z.infer<T>>;
