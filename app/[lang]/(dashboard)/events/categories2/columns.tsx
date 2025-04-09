@@ -10,8 +10,15 @@ import { ColumnSchema } from "@/types/columns/ColumnsDefinition";
 import { DefaultValues } from "react-hook-form";
 import { pageStrings } from "./labels";
 
-
-export const fieldsProps: ColumnSchema<Category>[] = [
+const fieldsProps: ColumnSchema<Category>[] = [
+	{
+		id: "id",
+		title: "ID",
+		type: "id",
+		defaultValue: "",
+		isVisible: true,
+		size: 100,
+	},
 	{
 		id: "name",
 		title: "Nome",
@@ -30,10 +37,8 @@ export const fieldsProps: ColumnSchema<Category>[] = [
 	},
 ] as const;
 
-
-function renderTableColumns(cols: ColumnSchema<Category>[]) {
-
-	return [...cols.filter((item) => item.isVisible !== false).map(({ id, title, options, type, size = 0 }) => ({
+const useTableColumns = (cols: ColumnSchema<Category>[]) => {
+	return cols.filter((item) => item.isVisible !== false).map(({ id, title, options, type, size = 0 }) => ({
 		id,
 		accessorKey: id,
 		header: title,
@@ -42,20 +47,12 @@ function renderTableColumns(cols: ColumnSchema<Category>[]) {
 		cell: (props: { getValue: () => any }) => (
 			<DataCell getValue={props.getValue} type={type} options={options} />
 		),
-	})),]
-}
+	}));
+};
 
+const columns: ColumnDef<Category>[] = [
 
-export const dataTableColumns: ColumnDef<Category>[] = [
-	{
-		id: "id",
-		header: "ID",
-		size: 100,
-		cell: (props: { getValue: () => any }) => (
-			<DataCell getValue={props.getValue} type={"id"} />
-		),
-	},
-	...renderTableColumns(fieldsProps),
+	...useTableColumns(fieldsProps),
 	{
 		id: "actions",
 		header: "Actions",
@@ -68,11 +65,14 @@ export const dataTableColumns: ColumnDef<Category>[] = [
 	},
 ];
 
-export const getDefaultValues = () => fieldsProps.map(prop => ({ id: prop.id, value: prop.defaultValue })) as DefaultValues<Category>
-export const getFieldsWithOptions = () => fieldsProps.filter(({ options }) => !!options)
-export const getVisibilityState = () => fieldsProps.reduce((acc, { id, isVisible }) => {
-	acc[id] = isVisible ?? true
-	return acc
-}, {} as VisibilityState)
+const visibilityState = fieldsProps.reduce((acc, { id, isVisible }) => {
+	acc[id] = isVisible ?? true;
+	return acc;
+}, {} as VisibilityState);
+const defaultValues = fieldsProps.map(prop => ({ id: prop.id, value: prop.defaultValue })) as DefaultValues<Category>;
+const fieldsWithOptions = fieldsProps.filter(({ options }) => !!options);
 
 
+export {
+	columns, fieldsProps, visibilityState, defaultValues, fieldsWithOptions
+}

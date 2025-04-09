@@ -1,45 +1,32 @@
 "use client";
-
-import { HeadingPages } from "@/components/common/heading/heading-pages";
-import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { DataTable } from "@/components/common/data-table/data-table";
-import { Category, CategorySchema } from "./types";
-import { dataTableColumns, getFieldsWithOptions, getVisibilityState } from "./columns";
-import { pageStrings } from "./labels";
-import { getFakeData } from "@/utils/getFakeData";
+import { Category, CategorySchema, fake_categories } from "./types";
+import { columns, fieldsWithOptions, visibilityState } from "./columns";
+import { HeaderActions, PageLayout } from "@/components/common/page/PageLayout";
 
-export const fake_categories = getFakeData(CategorySchema, 10);
+
+const headerActions: HeaderActions = {
+	primary: {
+		text: "Primary", href: "#"
+	},
+	secondary: {
+		text: "Nova categoria", href: "categories2/details-page"
+	}
+}
 
 
 const Page = () => {
 	return (
-		<Card>
-			<CardHeader>
-				<HeadingPages
-					title={pageStrings.title}
-					breadcrumbs={{
-						title: pageStrings.title,
-						href: pageStrings.href,
-					}}
-					actions={{
-						secondary: {
-							text: "Registrar " + pageStrings.name,
-							href: pageStrings.details,
-						},
-					}}
-				/>
-			</CardHeader>
+		<PageLayout title="Categorias" headerActions={headerActions}>
+			<DataTable
+				data={fake_categories as Category[]}
+				columns={columns}
+				facetedFilters={fieldsWithOptions}
+				visibilityState={visibilityState}
+				columnResizeMode="onChange"
+			/>
+		</PageLayout >
 
-			<CardContent>
-				<DataTable
-					data={fake_categories as Category[]}
-					columns={dataTableColumns}
-					facetedFilters={getFieldsWithOptions()}
-					visibilityState={getVisibilityState()}
-					columnResizeMode="onChange"
-				/>
-			</CardContent>
-		</Card>
 	);
 };
 

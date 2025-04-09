@@ -7,15 +7,15 @@ export interface Column<T extends Record<string, any> = any> {
 	id: keyof T;
 	title: string;
 	type:
-		| "text"
-		| "select"
-		| "hidden"
-		| "id"
-		| "checkbox"
-		| "badge"
-		| "date"
-		| "textarea"
-		| "badge";
+	| "text"
+	| "select"
+	| "hidden"
+	| "id"
+	| "checkbox"
+	| "badge"
+	| "date"
+	| "textarea"
+	| "badge";
 	options?: Option[];
 	defaultValue: T[keyof T];
 	isVisible?: boolean;
@@ -33,3 +33,5 @@ export interface ColumnSchema<T> {
 	size?: number;
 	options?: { label: string; value: string }[];
 }
+
+

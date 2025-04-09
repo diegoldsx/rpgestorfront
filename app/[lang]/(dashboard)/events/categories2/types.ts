@@ -9,3 +9,5 @@ export const CategorySchema = z.object({
 
 export type Category = z.infer<typeof CategorySchema>;
 
+export const fake_categories = getFakeData(CategorySchema, 10)
+

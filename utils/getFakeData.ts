@@ -1,4 +1,4 @@
-import { ZodObject, z } from "zod";
+import { ZodObject, z } from 'zod';
 
 export function getFakeData<T extends ZodObject<any>>(
 	schema: T,
@@ -6,9 +6,11 @@ export function getFakeData<T extends ZodObject<any>>(
 ): Array<z.infer<T>> {
 	const keys = Object.keys(schema.shape);
 
-	return Array.from({ length: count }, (_, i) =>
+
+	return Array.from({ length: count }).map((_, i) =>
 		keys.reduce((acc, key) => {
-			acc[key] = `${key} - ${i}`;
+			acc[key] = key === "id" ? `${i}` : `${key}-${i}`;
+			console.log(acc)
 			return acc;
 		}, {} as any)
 	) as Array<z.infer<T>>;
