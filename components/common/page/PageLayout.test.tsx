@@ -2,8 +2,8 @@ import { render, screen } from '@testing-library/react';
 import { describe, it, expect } from 'vitest';
 import { PageLayout } from './PageLayout';
 
-describe('1# PageLayout componente', () => {
-  it('renders title and children correctly', () => {
+describe('PageLayout componente testes', () => {
+  it('#1 renders title and children correctly', () => {
     const title = 'Test Title';
     const content = 'Test Content';
 
