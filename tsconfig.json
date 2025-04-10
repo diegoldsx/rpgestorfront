@@ -1,5 +1,6 @@
 {
 	"compilerOptions": {
+		"types": ["vite", "vitest", "node"],
 		"lib": ["dom", "dom.iterable", "esnext"],
 		"target": "esnext",
 		"allowJs": false,
@@ -17,6 +18,8 @@
 		"preserveWatchOutput": true,
 		"strictNullChecks": true,
 		"forceConsistentCasingInFileNames": true,
+		"baseUrl": ".",
+
 		"plugins": [
 			{
 				"name": "next"
