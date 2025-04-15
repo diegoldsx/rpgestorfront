@@ -1,45 +1,35 @@
-"use client";
 
-import { HeadingPages } from "@/components/common/heading/heading-pages";
-import { Card, CardContent, CardHeader } from "@/components/ui/card";
+"use client"
 import { DataTable } from "@/components/common/data-table/data-table";
 import {
 	getFieldsWithOptions,
 	getVisibilityState,
 } from "./schemas/columnSchema";
-import { FAKE_ASSEMBLY } from "./types/data";
 import { columns } from "./components/columns";
+import { PageLayout } from "@/components/common/page/PageLayout";
+import { useFetch } from "@/hooks/useFetch";
+import { Assembly } from "./schemas/schema";
 
 const Page = () => {
-	return (
-		<Card>
-			<CardHeader>
-				<HeadingPages
-					title="Assembléias"
-					breadcrumbs={{
-						title: "Assembléias",
-						href: "/assemblies",
-					}}
-					actions={{
-						secondary: {
-							text: "Registrar assembléia",
-							href: "assemblies/details",
-						},
-					}}
-				/>
-			</CardHeader>
 
-			<CardContent>
-				<DataTable
-					data={FAKE_ASSEMBLY}
-					columns={columns}
-					facetedFilters={getFieldsWithOptions()}
-					visibilityState={getVisibilityState()}
-					columnResizeMode="onChange"
-				/>
-			</CardContent>
-		</Card>
-	);
-};
+	const { data, loading, error } = useFetch<Assembly[]>("/api/assemblies")
+
+	return (
+		<PageLayout title="Assembléias" headerActions={{
+			secondary: {
+				text: "Registrar assembléia",
+				href: "assemblies/details",
+			},
+		}}>
+			{data && <DataTable
+				data={data || []}
+				columns={columns}
+				facetedFilters={getFieldsWithOptions()}
+				visibilityState={getVisibilityState()}
+				columnResizeMode="onChange"
+			/>}
+		</PageLayout>
+	)
+}
 
 export default Page;
