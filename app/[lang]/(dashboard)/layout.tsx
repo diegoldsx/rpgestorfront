@@ -1,3 +1,4 @@
+import { ReactNode } from "react";
 import DashBoardLayoutProvider from "@/provider/dashboard.layout.provider";
 import { authOptions } from "@/lib/auth";
 import { getServerSession, NextAuthOptions } from "next-auth";
@@ -8,13 +9,12 @@ export const metadata = {
 	title: "Associados",
 };
 
-const layout = async ({
-	children,
-	params: { lang },
-}: {
-	children: React.ReactNode;
-	params: { lang: any };
-}) => {
+type LayoutProps = {
+	children: ReactNode;
+	params: { lang: "en" | "pt" };
+};
+
+const Layout = async ({ children, params: { lang } }: LayoutProps) => {
 	const session = await getServerSession(authOptions as NextAuthOptions);
 
 	if (!session?.user?.email) {
@@ -23,10 +23,11 @@ const layout = async ({
 
 	const trans = await getDictionary(lang);
 
-
 	return (
-		<DashBoardLayoutProvider trans={trans}>{children}</DashBoardLayoutProvider>
+		<DashBoardLayoutProvider trans={trans}>
+			{children}
+		</DashBoardLayoutProvider>
 	);
 };
 
-export default layout;
+export default Layout;

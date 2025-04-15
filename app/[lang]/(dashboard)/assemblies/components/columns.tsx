@@ -4,14 +4,14 @@ import { ColumnDef } from "@tanstack/react-table";
 import { exactFilter } from "@/components/common/data-table/columnUtils";
 import { columnSchema } from "../schemas/columnSchema";
 import Link from "next/link";
-import { AssemblySchemaType } from "../schemas/schema";
+import { Assembly } from "../schemas/schema";
 import DataCell from "@/components/common/data-table/columns/DataCell";
 import ActionsCell from "@/components/common/data-table/columns/ActionCell";
 import { Input } from "@/components/ui/input";
 
 const editUrl = "assemblies/details";
 
-export const columns: ColumnDef<AssemblySchemaType>[] = [
+export const columns: ColumnDef<Assembly>[] = [
 	...columnSchema
 		.filter((item) => item.isVisible !== false)
 		.map(({ id, title, options, type, size = 0 }) => ({
@@ -29,9 +29,7 @@ export const columns: ColumnDef<AssemblySchemaType>[] = [
 		header: "Actions",
 		size: 150,
 		cell: ({ row }) => (
-			<Link href={editUrl}>
-				<ActionsCell row={row} editUrl={editUrl} label="Edit" />
-			</Link>
+			<ActionsCell row={row} editUrl={editUrl} label="Edit" />
 		),
 	},
 ];

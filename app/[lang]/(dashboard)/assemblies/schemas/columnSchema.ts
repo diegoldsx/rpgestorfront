@@ -1,8 +1,8 @@
 import { VisibilityState } from "@tanstack/react-table";
-import { AssemblySchemaType } from "./schema";
-import { ColumnSchema } from "@/types/columns/ColumnsDefinition";
+import { Assembly } from "./schema";
+import { Column } from "@/types/columns/ColumnsDefinition";
 
-export const columnSchema: Array<ColumnSchema<AssemblySchemaType>> = [
+export const columnSchema: Array<Column<Assembly>> = [
 	{
 		id: "id",
 		title: "ID",

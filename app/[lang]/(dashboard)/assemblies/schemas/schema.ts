@@ -1,18 +1,6 @@
 import { z } from "zod";
 
-export type Assembly = {
-	id?: string;
-	name: string;
-	status: string;
-	startDate?: string;
-	endDate?: string;
-	resultDate?: string;
-	description?: string;
-	type: string;
-	allowChangeVote: boolean;
-	displayMode: string;
-	videoConference: boolean;
-};
+
 
 export const AssemblySchema = z.object({
 	id: z.string().optional(),
@@ -30,4 +18,4 @@ export const AssemblySchema = z.object({
 	videoConference: z.boolean(),
 });
 
-export type AssemblySchemaType = z.infer<typeof AssemblySchema>;
+export type Assembly = z.infer<typeof AssemblySchema>;

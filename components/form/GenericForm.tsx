@@ -19,13 +19,13 @@ import { Input } from "@/components/ui/input";
 import Select from "@/components/Select";
 import { Checkbox } from "@/components/Checkbox";
 import { DatePicker } from "@/components/date-picker";
-import { ColumnSchema } from "@/types/columns/ColumnsDefinition";
+import { Column } from "@/types/columns/ColumnsDefinition";
 import { ColumnDef } from "@tanstack/react-table";
 
 interface GenericFormProps<T extends FieldValues> {
 	schema: ZodType<T>;
 	defaultValues: DefaultValues<T>;
-	columns: ColumnSchema<T>[];
+	columns: Column<T>[];
 	onSubmit: SubmitHandler<T>;
 	data?: Partial<T>;
 	submitLabel?: string;
