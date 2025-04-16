@@ -38,7 +38,7 @@ export const HeadingPages = ({
 				<div className="flex-none">
 					<Breadcrumbs>
 						<BreadcrumbItem href="/dashboard">Dashboard</BreadcrumbItem>
-						<BreadcrumbItem  href={breadcrumbs.href}>{breadcrumbs.title}</BreadcrumbItem>
+						<BreadcrumbItem href={breadcrumbs.href}>{breadcrumbs.title}</BreadcrumbItem>
 					</Breadcrumbs>
 				</div>
 			</div>

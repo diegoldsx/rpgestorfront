@@ -1,6 +1,6 @@
 "use client";
 
-import { HeadingPages } from "@/components/common/heading/heading-pages";
+import { HeadingPages } from "../heading/heading-pages";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 
 
