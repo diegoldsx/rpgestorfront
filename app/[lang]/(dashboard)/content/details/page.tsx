@@ -9,13 +9,13 @@ import { useFetchData } from "@/hooks/useFetchData";
 import { PageParams } from "@/types/commons/PageParams";
 import { GenericForm } from "@/components/form/GenericForm";
 import { columnSchema, defaultValues } from "../schemas/columnSchema";
+import { useFetch } from "@/hooks/useFetch";
 
 export default function DetailsPage({ searchParams }: PageParams) {
 	const id = searchParams.id;
 
-	const { data } = useFetchData(id, (id) => {
-		return FAKE_CONTENT.find((d) => d.id === id);
-	});
+	const { data, loading, error } = useFetch<ContentSchemaType>("/api/content/" + id)
+
 
 	const handleSubmit: SubmitHandler<ContentSchemaType> = async (data) => {
 		console.log("Submit", data);

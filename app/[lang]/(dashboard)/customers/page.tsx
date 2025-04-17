@@ -9,8 +9,13 @@ import {
 } from "./schemas/columnSchema";
 import { FAKE_CUSTOMERS } from "./types/data";
 import { columns } from "./components/columns";
+import { CustomerSchemaType } from "./schemas/schema";
+import { useFetch } from "@/hooks/useFetch";
 
 const Page = () => {
+	const { data, loading, error } =
+		useFetch<CustomerSchemaType[]>("/api/customer");
+
 	return (
 		<Card>
 			<CardHeader>
@@ -31,7 +36,7 @@ const Page = () => {
 
 			<CardContent>
 				<DataTable
-					data={FAKE_CUSTOMERS}
+					data={data || []}
 					columns={columns}
 					facetedFilters={getFieldsWithOptions()}
 					visibilityState={getVisibilityState()}

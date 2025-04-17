@@ -9,8 +9,13 @@ import {
 } from "./schemas/columnSchema";
 import { FAKE_CONTENT } from "./types/data";
 import { columns } from "./components/columns";
+import { Content } from "./types";
+import { useFetch } from "@/hooks/useFetch";
 
 const Page = () => {
+
+	const { data, loading, error } = useFetch<Content[]>("/api/content")
+
 	return (
 		<Card>
 			<CardHeader>
@@ -31,7 +36,7 @@ const Page = () => {
 
 			<CardContent>
 				<DataTable
-					data={FAKE_CONTENT}
+					data={data || []}
 					columns={columns}
 					facetedFilters={getFieldsWithOptions()}
 					visibilityState={getVisibilityState()}

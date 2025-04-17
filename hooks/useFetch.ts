@@ -7,8 +7,7 @@ export function useFetch<T>(url?: string) {
 	useEffect(() => {
 		if (!url) return;
 
-		const baseUrl =
-			typeof window !== "undefined" ? window.location.origin : "";
+		const baseUrl = typeof window !== "undefined" ? window.location.origin : "";
 
 		setLoading(true);
 		setError(null);
