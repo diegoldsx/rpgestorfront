@@ -16,7 +16,7 @@ export type HeaderActions = {
 }
 
 interface PageLayoutProps {
-  title: string;
+  title?: string;
   breadcrumbs?: {
     title: string;
     href: string;
@@ -27,9 +27,9 @@ interface PageLayoutProps {
 }
 
 export function PageLayout({
-  title,
+  title = "",
   breadcrumbs = {
-    title: title,
+    title: "",
     href: "#"
   },
   children,

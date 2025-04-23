@@ -71,7 +71,7 @@ const ProfileInfo = () => {
 						{
 							name: "Meu Perfil",
 							icon: "heroicons:user",
-							href: "#",
+							href: "/profile",
 						},
 						{
 							name: "Minhas Mensalidades",
