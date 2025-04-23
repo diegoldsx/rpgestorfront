@@ -3,11 +3,11 @@
 	"version": "6.0.0",
 	"private": true,
 	"scripts": {
-		"dev": "next dev",
+		"dev": "NODE_OPTIONS='--inspect=9229' next dev",
 		"build": "next build",
 		"start": "next start",
 		"lint": "tsc --noEmit",
-		"test": "vitest"
+		"test": "vitest run"
 	},
 	"dependencies": {
 		"@ckeditor/ckeditor5-build-classic": "^40.1.0",
