@@ -14,7 +14,7 @@ const FileUpload: React.FC = () => {
 		if (file) {
 			const reader = new FileReader();
 
-			reader.onload = (e) => {};
+			reader.onload = (e) => { };
 
 			reader.readAsText(file);
 		}

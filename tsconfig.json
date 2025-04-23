@@ -21,11 +21,11 @@
     "preserveWatchOutput": true,
     "strictNullChecks": true,
     "forceConsistentCasingInFileNames": true,
-    "baseUrl": ".",
+    "baseUrl": ".", // garante que o root é o projeto
     "paths": {
       "@/*": [
         "./*"
-      ]
+      ] // permite usar @/componentes/...
     },
     "types": [
       "vite",
@@ -43,7 +43,8 @@
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx",
-    ".next/types/**/*.ts"
+    ".next/types/**/*.ts",
+    "vitest/FileUpload.test.tsx"
   ],
   "exclude": [
     "node_modules",
