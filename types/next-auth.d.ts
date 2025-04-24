@@ -7,6 +7,10 @@ declare module 'next-auth' {
       name?: string | null
       email?: string | null
       image?: string | null
+      permissions?: {
+        route: string;
+        level: "read" | "edit" | "admin";
+      }[];
     }
   }
 
@@ -15,9 +19,17 @@ declare module 'next-auth' {
     name?: string | null
     email?: string | null
     image?: string | null
+    permissions?: {
+      route: string;
+      level: "read" | "edit" | "admin";
+    }[];
   }
 
   interface JWT {
     id?: string
+    permissions?: {
+      route: string;
+      level: "read" | "edit" | "admin";
+    }[];
   }
 }

@@ -1,32 +1,36 @@
 "use client";
-import { Fragment } from "react";
-import { Card, CardContent } from "@/components/ui/card";
-import { HeadingPages } from "@/components/common/heading/heading-pages";
 import { DataTable } from "@/components/common/data-table/data-table";
-import { columns } from "./utils/columns";
-import { facetedFilters, visibilityState } from "./utils/columnConfig";
-import { FAKE_USER_DATA } from "@/data/userData";
-import { User } from "@/types/user/user";
+import { fake_users, User } from "./types";
+import { columns, fieldsWithOptions, visibilityState } from "./columns";
+import { HeaderActions, PageLayout } from "@/components/common/page/PageLayout";
+import { useSession } from "next-auth/react";
 
-export default function UsersPage() {
-	return (
-		<Fragment>
-			<HeadingPages
-				title="Usuários"
-				breadcrumbs={{ title: "Dashboard", href: "/dashboard" }}
-				actions={{
-					primary: { text: "Importar", href: "#" },
-					secondary: { text: "Cadastrar Novo usuário", href: "/users/form" },
-				}}
-			/>
 
-			<div className="mt-3 space-y-6">
-				<Card>
-					<CardContent>
-						<DataTable data={FAKE_USER_DATA as User[]} columns={columns} facetedFilters={facetedFilters} visibilityState={visibilityState} />
-					</CardContent>
-				</Card>
-			</div>
-		</Fragment>
-	);
+const headerActions: HeaderActions = {
+	primary: {
+		text: "Primary", href: "#"
+	},
+	secondary: {
+		text: "Novo usuário", href: "users/details-page"
+	}
 }
+
+const Page = () => {
+	const { data: session, status } = useSession();
+	console.log(session)
+
+	return (
+		<PageLayout title="Users" headerActions={headerActions}>
+			<DataTable
+				data={fake_users as User[]}
+				columns={columns}
+				facetedFilters={fieldsWithOptions}
+				visibilityState={visibilityState}
+				columnResizeMode="onChange"
+			/>
+		</PageLayout >
+
+	);
+};
+
+export default Page;

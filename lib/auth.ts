@@ -1,9 +1,10 @@
 import Credentials from 'next-auth/providers/credentials';
 
-import { User, user } from '@/app/api/user/data';
+
 import GoogleProvider from 'next-auth/providers/google';
 import GithubProvider from 'next-auth/providers/github';
 import { NextAuthOptions } from 'next-auth';
+import { fake_users } from '@/app/[lang]/(dashboard)/users/types';
 
 export const authOptions: NextAuthOptions = {
 	providers: [
@@ -27,7 +28,7 @@ export const authOptions: NextAuthOptions = {
 					password: string;
 				};
 
-				const foundUser = user.find((u) => u.email === email);
+				const foundUser = fake_users.find((u) => u.email === email);
 
 				if (!foundUser) {
 					return null;
@@ -44,6 +45,7 @@ export const authOptions: NextAuthOptions = {
 						id: foundUser.id,
 						name: foundUser.name,
 						email: foundUser.email,
+						permissions: foundUser.permissions
 					}
 				}
 				return null;
@@ -59,12 +61,16 @@ export const authOptions: NextAuthOptions = {
 		async jwt({ token, user }) {
 			if (user) {
 				token.id = user.id
+				token.permissions = user.permissions;
+
 			}
 			return token
 		},
 		async session({ session, token }) {
 			if (session.user && token.id) {
 				session.user.id = token.id as string
+				session.user.permissions = token.permissions as any;
+
 			}
 			return session
 		},
