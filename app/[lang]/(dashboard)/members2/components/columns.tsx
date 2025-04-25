@@ -4,7 +4,7 @@ import { ColumnDef } from "@tanstack/react-table";
 import { exactFilter } from "@/components/common/data-table/columnUtils";
 import { columnSchema } from "../schemas/columnSchema";
 import Link from "next/link";
-import { Member } from "../schemas/schema";
+import { Member, MemberSchema } from "../schemas/schema";
 import DataCell from "@/components/common/data-table/columns/DataCell";
 import ActionsCell from "@/components/common/data-table/columns/ActionCell";
 

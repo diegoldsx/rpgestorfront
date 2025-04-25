@@ -19,7 +19,7 @@ import { Input } from "@/components/ui/input";
 import Select from "@/components/Select";
 import { Checkbox } from "@/components/Checkbox";
 import { DatePicker } from "@/components/date-picker";
-import { Column } from "@/types/columns/ColumnsDefinition";
+import { Column, ColumnSchema } from "@/types/columns/ColumnsDefinition";
 import { ColumnDef } from "@tanstack/react-table";
 
 interface GenericFormProps<T extends FieldValues> {

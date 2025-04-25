@@ -3,6 +3,7 @@ import { cva, type VariantProps } from 'class-variance-authority';
 import { Icon } from '@iconify/react';
 import Link from 'next/link';
 import { cn } from '@/lib/utils';
+import { string } from 'zod';
 
 const breadcrumbItemsVariants = cva(
   'flex gap-1 items-center transition underline-offset-4',
@@ -57,8 +58,8 @@ const breadcrumbsVariants = cva('flex flex-wrap list-none max-w-fit', {
 
 interface BreadcrumbsProps
   extends Omit<React.HTMLAttributes<HTMLOListElement>, 'color'>,
-    VariantProps<typeof breadcrumbsVariants>,
-    VariantProps<typeof breadcrumbItemsVariants> {
+  VariantProps<typeof breadcrumbsVariants>,
+  VariantProps<typeof breadcrumbItemsVariants> {
   maxItems?: number;
   itemsBeforeCollapse?: number;
   itemsAfterCollapse?: number;
@@ -134,7 +135,7 @@ const Breadcrumbs = React.forwardRef<HTMLOListElement, BreadcrumbsProps>(
                 disabled: disabled && !isLast,
                 separator,
                 className: cn(
-                  breadcrumbItemsVariants({ color, size, underline }),
+                  breadcrumbItemsVariants({ color, size }),
                   (child as React.ReactElement).props.className,
                   itemClasses
                 ),

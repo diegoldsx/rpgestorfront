@@ -3,7 +3,7 @@ import { Breadcrumbs, BreadcrumbItem } from "@/components/ui/breadcrumbs";
 
 const UnderlinesBreadcrumb = () => {
   const underlines = ["none", "hover", "always", "active", "focus"];
-  const descriptions:any = {
+  const descriptions: any = {
     none: "No underline",
     hover: "Underline on hover",
     always: "Always underline",
@@ -17,7 +17,7 @@ const UnderlinesBreadcrumb = () => {
           <p className="mb-2  text-base  font-medium  text-default-800 ">
             {descriptions[u]} ({u})
           </p>
-          <Breadcrumbs underline={u}>
+          <Breadcrumbs>
             <BreadcrumbItem>Home</BreadcrumbItem>
             <BreadcrumbItem>Dashboard</BreadcrumbItem>
             <BreadcrumbItem> Advanced UI</BreadcrumbItem>

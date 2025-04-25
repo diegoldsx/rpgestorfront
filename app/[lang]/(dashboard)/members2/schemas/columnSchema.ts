@@ -1,9 +1,9 @@
-import { ColumnSchema } from "@/types/columns/ColumnsDefinition";
+import { Column} from "@/types/columns/ColumnsDefinition";
 import { VisibilityState } from "@tanstack/react-table";
 import { Member } from "./schema";
-import { stateOptions } from "@/types/member/StateUF";
+import { stateOptions, StateUF } from "@/types/member/StateUF";
 
-export const columnSchema: Array<ColumnSchema<Member>> = [
+export const columnSchema: Array<Column<Member>> = [
 	{
 		id: "id",
 		title: "ID",
@@ -163,7 +163,7 @@ export const columnSchema: Array<ColumnSchema<Member>> = [
 		title: "Estado",
 		type: "select",
 		defaultValue: "",
-		options: stateOptions,
+		options: Object.values(StateUF).map((state) => ({ value: state, label: state })),
 		isVisible: true,
 		size: 150,
 	},

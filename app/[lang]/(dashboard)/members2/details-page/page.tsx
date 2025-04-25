@@ -8,6 +8,7 @@ import { useFetchData } from "@/hooks/useFetchData";
 import { PageParams } from "@/types/commons/PageParams";
 import { GenericForm } from "@/components/form/GenericForm";
 import { columnSchema, defaultValues } from "../schemas/columnSchema";
+import { columns } from "../components/columns";
 
 export default function DetailsPage({ searchParams }: PageParams) {
 	const id = searchParams.id;
@@ -36,7 +37,7 @@ export default function DetailsPage({ searchParams }: PageParams) {
 						defaultValues={defaultValues}
 						columns={columnSchema}
 						onSubmit={handleSubmit}
-						data={data || undefined}
+						data={data as Member}
 						submitLabel="Salvar Grupo"
 					/>
 				</CardContent>

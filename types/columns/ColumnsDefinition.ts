@@ -22,13 +22,13 @@ export interface Column<T extends Record<string, any> = any> {
 	size?: number;
 }
 
-export type ColumnType = "text" | "id" | "date" | "select" | "checkbox";
+export type ColumnType = "text" | "id" | "date" | "select" | "checkbox" | "textarea" | "badge" | "hidden";
 
 export interface ColumnSchema<T> {
 	id: keyof T & string;
 	title: string;
 	type: ColumnType;
-	defaultValue: string;
+	defaultValue: any;
 	isVisible?: boolean;
 	size?: number;
 	options?: { label: string; value: string }[];

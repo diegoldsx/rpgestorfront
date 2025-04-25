@@ -1,8 +1,8 @@
 import { VisibilityState } from "@tanstack/react-table";
-import { ContentSchema } from "./schema";
-import { ColumnSchema } from "@/types/columns/ColumnsDefinition";
+import { ContentSchema, ContentSchemaType } from "./schema";
+import { Column } from "@/types/columns/ColumnsDefinition";
 
-export const columnSchema: Array<ColumnSchema<typeof ContentSchema._type>> = [
+export const columnSchema: Array<Column<ContentSchemaType>> = [
 	{
 		id: "id",
 		title: "ID",
@@ -75,7 +75,7 @@ export const columnSchema: Array<ColumnSchema<typeof ContentSchema._type>> = [
 		id: "videoConference",
 		title: "Conferência de Vídeo",
 		type: "checkbox",
-		defaultValue: false,
+		defaultValue: "",
 		isVisible: true,
 		size: 180,
 	},
