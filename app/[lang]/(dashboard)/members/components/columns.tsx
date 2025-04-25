@@ -1,53 +1,35 @@
-// Updated content with references to Member
-// Original content from assemblies/components/columns.tsx
-
 "use client";
+
 import { ColumnDef } from "@tanstack/react-table";
 import { exactFilter } from "@/components/common/data-table/columnUtils";
-import Cell from "@/app/types/Cell";
-import { columnConfig } from "./columnHelper";
-import { Badge } from "@/components/ui/badge";
-import { BadgeStatus, getBadgeStatus } from "@/components/badge/badgeStatus";
-import { Member } from "@/types/member";
+import { columnSchema } from "../schemas/columnSchema";
 import Link from "next/link";
+import { Member, MemberSchema } from "../schemas/schema";
+import DataCell from "@/components/common/data-table/columns/DataCell";
+import ActionsCell from "@/components/common/data-table/columns/ActionCell";
 
-const editUrl = "members/details";
+const editUrl = "members/details-page";
 
 export const columns: ColumnDef<Member>[] = [
-	...columnConfig.map((field) => ({
-		id: field.id,
-		accessorKey: field.id,
-		header: field.title,
-		filterFn: exactFilter,
-		cell: (info: any) => {
-			const value = info.getValue() as string;
-
-			if (field.options) {
-				const option = field.options.find((option) => option.value === value);
-
-				return (
-					<Cell>
-						<span>{option?.label}</span>
-					</Cell>
-				);
-			}
-
-			return <Cell>{value}</Cell>;
-		},
-	})),
+	...columnSchema
+		.filter((item) => item.isVisible !== false)
+		.map(({ id, title, options, type, size = 0 }) => ({
+			id,
+			accessorKey: id,
+			header: title,
+			filterFn: exactFilter,
+			size: size,
+			cell: (props: { getValue: () => any }) => (
+				<DataCell getValue={props.getValue} type={type} options={options} />
+			),
+		})),
 	{
 		id: "actions",
 		header: "Actions",
 		size: 150,
 		cell: ({ row }) => (
-			<Cell>
-				<Link
-					className="text-primary hover:text-primary/80"
-					href={`${editUrl}?id=${row.original.id}`}
-				>
-					Edit
-				</Link>
-			</Cell>
+
+			<ActionsCell row={row} editUrl={editUrl} label="Edit" />
 		),
 	},
 ];
