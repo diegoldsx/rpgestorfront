@@ -100,7 +100,7 @@ export function GenericForm<T extends FieldValues>({
 								<DatePicker
 									displayFormat="dd/MM/yyyy"
 									selectedDate={(() => {
-										const value = methods.getValues(id as Path<T>);
+										const value = methods.watch(id as Path<T>);
 										if (!value) return undefined;
 										const date = new Date(value as string);
 										return isNaN(date.getTime()) ? undefined : date;

@@ -27,3 +27,5 @@ export enum StateUF {
 	SE = "SE",
 	TO = "TO",
 }
+
+export const stateOptions = Object.entries(StateUF).map(([value, label]) => ({ value, label }));

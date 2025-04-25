@@ -17,7 +17,7 @@ interface DatePickerProps extends React.HTMLAttributes<HTMLDivElement> {
 	label?: string;
 	placeholder?: string;
 	selectedDate?: Date;
-	onDateChange?: (date: Date | undefined) => void;
+	onDateChange?: (date: Date | null) => void;
 	displayFormat?: string;
 }
 
@@ -30,26 +30,26 @@ export const DatePicker = React.forwardRef<HTMLDivElement, DatePickerProps>(
 			selectedDate,
 			onDateChange,
 			displayFormat = "dd/MM/yyyy",
-
 			...rest
 		},
 		ref
 	) => {
-		const [internalDate, setInternalDate] = React.useState<Date | undefined>(
-			selectedDate
-		);
+		const [internalDate, setInternalDate] = React.useState<Date | undefined>(selectedDate);
+		const [open, setOpen] = React.useState(false);
 
 		const handleDateChange = (date: Date | undefined) => {
-			setInternalDate(date);
+			const newDate = date ?? null;
+			setInternalDate(newDate ?? undefined);
 			if (onDateChange) {
-				onDateChange(date);
+				onDateChange(newDate);
 			}
+			setOpen(false);
 		};
 
 		return (
 			<div ref={ref} {...rest}>
 				{label && <Label>{label}</Label>}
-				<Popover>
+				<Popover open={open} onOpenChange={setOpen}>
 					<PopoverTrigger asChild>
 						<Button
 							variant="outline"
