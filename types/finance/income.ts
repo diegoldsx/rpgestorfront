@@ -17,6 +17,7 @@ export type Income = {
 	observations?: string; // "Observações"
 	status: string;
 	totalInstallments: string;
+	taxApplied: string;
 	installmentType: string;
 	invoiceInstructions: string;
 	sampleMessage: string;
@@ -41,6 +42,8 @@ export const IncomeSchema = z.object({
 	discountExpirationDate: z.string().optional(),
 	discountDescription: z.string().optional(),
 	observations: z.string().optional(),
+	taxApplied: z.string().optional(),
+
 	status: z.string().min(1, "O status é obrigatório."),
 	totalInstallments: z.string().min(1, "O total de parcelas é obrigatório."),
 	installmentType: z.string().min(1, "O tipo de parcela é obrigatório."),

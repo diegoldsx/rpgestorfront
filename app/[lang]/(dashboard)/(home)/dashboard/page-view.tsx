@@ -1,5 +1,4 @@
 "use client";
-
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import ReportsSnapshot from "./components/reports-snapshot";
 
@@ -10,27 +9,28 @@ import ReportsArea from "./components/reports-area";
 import TipoAssociadoReport from "./components/tipo-associado-report";
 import UltimosEventos from "./components/ultimos-eventos";
 import UltimosComunicados from "./components/ultimos-comunicados";
+import { useEffect, useState } from "react";
+import {
+	OverviewChart,
+	OverviewChartProps,
+} from "@/components/charts/OverviewChart";
+import {} from "@/app/actions/charts";
 
 interface DashboardPageViewProps {
 	trans: {
 		[key: string]: string;
 	};
+	data: OverviewChartProps;
 }
 
-const DashboardPageView = ({ trans }: DashboardPageViewProps) => {
+const DashboardPageView = ({ trans, data }: DashboardPageViewProps) => {
+	console.log(data);
 	return (
 		<div className="space-y-6">
-			{/* <div className='flex items-center flex-wrap justify-between gap-4'>
-				<div className='text-2xl font-medium text-default-800 '>
-					RPGestor {trans?.dashboard}
-				</div>
-				<DatePickerWithRange />
-			</div> */}
-
 			{/* Área de métricas principais */}
 			<div className="grid grid-cols-12 gap-6">
 				<div className="col-span-12 lg:col-span-8">
-					<ReportsSnapshot /> {/* Adaptado para mostrar receitas x despesas */}
+					<OverviewChart {...data} />
 				</div>
 				<div className="col-span-12 lg:col-span-4">
 					<AssociadosStat /> {/* Métricas de associados */}
