@@ -1,66 +1,58 @@
 "use client";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import ReportsSnapshot from "./components/reports-snapshot";
 
-import UserStats from "./components/user-stats-chart";
-import AssociadosStat from "./components/associados-stat";
-import ReportsArea from "./components/reports-area";
-
-import TipoAssociadoReport from "./components/tipo-associado-report";
-import UltimosEventos from "./components/ultimos-eventos";
-import UltimosComunicados from "./components/ultimos-comunicados";
-import { useEffect, useState } from "react";
 import {
 	OverviewChart,
 	OverviewChartProps,
 } from "@/components/charts/OverviewChart";
-import {} from "@/app/actions/charts";
+import { MembersStatsChart, MembersStatsChartProps } from "@/components/charts/MemberStatsChart";
+import { ReportsArea, ReportServerItem } from "@/components/charts/ReportsArea";
+import { AccountBalance } from "@/components/charts/AccountBalance";
+import { MemberStatusPieChart } from "@/components/charts/MemberStatus";
 
 interface DashboardPageViewProps {
 	trans: {
 		[key: string]: string;
 	};
-	data: OverviewChartProps;
+	overview: OverviewChartProps;
+	memberStats: MembersStatsChartProps;
+	reports: ReportServerItem[];
+	accountBalance: AccountBalance[];
+	membersSituation: { active: number; inactive: number };
 }
 
-const DashboardPageView = ({ trans, data }: DashboardPageViewProps) => {
-	console.log(data);
+const DashboardPageView = ({ trans, overview, memberStats, reports, accountBalance, membersSituation }: DashboardPageViewProps) => {
 	return (
 		<div className="space-y-6">
 			{/* Área de métricas principais */}
 			<div className="grid grid-cols-12 gap-6">
 				<div className="col-span-12 lg:col-span-8">
-					<OverviewChart {...data} />
+					<OverviewChart {...overview} />
 				</div>
 				<div className="col-span-12 lg:col-span-4">
-					<AssociadosStat /> {/* Métricas de associados */}
+					<MembersStatsChart {...memberStats} />
 				</div>
 			</div>
 
 			{/* Métricas secundárias */}
 			<div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
 				<div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-					<ReportsArea /> {/* Indicadores financeiros */}
+					<ReportsArea reports={reports} /> {/* Indicadores financeiros */}
 				</div>
+
+				<div className="grid grid-cols-1">
+					<AccountBalance accountBalance={accountBalance} />
+				</div>
+
 				<Card>
 					<CardHeader className="border-none p-6 pt-5 mb-0">
 						<CardTitle className="text-lg font-semibold text-default-900 p-0">
-							Status dos Associados
-						</CardTitle>
-					</CardHeader>
-					<CardContent>
-						<UserStats />
-					</CardContent>
-				</Card>
-				<Card>
-					<CardHeader className="border-none p-6 pt-5 mb-0">
-						<CardTitle className="text-lg font-semibold text-default-900 p-0">
-							Tipos de Associado
+							Associados por Situação
 						</CardTitle>
 					</CardHeader>
 					<CardContent>
 						<div className="dashtail-legend">
-							<TipoAssociadoReport />
+							<MemberStatusPieChart active={membersSituation.active} inactive={membersSituation.inactive} />
 						</div>
 					</CardContent>
 				</Card>
@@ -85,22 +77,7 @@ const DashboardPageView = ({ trans, data }: DashboardPageViewProps) => {
 				</Card>
 			</div> */}
 
-			{/* Últimas atividades */}
-			<div className="grid grid-cols-12 gap-6">
-				<div className="col-span-12 lg:col-span-4">
-					<UltimosEventos />
-				</div>
-				<div className="col-span-12 lg:col-span-8">
-					<Card>
-						<CardHeader className="border-none pb-0">
-							<CardTitle className="pt-2.5">Últimos Comunicados</CardTitle>
-						</CardHeader>
-						<CardContent className="px-0">
-							<UltimosComunicados />
-						</CardContent>
-					</Card>
-				</div>
-			</div>
+
 		</div>
 	);
 };
