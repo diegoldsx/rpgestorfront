@@ -4,7 +4,7 @@ import { IncomeForm } from "./Form";
 import { SubmitHandler } from "react-hook-form";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { FAKE_DATA } from "@/data/incomeData";
-import { IncomeSchemaType } from "@/types/finance/income";
+import { IncomeSchemaType } from "@/types/Income";
 import { useFetchData } from "@/hooks/useFetchData";
 import { PageParams } from "@/types/commons/PageParams";
 

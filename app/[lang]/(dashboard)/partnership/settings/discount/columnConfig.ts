@@ -3,7 +3,7 @@ import { FieldConfig as Field } from "@/app/types/FieldConfig";
 import { options } from "./options";
 
 import { VisibilityState } from "@tanstack/react-table";
-import { Discount } from "@/types/partnership/discount";
+import { Discount } from "@/types/Discount";
 
 export const columnConfig: Field<Discount>[] = [
 	{ id: "id", title: "ID" },

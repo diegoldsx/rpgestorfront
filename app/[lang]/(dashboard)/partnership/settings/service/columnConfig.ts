@@ -3,7 +3,7 @@ import { FieldConfig as Field } from "@/app/types/FieldConfig";
 import { options } from "./options";
 
 import { VisibilityState } from "@tanstack/react-table";
-import { Service } from "@/types/partnership/service";
+import { Service } from "@/types/Service";
 
 export const columnConfig: Field<Service>[] = [
 	{ id: "id", title: "ID" },

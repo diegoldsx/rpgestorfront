@@ -1,4 +1,4 @@
-import { FieldConfig as Field } from "@/types/config/field-config";
+import { FieldConfig as Field } from "@/types/columns/field-config";
 import { Message } from "../types/message";
 import { options } from "./options";
 

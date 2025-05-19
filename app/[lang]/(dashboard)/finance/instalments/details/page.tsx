@@ -3,7 +3,7 @@
 import { InstalmentForm } from "./Form";
 import { SubmitHandler } from "react-hook-form";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { InstalmentSchemaType } from "@/types/finance/instalment";
+import { InstalmentSchemaType } from "@/types/Installment";
 import { useFetchData } from "@/hooks/useFetchData";
 import { PageParams } from "@/types/commons/PageParams";
 import { INSTALMENT_DATA } from "@/data/fake";

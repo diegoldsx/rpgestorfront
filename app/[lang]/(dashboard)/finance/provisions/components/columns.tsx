@@ -9,7 +9,7 @@ import Link from "next/link";
 import { Icon } from "@iconify/react";
 import { useParams } from "next/navigation";
 
-import { Income } from "@/types/finance/income";
+import { Income } from "@/types/Income";
 
 const editUrl = "pt/finance/provisions/details";
 

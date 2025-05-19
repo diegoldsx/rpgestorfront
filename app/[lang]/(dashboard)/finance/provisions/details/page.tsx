@@ -4,7 +4,7 @@ import { ProvisionForm } from "./Form";
 import { SubmitHandler } from "react-hook-form";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { FAKE_DATA } from "@/data/provisionsData";
-import { ProvisionSchemaType } from "@/types/finance/provision";
+import { ProvisionSchemaType } from "@/types/Provision";
 import { useFetchData } from "@/hooks/useFetchData";
 import { PageParams } from "@/types/commons/PageParams";
 

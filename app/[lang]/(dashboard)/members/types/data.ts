@@ -1,5 +1,5 @@
-import { Member } from "@/types/member";
-import { StateUF } from "@/types/member/StateUF";
+import { Member } from "@/types/Member";
+import { StateUF } from "@/types/options/StateUF";
 
 export const fake_members: Member[] = [
 	{

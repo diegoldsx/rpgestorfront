@@ -1,6 +1,6 @@
 'use server'
 
-import { Income } from "@/types/finance/income"
+import { Income } from "@/types/Income"
 
 
 

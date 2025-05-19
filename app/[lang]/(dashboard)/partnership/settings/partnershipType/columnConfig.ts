@@ -4,7 +4,7 @@ import { options } from "./options";
 
 import { VisibilityState } from "@tanstack/react-table";
 
-import { PartnershipType } from "@/types/partnership/partnershipType";
+import { PartnershipType } from "@/types/PartnershipType";
 
 export const columnConfig: Field<PartnershipType>[] = [
 	{ id: "id", title: "ID" },

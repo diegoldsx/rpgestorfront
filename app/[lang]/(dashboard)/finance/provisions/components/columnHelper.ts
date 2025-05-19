@@ -1,6 +1,6 @@
 import { VisibilityState } from "@tanstack/react-table";
 import { FieldConfig } from "@/app/types/FieldConfig";
-import { ProvisionSchemaType } from "@/types/finance/provision";
+import { ProvisionSchemaType } from "@/types/Provision";
 
 const field = (
 	id: keyof ProvisionSchemaType,

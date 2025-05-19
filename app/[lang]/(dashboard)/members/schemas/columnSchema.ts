@@ -1,7 +1,7 @@
-import { Column} from "@/types/columns/ColumnsDefinition";
+import { Column } from "@/types/columns/ColumnsDefinition";
 import { VisibilityState } from "@tanstack/react-table";
 import { Member } from "./schema";
-import { stateOptions, StateUF } from "@/types/member/StateUF";
+import { stateOptions, StateUF } from "@/types/options/StateUF";
 
 export const columnSchema: Array<Column<Member>> = [
 	{
@@ -97,7 +97,7 @@ export const columnSchema: Array<Column<Member>> = [
 		id: "paymentMethod",
 		title: "Método de Pagamento",
 		type: "select",
-		options: [{value:"pix", label:"PIX"}, {value:"boleto", label:"Boleto"}],
+		options: [{ value: "pix", label: "PIX" }, { value: "boleto", label: "Boleto" }],
 		defaultValue: "",
 		isVisible: true,
 		size: 150,

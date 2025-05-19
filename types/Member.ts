@@ -1,0 +1,76 @@
+import { z } from "zod";
+import { Status, DocumentType, StateUF, PaymentMethods, StatusType, PaymentMethod, StateUFEnum, PaymentMethodEnum, StatusEnum, DocumentTypeEnum } from '@/types/options'
+import { PaymentGroupSchema } from "./PaymentGroup";
+import { createEnumFromOptions } from "@/utils/createEnumFromOptions";
+
+export const MemberSchema = z.object({
+	id: z.string(),
+	status: StatusEnum,
+	documentType: DocumentTypeEnum,
+	documentNumber: z.number(),
+	code: z.number(),
+	name: z.string().optional(),
+	birthDate: z.string().optional(),
+
+	cep: z.string(),
+	street: z.string(),
+	number: z.string(),
+	complement: z.string().optional(),
+	neighborhood: z.string(),
+	state: StateUFEnum,
+	city: z.string(),
+
+	phone: z.string().optional(),
+	mobile: z.string().optional(),
+	corporateName: z.string().optional(),
+	email: z.string().email(),
+	paymentGroup: PaymentGroupSchema,
+	paymentMethod: PaymentMethodEnum,
+	automaticBilling: z.boolean(),
+	attachTo: z.string(),
+	chargeAmmount: z.number(),
+	userPassword: z.string().optional(),
+	photo: z.string(),
+	position: z.string(),
+	areaOfExpertise: z.string(),
+});
+
+export type Member = z.infer<typeof MemberSchema>;
+
+
+export const memberExample: Member = {
+	id: '001',
+	status: 'active',
+	documentType: 'pf',
+	documentNumber: 12345678901,
+	code: 1001,
+	name: 'Ana Paula Souza',
+	birthDate: '1992-04-12',
+	cep: '01310-100',
+	street: 'Av. Paulista',
+	number: '1578',
+	complement: 'Apto 1203',
+	neighborhood: 'Bela Vista',
+	state: 'SP',
+	city: 'São Paulo',
+	phone: '(11) 3232-3232',
+	mobile: '(11) 91234-5678',
+	corporateName: 'Ana Paula ME',
+	email: 'ana.paula@example.com',
+	paymentGroup: {
+		id: 'pg001',
+		name: 'Plano Mensal',
+		defaultAmount: 150.0,
+		emailModel: 'mobile',
+		cycle: 'monthly',
+		status: 'active',
+	},
+	paymentMethod: 'pix',
+	automaticBilling: true,
+	attachTo: 'Associação ABC',
+	chargeAmmount: 150.0,
+	userPassword: 'SenhaForte123!',
+	photo: 'ana-paula.jpg',
+	position: 'Analista de RH',
+	areaOfExpertise: 'Recursos Humanos',
+};

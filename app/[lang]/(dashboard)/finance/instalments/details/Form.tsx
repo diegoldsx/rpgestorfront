@@ -11,7 +11,7 @@ import { columnConfig, defaultValues } from "../components/columnHelper";
 import {
 	InstalmentSchema,
 	InstalmentSchemaType,
-} from "@/types/finance/instalment";
+} from "@/types/Installment";
 
 interface Props {
 	onSubmit: SubmitHandler<InstalmentSchemaType>;
@@ -54,7 +54,7 @@ export function InstalmentForm({ onSubmit, data }: Props) {
 						errors={errors}
 					>
 						{options ? <Select options={options} /> : <></>}
-						</FormFieldComponent>
+					</FormFieldComponent>
 				))}
 
 				<div className="md:col-span-2 mt-6 flex justify-end">

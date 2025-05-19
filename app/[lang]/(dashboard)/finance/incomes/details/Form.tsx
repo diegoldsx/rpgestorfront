@@ -8,7 +8,7 @@ import { useEffect } from "react";
 import { FormFieldComponent } from "@/components/FormFieldComponent";
 import { SubmitButton } from "@/components/SubmitButton";
 import { columnConfig, defaultValues } from "../components/columnHelper";
-import { IncomeSchemaType, IncomeSchema } from "@/types/finance/income";
+import { IncomeSchemaType, IncomeSchema } from "@/types/Income";
 
 interface Props {
 	onSubmit: SubmitHandler<IncomeSchemaType>;
@@ -51,7 +51,7 @@ export function IncomeForm({ onSubmit, data }: Props) {
 						errors={errors}
 					>
 						{options ? <Select options={options} /> : <></>}
-						</FormFieldComponent>
+					</FormFieldComponent>
 				))}
 
 				<div className="md:col-span-2 mt-6 flex justify-end">

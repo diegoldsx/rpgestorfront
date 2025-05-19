@@ -11,7 +11,7 @@ import { columnConfig, defaultValues } from "../components/columnHelper";
 import {
 	ProvisionSchema,
 	ProvisionSchemaType,
-} from "@/types/finance/provision";
+} from "@/types/Provision";
 
 interface Props {
 	onSubmit: SubmitHandler<ProvisionSchemaType>;
@@ -54,7 +54,7 @@ export function ProvisionForm({ onSubmit, data }: Props) {
 						errors={errors}
 					>
 						{options ? <Select options={options} /> : <></>}
-						</FormFieldComponent>
+					</FormFieldComponent>
 				))}
 
 				<div className="md:col-span-2 mt-6 flex justify-end">

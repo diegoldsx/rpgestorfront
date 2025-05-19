@@ -1,5 +1,5 @@
 
-import { stateOptions, states, StateUF } from "@/types/member/StateUF";
+import { stateOptions, states, StateUF } from "@/types/options/StateUF";
 import { z } from "zod";
 
 export const MemberSchema = z.object({

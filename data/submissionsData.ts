@@ -1,5 +1,5 @@
 import { SubmissionSchemaType } from "@/schemas/events/submission";
-import { Submission } from "@/types/gathering/submission";
+import { Submission } from "@/types/Submission";
 
 export const FAKE_DATA: any[] = [
 	{

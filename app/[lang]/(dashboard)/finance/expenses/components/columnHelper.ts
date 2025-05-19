@@ -1,6 +1,6 @@
 import { VisibilityState } from "@tanstack/react-table";
 import { FieldConfig } from "@/app/types/FieldConfig";
-import { ExpenseSchemaType } from "@/types/finance/expense";
+import { ExpenseSchemaType } from "@/types/Expense";
 
 const field = (id: keyof ExpenseSchemaType, title: string, options?: any) => ({
 	id,

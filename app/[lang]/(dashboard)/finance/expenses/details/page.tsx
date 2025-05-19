@@ -4,7 +4,7 @@ import { ExpensesForm } from "./Form";
 import { SubmitHandler } from "react-hook-form";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { FAKE_DATA } from "@/data/expensesData";
-import { ExpenseSchemaType } from "@/types/finance/expense";
+import { ExpenseSchemaType } from "@/types/Expense";
 import { useFetchData } from "@/hooks/useFetchData";
 import { PageParams } from "@/types/commons/PageParams";
 

@@ -8,7 +8,7 @@ import { BadgeStatus, getBadgeStatus } from "@/components/badge/badgeStatus";
 import Link from "next/link";
 import { Icon } from "@iconify/react";
 import { useParams } from "next/navigation";
-import { PartnershipType } from "@/types/partnership/partnershipType";
+import { PartnershipType } from "@/types/PartnershipType";
 
 const editUrl = "partnership/settings/partnershipType/form";
 

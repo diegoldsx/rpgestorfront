@@ -1,6 +1,6 @@
 import { VisibilityState } from "@tanstack/react-table";
 import { FieldConfig } from "@/app/types/FieldConfig";
-import { IncomeSchemaType } from "@/types/finance/income";
+import { IncomeSchemaType } from "@/types/Income";
 
 const field = (id: keyof IncomeSchemaType, title: string, options?: any) => ({
 	id,

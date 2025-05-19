@@ -3,7 +3,7 @@ import { FieldConfig as Field } from "@/app/types/FieldConfig";
 import { options } from "./options";
 
 import { VisibilityState } from "@tanstack/react-table";
-import { Payment } from "@/types/partnership/payment";
+import { Payment } from "@/types/Payment";
 
 export const columnConfig: Field<Payment>[] = [
 	{ id: "id", title: "ID" },

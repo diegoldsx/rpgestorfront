@@ -8,7 +8,7 @@ import { useEffect } from "react";
 import { FormFieldComponent } from "@/components/FormFieldComponent";
 import { SubmitButton } from "@/components/SubmitButton";
 import { columnConfig, defaultValues } from "../components/columnHelper";
-import { ExpenseSchemaType, ExpenseSchema } from "@/types/finance/expense";
+import { ExpenseSchemaType, ExpenseSchema } from "@/types/Expense";
 
 interface Props {
 	onSubmit: SubmitHandler<ExpenseSchemaType>;

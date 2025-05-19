@@ -11,16 +11,16 @@ import {
 	email,
 	link,
 } from "./faker";
-import { Assembly } from "@/types/assembly/assembly";
-import { Course } from "@/types/event/course";
-import { Submission } from "@/types/event/submission";
-import { Expense } from "@/types/finance/expense";
-import { Income } from "@/types/finance/income";
-import { Provision } from "@/types/finance/provision";
-import { Transfer } from "@/types/finance/transfer";
+import { Assembly } from "@/types/Assembly";
+import { Course } from "@/types/Course";
+import { Submission } from "@/types/Submission";
+import { Expense } from "@/types/Expense";
+import { Income } from "@/types/Income";
+import { Provision } from "@/types/Provision";
+import { Transfer } from "@/types/Transfer";
 import { PaymentGroup } from "../[lang]/(dashboard)/settings/payment-groups/types/PaymentGroup";
-import { Category } from "@/types/event/category";
-import { Event } from "@/types/event/event";
+import { Category } from "@/types/Category";
+import { Event } from "@/types/Event";
 
 const LENGTH = 30;
 
