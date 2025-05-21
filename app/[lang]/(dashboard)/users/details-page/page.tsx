@@ -2,7 +2,7 @@
 
 import { SubmitHandler } from "react-hook-form";
 import { PageParams } from "@/types/commons/PageParams";
-import { GenericForm } from "@/components/form/GenericForm_";
+import { GenericForm } from "@/components/form/GenericForm";
 import { PageLayout } from "@/components/common/page/PageLayout";
 import { useFetchData } from "@/hooks/useFetchData";
 import { User, userSchema, fake_users } from "../types";

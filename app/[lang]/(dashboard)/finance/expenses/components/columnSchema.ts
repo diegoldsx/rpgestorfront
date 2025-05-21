@@ -274,6 +274,21 @@ export const columnSchema: Array<Column<ExpenseType>> = [
 	})
 ]
 
+export const defaultValues = Object.fromEntries(
+	columnSchema.map(({ id, defaultValue }) => [id, defaultValue])
+) as Partial<ExpenseType>;
+
+export const facetedFilters = columnSchema.filter((f) => !!f.options);
+
+export const visibleColumns: ReadonlyArray<string> = ["*"];
+export const visibilityState: VisibilityState = Object.fromEntries(
+	columnSchema.map(({ id }) => [
+		id,
+		visibleColumns.includes(id) || visibleColumns[0] === "*",
+	])
+);
+
+
 
 
 export function getVisibilityState(

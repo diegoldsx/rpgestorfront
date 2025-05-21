@@ -4,8 +4,9 @@ import { HeadingPages } from "@/components/common/heading/heading-pages";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { DataTable } from "@/components/common/data-table/data-table";
 import {
+
 	getFieldsWithOptions,
-	getVisibilityState,
+	visibilityState,
 } from "./components/columnSchema";
 import { columns } from "./components/columns";
 import { fakeIncomes } from "@/types/Income";
@@ -48,7 +49,7 @@ const Page = () => {
 					columns={columns}
 
 					facetedFilters={getFieldsWithOptions()}
-					visibilityState={getVisibilityState()}
+					visibilityState={visibilityState}
 					columnResizeMode="onChange"
 				/>
 			</CardContent>

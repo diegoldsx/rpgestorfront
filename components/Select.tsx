@@ -1,6 +1,7 @@
 import React from "react";
 import * as RadixSelect from "@radix-ui/react-select";
 import { ChevronDown, Check } from "lucide-react";
+import { Option } from "@/types/options/Option";
 
 interface SelectProps {
 	options: Option[];

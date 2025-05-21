@@ -196,21 +196,22 @@ export const columnSchema: Array<Column<IncomeType>> = [
 	}),
 ]
 
+export const defaultValues = Object.fromEntries(
+	columnSchema.map(({ id, defaultValue }) => [id, defaultValue])
+) as Partial<IncomeType>;
 
+export const facetedFilters = columnSchema.filter((f) => !!f.options);
 
-export function getVisibilityState(
-	visibilityArray: string[] = ["*"]
-): VisibilityState {
-	return Object.fromEntries(
-		columnSchema
-			.filter(({ id }) => id !== undefined)
-			.map(({ id }) => [
-				id as string,
-				visibilityArray.includes("*") || visibilityArray.includes(id as string),
-			])
-	);
-}
+export const visibleColumns: ReadonlyArray<string> = ["*"];
+export const visibilityState: VisibilityState = Object.fromEntries(
+	columnSchema.map(({ id }) => [
+		id,
+		visibleColumns.includes(id) || visibleColumns[0] === "*",
+	])
+);
+
 
 export function getFieldsWithOptions() {
 	return columnSchema.filter(({ options }) => !!options);
 }
+

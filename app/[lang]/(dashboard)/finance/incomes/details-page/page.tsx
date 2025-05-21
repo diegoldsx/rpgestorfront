@@ -10,6 +10,7 @@ import { GenericForm } from "@/components/form/GenericForm";
 import { columnSchema, defaultValues } from "../components/columnSchema";
 import { fakeCategories, CategorySchema, CategoryType } from "@/types/Category";
 import { moduleLabels } from "../page";
+import { IncomeSchema, IncomeType } from "@/types/Income";
 
 export default function DetailsPage({ searchParams }: PageParams) {
 	const id = searchParams.id;
@@ -18,7 +19,7 @@ export default function DetailsPage({ searchParams }: PageParams) {
 		return fakeCategories.find((d) => d.id === id);
 	});
 
-	const handleSubmit: SubmitHandler<CategoryType> = async (data) => {
+	const handleSubmit: SubmitHandler<IncomeType> = async (data) => {
 		console.log("Submit", data);
 	};
 
@@ -32,8 +33,8 @@ export default function DetailsPage({ searchParams }: PageParams) {
 				</CardHeader>
 
 				<CardContent>
-					<GenericForm<CategoryType>
-						schema={CategorySchema}
+					<GenericForm<IncomeType>
+						schema={IncomeSchema}
 						defaultValues={defaultValues}
 						columns={columnSchema}
 						onSubmit={handleSubmit}

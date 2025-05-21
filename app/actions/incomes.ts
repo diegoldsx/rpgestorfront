@@ -1,6 +1,6 @@
 'use server'
 
-import { Income } from "@/types/Income"
+import { IncomeType } from "@/types/Income"
 
 
 
@@ -23,7 +23,7 @@ export async function getIncomesSeries() {
 }
 
 
-const incomes: Income[] = [
+const incomes: IncomeType[] = [
   {
     id: "1",
     payer: "Payer 1",
