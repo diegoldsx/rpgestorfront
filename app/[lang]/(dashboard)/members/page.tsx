@@ -1,30 +1,35 @@
-"use client";
+
+
 import { DataTable } from "@/components/common/data-table/data-table";
 import {
 	getFieldsWithOptions,
 	getVisibilityState,
-} from "./schemas/columnSchema";
-import { fakeMembers, MemberSchema, MemberType } from "@/types/Member";
+} from "./components/columnSchema";
 import { columns } from "./components/columns";
 import { PageLayout } from "@/components/common/page/PageLayout";
-import { MemberSchemaType } from "@/schemas/members/member";
+import { fakeMembers } from "@/types/Member";
 
 const Page = () => {
+
+	// const { data, loading, error } = useFetch<MemberType[]>("/api/members")
+
+
 	return (
 		<PageLayout title="Associados" headerActions={{
 			secondary: {
-				text: "Registrar Associado",
+				text: "Registrar associado",
 				href: "members/details-page",
 			},
 		}}>
-			<DataTable
+			{fakeMembers && <DataTable
 				data={fakeMembers}
 				columns={columns}
 				facetedFilters={getFieldsWithOptions()}
 				visibilityState={getVisibilityState()}
 				columnResizeMode="onChange"
-			/>
-		</PageLayout>)
-};
+			/>}
+		</PageLayout>
+	)
+}
 
 export default Page;

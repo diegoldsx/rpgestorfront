@@ -2,8 +2,7 @@
 
 import { ColumnDef } from "@tanstack/react-table";
 import { exactFilter } from "@/components/common/data-table/columnUtils";
-import { columnSchema } from "../schemas/columnSchema";
-import Link from "next/link";
+import { columnSchema } from "./columnSchema";
 import DataCell from "@/components/common/data-table/columns/DataCell";
 import ActionsCell from "@/components/common/data-table/columns/ActionCell";
 import { MemberType } from "@/types/Member";
