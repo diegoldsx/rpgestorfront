@@ -1,7 +1,7 @@
 import { z } from "zod";
 
 export const ServiceDeskSchema = z.object({
-  id: z.string().optional(),
+  id: z.string(),
   registration: z.string().min(1, { message: "Matrícula é obrigatório" }),
   document: z.string().min(1, { message: "O documento é obrigatório" }),
   memberId: z.string(),

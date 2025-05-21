@@ -79,7 +79,7 @@ export const EmailModels = [
 export const EmailModelEnum = createEnumFromOptions(EmailModels);
 export type EmailModel = z.infer<typeof EmailModelEnum>;
 
-export const DocumentType = [
+export const DocumentType: Option[] = [
   { label: 'Pessoa Física', value: 'pf' },
   { label: 'Pessoa Jurídica', value: 'pj' },
 ] as const;

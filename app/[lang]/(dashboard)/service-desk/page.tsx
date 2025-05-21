@@ -4,24 +4,32 @@ import { Fragment } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { HeadingPages } from "@/components/common/heading/heading-pages";
 import { DataTable } from "@/components/common/data-table/data-table";
-import { getFieldsWithOptions, getVisibilityState } from "./types/metadata";
-import { SERVICE_DESK_DATA } from "./types/data";
-import { page } from "./utils/labels";
+import { getFieldsWithOptions, getVisibilityState } from "./components/columnSchema";
 import { columns } from "./components/columns";
+import { fakeServiceDesks } from "@/types/ServiceDesk";
+
+export const moduleLabels = {
+	detailsUrl: "service-desk/details-page",
+	title: "Atendimento",
+	route: "/service-desk",
+	new: "Registrar atendimento",
+	edit: "Editar atendimento",
+	submit: "Salvar atendimento",
+}
 
 export const Page = () => {
 	return (
 		<Fragment>
 			<HeadingPages
-				title={page.title}
+				title={moduleLabels.title}
 				breadcrumbs={{
-					title: page.title,
-					href: page.href,
+					title: moduleLabels.title,
+					href: moduleLabels.route,
 				}}
 				actions={{
 					secondary: {
-						text: page.actions.text,
-						href: page.actions.href,
+						text: moduleLabels.new,
+						href: moduleLabels.detailsUrl,
 					},
 				}}
 			/>
@@ -30,7 +38,7 @@ export const Page = () => {
 				<Card>
 					<CardContent>
 						<DataTable
-							data={SERVICE_DESK_DATA}
+							data={fakeServiceDesks}
 							columns={columns}
 							facetedFilters={getFieldsWithOptions()}
 							visibilityState={getVisibilityState()}

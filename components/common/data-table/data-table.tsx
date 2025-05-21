@@ -34,6 +34,7 @@ export type FacetedFilter = {
 interface DataTableProps<TData> {
 	columns: ColumnDef<TData, any>[];
 	data: TData[];
+	editUrl?: string;
 	toolbar?: React.ReactNode;
 	facetedFilters?: any[];
 	filterComponent?: React.ReactNode;

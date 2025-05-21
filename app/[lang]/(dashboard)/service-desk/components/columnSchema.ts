@@ -1,8 +1,9 @@
 import { FieldConfig as Field } from "@/app/types/FieldConfig";
-import { ServiceDesk } from "@/types/service-desk";
+import { Column } from "@/types/columns/ColumnsDefinition";
+import { ServiceDeskType } from "@/types/ServiceDesk";
 import { VisibilityState } from "@tanstack/react-table";
 
-export const fieldsMetadata: Array<Field<ServiceDesk>> = [
+export const columnSchema: Array<Column<ServiceDeskType>> = [
 	{
 		id: "id",
 		title: "ID",
@@ -25,7 +26,7 @@ export const fieldsMetadata: Array<Field<ServiceDesk>> = [
 		isVisible: true,
 	},
 	{
-		id: "member",
+		id: "memberId",
 		title: "Associado",
 		type: "text",
 		defaultValue: "",
@@ -97,15 +98,9 @@ export const fieldsMetadata: Array<Field<ServiceDesk>> = [
 	},
 ];
 
-export function getMetadata() {
-	return fieldsMetadata;
-}
 
-export function getFieldMetadata(id: string) {
-	return fieldsMetadata.find((item) => item.id === id);
-}
 
-export const defaultValues: Record<string, any> = fieldsMetadata.map(
+export const defaultValues: Record<string, any> = columnSchema.map(
 	({ id, defaultValue, options }) => ({
 		id,
 		value: options && options.length > 0 ? options[0].value : defaultValue,
@@ -116,7 +111,7 @@ export function getVisibilityState(
 	visibilityArray: string[] = ["*"]
 ): VisibilityState {
 	return Object.fromEntries(
-		fieldsMetadata.map(({ id }) => [
+		columnSchema.map(({ id }) => [
 			id,
 			visibilityArray.includes("*") || visibilityArray.includes(id),
 		])
@@ -124,5 +119,5 @@ export function getVisibilityState(
 }
 
 export function getFieldsWithOptions() {
-	return fieldsMetadata.filter(({ options }) => !!options);
+	return columnSchema.filter(({ options }) => !!options);
 }

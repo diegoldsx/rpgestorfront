@@ -1,48 +1,36 @@
 "use client";
-import Cell from "@/app/types/Cell";
-import Link from "next/link";
+
 import { ColumnDef } from "@tanstack/react-table";
 import { exactFilter } from "@/components/common/data-table/columnUtils";
-import { fieldsMetadata } from "../types/metadata";
-import { ServiceDeskSchemaType } from "../types/schema";
+import { columnSchema } from "./columnSchema";
+import Link from "next/link";
+import DataCell from "@/components/common/data-table/columns/DataCell";
+import ActionsCell from "@/components/common/data-table/columns/ActionCell";
+import { ServiceDeskType } from "@/types/ServiceDesk";
+import { moduleLabels } from "../page";
 
-const editUrl = "service-desk/details";
 
-export const columns: ColumnDef<ServiceDeskSchemaType>[] = [
-	...fieldsMetadata
+export const columns: ColumnDef<ServiceDeskType>[] = [
+	...columnSchema
 		.filter((item) => item.isVisible !== false)
-		.map(({ id, title, options }) => ({
+		.map(({ id, title, options, type, size = 0 }) => ({
 			id,
 			accessorKey: id,
 			header: title,
 			filterFn: exactFilter,
-			cell: (info: any) => {
-				const value = info.getValue() as string;
-
-				if (options) {
-					const option = options.find((opt) => opt.value === value);
-					return (
-						<Cell>
-							<span>{option?.label ?? value}</span>
-						</Cell>
-					);
-				}
-				return <Cell>{value}</Cell>;
-			},
+			size: size,
+			cell: (props: { getValue: () => any }) => (
+				<DataCell getValue={props.getValue} type={type} options={options} />
+			),
 		})),
 	{
 		id: "actions",
 		header: "Actions",
 		size: 150,
 		cell: ({ row }) => (
-			<Cell>
-				<Link
-					className="text-primary hover:text-primary/80"
-					href={`${editUrl}?id=${row.original.id}`}
-				>
-					Edit
-				</Link>
-			</Cell>
+			<Link href={moduleLabels.detailsUrl}>
+				<ActionsCell row={row} editUrl={moduleLabels.detailsUrl} label="Edit" />
+			</Link>
 		),
 	},
 ];
