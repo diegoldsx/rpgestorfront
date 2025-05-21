@@ -6,24 +6,23 @@ const createEnumFromOptions = <T extends readonly Option[]>(
 ) => z.enum(options.map(o => o.value) as [string, ...string[]]);
 
 
-
-export const AccessType = [
+const AccessTypeOptions: Option[] = [
   { value: 'private', label: 'Privado' },
   { value: 'public', label: 'Público' },
-] as const;
-export const AccessTypeEnum = createEnumFromOptions(AccessType);
+]
+export const AccessTypeEnum = createEnumFromOptions(AccessTypeOptions);
 export type AccessType = z.infer<typeof AccessTypeEnum>;
 
-export const Banks = [
+export const BanksOptions: Option[] = [
   { label: 'Caixa', value: 'caixa' },
   { label: 'Bradesco', value: 'bradesco' },
   { label: 'Itaú', value: 'itau' },
   { label: 'Nubank', value: 'nubank' },
 ] as const;
-export const BankEnum = createEnumFromOptions(Banks);
+export const BankEnum = createEnumFromOptions(BanksOptions);
 export type Bank = z.infer<typeof BankEnum>;
 
-export const StatesUF = [
+export const StatesUF: Option[] = [
   { label: 'Acre', value: 'AC' },
   { label: 'Alagoas', value: 'AL' },
   { label: 'Amapá', value: 'AP' },
@@ -56,7 +55,7 @@ export const StateUFEnum = createEnumFromOptions(StatesUF);
 export type StateUF = z.infer<typeof StateUFEnum>;
 
 
-export const Status = [
+export const Status: Option[] = [
   { label: 'Ativo', value: 'active' },
   { label: 'Inativo', value: 'inactive' },
   { label: 'Pendente', value: 'pending' },
@@ -81,19 +80,19 @@ export const EmailModelEnum = createEnumFromOptions(EmailModels);
 export type EmailModel = z.infer<typeof EmailModelEnum>;
 
 export const DocumentType = [
-  { label: 'PF', value: 'pf' },
-  { label: 'PJ', value: 'pj' },
+  { label: 'Pessoa Física', value: 'pf' },
+  { label: 'Pessoa Jurídica', value: 'pj' },
 ] as const;
 export const DocumentTypeEnum = createEnumFromOptions(DocumentType);
 export type Document = z.infer<typeof DocumentTypeEnum>;
 
-export const PaymentMethods = [
+export const PaymentMethodOptions: Option[] = [
   { label: 'Transferência Bancária', value: 'transference' },
   { label: 'Pix', value: 'pix' },
   { label: 'Boleto', value: 'invoice' },
   { label: 'Dinheiro', value: 'cash' },
-] as const;
-export const PaymentMethodEnum = createEnumFromOptions(PaymentMethods);
+];
+export const PaymentMethodEnum = createEnumFromOptions(PaymentMethodOptions);
 export type PaymentMethod = z.infer<typeof PaymentMethodEnum>;
 
 export const CostCenter = [

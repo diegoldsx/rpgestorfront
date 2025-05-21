@@ -1,24 +1,41 @@
 import { z } from "zod";
-import { BillingCycles, EmailModels, Status } from "./options";
-import { createEnumFromOptions } from "@/utils/createEnumFromOptions";
+import { BillingCycleEnum, EmailModelEnum, StatusEnum } from "./options";
 
-export type PaymentGroup = {
-	id: string;
-	name: string;
-	defaultAmount: number;
-	emailModel:typeof EmailModels;
-	cycle: typeof BillingCycles;
-	status: typeof Status;
-};
 
 export const PaymentGroupSchema = z.object({
 	id: z.string(),
 	name: z.string(),
 	defaultAmount: z.number(),
-	emailModel: createEnumFromOptions(EmailModels),
-	cycle: createEnumFromOptions(BillingCycles),
-	status:  createEnumFromOptions(Status),
+	emailModel: EmailModelEnum,
+	cycle: BillingCycleEnum,
+	status: StatusEnum,
 });
 
-export type PaymentGroupSchemaType = z.infer<typeof PaymentGroupSchema>;
+export type PaymentGroupType = z.infer<typeof PaymentGroupSchema>;
 
+export const fakePaymentGroups: PaymentGroupType[] = [
+	{
+		id: '1',
+		name: 'Payment Group 1',
+		defaultAmount: 100,
+		emailModel: 'mobile',
+		cycle: 'monthly',
+		status: 'active',
+	},
+	{
+		id: '2',
+		name: 'Payment Group 2',
+		defaultAmount: 200,
+		emailModel: 'card',
+		cycle: 'bimonthly',
+		status: 'inactive',
+	},
+	{
+		id: '3',
+		name: 'Payment Group 3',
+		defaultAmount: 300,
+		emailModel: 'associateCard',
+		cycle: 'quarterly',
+		status: 'pending',
+	},
+];

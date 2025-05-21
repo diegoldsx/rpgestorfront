@@ -1,5 +1,5 @@
 
-import { stateOptions, states, StateUF } from "@/types/options/StateUF";
+import { StateUFEnum } from "@/types/options";
 import { z } from "zod";
 
 export const MemberSchema = z.object({
@@ -21,7 +21,7 @@ export const MemberSchema = z.object({
   number: z.string().nonempty("Número é obrigatório"),
   complement: z.string().optional(),
   neighborhood: z.string().nonempty("Bairro é obrigatório"),
-  state: z.nativeEnum(StateUF, { message: "Estado inválido" }),
+  state: StateUFEnum,
   city: z.string().nonempty("Cidade é obrigatória"),
   document: z.string().nonempty("Documento é obrigatório"),
 });

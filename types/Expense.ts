@@ -18,17 +18,14 @@ export const ExpenseSchema = z.object({
 	description: z.string().optional(),
 	observations: z.string().optional(),
 	status: StatusEnum,
-
 	paymentDate: z.string().optional(),
 	paymentClearingDate: z.string().optional(),
 	discounts: z.string().optional(),
 	addition: z.string().optional(),
 	totalPaid: z.string().optional(),
 	totalClearing: z.string().optional(),
-
 	installments: z.string().optional(),
 	installmentType: z.string().min(1, "O tipo de parcela é obrigatório."),
-
 	itemPayer: z.string().optional(),
 	itemCategory: z.string().optional(),
 	itemCostCenter: z.string().optional(),
@@ -36,7 +33,6 @@ export const ExpenseSchema = z.object({
 	itemDueDate: z.string().optional(),
 	itemDescription: z.string().optional(),
 	itemAmount: z.string().optional(),
-
 	taxISS: z.string().optional(),
 	taxCSSL: z.string().optional(),
 	taxPIS: z.string().optional(),

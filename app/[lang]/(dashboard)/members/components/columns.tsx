@@ -4,13 +4,13 @@ import { ColumnDef } from "@tanstack/react-table";
 import { exactFilter } from "@/components/common/data-table/columnUtils";
 import { columnSchema } from "../schemas/columnSchema";
 import Link from "next/link";
-import { Member, MemberSchema } from "../schemas/schema";
 import DataCell from "@/components/common/data-table/columns/DataCell";
 import ActionsCell from "@/components/common/data-table/columns/ActionCell";
+import { MemberType } from "@/types/Member";
 
 const editUrl = "members/details-page";
 
-export const columns: ColumnDef<Member>[] = [
+export const columns: ColumnDef<MemberType>[] = [
 	...columnSchema
 		.filter((item) => item.isVisible !== false)
 		.map(({ id, title, options, type, size = 0 }) => ({

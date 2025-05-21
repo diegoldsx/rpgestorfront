@@ -22,6 +22,18 @@ export interface Column<T extends Record<string, any> = any> {
 	size?: number;
 }
 
+export function createColumn<T extends Record<string, any>>(
+	partial: Partial<Column<T>>
+): Column<T> {
+	return {
+		type: "text",        // valor padrão
+		isVisible: true,     // valor padrão
+		size: 200,           // valor padrão
+		defaultValue: "",
+		...partial,          // sobrescreve se vier do usuário
+	} as Column<T>;
+}
+
 export type ColumnType = "text" | "id" | "date" | "select" | "checkbox" | "textarea" | "badge" | "hidden";
 
 export interface ColumnSchema<T> {

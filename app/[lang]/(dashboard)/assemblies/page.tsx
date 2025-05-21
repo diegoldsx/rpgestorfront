@@ -4,15 +4,15 @@ import { DataTable } from "@/components/common/data-table/data-table";
 import {
 	getFieldsWithOptions,
 	getVisibilityState,
-} from "./schemas/columnSchema";
+} from "./components/columnSchema";
 import { columns } from "./components/columns";
 import { PageLayout } from "@/components/common/page/PageLayout";
 import { useFetch } from "@/hooks/useFetch";
-import { Assembly } from "./schemas/schema";
+import { AssemblyType } from "@/types/Assembly";
 
 const Page = () => {
 
-	const { data, loading, error } = useFetch<Assembly[]>("/api/assemblies")
+	const { data, loading, error } = useFetch<AssemblyType[]>("/api/assemblies")
 
 	return (
 		<PageLayout title="Assembléias" headerActions={{

@@ -3,14 +3,13 @@ import { useRouter } from 'next/navigation'
 
 import { SubmitHandler } from "react-hook-form";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { AssemblySchema, Assembly } from "../schemas/schema";
-import { FAKE_ASSEMBLY } from "../types/data";
 
 import { useFetch } from "@/hooks/useFetch";
 import { PageParams } from "@/types/commons/PageParams";
 import { GenericForm } from "@/components/form/GenericForm";
-import { columnSchema, defaultValues } from "../schemas/columnSchema";
+import { columnSchema, defaultValues } from "../components/columnSchema";
 import { postData, putData } from "@/lib/httpMutations";
+import { AssemblySchema, AssemblyType } from '@/types/Assembly';
 
 
 export default function DetailsPage({ searchParams }: PageParams) {
@@ -18,16 +17,16 @@ export default function DetailsPage({ searchParams }: PageParams) {
 	const router = useRouter()
 
 
-	const { data, loading } = useFetch<Assembly>("/api/assemblies?id=" + id)
+	const { data, loading } = useFetch<AssemblyType>("/api/assemblies?id=" + id)
 
-	const handleSubmit: SubmitHandler<Assembly> = async (data) => {
+	const handleSubmit: SubmitHandler<AssemblyType> = async (data) => {
 
 		if (data.id) {
-			const putRes = await putData<Assembly>("/api/assemblies", data)
+			const putRes = await putData<AssemblyType>("/api/assemblies", data)
 			console.log("PUT", putRes)
 		}
 		else {
-			const postRes = await postData<Assembly>("/api/assemblies", data)
+			const postRes = await postData<AssemblyType>("/api/assemblies", data)
 			console.log("POST", postRes)
 
 		}
@@ -47,7 +46,7 @@ export default function DetailsPage({ searchParams }: PageParams) {
 				</CardHeader>
 
 				<CardContent>
-					<GenericForm<Assembly>
+					<GenericForm<AssemblyType>
 						schema={AssemblySchema}
 						defaultValues={defaultValues}
 						columns={columnSchema}

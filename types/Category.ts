@@ -11,3 +11,22 @@ export const CategorySchema = z.object({
 });
 
 export type CategoryType = z.infer<typeof CategorySchema>;
+
+export const fakeCategories: CategoryType[] = [
+	{
+		id: '1',
+		name: 'Category A',
+		status: 'active',
+	},
+	{
+		id: '2',
+		name: 'Category B',
+		status: 'inactive',
+	},
+	{
+		id: '3',
+		name: 'Category C',
+		status: 'active',
+	},
+];
+

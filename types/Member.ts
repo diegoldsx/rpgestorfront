@@ -1,7 +1,7 @@
 import { z } from "zod";
-import { Status, DocumentType, StateUF, PaymentMethods, StatusType, PaymentMethod, StateUFEnum, PaymentMethodEnum, StatusEnum, DocumentTypeEnum } from '@/types/options'
+import { StateUFEnum, PaymentMethodEnum, StatusEnum, DocumentTypeEnum } from '@/types/options'
 import { PaymentGroupSchema } from "./PaymentGroup";
-import { createEnumFromOptions } from "@/utils/createEnumFromOptions";
+
 
 export const MemberSchema = z.object({
 	id: z.string(),
@@ -24,7 +24,7 @@ export const MemberSchema = z.object({
 	mobile: z.string().optional(),
 	corporateName: z.string().optional(),
 	email: z.string().email(),
-	paymentGroup: PaymentGroupSchema,
+	paymentGroup: z.string(),
 	paymentMethod: PaymentMethodEnum,
 	automaticBilling: z.boolean(),
 	attachTo: z.string(),
@@ -35,42 +35,36 @@ export const MemberSchema = z.object({
 	areaOfExpertise: z.string(),
 });
 
-export type Member = z.infer<typeof MemberSchema>;
+export type MemberType = z.infer<typeof MemberSchema>;
 
 
-export const memberExample: Member = {
-	id: '001',
-	status: 'active',
-	documentType: 'pf',
-	documentNumber: 12345678901,
-	code: 1001,
-	name: 'Ana Paula Souza',
-	birthDate: '1992-04-12',
-	cep: '01310-100',
-	street: 'Av. Paulista',
-	number: '1578',
-	complement: 'Apto 1203',
-	neighborhood: 'Bela Vista',
-	state: 'SP',
-	city: 'São Paulo',
-	phone: '(11) 3232-3232',
-	mobile: '(11) 91234-5678',
-	corporateName: 'Ana Paula ME',
-	email: 'ana.paula@example.com',
-	paymentGroup: {
-		id: 'pg001',
-		name: 'Plano Mensal',
-		defaultAmount: 150.0,
-		emailModel: 'mobile',
-		cycle: 'monthly',
+export const fakeMembers: MemberType[] =
+	[{
+		id: '001',
 		status: 'active',
-	},
-	paymentMethod: 'pix',
-	automaticBilling: true,
-	attachTo: 'Associação ABC',
-	chargeAmmount: 150.0,
-	userPassword: 'SenhaForte123!',
-	photo: 'ana-paula.jpg',
-	position: 'Analista de RH',
-	areaOfExpertise: 'Recursos Humanos',
-};
+		documentType: 'pf',
+		documentNumber: 12345678901,
+		code: 1001,
+		name: 'Ana Paula Souza',
+		birthDate: '1992-04-12',
+		cep: '01310-100',
+		street: 'Av. Paulista',
+		number: '1578',
+		complement: 'Apto 1203',
+		neighborhood: 'Bela Vista',
+		state: 'SP',
+		city: 'São Paulo',
+		phone: '(11) 3232-3232',
+		mobile: '(11) 91234-5678',
+		corporateName: 'Ana Paula ME',
+		email: 'ana.paula@example.com',
+		paymentGroup: "pay day",
+		paymentMethod: 'pix',
+		automaticBilling: true,
+		attachTo: 'Associação ABC',
+		chargeAmmount: 150.0,
+		userPassword: 'SenhaForte123!',
+		photo: 'ana-paula.jpg',
+		position: 'Analista de RH',
+		areaOfExpertise: 'Recursos Humanos',
+	}]

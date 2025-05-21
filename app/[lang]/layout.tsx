@@ -8,7 +8,7 @@ import TanstackProvider from "@/provider/providers.client";
 import AuthProvider from "@/provider/auth.provider";
 import "flatpickr/dist/themes/light.css";
 import DirectionProvider from "@/provider/direction.provider";
-import { Toaster } from "sonner";
+import { Toaster, toast } from "sonner";
 
 const inter = Inter({
 	subsets: ["latin"],
@@ -23,6 +23,8 @@ export const metadata = {
 };
 
 export default function RootLayout({ children, params: { lang } }: { children: React.ReactNode; params: { lang: string } }) {
+
+
 	return (
 		<html className={inter.className}>
 			<body suppressHydrationWarning={true} className="rpgestor-app">

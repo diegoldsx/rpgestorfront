@@ -20,3 +20,35 @@ export const ServiceDeskSchema = z.object({
 });
 
 export type ServiceDeskType = z.infer<typeof ServiceDeskSchema>;
+
+export const fakeServiceDesks: ServiceDeskType[] = [
+  {
+    id: '1',
+    registration: 'registration 1',
+    document: 'document 1',
+    memberId: 'memberId 1',
+    phone: 'phone 1',
+    email: 'email 1',
+    company: 'company 1',
+    sector: 'sector 1',
+    local: 'local 1',
+    appointmentDate: 'appointmentDate 1',
+    appointmentHour: 'appointmentHour 1',
+    description: 'description 1',
+  },
+  {
+    id: '2',
+    registration: 'registration 2',
+    document: 'document 2',
+    memberId: 'memberId 2',
+    phone: 'phone 2',
+    email: 'email 2',
+    company: 'company 2',
+    sector: 'sector 2',
+    local: 'local 2',
+    appointmentDate: 'appointmentDate 2',
+    appointmentHour: 'appointmentHour 2',
+    description: 'description 2',
+  }
+]
+

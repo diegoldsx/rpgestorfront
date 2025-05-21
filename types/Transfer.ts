@@ -10,3 +10,21 @@ export const TransferSchema = z.object({
 });
 
 export type TransferType = z.infer<typeof TransferSchema>;
+
+export const fakeTransfers: TransferType[] = [
+	{
+		id: '1',
+		origin: 'origin 1',
+		destination: 'destination 1',
+		date: 'date 1',
+		amount: 'amount 1',
+	},
+	{
+		id: '2',
+		origin: 'origin 2',
+		destination: 'destination 2',
+		date: 'date 2',
+		amount: 'amount 2',
+	}
+]
+

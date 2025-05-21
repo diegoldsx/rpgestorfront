@@ -35,4 +35,53 @@ export type Permission = {
 	level: PermissionLevel;
 };
 
+export const fakeUsers: UserType[] = [
+	{
+		id: '1',
+		name: 'name 1',
+		email: 'email 1',
+		status: 'active',
+		username: 'diego001',
+		permissions: [
+			{
+				route: 'assemblies',
+				level: 'admin',
+			},
+			{
+				route: 'events',
+				level: 'admin',
+			},
+			{
+				route: 'finance',
+				level: 'admin',
+			},
+			{
+				route: 'members',
+				level: 'admin',
+			},
+			{
+				route: 'afilliation',
+				level: 'admin',
+			},
+			{
+				route: 'service-desk',
+				level: 'admin',
+			},
+		]
+	},
+	{
+		id: '2',
+		name: 'name 2',
+		email: 'email 2',
+		status: 'active',
+		username: 'username 2',
+		permissions: [
+			{
+				route: 'assemblies',
+				level: 'read',
+			}
+		]
+	}
+]
+
 

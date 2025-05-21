@@ -1,100 +1,87 @@
 import { VisibilityState } from "@tanstack/react-table";
-import { Assembly } from "./schema";
-import { Column } from "@/types/columns/ColumnsDefinition";
+import { AssemblyType } from "@/types/Assembly";
+import { Column, createColumn } from "@/types/columns/ColumnsDefinition";
+import { Status } from "@/types/options";
 
-export const columnSchema: Array<Column<Assembly>> = [
-	{
+export const columnSchema: Array<Column<AssemblyType>> = [
+	createColumn<AssemblyType>({
 		id: "id",
 		title: "ID",
 		type: "id",
-		defaultValue: "",
-		isVisible: true,
 		size: 100,
-	},
-	{
+	}),
+	createColumn<AssemblyType>({
 		id: "name",
 		title: "Nome",
 		type: "text",
-		defaultValue: "",
-		isVisible: true,
+
 		size: 600,
-	},
-	{
+	}),
+	createColumn<AssemblyType>({
 		id: "status",
 		title: "Situação",
 		type: "badge",
 		defaultValue: "active",
-		isVisible: true,
 		size: 150,
-		options: [
-			{ value: "active", label: "Ativo" },
-			{ value: "inactive", label: "Inativo" },
-		],
-	},
-	{
+		options: Status,
+	}),
+	createColumn<AssemblyType>({
 		id: "startDate",
 		title: "Data de início",
 		type: "date",
-		defaultValue: "",
-		isVisible: true,
+
+
 		size: 180,
-	},
-	{
+	}),
+	createColumn<AssemblyType>({
 		id: "endDate",
 		title: "Data fim",
 		type: "date",
-		defaultValue: "",
-		isVisible: true,
+
 		size: 180,
-	},
-	{
+	}),
+	createColumn<AssemblyType>({
 		id: "resultDate",
 		title: "Data resultado",
 		type: "date",
-		defaultValue: "",
-		isVisible: true,
+
 		size: 180,
-	},
-	{
+	}),
+	createColumn<AssemblyType>({
 		id: "description",
 		title: "Descrição",
 		type: "textarea",
-		defaultValue: "",
-		isVisible: true,
+
 		size: 200,
-	},
-	{
+	}),
+	createColumn<AssemblyType>({
 		id: "type",
 		title: "Tipo",
 		type: "text",
-		defaultValue: "",
-		isVisible: true,
+
 		size: 200,
-	},
-	{
+	}),
+	createColumn<AssemblyType>({
 		id: "allowChangeVote",
 		title: "Permite mudar voto",
 		type: "checkbox",
-		defaultValue: false,
-		isVisible: true,
+
 		size: 300,
-	},
-	{
+	}),
+	createColumn<AssemblyType>({
 		id: "displayMode",
 		title: "Modo exibição",
 		type: "text",
-		defaultValue: "",
-		isVisible: true,
+
 		size: 200,
-	},
-	{
+	}),
+	createColumn<AssemblyType>({
 		id: "videoConference",
 		title: "Conferência de vídeo",
 		type: "checkbox",
-		defaultValue: false,
-		isVisible: true,
+
 		size: 220,
-	},
+	}),
 ];
 
 export const defaultValues: Record<string, any> = columnSchema.reduce(

@@ -33,3 +33,53 @@ export const RevenueSchema = z.object({
 });
 
 export type RevenueType = z.infer<typeof RevenueSchema>;
+
+
+export const fakeRevenues: RevenueType[] = [
+	{
+		id: '1',
+		payer: 'Payer 1',
+		description: 'Description 1',
+		dueDate: '2022-01-01',
+		account: 'account 1',
+		paymentMethod: 'payment method 1',
+		costCenter: 'cost center 1',
+		category: 'category 1',
+		value: '100',
+		paidValue: '100',
+		discountType: 'discount type 1',
+		discountPercentage: 10,
+		discountExpirationDate: '2022-01-01',
+		discountDescription: 'discount description 1',
+		observations: 'observations 1',
+		taxApplied: 'tax applied 1',
+		status: 'active',
+		totalInstallments: '1',
+		installmentType: 'installment type 1',
+		invoiceInstructions: 'invoice instructions 1',
+		sampleMessage: 'sample message 1',
+	},
+	{
+		id: '2',
+		payer: 'Payer 2',
+		description: 'Description 2',
+		dueDate: '2022-01-01',
+		account: 'account 2',
+		paymentMethod: 'payment method 2',
+		costCenter: 'cost center 2',
+		category: 'category 2',
+		value: '100',
+		paidValue: '100',
+		discountType: 'discount type 		2',
+		discountPercentage: 10,
+		discountExpirationDate: '2022-01-01',
+		discountDescription: 'discount description 2',
+		observations: 'observations 2',
+		taxApplied: 'tax applied 2',
+		status: 'active',
+		totalInstallments: '1',
+		installmentType: 'installment type 2',
+		invoiceInstructions: 'invoice instructions 2',
+		sampleMessage: 'sample message 2',
+	}
+]

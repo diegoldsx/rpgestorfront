@@ -1,16 +1,65 @@
 import { Column } from "@/types/columns/ColumnsDefinition";
 import { VisibilityState } from "@tanstack/react-table";
-import { Member } from "./schema";
-import { stateOptions, StateUF } from "@/types/options/StateUF";
+import { PaymentMethodOptions, StatesUF, StateUF, StateUFEnum, Status } from "@/types/options";
+import { MemberType } from "@/types/Member";
 
-export const columnSchema: Array<Column<Member>> = [
+export const columnSchema: Array<Column<MemberType>> = [
 	{
 		id: "id",
 		title: "ID",
 		type: "id",
 		defaultValue: "",
 		isVisible: true,
-		size: 200,
+		size: 100,
+	},
+	{
+		id: "status",
+		title: "Status Financeiro",
+		type: "select",
+		defaultValue: "",
+		isVisible: true,
+		size: 150,
+		options: Status,
+	},
+	{
+		id: "documentType",
+		title: "Tipo de documento",
+		type: "select",
+		defaultValue: "",
+		isVisible: true,
+		size: 100,
+	},
+	{
+		id: "documentNumber",
+		title: "Documento",
+		type: "text",
+		defaultValue: "",
+		isVisible: true,
+		size: 100,
+	},
+	{
+		id: "code",
+		title: "Código",
+		type: "text",
+		defaultValue: "",
+		isVisible: true,
+		size: 100,
+	},
+	{
+		id: "name",
+		title: "Nome",
+		type: "text",
+		defaultValue: "",
+		isVisible: true,
+		size: 300,
+	},
+	{
+		id: "birthDate",
+		title: "Data de Nascimento",
+		type: "date",
+		defaultValue: "",
+		isVisible: true,
+		size: 150,
 	},
 	{
 		id: "email",
@@ -36,14 +85,7 @@ export const columnSchema: Array<Column<Member>> = [
 		isVisible: true,
 		size: 150,
 	},
-	{
-		id: "birthDate",
-		title: "Data de Nascimento",
-		type: "date",
-		defaultValue: "",
-		isVisible: true,
-		size: 150,
-	},
+
 	{
 		id: "corporateName",
 		title: "Razão Social",
@@ -52,43 +94,11 @@ export const columnSchema: Array<Column<Member>> = [
 		isVisible: true,
 		size: 200,
 	},
-	{
-		id: "tradeName",
-		title: "Nome Fantasia",
-		type: "text",
-		defaultValue: "",
-		isVisible: true,
-		size: 200,
-	},
-	{
-		id: "financialStatus",
-		title: "Status Financeiro",
-		type: "select",
-		defaultValue: "",
-		isVisible: true,
-		size: 150,
-		options: [
-			{ value: "active", label: "Ativo" },
-			{ value: "inactive", label: "Inativo" },
-		],
-	},
-	{
-		id: "billingCycle",
-		title: "Ciclo de Faturamento",
-		type: "select",
-		defaultValue: "",
-		isVisible: true,
-		size: 150,
-		options: [
-			{ value: "monthly", label: "Mensal" },
-			{ value: "quarterly", label: "Trimestral" },
-			{ value: "yearly", label: "Anual" },
-		],
-	},
+
 	{
 		id: "paymentGroup",
 		title: "Grupo de Pagamento",
-		type: "text",
+		type: "select",
 		defaultValue: "",
 		isVisible: true,
 		size: 150,
@@ -97,19 +107,12 @@ export const columnSchema: Array<Column<Member>> = [
 		id: "paymentMethod",
 		title: "Método de Pagamento",
 		type: "select",
-		options: [{ value: "pix", label: "PIX" }, { value: "boleto", label: "Boleto" }],
 		defaultValue: "",
 		isVisible: true,
 		size: 150,
+		options: PaymentMethodOptions,
 	},
-	{
-		id: "type",
-		title: "Tipo",
-		type: "text",
-		defaultValue: "",
-		isVisible: true,
-		size: 150,
-	},
+
 	{
 		id: "cep",
 		title: "CEP",
@@ -163,18 +166,11 @@ export const columnSchema: Array<Column<Member>> = [
 		title: "Estado",
 		type: "select",
 		defaultValue: "",
-		options: Object.values(StateUF).map((state) => ({ value: state, label: state })),
+		options: StatesUF,
 		isVisible: true,
 		size: 150,
 	},
-	{
-		id: "document",
-		title: "Document",
-		type: "text",
-		defaultValue: "",
-		isVisible: true,
-		size: 150,
-	},
+
 
 ];
 

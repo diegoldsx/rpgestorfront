@@ -2,16 +2,15 @@
 
 import { ColumnDef } from "@tanstack/react-table";
 import { exactFilter } from "@/components/common/data-table/columnUtils";
-import { columnSchema } from "../schemas/columnSchema";
+import { columnSchema } from "./columnSchema";
 import Link from "next/link";
-import { Assembly } from "../schemas/schema";
 import DataCell from "@/components/common/data-table/columns/DataCell";
 import ActionsCell from "@/components/common/data-table/columns/ActionCell";
-import { Input } from "@/components/ui/input";
+import { AssemblyType } from "@/types/Assembly";
 
 const editUrl = "assemblies/details";
 
-export const columns: ColumnDef<Assembly>[] = [
+export const columns: ColumnDef<AssemblyType>[] = [
 	...columnSchema
 		.filter((item) => item.isVisible !== false)
 		.map(({ id, title, options, type, size = 0 }) => ({

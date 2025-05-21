@@ -4,9 +4,10 @@ import {
 	getFieldsWithOptions,
 	getVisibilityState,
 } from "./schemas/columnSchema";
-import { fake_members } from "./types/data";
+import { fakeMembers, MemberSchema, MemberType } from "@/types/Member";
 import { columns } from "./components/columns";
 import { PageLayout } from "@/components/common/page/PageLayout";
+import { MemberSchemaType } from "@/schemas/members/member";
 
 const Page = () => {
 	return (
@@ -17,7 +18,7 @@ const Page = () => {
 			},
 		}}>
 			<DataTable
-				data={fake_members}
+				data={fakeMembers}
 				columns={columns}
 				facetedFilters={getFieldsWithOptions()}
 				visibilityState={getVisibilityState()}

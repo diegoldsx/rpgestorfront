@@ -31,3 +31,24 @@ export const SubmissionSchema = z.object({
 });
 
 export type SubmissionType = z.infer<typeof SubmissionSchema>;
+
+export const fakeSubmissions: SubmissionType[] = [
+	{
+		id: '1',
+		packagingName: 'packagingName 1',
+		strategicPartners: 'strategicPartners 1',
+		area: 'area 1',
+		authors: 'authors 1',
+		institution: 'institution 1',
+		date: 'date 1',
+		eventId: 'eventId 1',
+		submitedBy: 'submitedBy 1',
+		packageReleaseDate: 'packageReleaseDate 1',
+		packageDesignAgency: 'packageDesignAgency 1',
+		status: 'status 1',
+		presentationLink: 'presentationLink 1',
+		comments: 'comments 1',
+		number: 'number 1',
+		presentationDate: 'presentationDate 1',
+		roomContent: 'roomContent 1',
+	}]
