@@ -6,29 +6,37 @@ import { DataTable } from "@/components/common/data-table/data-table";
 import {
 	getFieldsWithOptions,
 	getVisibilityState,
-} from "./schemas/columnSchema";
-import { FAKE_CUSTOMERS } from "./types/data";
+} from "./components/columnSchema";
 import { columns } from "./components/columns";
-import { CustomerSchemaType } from "./schemas/schema";
-import { useFetch } from "@/hooks/useFetch";
+import { fakeCustomers } from "@/types/Customer";
+
+
+export const moduleLabels = {
+	detailsUrl: "customers/details-page",
+	title: "Clientes",
+	route: "/customers",
+	new: "Registrar cliente",
+	edit: "Editar cliente",
+}
+
 
 const Page = () => {
-	const { data, loading, error } =
-		useFetch<CustomerSchemaType[]>("/api/customer");
+	// const { data, loading, error } =
+	// 	useFetch<CustomerSchemaType[]>("/api/customer");
 
 	return (
 		<Card>
 			<CardHeader>
 				<HeadingPages
-					title="Assembléias"
+					title={moduleLabels.title}
 					breadcrumbs={{
-						title: "Assembléias",
-						href: "/groups",
+						title: moduleLabels.title,
+						href: moduleLabels.route,
 					}}
 					actions={{
 						secondary: {
-							text: "Registrar assembléia",
-							href: "groups/details",
+							text: moduleLabels.new,
+							href: moduleLabels.detailsUrl,
 						},
 					}}
 				/>
@@ -36,8 +44,9 @@ const Page = () => {
 
 			<CardContent>
 				<DataTable
-					data={data || []}
+					data={fakeCustomers || []}
 					columns={columns}
+
 					facetedFilters={getFieldsWithOptions()}
 					visibilityState={getVisibilityState()}
 					columnResizeMode="onChange"

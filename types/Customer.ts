@@ -33,11 +33,11 @@ export const CustomerSchema = z.object({
 	billingMobile: z.string().min(8, "Celular de cobrança inválido."),
 });
 
-export type Customer = z.infer<typeof CustomerSchema>;
+export type CustomerType = z.infer<typeof CustomerSchema>;
 
-export const fakeCustomers: Customer[] = [
+export const fakeCustomers: CustomerType[] = [
 	{
-		id: "c001",
+		id: "1",
 		documentType: "pj",
 		documentNumber: 12345678000199,
 		name: "João Silva",
@@ -66,7 +66,7 @@ export const fakeCustomers: Customer[] = [
 		billingMobile: "11988888888"
 	},
 	{
-		id: "c002",
+		id: "2",
 		documentType: "pf",
 		documentNumber: 22222222222,
 		name: "João Silvo",
