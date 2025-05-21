@@ -6,24 +6,37 @@ import { DataTable } from "@/components/common/data-table/data-table";
 import {
 	getFieldsWithOptions,
 	getVisibilityState,
-} from "./schemas/columnSchema";
-import { FAKE_CATEGORIES } from "./types/data";
+} from "./components/columnSchema";
 import { columns } from "./components/columns";
+import { fakeCategories } from "@/types/Category";
+
+
+export const moduleLabels = {
+	detailsUrl: "categories/details-page",
+	title: "Categorias",
+	route: "/categories",
+	new: "Registrar categoria",
+	edit: "Editar categoria",
+}
+
 
 const Page = () => {
+	// const { data, loading, error } =
+	// 	useFetch<CustomerSchemaType[]>("/api/customer");
+
 	return (
 		<Card>
 			<CardHeader>
 				<HeadingPages
-					title="Categorias"
+					title={moduleLabels.title}
 					breadcrumbs={{
-						title: "Categorias",
-						href: "/categories",
+						title: moduleLabels.title,
+						href: moduleLabels.route,
 					}}
 					actions={{
 						secondary: {
-							text: "Registrar categoria",
-							href: "categories/details-page",
+							text: moduleLabels.new,
+							href: moduleLabels.detailsUrl,
 						},
 					}}
 				/>
@@ -31,8 +44,9 @@ const Page = () => {
 
 			<CardContent>
 				<DataTable
-					data={FAKE_CATEGORIES}
+					data={fakeCategories || []}
 					columns={columns}
+
 					facetedFilters={getFieldsWithOptions()}
 					visibilityState={getVisibilityState()}
 					columnResizeMode="onChange"

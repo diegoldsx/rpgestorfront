@@ -2,16 +2,16 @@
 
 import { ColumnDef } from "@tanstack/react-table";
 import { exactFilter } from "@/components/common/data-table/columnUtils";
-import { columnSchema } from "./columnSchema";
 import Link from "next/link";
 
 import DataCell from "@/components/common/data-table/columns/DataCell";
 import ActionsCell from "@/components/common/data-table/columns/ActionCell";
 import { moduleLabels } from "../page";
-import { ProvisionType } from "@/types/Provision";
+import { InstallmentType } from "@/types/Installment";
+import { columnSchema } from "./columnSchema";
 
 
-export const columns: ColumnDef<ProvisionType>[] = [
+export const columns: ColumnDef<InstallmentType>[] = [
 	...columnSchema
 		.filter((item) => item.isVisible !== false)
 		.map(({ id, title, options, type, size = 0 }) => ({

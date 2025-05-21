@@ -32,3 +32,32 @@ export const IncomeSchema = z.object({
 });
 
 export type IncomeType = z.infer<typeof IncomeSchema>;
+
+
+
+export const fakeIncomes: IncomeType[] = [
+	{
+		id: "1",
+		payer: "Pagador",
+		description: "descrição",
+		competenceDate: "Cometence",
+		dueDate: "Due Date",
+		account: "Account",
+		paymentMethod: PaymentMethodEnum.Values.pix,
+		costCenter: CostCenterEnum.Values.administrativo,
+		category: "Category",
+		value: "Value",
+		paidValue: "Paid Value",
+		discountType: "Discount Type",
+		discountPercentage: "Discount Percentage",
+		discountExpirationDate: "Discount Expiration Date",
+		discountDescription: "Discount Description",
+		observations: "Observations",
+		taxApplied: "Tax Applied",
+		status: "active",
+		totalInstallments: "Total Installments",
+		installmentType: "Installment Type",
+		invoiceInstructions: "Invoice Instructions",
+		sampleMessage: "sampleMessage",
+	},
+]

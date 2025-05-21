@@ -3,24 +3,24 @@
 import { HeadingPages } from "@/components/common/heading/heading-pages";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { DataTable } from "@/components/common/data-table/data-table";
-import {
-	getFieldsWithOptions,
-	getVisibilityState,
-} from "./components/columnSchema";
+
 import { columns } from "./components/columns";
-import {fakeSubmissions as fakeData } from "@/types/Submission";
+import { facetedFilters, visibilityState } from "./components/columnSchema";
+import { fakeRemittance } from "@/types/Remittance";
 
 
 export const moduleLabels = {
-	detailsUrl: "submissions/details-page",
-	title: "Submissões",
-	route: "/submissions",
-	new: "Registrar submissão",
-	edit: "Editar submissão",
+	detailsUrl: "remittance/details-page",
+	title: "Remessa",
+	route: "/remittance",
+	new: "Registrar Remessa",
+	edit: "Editar Remessa",
 }
 
-const Page = () => {
 
+const Page = () => {
+	// const { data, loading, error } =
+	// 	useFetch<CustomerSchemaType[]>("/api/customer");
 
 	return (
 		<Card>
@@ -42,11 +42,11 @@ const Page = () => {
 
 			<CardContent>
 				<DataTable
-					data={fakeData || []}
+					data={fakeRemittance}
 					columns={columns}
 
-					facetedFilters={getFieldsWithOptions()}
-					visibilityState={getVisibilityState()}
+					facetedFilters={facetedFilters}
+					visibilityState={visibilityState}
 					columnResizeMode="onChange"
 				/>
 			</CardContent>

@@ -8,10 +8,10 @@ import Link from "next/link";
 import DataCell from "@/components/common/data-table/columns/DataCell";
 import ActionsCell from "@/components/common/data-table/columns/ActionCell";
 import { moduleLabels } from "../page";
-import { ProvisionType } from "@/types/Provision";
+import { ReturnType } from "@/types/Return";
 
 
-export const columns: ColumnDef<ProvisionType>[] = [
+export const columns: ColumnDef<ReturnType>[] = [
 	...columnSchema
 		.filter((item) => item.isVisible !== false)
 		.map(({ id, title, options, type, size = 0 }) => ({

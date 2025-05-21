@@ -63,11 +63,11 @@ export const Status: Option[] = [
 export const StatusEnum = createEnumFromOptions(Status);
 export type StatusType = z.infer<typeof StatusEnum>;
 
-export const DiscountType = [
+export const DiscountTypeOptions: Option[] = [
   { label: 'R$', value: 'real' },
   { label: '%', value: 'percent' },
 ] as const;
-export const DiscountEnum = createEnumFromOptions(DiscountType);
+export const DiscountEnum = createEnumFromOptions(DiscountTypeOptions);
 export type Discount = z.infer<typeof DiscountEnum>;
 
 export const EmailModels = [
@@ -95,19 +95,19 @@ export const PaymentMethodOptions: Option[] = [
 export const PaymentMethodEnum = createEnumFromOptions(PaymentMethodOptions);
 export type PaymentMethod = z.infer<typeof PaymentMethodEnum>;
 
-export const CostCenter = [
+export const CostCenterOptions: Option[] = [
   { label: 'Administrativo', value: 'administrativo' },
   { label: 'Eventos', value: 'eventos' },
   { label: 'Treinamentos', value: 'trainamentos' },
 ] as const;
-export const CostCenterEnum = createEnumFromOptions(CostCenter);
+export const CostCenterEnum = createEnumFromOptions(CostCenterOptions);
 export type CostCenterType = z.infer<typeof CostCenterEnum>;
 
-export const BillingCycles = [
+export const BillingCyclesOptions: Option[] = [
   { label: 'Mensal', value: 'monthly' },
   { label: 'Bimestral', value: 'bimonthly' },
   { label: 'Trimestral', value: 'quarterly' },
   { label: 'Anual', value: 'annually' },
 ] as const;
-export const BillingCycleEnum = createEnumFromOptions(BillingCycles);
+export const BillingCycleEnum = createEnumFromOptions(BillingCyclesOptions);
 export type BillingCycle = z.infer<typeof BillingCycleEnum>;

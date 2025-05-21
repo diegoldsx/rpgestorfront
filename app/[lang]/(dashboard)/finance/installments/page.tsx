@@ -4,23 +4,25 @@ import { HeadingPages } from "@/components/common/heading/heading-pages";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { DataTable } from "@/components/common/data-table/data-table";
 import {
-	getFieldsWithOptions,
-	getVisibilityState,
+facetedFilters,
+visibilityState
 } from "./components/columnSchema";
 import { columns } from "./components/columns";
-import {fakeSubmissions as fakeData } from "@/types/Submission";
+import {  fakeInstallments as fakeData } from "@/types/Installment";
 
 
 export const moduleLabels = {
-	detailsUrl: "submissions/details-page",
-	title: "Submissões",
-	route: "/submissions",
-	new: "Registrar submissão",
-	edit: "Editar submissão",
+	detailsUrl: "installments/details-page",
+	title: "Parcelas",
+	route: "/installments",
+	new: "Registrar parcela",
+	edit: "Editar parcela",
 }
 
-const Page = () => {
 
+const Page = () => {
+	// const { data, loading, error } =
+	// 	useFetch<CustomerSchemaType[]>("/api/customer");
 
 	return (
 		<Card>
@@ -42,11 +44,10 @@ const Page = () => {
 
 			<CardContent>
 				<DataTable
-					data={fakeData || []}
+					data={fakeData}
 					columns={columns}
-
-					facetedFilters={getFieldsWithOptions()}
-					visibilityState={getVisibilityState()}
+					facetedFilters={facetedFilters}
+					visibilityState={visibilityState}
 					columnResizeMode="onChange"
 				/>
 			</CardContent>

@@ -1,46 +1,58 @@
 "use client";
 
-import { Fragment } from "react";
-import { Card, CardContent } from "@/components/ui/card";
 import { HeadingPages } from "@/components/common/heading/heading-pages";
-import { columns } from "./components/columns";
+import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { DataTable } from "@/components/common/data-table/data-table";
-import { FAKE_DATA } from "@/data/incomeData";
 import {
-	incomeFacetedFilters,
-	incomeVisibilityState,
-} from "./components/columnHelper";
+	getFieldsWithOptions,
+	getVisibilityState,
+} from "./components/columnSchema";
+import { columns } from "./components/columns";
+import { fakeIncomes } from "@/types/Income";
 
-const title = "Receitas";
-const breadcrumbs = {
-	title: "Financeiro",
-	href: "/finance",
-};
-const actions = {
-	secondary: {
-		text: "Cadastrar nova Receita",
-		href: "/finance/incomes/details",
-	},
-};
 
-export const Page = () => {
+export const moduleLabels = {
+	detailsUrl: "incomes/details-page",
+	title: "Receitas",
+	route: "/incomes",
+	new: "Registrar receita",
+	edit: "Editar receita",
+}
+
+
+const Page = () => {
+	// const { data, loading, error } =
+	// 	useFetch<CustomerSchemaType[]>("/api/customer");
+
 	return (
-		<Fragment>
-			<HeadingPages title={title} breadcrumbs={breadcrumbs} actions={actions} />
+		<Card>
+			<CardHeader>
+				<HeadingPages
+					title={moduleLabels.title}
+					breadcrumbs={{
+						title: moduleLabels.title,
+						href: moduleLabels.route,
+					}}
+					actions={{
+						secondary: {
+							text: moduleLabels.new,
+							href: moduleLabels.detailsUrl,
+						},
+					}}
+				/>
+			</CardHeader>
 
-			<div className="mt-3 space-y-6">
-				<Card>
-					<CardContent>
-						<DataTable
-							data={FAKE_DATA}
-							columns={columns}
-							facetedFilters={incomeFacetedFilters}
-							visibilityState={incomeVisibilityState}
-						/>
-					</CardContent>
-				</Card>
-			</div>
-		</Fragment>
+			<CardContent>
+				<DataTable
+					data={fakeIncomes}
+					columns={columns}
+
+					facetedFilters={getFieldsWithOptions()}
+					visibilityState={getVisibilityState()}
+					columnResizeMode="onChange"
+				/>
+			</CardContent>
+		</Card>
 	);
 };
 

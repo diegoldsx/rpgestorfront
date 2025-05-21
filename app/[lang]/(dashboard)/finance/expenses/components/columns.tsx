@@ -1,64 +1,37 @@
 "use client";
+
 import { ColumnDef } from "@tanstack/react-table";
 import { exactFilter } from "@/components/common/data-table/columnUtils";
-import Cell from "@/app/types/Cell";
-import { columnConfig } from "./columnHelper";
-import { Badge } from "@/components/ui/badge";
-import { BadgeStatus, getBadgeStatus } from "@/components/badge/badgeStatus";
+import { columnSchema } from "./columnSchema";
 import Link from "next/link";
-import { Icon } from "@iconify/react";
-import { useParams } from "next/navigation";
-import { Expense } from "@/types/Expense";
 
-const editUrl = "pt/financial/expenses/form";
+import DataCell from "@/components/common/data-table/columns/DataCell";
+import ActionsCell from "@/components/common/data-table/columns/ActionCell";
+import { moduleLabels } from "../page";
+import { ExpenseType } from "@/types/Expense";
 
-export const columns: ColumnDef<Expense>[] = [
-	...columnConfig.map((field) => ({
-		id: field.id,
-		accessorKey: field.id,
-		header: field.title,
-		filterFn: exactFilter,
-		cell: (info: any) => {
-			const value = info.getValue() as string;
 
-			if (field.id === "status" && field.options) {
-				const option = field.options.find((option) => option.value === value);
-				const badgeStyle = getBadgeStatus(option?.value as BadgeStatus);
-
-				return (
-					<Cell>
-						<Badge color={badgeStyle}>{option?.label}</Badge>
-					</Cell>
-				);
-			}
-
-			if (field.options) {
-				const option = field.options.find((option) => option.value === value);
-
-				return (
-					<Cell>
-						<span>{option?.label}</span>
-					</Cell>
-				);
-			}
-
-			return <Cell>{value}</Cell>;
-		},
-	})),
+export const columns: ColumnDef<ExpenseType>[] = [
+	...columnSchema
+		.filter((item) => item.isVisible !== false)
+		.map(({ id, title, options, type, size = 0 }) => ({
+			id,
+			accessorKey: id,
+			header: title,
+			filterFn: exactFilter,
+			size: size,
+			cell: (props: { getValue: () => any }) => (
+				<DataCell getValue={props.getValue} type={type} options={options} />
+			),
+		})),
 	{
 		id: "actions",
-		header: "Ações",
-		cell: ({ row }) => {
-			const id = row.original.id;
-			const params = useParams();
-			return (
-				<Cell className="flex gap-2">
-					<Link href={`/${editUrl}?id=${id}`}>
-						<Icon icon="heroicons:pencil-square" className="w-5 h-5" />
-					</Link>
-				</Cell>
-			);
-		},
+		header: "Actions",
 		size: 150,
+		cell: ({ row }) => (
+			<Link href={moduleLabels.detailsUrl}>
+				<ActionsCell row={row} editUrl={moduleLabels.detailsUrl} label="Edit" />
+			</Link>
+		),
 	},
 ];

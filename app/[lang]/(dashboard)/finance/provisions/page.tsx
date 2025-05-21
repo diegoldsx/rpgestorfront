@@ -1,46 +1,56 @@
 "use client";
 
-import { Fragment } from "react";
-import { Card, CardContent } from "@/components/ui/card";
 import { HeadingPages } from "@/components/common/heading/heading-pages";
-import { columns } from "./components/columns";
+import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { DataTable } from "@/components/common/data-table/data-table";
-import { FAKE_DATA } from "@/data/provisionsData";
-import {
-	provisionFacetedFilters,
-	provisionVisibilityState,
-} from "./components/columnHelper";
 
-const title = "Lançamentos";
-const breadcrumbs = {
-	title: "Financeiro",
-	href: "/finance",
-};
-const actions = {
-	secondary: {
-		text: "Cadastrar nova Receita",
-		href: "/finance/provision/details",
-	},
-};
+import { columns } from "./components/columns";
+import { fakeProvisions as fakeData } from "@/types/Provision";
+import { facetedFilters, visibilityState } from "./components/columnSchema";
 
-export const Page = () => {
+
+export const moduleLabels = {
+	detailsUrl: "provisions/details-page",
+	title: "Provisão",
+	route: "/provisions",
+	new: "Registrar provisão",
+	edit: "Editar provisão",
+}
+
+
+const Page = () => {
+	// const { data, loading, error } =
+	// 	useFetch<CustomerSchemaType[]>("/api/customer");
+
 	return (
-		<Fragment>
-			<HeadingPages title={title} breadcrumbs={breadcrumbs} actions={actions} />
+		<Card>
+			<CardHeader>
+				<HeadingPages
+					title={moduleLabels.title}
+					breadcrumbs={{
+						title: moduleLabels.title,
+						href: moduleLabels.route,
+					}}
+					actions={{
+						secondary: {
+							text: moduleLabels.new,
+							href: moduleLabels.detailsUrl,
+						},
+					}}
+				/>
+			</CardHeader>
 
-			<div className="mt-3 space-y-6">
-				<Card>
-					<CardContent>
-						<DataTable
-							data={FAKE_DATA}
-							columns={columns}
-							facetedFilters={provisionFacetedFilters}
-							visibilityState={provisionVisibilityState}
-						/>
-					</CardContent>
-				</Card>
-			</div>
-		</Fragment>
+			<CardContent>
+				<DataTable
+					data={fakeData}
+					columns={columns}
+
+					facetedFilters={facetedFilters}
+					visibilityState={visibilityState}
+					columnResizeMode="onChange"
+				/>
+			</CardContent>
+		</Card>
 	);
 };
 

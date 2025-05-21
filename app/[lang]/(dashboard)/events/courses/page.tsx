@@ -6,24 +6,35 @@ import { DataTable } from "@/components/common/data-table/data-table";
 import {
 	getFieldsWithOptions,
 	getVisibilityState,
-} from "./schemas/columnSchema";
-import { FAKE_COURSES } from "./types/data";
+} from "./components/columnSchema";
 import { columns } from "./components/columns";
+import {fakeCourses as fakeData } from "@/types/Course";
+
+
+export const moduleLabels = {
+	detailsUrl: "courses/details-page",
+	title: "Cursos",
+	route: "/courses",
+	new: "Registrar curso",
+	edit: "Editar curso",
+}
 
 const Page = () => {
+
+
 	return (
 		<Card>
 			<CardHeader>
 				<HeadingPages
-					title="Assembléias"
+					title={moduleLabels.title}
 					breadcrumbs={{
-						title: "Assembléias",
-						href: "/courses",
+						title: moduleLabels.title,
+						href: moduleLabels.route,
 					}}
 					actions={{
 						secondary: {
-							text: "Registrar assembléia",
-							href: "courses/details",
+							text: moduleLabels.new,
+							href: moduleLabels.detailsUrl,
 						},
 					}}
 				/>
@@ -31,8 +42,9 @@ const Page = () => {
 
 			<CardContent>
 				<DataTable
-					data={FAKE_COURSES}
+					data={fakeData || []}
 					columns={columns}
+
 					facetedFilters={getFieldsWithOptions()}
 					visibilityState={getVisibilityState()}
 					columnResizeMode="onChange"

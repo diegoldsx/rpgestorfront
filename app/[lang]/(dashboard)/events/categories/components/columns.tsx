@@ -2,16 +2,16 @@
 
 import { ColumnDef } from "@tanstack/react-table";
 import { exactFilter } from "@/components/common/data-table/columnUtils";
-import { columnSchema } from "../schemas/columnSchema";
+import { columnSchema } from "./columnSchema";
 import Link from "next/link";
-import { CategorySchemaType } from "../schemas/schema";
+
 import DataCell from "@/components/common/data-table/columns/DataCell";
 import ActionsCell from "@/components/common/data-table/columns/ActionCell";
-import { Input } from "@/components/ui/input";
+import { CategoryType } from "@/types/Category";
+import { moduleLabels } from "../page";
 
-const editUrl = "categories/details-page";
 
-export const columns: ColumnDef<CategorySchemaType>[] = [
+export const columns: ColumnDef<CategoryType>[] = [
 	...columnSchema
 		.filter((item) => item.isVisible !== false)
 		.map(({ id, title, options, type, size = 0 }) => ({
@@ -29,8 +29,8 @@ export const columns: ColumnDef<CategorySchemaType>[] = [
 		header: "Actions",
 		size: 150,
 		cell: ({ row }) => (
-			<Link href={editUrl}>
-				<ActionsCell row={row} editUrl={editUrl} label="Edit" />
+			<Link href={moduleLabels.detailsUrl}>
+				<ActionsCell row={row} editUrl={moduleLabels.detailsUrl} label="Edit" />
 			</Link>
 		),
 	},
