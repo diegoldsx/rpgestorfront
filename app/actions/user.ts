@@ -2,6 +2,8 @@
 
 import { getServerSession } from 'next-auth'
 import { authOptions } from '@/lib/auth'
+import { fake_users } from '../[lang]/(dashboard)/users/types'
+import { fakeUsers } from '@/types/User'
 
 type UpdateUserInput = {
   name: string
@@ -40,4 +42,15 @@ export async function updateAuthenticatedUser(data: UpdateUserInput) {
   }
 
   return updatedUser
+}
+
+export async function getUserProfileInfo(id: string) {
+  const result = fakeUsers.find(user => user.id === id)
+
+
+  if (!result) {
+    throw new Error('Usuário não encontrado')
+  }
+
+  return result
 }
