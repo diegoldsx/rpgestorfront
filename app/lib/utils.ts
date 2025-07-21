@@ -166,3 +166,4 @@ export const translate = (title: string, trans: Translations): string => {
 
 	return title;
 };
+

@@ -1,4 +1,4 @@
-import { getAccountBalance, getMembersStatsData, getOverviewData, getReportSummary, } from "@/app/actions/charts";
+import { getAccountBalance, getMembersStatsData, getOverviewData, getReportSummary, } from "@/app/action/charts";
 import DashboardPageView from "./page-view";
 import { getDictionary } from "@/app/dictionaries";
 import { Calendar, TrendingDown, TrendingUp, User } from "lucide-react";

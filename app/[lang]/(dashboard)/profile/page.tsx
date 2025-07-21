@@ -1,4 +1,4 @@
-import { getAuthenticatedUser, updateAuthenticatedUser, getUserProfileInfo } from '@/app/actions/user'
+import { getAuthenticatedUser, updateAuthenticatedUser, getUserProfileInfo } from '@/app/action/user'
 import { PageLayout } from '@/components/common/page/PageLayout'
 import { Input } from '@/components/ui/input'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'

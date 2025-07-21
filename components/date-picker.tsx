@@ -12,6 +12,8 @@ import { Calendar } from "@/components/ui/calendar";
 import { Label } from "@/components/ui/label";
 import { format } from "date-fns";
 
+type Modes = "single" | "multiple" | "range";
+
 interface DatePickerProps extends React.HTMLAttributes<HTMLDivElement> {
 	name?: string;
 	label?: string;
@@ -19,6 +21,7 @@ interface DatePickerProps extends React.HTMLAttributes<HTMLDivElement> {
 	selectedDate?: Date;
 	onDateChange?: (date: Date | null) => void;
 	displayFormat?: string;
+	mode?: Modes;
 }
 
 export const DatePicker = React.forwardRef<HTMLDivElement, DatePickerProps>(
@@ -30,6 +33,7 @@ export const DatePicker = React.forwardRef<HTMLDivElement, DatePickerProps>(
 			selectedDate,
 			onDateChange,
 			displayFormat = "dd/MM/yyyy",
+			mode = "single",
 			...rest
 		},
 		ref
@@ -49,6 +53,14 @@ export const DatePicker = React.forwardRef<HTMLDivElement, DatePickerProps>(
 		return (
 			<div ref={ref} {...rest}>
 				{label && <Label>{label}</Label>}
+				{name && (
+					<input
+						type="hidden"
+						name={name}
+						value={selectedDate ? selectedDate.toISOString() : ""}
+						readOnly
+					/>
+				)}
 				<Popover open={open} onOpenChange={setOpen}>
 					<PopoverTrigger asChild>
 						<Button
@@ -65,7 +77,8 @@ export const DatePicker = React.forwardRef<HTMLDivElement, DatePickerProps>(
 					</PopoverTrigger>
 					<PopoverContent className="w-auto p-0">
 						<Calendar
-							mode="single"
+							className="text-bold"
+							mode={"single"}
 							selected={internalDate}
 							onSelect={handleDateChange}
 							initialFocus
