@@ -15,7 +15,6 @@ import EcommerceStats from "./components/ecommerce-stats";
 import TopSell from "./components/top-sell";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import DashboardDropdown from "@/components/dashboard-dropdown";
-import DatePickerWithRange from "@/components/date-picker-with-range";
 interface EcommercePageViewProps {
   trans: {
     [key: string]: string;
@@ -28,7 +27,6 @@ const EcommercePageView = ({ trans }:EcommercePageViewProps) => {
         <div className="text-2xl font-medium text-default-800">
           Ecommerce Dashboard
         </div>
-        <DatePickerWithRange />
       </div>
       <Card>
         <CardContent className="p-4">

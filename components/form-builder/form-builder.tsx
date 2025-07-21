@@ -7,23 +7,10 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 
-import {
-	Select,
-	SelectTrigger,
-	SelectContent,
-	SelectItem,
-	SelectValue,
-} from "@/components/ui/select";
+import { Select, SelectTrigger, SelectContent, SelectItem, SelectValue } from "@/components/ui/select";
 import { format } from "date-fns";
-import {
-	FaFont,
-	FaAlignLeft,
-	FaList,
-	FaCalendarAlt,
-	FaTrash,
-} from "react-icons/fa";
+import { FaFont, FaAlignLeft, FaList, FaCalendarAlt, FaTrash } from "react-icons/fa";
 import { DatePicker } from "@/components/date-picker";
-import DatePickerWithRange from "../date-picker-with-range";
 
 interface Field {
 	id: string;
@@ -93,9 +80,7 @@ export default function FormBuilder() {
 
 	return (
 		<div className="max-w-3xl mx-auto p-6 bg-white shadow-md rounded-lg">
-			<h2 className="text-2xl font-bold text-gray-800 mb-4">
-				Construtor de Formulário
-			</h2>
+			<h2 className="text-2xl font-bold text-gray-800 mb-4">Construtor de Formulário</h2>
 
 			<div className="grid grid-cols-2 gap-4 mb-6">
 				{fieldTypes.map((field) => (
@@ -124,9 +109,7 @@ export default function FormBuilder() {
 							<Label>ID do Campo</Label>
 							<Input
 								value={newField.id}
-								onChange={(e) =>
-									setNewField({ ...newField, id: e.target.value })
-								}
+								onChange={(e) => setNewField({ ...newField, id: e.target.value })}
 								placeholder="Ex: campo_nome"
 							/>
 						</div>
@@ -134,9 +117,7 @@ export default function FormBuilder() {
 							<Label>Nome do Campo</Label>
 							<Input
 								value={newField.label}
-								onChange={(e) =>
-									setNewField({ ...newField, label: e.target.value })
-								}
+								onChange={(e) => setNewField({ ...newField, label: e.target.value })}
 								placeholder="Nome visível do campo"
 							/>
 						</div>
@@ -144,9 +125,7 @@ export default function FormBuilder() {
 							<Label>Placeholder</Label>
 							<Input
 								value={newField.placeholder}
-								onChange={(e) =>
-									setNewField({ ...newField, placeholder: e.target.value })
-								}
+								onChange={(e) => setNewField({ ...newField, placeholder: e.target.value })}
 								placeholder="Texto do placeholder"
 							/>
 						</div>
@@ -155,9 +134,7 @@ export default function FormBuilder() {
 							<input
 								type="checkbox"
 								checked={newField.required}
-								onChange={(e) =>
-									setNewField({ ...newField, required: e.target.checked })
-								}
+								onChange={(e) => setNewField({ ...newField, required: e.target.checked })}
 							/>
 						</div>
 
@@ -213,16 +190,11 @@ export default function FormBuilder() {
 					{fields.map((field) => (
 						<div key={field.id} className="border p-4 rounded-md relative">
 							<Label htmlFor={field.id}>
-								{field.label}{" "}
-								{field.required && <span className="text-red-500">*</span>}
+								{field.label} {field.required && <span className="text-red-500">*</span>}
 							</Label>
 
 							{field.type === "text" && (
-								<Input
-									id={field.id}
-									placeholder={field.placeholder}
-									required={field.required}
-								/>
+								<Input id={field.id} placeholder={field.placeholder} required={field.required} />
 							)}
 							{field.type === "textarea" && (
 								<Textarea
