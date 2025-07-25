@@ -1,14 +1,12 @@
 "use client";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
-import {
-	OverviewChart,
-	OverviewChartProps,
-} from "@/components/charts/OverviewChart";
+import { OverviewChart, OverviewChartProps } from "@/components/charts/OverviewChart";
 import { MembersStatsChart, MembersStatsChartProps } from "@/components/charts/MemberStatsChart";
 import { ReportsArea, ReportServerItem } from "@/components/charts/ReportsArea";
 import { AccountBalance } from "@/components/charts/AccountBalance";
 import { MemberStatusPieChart } from "@/components/charts/MemberStatus";
+import { IncomesXExpensesChart } from "@/components/charts/IncomesXExpensesChart";
 
 interface DashboardPageViewProps {
 	trans: {
@@ -21,16 +19,20 @@ interface DashboardPageViewProps {
 	membersSituation: { active: number; inactive: number };
 }
 
-const DashboardPageView = ({ trans, overview, memberStats, reports, accountBalance, membersSituation }: DashboardPageViewProps) => {
+const DashboardPageView = ({
+	trans,
+	overview,
+	memberStats,
+	reports,
+	accountBalance,
+	membersSituation,
+}: DashboardPageViewProps) => {
 	return (
 		<div className="space-y-6">
 			{/* Área de métricas principais */}
-			<div className="grid grid-cols-12 gap-6">
-				<div className="col-span-12 lg:col-span-8">
-					<OverviewChart {...overview} />
-				</div>
-				<div className="col-span-12 lg:col-span-4">
-					<MembersStatsChart {...memberStats} />
+			<div className="grid grid-cols-12">
+				<div className="col-span-12">
+					<IncomesXExpensesChart total={0} totalExpenses={0} totalIncomes={0} categories={["Jul"]} series={[0]} />
 				</div>
 			</div>
 
@@ -46,9 +48,7 @@ const DashboardPageView = ({ trans, overview, memberStats, reports, accountBalan
 
 				<Card>
 					<CardHeader className="border-none p-6 pt-5 mb-0">
-						<CardTitle className="text-lg font-semibold text-default-900 p-0">
-							Associados por Situação
-						</CardTitle>
+						<CardTitle className="text-lg font-semibold text-default-900 p-0">Receitas x Despesas</CardTitle>
 					</CardHeader>
 					<CardContent>
 						<div className="dashtail-legend">
@@ -76,8 +76,6 @@ const DashboardPageView = ({ trans, overview, memberStats, reports, accountBalan
 					</CardContent>
 				</Card>
 			</div> */}
-
-
 		</div>
 	);
 };

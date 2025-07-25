@@ -7,7 +7,6 @@ import { Label } from "@/components/ui/label";
 import { CalendarIcon } from "lucide-react";
 import { format, setMonth, setYear } from "date-fns";
 import Select from "@/components/Select";
-import { Option } from "@/types/options/Option";
 
 const months = ["Jan", "Fev", "Mar", "Abr", "Mai", "Jun", "Jul", "Ago", "Set", "Out", "Nov", "Dez"];
 
