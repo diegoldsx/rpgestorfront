@@ -25,6 +25,7 @@ const Dashboard = async ({ params: { lang } }: DashboardProps) => {
 	const memberStats: MembersStatsChartProps = await getMembersStatsData();
 	const { reports } = await getReportSummary();
 	const { accounts } = await getAccountBalance();
+
 	const membersSituation = { active: 32, inactive: 3 };
 
 	return (

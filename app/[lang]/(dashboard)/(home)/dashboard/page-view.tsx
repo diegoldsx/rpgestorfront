@@ -7,7 +7,7 @@ import { ReportsArea, ReportServerItem } from "@/components/charts/ReportsArea";
 import { AccountBalance } from "@/components/charts/AccountBalance";
 import { MemberStatusPieChart } from "@/components/charts/MemberStatus";
 import { IncomesXExpensesChart } from "@/components/charts/IncomesXExpensesChart";
-
+import DonutChart from "@/components/charts/DonutChart";
 interface DashboardPageViewProps {
 	trans: {
 		[key: string]: string;
@@ -19,14 +19,18 @@ interface DashboardPageViewProps {
 	membersSituation: { active: number; inactive: number };
 }
 
-const DashboardPageView = ({
-	trans,
-	overview,
-	memberStats,
-	reports,
-	accountBalance,
-	membersSituation,
-}: DashboardPageViewProps) => {
+const DashboardPageView = ({ reports, accountBalance, membersSituation }: DashboardPageViewProps) => {
+	return (
+		<>
+			<DonutChart
+				title="Members"
+				labels={["Ativos", "Inativos"]}
+				series={[membersSituation.active, membersSituation.inactive]}
+				width={380}
+			/>
+		</>
+	);
+
 	return (
 		<div className="space-y-6">
 			{/* Área de métricas principais */}
@@ -57,25 +61,6 @@ const DashboardPageView = ({
 					</CardContent>
 				</Card>
 			</div>
-
-			{/* Mapa de associados */}
-			{/* <div className='col-span-2'>
-				<Card>
-					<CardHeader className='border-none pb-0'>
-						<div className='flex flex-wrap items-center gap-2'>
-							<div className='flex-1 text-xl font-semibold text-default-900 whitespace-nowrap'>
-								Associados por Região
-							</div>
-							<div className='flex-none'>
-								<DashboardSelect />
-							</div>
-						</div>
-					</CardHeader>
-					<CardContent className='px-5 pb-0'>
-						<CountryMap />
-					</CardContent>
-				</Card>
-			</div> */}
 		</div>
 	);
 };
