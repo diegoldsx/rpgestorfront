@@ -1,197 +1,121 @@
 import { Column } from "@/types/columns/ColumnsDefinition";
+import { StatesUF, PaymentMethodOptions, Status } from "@/types/options";
+import { Member } from "@/types/Member";
 import { VisibilityState } from "@tanstack/react-table";
-import { PaymentMethodOptions, StatesUF, StateUF, StateUFEnum, Status } from "@/types/options";
-import { MemberType } from "@/types/Member";
 
-export const columnSchema: Array<Column<MemberType>> = [
+export const columnSchema: Array<Column<Member>> = [
+	// Comum
 	{
-		id: "id",
-		title: "ID",
-		type: "id",
-		defaultValue: "",
+		id: "type",
+		title: "Tipo de Pessoa",
+		type: "select",
+		defaultValue: "individual",
 		isVisible: true,
-		size: 100,
+		size: 120,
+		options: [
+			{ label: "Pessoa Física", value: "individual" },
+			{ label: "Pessoa Jurídica", value: "company" },
+		],
 	},
+	{ id: "code", title: "Código", type: "text", defaultValue: "", isVisible: true },
+	{ id: "status", title: "Status", type: "select", defaultValue: "ACTIVE", isVisible: true, options: Status },
+
+	// Pessoa Física
+	{ id: "cpf", title: "CPF", type: "text", defaultValue: "", isVisible: true },
+	{ id: "fullName", title: "Nome", type: "text", defaultValue: "", isVisible: true },
+	{ id: "birthDate", title: "Nascimento", type: "date", defaultValue: "", isVisible: true },
+
+	// Pessoa Jurídica
+	{ id: "cnpj", title: "CNPJ", type: "text", defaultValue: "", isVisible: true },
+	{ id: "corporateName", title: "Razão Social", type: "text", defaultValue: "", isVisible: true },
+	{ id: "tradeName", title: "Nome Fantasia", type: "text", defaultValue: "", isVisible: true },
+	{ id: "stateRegistration", title: "Insc. Estadual", type: "text", defaultValue: "", isVisible: true },
+	{ id: "municipalRegistration", title: "Insc. Municipal", type: "text", defaultValue: "", isVisible: true },
+	{ id: "totalEmployees", title: "Funcionários", type: "text", defaultValue: "", isVisible: true },
+	{ id: "website", title: "Site", type: "text", defaultValue: "", isVisible: true },
 	{
-		id: "status",
-		title: "Status Financeiro",
+		id: "publishData",
+		title: "Divulgar dados?",
 		type: "select",
 		defaultValue: "",
 		isVisible: true,
-		size: 150,
-		options: Status,
+		options: [
+			{ label: "Sim", value: "true" },
+			{ label: "Não", value: "false" },
+		],
 	},
+
+	// Endereço principal
+	{ id: "address.zipCode", title: "CEP", type: "text", defaultValue: "", isVisible: true },
+	{ id: "address.street", title: "Rua", type: "text", defaultValue: "", isVisible: true },
+	{ id: "address.number", title: "Número", type: "text", defaultValue: "", isVisible: true },
+	{ id: "address.complement", title: "Complemento", type: "text", defaultValue: "", isVisible: true },
+	{ id: "address.district", title: "Bairro", type: "text", defaultValue: "", isVisible: true },
+	{ id: "address.city", title: "Cidade", type: "text", defaultValue: "", isVisible: true },
+	{ id: "address.state", title: "UF", type: "select", defaultValue: "", isVisible: true, options: StatesUF },
+
+	// Endereço cobrança
+	{ id: "billingAddress.zipCode", title: "CEP Cobrança", type: "text", defaultValue: "", isVisible: true },
+	{ id: "billingAddress.street", title: "Rua Cobrança", type: "text", defaultValue: "", isVisible: true },
+	{ id: "billingAddress.number", title: "Número Cobrança", type: "text", defaultValue: "", isVisible: true },
+	{ id: "billingAddress.complement", title: "Complemento Cobrança", type: "text", defaultValue: "", isVisible: true },
+	{ id: "billingAddress.district", title: "Bairro Cobrança", type: "text", defaultValue: "", isVisible: true },
+	{ id: "billingAddress.city", title: "Cidade Cobrança", type: "text", defaultValue: "", isVisible: true },
 	{
-		id: "documentType",
-		title: "Tipo de documento",
+		id: "billingAddress.state",
+		title: "UF Cobrança",
 		type: "select",
 		defaultValue: "",
 		isVisible: true,
-		size: 100,
-	},
-	{
-		id: "documentNumber",
-		title: "Documento",
-		type: "text",
-		defaultValue: "",
-		isVisible: true,
-		size: 100,
-	},
-	{
-		id: "code",
-		title: "Código",
-		type: "text",
-		defaultValue: "",
-		isVisible: true,
-		size: 100,
-	},
-	{
-		id: "name",
-		title: "Nome",
-		type: "text",
-		defaultValue: "",
-		isVisible: true,
-		size: 300,
-	},
-	{
-		id: "birthDate",
-		title: "Data de Nascimento",
-		type: "date",
-		defaultValue: "",
-		isVisible: true,
-		size: 150,
-	},
-	{
-		id: "email",
-		title: "Email",
-		type: "text",
-		defaultValue: "",
-		isVisible: true,
-		size: 200,
-	},
-	{
-		id: "phone",
-		title: "Telefone",
-		type: "text",
-		defaultValue: "",
-		isVisible: true,
-		size: 250,
-	},
-	{
-		id: "mobile",
-		title: "Celular",
-		type: "text",
-		defaultValue: "",
-		isVisible: true,
-		size: 150,
+		options: StatesUF,
 	},
 
-	{
-		id: "corporateName",
-		title: "Razão Social",
-		type: "text",
-		defaultValue: "",
-		isVisible: true,
-		size: 200,
-	},
+	// Contato
+	{ id: "contact.phone", title: "Telefone", type: "text", defaultValue: "", isVisible: true },
+	{ id: "contact.mobile", title: "Celular", type: "text", defaultValue: "", isVisible: true },
+	{ id: "contact.email", title: "Email", type: "text", defaultValue: "", isVisible: true },
+	{ id: "contact.billingEmail", title: "Email Cobrança", type: "text", defaultValue: "", isVisible: true },
 
-	{
-		id: "paymentGroup",
-		title: "Grupo de Pagamento",
-		type: "select",
-		defaultValue: "",
-		isVisible: true,
-		size: 150,
-	},
+	// Financeiro
+	{ id: "paymentGroup", title: "Grupo Pagamento", type: "text", defaultValue: "", isVisible: true },
+	{ id: "cycle", title: "Ciclo", type: "text", defaultValue: "", isVisible: true },
 	{
 		id: "paymentMethod",
-		title: "Método de Pagamento",
+		title: "Forma Pagamento",
 		type: "select",
 		defaultValue: "",
 		isVisible: true,
-		size: 150,
 		options: PaymentMethodOptions,
 	},
-
 	{
-		id: "cep",
-		title: "CEP",
-		type: "text",
-		defaultValue: "",
-		isVisible: true,
-		size: 100,
-	},
-	{
-		id: "street",
-		title: "Rua",
-		type: "text",
-		defaultValue: "",
-		isVisible: true,
-		size: 200,
-	},
-	{
-		id: "number",
-		title: "Número",
-		type: "text",
-		defaultValue: "",
-		isVisible: true,
-		size: 100,
-	},
-	{
-		id: "complement",
-		title: "Complemento",
-		type: "text",
-		defaultValue: "",
-		isVisible: true,
-		size: 150,
-	},
-	{
-		id: "neighborhood",
-		title: "Bairro",
-		type: "text",
-		defaultValue: "",
-		isVisible: true,
-		size: 150,
-	},
-	{
-		id: "city",
-		title: "Cidade",
-		type: "text",
-		defaultValue: "",
-		isVisible: true,
-		size: 150,
-	},
-	{
-		id: "state",
-		title: "Estado",
+		id: "autoBilling",
+		title: "Cobrança Automática",
 		type: "select",
 		defaultValue: "",
-		options: StatesUF,
 		isVisible: true,
-		size: 150,
+		options: [
+			{ label: "Sim", value: "true" },
+			{ label: "Não", value: "false" },
+		],
 	},
+	{ id: "billingAmount", title: "Valor da Cobrança", type: "text", defaultValue: "", isVisible: true },
 
+	// Redes sociais
+	{ id: "socialMedia.instagram", title: "Instagram", type: "text", defaultValue: "", isVisible: true },
+	{ id: "socialMedia.facebook", title: "Facebook", type: "text", defaultValue: "", isVisible: true },
+	{ id: "socialMedia.linkedin", title: "LinkedIn", type: "text", defaultValue: "", isVisible: true },
 
+	// Extras
+	{ id: "userPassword", title: "Senha", type: "text", defaultValue: "", isVisible: false },
+	{ id: "logo", title: "Logo", type: "text", defaultValue: "", isVisible: false },
+	{ id: "photo", title: "Foto", type: "text", defaultValue: "", isVisible: false },
 ];
 
-export const defaultValues: Record<string, any> = columnSchema.reduce(
-	(acc, { id, defaultValue, options }) => {
-		acc[id] = options?.length ? options[0].value : (defaultValue ?? "");
-		return acc;
-	},
-	{} as Record<string, any>
-);
-
-export function getVisibilityState(
-	visibilityArray: string[] = ["*"]
-): VisibilityState {
+export function getVisibilityState(visibilityArray: string[] = ["*"]): VisibilityState {
 	return Object.fromEntries(
 		columnSchema
 			.filter(({ id }) => id !== undefined)
-			.map(({ id }) => [
-				id as string,
-				visibilityArray.includes("*") || visibilityArray.includes(id as string),
-			])
+			.map(({ id }) => [id as string, visibilityArray.includes("*") || visibilityArray.includes(id as string)])
 	);
 }
 

@@ -15,12 +15,10 @@ type DataCellProps<T> = {
 	type?: string;
 };
 
-export default function DataCell<T>({
-	getValue,
-	options,
-	type,
-}: DataCellProps<T>) {
+export default function DataCell<T>({ getValue, options, type }: DataCellProps<T>) {
 	const value = getValue();
+
+	if (value === null || value === undefined || value === "") return <span>-</span>;
 
 	if (type === "checkbox") {
 		return (
@@ -37,10 +35,7 @@ export default function DataCell<T>({
 
 	if (type === "textarea") {
 		return (
-			<Cell
-				title={String(value)}
-				className="line-clamp-2 max-w-full overflow-hidden text-ellipsis whitespace-pre-wrap"
-			>
+			<Cell title={String(value)} className="line-clamp-2 max-w-full overflow-hidden text-ellipsis whitespace-pre-wrap">
 				{String(value)}
 			</Cell>
 		);
