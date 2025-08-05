@@ -101,4 +101,13 @@ export const CostCenterEnum = createEnumFromOptions(CostCenterOptions);
 export type CostCenterType = z.infer<typeof CostCenterEnum>;
 
 export { Members as MemberOptions } from "./Members";
-export { BillingCycles as BillingCycleOptions } from "./BillingCycle";
+
+export const BillingCycleOptions: Option[] = [
+	{ label: "Mensal", value: "monthly" },
+	{ label: "Bimestral", value: "bimonthly" },
+	{ label: "Trimestral", value: "quartely" },
+	{ label: "Anual", value: "anually" },
+] as const;
+export { BillingCycles } from "./BillingCycle";
+
+export const BillingCycleEnum = createEnumFromOptions(BillingCycleOptions);

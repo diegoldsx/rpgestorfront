@@ -1,13 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useState, useMemo } from "react";
-import {
-	VisXYContainer,
-	VisLine,
-	VisAxis,
-	VisXYLabels,
-	VisBulletLegend,
-} from "@unovis/react";
+import { VisXYContainer, VisLine, VisAxis, VisXYLabels, VisBulletLegend } from "@unovis/react";
 import { countries, countriesData, legendItems } from "./data";
 import { Country, DataRecord2 } from "./utils";
 import { useThemeStore } from "@/store";
@@ -43,34 +37,21 @@ const DataGapsLine = ({ height = 400 }) => {
 				<span className="text-sm font-medium text-card-foreground">
 					Select a fallback value for missing data points
 				</span>
-				<VisBulletLegend
-					items={items}
-					onLegendItemClick={useCallback((_: any, i: any) => setCurrent(i), [])}
-				/>
+				<VisBulletLegend items={items} onLegendItemClick={useCallback((_: any, i: any) => setCurrent(i), [])} />
 			</div>
-			<VisXYContainer
-				duration={0}
-				height={height}
-				xDomain={[1961, 2022]}
-				yDomain={[0, 650]}
-			>
+			<VisXYContainer duration={0} height={height} xDomain={[1961, 2022]} yDomain={[0, 650]}>
 				<VisLine
 					data={countriesData}
 					x={useCallback((d: DataRecord2) => d.year, [])}
 					y={useMemo(() => countries.map(getY), [])}
 					fallbackValue={fallbackValue}
-					color={`hsl(${
-						theme?.cssVars[mode === "dark" ? "dark" : "light"].warning
-					})`}
+					color={`hsl(${theme?.cssVars[mode === "dark" ? "dark" : "light"].warning})`}
 				/>
 
 				<VisXYLabels
 					data={countries}
 					x={2019.5}
-					y={useCallback(
-						(c: Country) => getY(c)(countriesData[countriesData.length - 1]),
-						[]
-					)}
+					y={useCallback((c: Country) => getY(c)(countriesData[countriesData.length - 1]), [])}
 					label={useCallback((c: Country) => c.label, [])}
 					backgroundColor="none"
 				/>
@@ -78,21 +59,7 @@ const DataGapsLine = ({ height = 400 }) => {
 				<VisAxis
 					type="x"
 					numTicks={10}
-					tickTextColor={`hsl(${
-						theme?.cssVars[
-							mode === "dark" || mode === "system" ? "dark" : "light"
-						].chartLabel
-					})`}
-				/>
-				<VisAxis
-					type="y"
-					tickFormat={(d: number) => `${d}${d ? "M" : ""}`}
-					tickValues={[0, 200, 400, fallbackValue || 0, 600]}
-					tickTextColor={`hsl(${
-						theme?.cssVars[
-							mode === "dark" || mode === "system" ? "dark" : "light"
-						].chartLabel
-					})`}
+					tickTextColor={`hsl(${theme?.cssVars[mode === "dark" || mode === "system" ? "dark" : "light"].chartLabel})`}
 				/>
 			</VisXYContainer>
 		</>

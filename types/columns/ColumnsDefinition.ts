@@ -2,19 +2,6 @@ export type Option<T = string> = {
 	label: string;
 	value: T;
 };
-type MaxDepth = 2;
-
-type Join<K, P> = K extends string ? (P extends string ? `${K}.${P}` : never) : never;
-
-type PathToField<T, D extends number = MaxDepth> = [D] extends [never]
-	? never
-	: T extends object
-	? {
-			[K in keyof T]: T[K] extends object ? K | Join<K, PathToField<T[K], Prev[D]>> : K;
-	  }[keyof T]
-	: "";
-
-type Prev = [never, 0, 1, 2, 3]; // suporte até profundidade 3
 
 export interface Column<T extends Record<string, any> = any> {
 	id: string;
@@ -36,14 +23,31 @@ export function createColumn<T extends Record<string, any>>(partial: Partial<Col
 	} as Column<T>;
 }
 
-export type ColumnType = "text" | "id" | "date" | "select" | "checkbox" | "textarea" | "badge" | "hidden";
-
 export interface ColumnSchema<T> {
-	id: keyof T & string;
+	id: keyof T | DotNotationKeys<T> | string;
 	title: string;
-	type: ColumnType;
-	defaultValue: any;
+	type: "text" | "id" | "date" | "select" | "checkbox" | "textarea" | "badge" | "email" | "hidden";
+	defaultValue?: any;
 	isVisible?: boolean;
+	condition?: (data: any) => boolean;
 	size?: number;
 	options?: { label: string; value: string }[];
+}
+
+type DotNotationKeys<T, Prefix extends string = ""> = {
+	[K in keyof T & string]: T[K] extends object
+		? `${Prefix}${K}` | DotNotationKeys<T[K], `${Prefix}${K}.`>
+		: `${Prefix}${K}`;
+}[keyof T & string];
+
+export interface FormSchemas<T> {
+	id: keyof T & string;
+	label: string;
+	field: "input" | "id" | "date" | "select" | "checkbox" | "textarea";
+	defaultValue: any;
+	placeholder?: string;
+	condition?: (data: any) => boolean;
+	isVisible?: boolean;
+	size?: number;
+	options?: Option[];
 }

@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect } from "react";
+import React, { useEffect, useMemo } from "react";
 import {
 	useForm,
 	FormProvider,
@@ -9,23 +9,37 @@ import {
 	Path,
 	PathValue,
 	DefaultValues,
+	useWatch,
+	Controller,
 } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { ZodType } from "zod";
 
-import { FormFieldComponent } from "@/components/FormFieldComponent";
 import { SubmitButton } from "@/components/SubmitButton";
 import { Input } from "@/components/ui/input";
-import Select from "@/components/Select";
+import { SelectComponent } from "@/components/SelectComponent";
 import { Checkbox } from "@/components/Checkbox";
 import { DatePicker } from "@/components/date-picker";
-import { Column, ColumnSchema } from "@/types/columns/ColumnsDefinition";
-import { ColumnDef } from "@tanstack/react-table";
+import { ColumnSchema } from "@/types/columns/ColumnsDefinition";
+
+type FieldType = "text" | "select" | "checkbox" | "date";
+
+export interface FormField<T> {
+	id: Path<T>;
+	title: string;
+	type: FieldType;
+	options?: { label: string; value: string }[];
+	placeholder?: string;
+	disabled?: boolean;
+	readOnly?: boolean;
+	description?: string;
+}
 
 interface GenericFormProps<T extends FieldValues> {
 	schema: ZodType<T>;
 	defaultValues: DefaultValues<T>;
-	columns: Column<T>[];
+	fields?: FormField<T>[];
+	columns?: ColumnSchema<T>[];
 	onSubmit: SubmitHandler<T>;
 	data?: Partial<T>;
 	submitLabel?: string;
@@ -34,6 +48,7 @@ interface GenericFormProps<T extends FieldValues> {
 export function GenericForm<T extends FieldValues>({
 	schema,
 	defaultValues,
+	fields,
 	columns,
 	onSubmit,
 	data,
@@ -41,7 +56,7 @@ export function GenericForm<T extends FieldValues>({
 }: GenericFormProps<T>) {
 	const methods = useForm<T>({
 		resolver: zodResolver(schema),
-		defaultValues: data ? { ...defaultValues, ...data } : defaultValues,
+		defaultValues: { ...defaultValues, ...data },
 	});
 
 	const {
@@ -49,85 +64,112 @@ export function GenericForm<T extends FieldValues>({
 		control,
 		formState: { errors, isSubmitting },
 		reset,
+		setValue,
+		register,
 	} = methods;
 
+	const formFields = useMemo<FormField<T>[]>(() => {
+		if (fields) return fields;
+		if (!columns) return [];
+		return columns.map((c) => ({
+			id: c.id as Path<T>,
+			title: c.title,
+			type: c.type as FieldType,
+			options: (c as any).options,
+			placeholder: (c as any).placeholder,
+			disabled: (c as any).disabled,
+			readOnly: (c as any).readOnly,
+			description: (c as any).description,
+		}));
+	}, [fields, columns]);
+
 	useEffect(() => {
-		if (data) {
-			reset({ ...defaultValues, ...data });
-		}
-	}, [data, reset]);
+		if (data) reset((prev) => ({ ...prev, ...defaultValues, ...data }));
+	}, [data, defaultValues, reset]);
+
+	function safeParseDate(value?: string) {
+		if (!value) return undefined;
+		const d = new Date(value);
+		return isNaN(d.getTime()) ? undefined : d;
+	}
 
 	return (
 		<FormProvider {...methods}>
 			<form
-				onSubmit={(e) => {
-					e.preventDefault();
-					handleSubmit(onSubmit)(e);
-				}}
+				onSubmit={handleSubmit(
+					(d) => onSubmit(d),
+					(errs) => console.warn("❌ FORM INVÁLIDO", errs)
+				)}
 				noValidate
 				className="grid grid-cols-1 md:grid-cols-2 gap-4"
 			>
-				{columns.map(({ id, title, type, options }) => {
-					if (!["text", "select", "checkbox", "date"].includes(type))
-						return null;
-
-					let fieldComponent: React.ReactElement;
-
+				{formFields.map(({ id, title, type, options, placeholder, disabled, readOnly, description }) => {
+					let fieldComponent: React.ReactNode = null;
 					switch (type) {
 						case "text":
-							fieldComponent = <Input type="text" />;
-							break;
-						case "select":
-							fieldComponent = <Select options={options || []} />;
-							break;
-						case "checkbox":
 							fieldComponent = (
-								<Checkbox
-									checked={methods.watch(id as Path<T>)}
-									onCheckedChange={(val) => {
-										if (typeof val === "boolean") {
-											methods.setValue(
-												id as Path<T>,
-												val as PathValue<T, Path<T>>
-											);
-										}
-									}}
+								<Input
+									id={String(id)}
+									{...register(id)}
+									placeholder={placeholder}
+									disabled={disabled}
+									readOnly={readOnly}
 								/>
 							);
 							break;
-						case "date":
+						case "select":
+							fieldComponent = (
+								<Controller
+									name={id}
+									control={control}
+									render={({ field }) => (
+										<SelectComponent
+											value={field.value}
+											onChange={field.onChange}
+											options={options || []}
+											disabled={disabled}
+										/>
+									)}
+								/>
+							);
+							break;
+						case "checkbox": {
+							const checked = useWatch({ name: id as Path<T>, control });
+							fieldComponent = (
+								<Checkbox
+									checked={checked}
+									disabled={disabled}
+									onCheckedChange={(v) => typeof v === "boolean" && setValue(id, v as PathValue<T, Path<T>>)}
+								/>
+							);
+							break;
+						}
+						case "date": {
+							const raw = useWatch({ name: id as Path<T>, control });
 							fieldComponent = (
 								<DatePicker
 									displayFormat="dd/MM/yyyy"
-									selectedDate={(() => {
-										const value = methods.watch(id as Path<T>);
-										if (!value) return undefined;
-										const date = new Date(value as string);
-										return isNaN(date.getTime()) ? undefined : date;
-									})()}
-									onDateChange={(date) =>
-										methods.setValue(
-											id as Path<T>,
-											(date ? date.toISOString() : "") as PathValue<T, Path<T>>
-										)
-									}
+									selectedDate={safeParseDate(raw as string)}
+									onDateChange={(d) => setValue(id, (d ? d.toISOString() : "") as PathValue<T, Path<T>>)}
 								/>
 							);
 							break;
-						default:
-							return null;
+						}
 					}
 
+					const error = errors[id as keyof typeof errors];
+
 					return (
-						<FormFieldComponent
-							key={String(id)}
-							name={String(id)}
-							label={title}
-							control={control}
-							errors={errors}
-						>
+						<div key={String(id)} className="flex flex-col gap-1">
+							<label htmlFor={String(id)} className="text-sm font-medium text-gray-700">
+								{title}
+							</label>
+
 							{fieldComponent}
-						</FormFieldComponent>
+
+							{description && !error && <span className="text-xs text-gray-500">{description}</span>}
+							{error && <span className="text-xs text-red-500">{(error as any).message}</span>}
+						</div>
 					);
 				})}
 

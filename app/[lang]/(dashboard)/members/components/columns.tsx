@@ -5,7 +5,7 @@ import { exactFilter } from "@/components/common/data-table/columnUtils";
 import { columnSchema } from "./columnSchema";
 import DataCell from "@/components/common/data-table/columns/DataCell";
 import ActionsCell from "@/components/common/data-table/columns/ActionCell";
-import { Member } from "@/types/Member";
+import { MemberType } from "@/types/Member";
 
 const editUrl = "members/details-page";
 
@@ -18,12 +18,12 @@ function getNestedValue(obj: unknown, path: string): unknown {
 	}, obj);
 }
 
-export const columns: ColumnDef<Member>[] = [
+export const columns: ColumnDef<MemberType>[] = [
 	...columnSchema
 		.filter((item) => item.isVisible !== false)
 		.map(({ id, title, options, type, size = 0 }) => ({
 			id,
-			accessorFn: (row: Member) => getNestedValue(row, id as string),
+			accessorFn: (row: MemberType) => getNestedValue(row, id as string),
 			header: title,
 			filterFn: exactFilter,
 			size,

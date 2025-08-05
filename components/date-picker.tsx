@@ -1,11 +1,7 @@
 "use client";
 
 import * as React from "react";
-import {
-	Popover,
-	PopoverContent,
-	PopoverTrigger,
-} from "@/components/ui/popover";
+import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { Calendar as CalendarIcon } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Calendar } from "@/components/ui/calendar";
@@ -53,25 +49,16 @@ export const DatePicker = React.forwardRef<HTMLDivElement, DatePickerProps>(
 		return (
 			<div ref={ref} {...rest}>
 				{label && <Label>{label}</Label>}
-				{name && (
-					<input
-						type="hidden"
-						name={name}
-						value={selectedDate ? selectedDate.toISOString() : ""}
-						readOnly
-					/>
-				)}
+				{name && <input type="hidden" name={name} value={selectedDate ? selectedDate.toISOString() : ""} readOnly />}
 				<Popover open={open} onOpenChange={setOpen}>
 					<PopoverTrigger asChild>
 						<Button
 							variant="outline"
-							className="w-full h-9 justify-between border-default-300 text-left font-normal text-black hover:bg-transparent"
+							className="w-full bg-white h-9 justify-between border-default-300 text-left font-normal text-black hover:bg-transparent"
 						>
 							<div className="flex items-center gap-4 text-default-600">
 								<CalendarIcon className="w-5 h-4 text-muted-foreground" />
-								{selectedDate
-									? format(selectedDate, displayFormat)
-									: placeholder}
+								{selectedDate ? format(selectedDate, displayFormat) : placeholder}
 							</div>
 						</Button>
 					</PopoverTrigger>

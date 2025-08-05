@@ -1,5 +1,4 @@
 import { DataTable } from "@/components/common/data-table/data-table";
-import { getFieldsWithOptions, getVisibilityState } from "./components/columnSchema";
 import { columns } from "./components/columns";
 import { PageLayout } from "@/components/common/page/PageLayout";
 import { fakeMembers } from "@/types/Member";
@@ -15,14 +14,7 @@ const Page = () => {
 				},
 			}}
 		>
-			{fakeMembers && (
-				<DataTable
-					data={fakeMembers}
-					columns={columns}
-					facetedFilters={getFieldsWithOptions()}
-					columnResizeMode="onChange"
-				/>
-			)}
+			{fakeMembers && <DataTable data={fakeMembers} columns={columns} columnResizeMode="onChange" />}
 		</PageLayout>
 	);
 };

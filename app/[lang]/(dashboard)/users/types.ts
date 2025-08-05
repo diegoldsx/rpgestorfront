@@ -1,6 +1,6 @@
 import { z } from "zod";
-import avatar3 from '@/public/images/avatar/avatar-3.jpg';
-import avatar2 from '@/public/images/avatar/avatar-2.jpg';
+import avatar3 from "@/public/images/avatar/avatar-3.jpg";
+import avatar2 from "@/public/images/avatar/avatar-2.jpg";
 
 // enum de nível de permissão
 export const permissionLevelEnum = z.enum(["read", "edit", "admin"]);
@@ -14,7 +14,7 @@ const permissionSchema = z.object({
 
 // schema completo do usuário
 export const userSchema = z.object({
-	id: z.string(),
+	id: z.string().optional(),
 	name: z.string().min(3, "O nome é obrigatório"),
 	email: z.string().email("O email é obrigatório"),
 	status: z.enum(["active", "inactive"], {

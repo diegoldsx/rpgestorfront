@@ -33,17 +33,13 @@ export const FormFieldComponent: React.FC<FormFieldComponentProps> = ({
 				control={control}
 				render={({ field }) => {
 					const type = children.type;
-					const displayName =
-						typeof type === "function" && "displayName" in type
-							? type.displayName
-							: null;
+					const displayName = typeof type === "function" && "displayName" in type ? type.displayName : null;
 
 					return React.cloneElement(children, {
 						...field,
 						id: name,
 						placeholder,
-						...(children.props?.type === "checkbox" ||
-						displayName === "Checkbox"
+						...(children.props?.type === "checkbox" || displayName === "Checkbox"
 							? {
 									checked: field.value,
 									onCheckedChange: (val: boolean | "indeterminate") => {
@@ -53,8 +49,7 @@ export const FormFieldComponent: React.FC<FormFieldComponentProps> = ({
 							: displayName === "DatePicker"
 							? {
 									selectedDate: field.value ? new Date(field.value) : undefined,
-									onDateChange: (date: Date | undefined) =>
-										field.onChange(date ? date.toISOString() : ""),
+									onDateChange: (date: Date | undefined) => field.onChange(date ? date.toISOString() : ""),
 							  }
 							: {
 									value: field.value,
@@ -64,9 +59,7 @@ export const FormFieldComponent: React.FC<FormFieldComponentProps> = ({
 				}}
 			/>
 
-			{errors[name]?.message && (
-				<span className="text-sm text-red-500">{errors[name].message}</span>
-			)}
+			{errors[name]?.message && <span className="text-sm text-red-500">{errors[name].message}</span>}
 		</div>
 	);
 };

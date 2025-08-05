@@ -1,10 +1,10 @@
-import Credentials from 'next-auth/providers/credentials';
+import Credentials from "next-auth/providers/credentials";
+import { CredentialsProvider } from "next-auth/providers/credentials";
 
-
-import GoogleProvider from 'next-auth/providers/google';
-import GithubProvider from 'next-auth/providers/github';
-import { NextAuthOptions } from 'next-auth';
-import { fake_users } from '@/app/[lang]/(dashboard)/users/types';
+import GoogleProvider from "next-auth/providers/google";
+import GithubProvider from "next-auth/providers/github";
+import { NextAuthOptions } from "next-auth";
+import { fake_users } from "@/app/[lang]/(dashboard)/users/types";
 
 export const authOptions: NextAuthOptions = {
 	providers: [
@@ -17,12 +17,12 @@ export const authOptions: NextAuthOptions = {
 			clientSecret: process.env.AUTH_GITHUB_SECRET as string,
 		}),
 		Credentials({
-			name: 'credentials',
+			name: "credentials",
 			credentials: {
-				email: { label: 'Email', type: 'email' },
-				password: { label: 'Password', type: 'password' },
+				email: { label: "Email", type: "email" },
+				password: { label: "Password", type: "password" },
 			},
-			async authorize(credentials) {
+			authorize(credentials, req) {
 				const { email, password } = credentials as {
 					email: string;
 					password: string;
@@ -40,13 +40,13 @@ export const authOptions: NextAuthOptions = {
 					return null;
 				}
 
-				if (foundUser) {
+				if (foundUser && foundUser.id) {
 					return {
-						id: foundUser.id,
+						id: String(foundUser.id),
 						name: foundUser.name,
 						email: foundUser.email,
-						permissions: foundUser.permissions
-					}
+						permissions: foundUser.permissions,
+					};
 				}
 				return null;
 			},
@@ -55,25 +55,23 @@ export const authOptions: NextAuthOptions = {
 	secret: process.env.AUTH_SECRET,
 
 	session: {
-		strategy: 'jwt',
+		strategy: "jwt",
 	},
 	callbacks: {
 		async jwt({ token, user }) {
 			if (user) {
-				token.id = user.id
+				token.id = user.id;
 				token.permissions = user.permissions;
-
 			}
-			return token
+			return token;
 		},
 		async session({ session, token }) {
 			if (session.user && token.id) {
-				session.user.id = token.id as string
+				session.user.id = token.id as string;
 				session.user.permissions = token.permissions as any;
-
 			}
-			return session
+			return session;
 		},
 	},
-	debug: process.env.NODE_ENV !== 'production',
+	debug: process.env.NODE_ENV !== "production",
 };
