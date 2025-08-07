@@ -14,7 +14,7 @@ const Page = () => {
 				},
 			}}
 		>
-			{fakeMembers && <DataTable data={fakeMembers} columns={columns} columnResizeMode="onChange" />}
+			{fakeMembers && <DataTable data={fakeMembers} columns={columns} />}
 		</PageLayout>
 	);
 };

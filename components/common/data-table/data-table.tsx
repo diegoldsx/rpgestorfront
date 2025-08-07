@@ -18,7 +18,7 @@ import {
 } from "@tanstack/react-table";
 
 import { Table, TableBody, TableCell, TableRow } from "@/components/ui/table";
-
+import { Checkbox } from "@/components/ui/checkbox";
 import { BasePagination } from "./table-pagination";
 import { DataTableColumnToggler } from "./table-column-toggler";
 import FacetedFilters from "./faceted-filters";
@@ -31,50 +31,75 @@ export type FacetedFilter = {
 	title: string;
 	options: { value: string; label: string }[];
 };
-interface DataTableProps<TData> {
+
+interface DataTableProps<TData extends { id: string | number }> {
 	columns: ColumnDef<TData, any>[];
 	data: TData[];
-	editUrl?: string;
-	toolbar?: React.ReactNode;
-	facetedFilters?: any[];
-	filterComponent?: React.ReactNode;
-	toolbarActions?: React.ReactNode;
-	rowActions?: (row: TData) => React.ReactNode;
+	facetedFilters?: FacetedFilter[];
 	emptyMessage?: string;
 	selectable?: boolean;
 	visibilityState?: VisibilityState;
 	sortBy?: SortingState;
-	columnResizeMode?: "onChange" | "onEnd";
 }
 
-export function DataTable<TData>({
+export function DataTable<TData extends { id: string | number }>({
 	columns,
 	data,
 	facetedFilters,
 	visibilityState = {},
-	rowActions,
 	emptyMessage = "Nenhum registro encontrado.",
 	selectable = true,
 	sortBy = [],
 }: DataTableProps<TData>) {
 	const [rowSelection, setRowSelection] = React.useState<RowSelectionState>({});
-	const [columnVisibility, setColumnVisibility] =
-		React.useState<VisibilityState>(visibilityState);
-	const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
+	const [columnVisibility, setColumnVisibility] = React.useState<VisibilityState>(visibilityState);
+	const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>([]);
+	const [sorting, setSorting] = React.useState<SortingState>(sortBy);
+
+	const selectColumn = React.useMemo<ColumnDef<TData, any>>(
+		() => ({
+			id: "select",
+			header: ({ table }) => {
+				const all = table.getIsAllRowsSelected();
+				const some = table.getIsSomeRowsSelected();
+				return (
+					<Checkbox
+						aria-label="Selecionar todos"
+						checked={all}
+						onCheckedChange={(v) => table.toggleAllRowsSelected(!!v)}
+						ref={(el) => {
+							if (el) {
+								// @ts-ignore
+								el.indeterminate = some && !all;
+							}
+						}}
+					/>
+				);
+			},
+			cell: ({ row }) => (
+				<Checkbox
+					aria-label={`Selecionar linha ${row.id}`}
+					checked={row.getIsSelected()}
+					onCheckedChange={(v) => row.toggleSelected(!!v)}
+				/>
+			),
+			enableSorting: false,
+			enableColumnFilter: false,
+			size: 32,
+		}),
 		[]
 	);
-	const [sorting, setSorting] = React.useState<SortingState>(sortBy);
+
+	const cols = React.useMemo(
+		() => (selectable ? [selectColumn, ...columns] : columns),
+		[columns, selectable, selectColumn]
+	);
 
 	const table = useReactTable({
 		data,
-		columns,
+		columns: cols,
 		columnResizeMode: "onEnd",
-		state: {
-			sorting,
-			columnVisibility,
-			rowSelection,
-			columnFilters,
-		},
+		state: { sorting, columnVisibility, rowSelection, columnFilters },
 		enableRowSelection: selectable,
 		onRowSelectionChange: setRowSelection,
 		onSortingChange: setSorting,
@@ -88,58 +113,36 @@ export function DataTable<TData>({
 		getFacetedUniqueValues: getFacetedUniqueValues(),
 	});
 
-	const safeFacetedFilters = facetedFilters ?? [];
 	return (
-		<div className="">
+		<div>
 			<header className="flex items-center justify-end gap-4 p-4">
-				<div className="space-x-2">
-					<FacetedFilters filters={safeFacetedFilters} table={table} />
-				</div>
-
-				<div className="space-x-2">
-					<DataTableColumnToggler table={table} />
-				</div>
-
-				<div className="space-x-2">
-					<TableDataExporter table={table} />
-				</div>
-			</header>
-
-			<div>
+				<FacetedFilters filters={facetedFilters ?? []} table={table} />
+				<DataTableColumnToggler table={table} />
+				<TableDataExporter table={table} />
 				<DataTableAdvancedSearch table={table} />
-			</div>
+			</header>
 
 			<div className="border-t border-default-200">
 				<Table>
 					<DataTableHeader headerGroups={table.getHeaderGroups()} />
 					<TableBody>
-						{table.getRowModel().rows?.length ? (
+						{table.getRowModel().rows.length ? (
 							table.getRowModel().rows.map((row) => (
-								<TableRow
-									key={row.id}
-									data-state={row.getIsSelected() && "selected"}
-									className="hover:bg-default-50"
-								>
+								<TableRow key={row.id} data-state={row.getIsSelected() && "selected"} className="hover:bg-default-50">
 									{row.getVisibleCells().map((cell) => (
 										<TableCell
 											key={cell.id}
-											className="text-sm  text-default-600"
+											className="text-sm text-default-600"
 											style={{ width: cell.column.getSize() }}
 										>
-											{flexRender(
-												cell.column.columnDef.cell,
-												cell.getContext()
-											)}
+											{flexRender(cell.column.columnDef.cell, cell.getContext())}
 										</TableCell>
 									))}
 								</TableRow>
 							))
 						) : (
 							<TableRow>
-								<TableCell
-									colSpan={columns.length + (rowActions ? 1 : 0)}
-									className="h-24 text-left"
-								>
+								<TableCell colSpan={cols.length} className="h-24 text-left">
 									{emptyMessage}
 								</TableCell>
 							</TableRow>
@@ -147,6 +150,7 @@ export function DataTable<TData>({
 					</TableBody>
 				</Table>
 			</div>
+
 			<BasePagination table={table} />
 		</div>
 	);
