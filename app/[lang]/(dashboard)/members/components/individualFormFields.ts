@@ -68,6 +68,7 @@ export const fields: FormField<IndividualType>[] = [
 		id: "status",
 		title: "Status",
 		type: "select",
+
 		options: [
 			{ label: "Ativo", value: "active" },
 			{ label: "Inativo", value: "inactive" },

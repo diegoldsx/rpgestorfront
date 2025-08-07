@@ -18,6 +18,7 @@ import {
 	companySchema,
 	type CompanyType,
 } from "../components/companyFormFields";
+import { Tabs } from "@/components/Tabs";
 
 export default function DetailsPage() {
 	const memberId = useSearchParams().get("id");
@@ -45,6 +46,10 @@ export default function DetailsPage() {
 	return (
 		<div className="max-w-5xl mx-auto p-6 space-y-8">
 			<h1 className="text-2xl font-bold text-center">Cadastro de Associado</h1>
+
+			<Tabs value="insert">
+				<p>1</p>
+			</Tabs>
 
 			<div className="flex justify-center gap-4">
 				{options.map(({ value, label }) => {

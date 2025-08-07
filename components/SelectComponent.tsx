@@ -17,10 +17,10 @@ export const SelectComponent = React.forwardRef<HTMLButtonElement, SelectProps &
 				<Select.Trigger
 					{...rest}
 					disabled={disabled}
-					className={`flex items-center justify-between w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none focus:ring-2 transition ${
+					className={`flex items-center justify-between w-full  px-3 py-2 border rounded-md shadow-sm focus:outline-none focus:ring-2 transition ${
 						disabled
-							? "bg-gray-100 text-gray-400 cursor-not-allowed border-gray-200"
-							: "border-gray-300 focus:ring-blue-500"
+							? "bg-gray-100 text-gray-400 cursor-not-allowed border-gray-300"
+							: "border-gray-300 focus:ring-blue-500 bg-white"
 					}`}
 				>
 					<Select.Value placeholder={placeholder || "Selecione..."} />
