@@ -11,7 +11,6 @@ import { Input } from "@/components/ui/input";
 import { CustomerType } from "@/types/Customer";
 import { moduleLabels } from "../page";
 
-
 export const columns: ColumnDef<CustomerType>[] = [
 	...columnSchema
 		.filter((item) => item.isVisible !== false)
@@ -21,16 +20,14 @@ export const columns: ColumnDef<CustomerType>[] = [
 			header: title,
 			filterFn: exactFilter,
 			size: size,
-			cell: (props: { getValue: () => any }) => (
-				<DataCell getValue={props.getValue} type={type} options={options} />
-			),
+			cell: (props: { getValue: () => any }) => <DataCell getValue={props.getValue} type={type} options={options} />,
 		})),
 	{
 		id: "actions",
 		header: "Actions",
 		size: 150,
 		cell: ({ row }) => (
-			<Link href={moduleLabels.detailsUrl}>
+			<Link href={"customers/details-page?id=" + row.original.id}>
 				<ActionsCell row={row} editUrl={moduleLabels.detailsUrl} label="Edit" />
 			</Link>
 		),

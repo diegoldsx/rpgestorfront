@@ -7,10 +7,15 @@ import Link from "next/link";
 import DataCell from "@/components/common/data-table/columns/DataCell";
 import ActionsCell from "@/components/common/data-table/columns/ActionCell";
 import { AssemblyType } from "@/types/Assembly";
-
-const editUrl = "assemblies/details";
+import { makeActionColumn } from "@/components/common/data-table/columns/ActionColumn";
 
 export const columns: ColumnDef<AssemblyType>[] = [
+	{
+		id: "actions",
+		header: "Actions",
+		size: 150,
+		cell: ({ row }) => <Link href={`assemblies/details?id=${row.original.id}`}>Edit</Link>,
+	},
 	...columnSchema
 		.filter((item) => item.isVisible !== false)
 		.map(({ id, title, options, type, size = 0 }) => ({
@@ -19,16 +24,6 @@ export const columns: ColumnDef<AssemblyType>[] = [
 			header: title,
 			filterFn: exactFilter,
 			size: size,
-			cell: (props: { getValue: () => any }) => (
-				<DataCell getValue={props.getValue} type={type} options={options} />
-			),
+			cell: (props: { getValue: () => any }) => <DataCell getValue={props.getValue} type={type} options={options} />,
 		})),
-	{
-		id: "actions",
-		header: "Actions",
-		size: 150,
-		cell: ({ row }) => (
-			<ActionsCell row={row} editUrl={editUrl} label="Edit" />
-		),
-	},
 ];

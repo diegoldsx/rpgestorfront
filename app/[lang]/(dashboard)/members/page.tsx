@@ -1,7 +1,7 @@
 import { DataTable } from "@/components/common/data-table/data-table";
-import { columns } from "./components/columns";
 import { PageLayout } from "@/components/common/page/PageLayout";
 import { fakeMembers } from "@/types/Member";
+import { memberCols } from "./components/columnSchema";
 
 const Page = () => {
 	return (
@@ -14,7 +14,7 @@ const Page = () => {
 				},
 			}}
 		>
-			{fakeMembers && <DataTable data={fakeMembers} columns={columns} />}
+			{fakeMembers && <DataTable data={fakeMembers} columns={memberCols} />}
 		</PageLayout>
 	);
 };

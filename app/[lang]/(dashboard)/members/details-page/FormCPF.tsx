@@ -1,7 +1,6 @@
 "use client";
 import { GenericForm } from "@/components/form/GenericForm";
 import { z } from "zod";
-import { columnSchema } from "../components/columnSchema";
 import { Column } from "@/types/columns/ColumnsDefinition";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";

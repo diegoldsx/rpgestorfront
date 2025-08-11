@@ -51,6 +51,11 @@ const companySchema = z.object({
 export const MemberSchema = z.union([individualSchema, companySchema]);
 export type MemberType = z.infer<typeof MemberSchema>;
 
+export const MemberTypesOptions = {
+	individual: "Pessoa Física",
+	company: "Pessoa Juridica",
+} as const;
+
 export const fakeMembers: MemberType[] = [
 	{
 		id: "1",

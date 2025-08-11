@@ -214,24 +214,16 @@ export const columnSchema: Array<Column<CustomerType>> = [
 	}),
 ];
 
-export const defaultValues: Record<string, any> = columnSchema.reduce(
-	(acc, { id, defaultValue, options }) => {
-		acc[id] = options?.length ? options[0].value : (defaultValue ?? "");
-		return acc;
-	},
-	{} as Record<string, any>
-);
+export const defaultValues: Record<string, any> = columnSchema.reduce((acc, { id, defaultValue, options }) => {
+	acc[id] = options?.length ? options[0].value : defaultValue ?? "";
+	return acc;
+}, {} as Record<string, any>);
 
-export function getVisibilityState(
-	visibilityArray: string[] = ["*"]
-): VisibilityState {
+export function getVisibilityState(visibilityArray: string[] = ["*"]): VisibilityState {
 	return Object.fromEntries(
 		columnSchema
 			.filter(({ id }) => id !== undefined)
-			.map(({ id }) => [
-				id as string,
-				visibilityArray.includes("*") || visibilityArray.includes(id as string),
-			])
+			.map(({ id }) => [id as string, visibilityArray.includes("*") || visibilityArray.includes(id as string)])
 	);
 }
 

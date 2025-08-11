@@ -2,6 +2,8 @@
 
 import * as React from "react";
 import {
+	Cell,
+	CellContext,
 	ColumnDef,
 	ColumnFiltersState,
 	RowSelectionState,
@@ -25,6 +27,7 @@ import FacetedFilters from "./faceted-filters";
 import DataTableHeader from "./data-table-header";
 import { TableDataExporter } from "./table-data-exporter";
 import { DataTableAdvancedSearch } from "./data-table-advanced-search";
+import Link from "next/link";
 
 export type FacetedFilter = {
 	id: string;
@@ -40,10 +43,12 @@ interface DataTableProps<TData extends { id: string | number }> {
 	selectable?: boolean;
 	visibilityState?: VisibilityState;
 	sortBy?: SortingState;
+	meta: { editEndpoint: string };
 }
 
 export function DataTable<TData extends { id: string | number }>({
 	columns,
+	meta,
 	data,
 	facetedFilters,
 	visibilityState = {},
@@ -90,14 +95,18 @@ export function DataTable<TData extends { id: string | number }>({
 		[]
 	);
 
-	const cols = React.useMemo(
-		() => (selectable ? [selectColumn, ...columns] : columns),
-		[columns, selectable, selectColumn]
+	type RowT = (typeof data)[number];
+
+	const baseCols = React.useMemo<ColumnDef<RowT>[]>(() => [...columns], [columns]);
+
+	const allColumns = React.useMemo<ColumnDef<RowT>[]>(
+		() => (selectable ? [selectColumn as ColumnDef<RowT>, ...baseCols] : baseCols),
+		[baseCols, selectable, selectColumn]
 	);
 
 	const table = useReactTable({
 		data,
-		columns: cols,
+		columns: allColumns, // Coluna de Actions será a primeira a ser exibida em todos componentes
 		columnResizeMode: "onEnd",
 		state: { sorting, columnVisibility, rowSelection, columnFilters },
 		enableRowSelection: selectable,
@@ -142,7 +151,7 @@ export function DataTable<TData extends { id: string | number }>({
 							))
 						) : (
 							<TableRow>
-								<TableCell colSpan={cols.length} className="h-24 text-left">
+								<TableCell colSpan={columns.length} className="h-24 text-left">
 									{emptyMessage}
 								</TableCell>
 							</TableRow>

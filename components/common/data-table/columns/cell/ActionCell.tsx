@@ -9,11 +9,18 @@ type ActionsCellProps<T> = {
 	label?: string;
 };
 
-export default function ActionsCell<T>({ row, editUrl, label = "Edit" }: ActionsCellProps<T>) {
+export default function ActionsCell<T>({
+	row,
+	editUrl,
+	label = "Edit",
+}: ActionsCellProps<T>) {
 	const id = (row.original as any).id;
 	return (
 		<Cell>
-			<Link className="text-primary hover:text-primary/80" href={`${editUrl}?id=${id}`}>
+			<Link
+				className="text-primary hover:text-primary/80"
+				href={`${editUrl}?id=${id}`}
+			>
 				{label}
 			</Link>
 		</Cell>
