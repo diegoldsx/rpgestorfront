@@ -3,10 +3,7 @@
 import { HeadingPages } from "@/components/common/heading/heading-pages";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { DataTable } from "@/components/common/data-table/data-table";
-import {
-	getFieldsWithOptions,
-	getVisibilityState,
-} from "./schemas/columnSchema";
+import { getFieldsWithOptions, getVisibilityState } from "./schemas/columnSchema";
 import { FAKE_GROUPS } from "./types/data";
 import { columns } from "./components/columns";
 
@@ -15,15 +12,15 @@ const Page = () => {
 		<Card>
 			<CardHeader>
 				<HeadingPages
-					title="Assembléias"
+					title="Grupos"
 					breadcrumbs={{
-						title: "Assembléias",
+						title: "grupos",
 						href: "/groups",
 					}}
 					actions={{
 						secondary: {
-							text: "Registrar assembléia",
-							href: "groups/details",
+							text: "Registrar grupo",
+							href: "groups/details-page",
 						},
 					}}
 				/>
@@ -35,7 +32,6 @@ const Page = () => {
 					columns={columns}
 					facetedFilters={getFieldsWithOptions()}
 					visibilityState={getVisibilityState()}
-					columnResizeMode="onChange"
 				/>
 			</CardContent>
 		</Card>

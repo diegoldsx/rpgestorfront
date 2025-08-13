@@ -4,7 +4,7 @@ import { Fragment } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { HeadingPages } from "@/components/common/heading/heading-pages";
 import { DataTable } from "@/components/common/data-table/data-table";
-import { getFieldsWithOptions, getVisibilityState } from "./components/columnSchema";
+import { getFacedFilters, getVisibilityState } from "./components/columnSchema";
 import { columns } from "./components/columns";
 import { fakeServiceDesks } from "@/types/ServiceDesk";
 
@@ -15,7 +15,7 @@ export const moduleLabels = {
 	new: "Registrar atendimento",
 	edit: "Editar atendimento",
 	submit: "Salvar atendimento",
-}
+};
 
 export const Page = () => {
 	return (
@@ -40,7 +40,7 @@ export const Page = () => {
 						<DataTable
 							data={fakeServiceDesks}
 							columns={columns}
-							facetedFilters={getFieldsWithOptions()}
+							facetedFilters={getFacedFilters}
 							visibilityState={getVisibilityState()}
 						/>
 					</CardContent>

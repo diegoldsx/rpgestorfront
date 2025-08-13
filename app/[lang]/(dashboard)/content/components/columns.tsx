@@ -12,18 +12,6 @@ import { Input } from "@/components/ui/input";
 const editUrl = "content/details";
 
 export const columns: ColumnDef<ContentSchemaType>[] = [
-	...columnSchema
-		.filter((item) => item.isVisible !== false)
-		.map(({ id, title, options, type, size = 0 }) => ({
-			id,
-			accessorKey: id,
-			header: title,
-			filterFn: exactFilter,
-			size: size,
-			cell: (props: { getValue: () => any }) => (
-				<DataCell getValue={props.getValue} type={type} options={options} />
-			),
-		})),
 	{
 		id: "actions",
 		header: "Actions",
@@ -34,4 +22,14 @@ export const columns: ColumnDef<ContentSchemaType>[] = [
 			</Link>
 		),
 	},
+	...columnSchema
+		.filter((item) => item.isVisible !== false)
+		.map(({ id, title, options, type, size = 0 }) => ({
+			id,
+			accessorKey: id,
+			header: title,
+			filterFn: exactFilter,
+			size: size,
+			cell: (props: { getValue: () => any }) => <DataCell getValue={props.getValue} type={type} options={options} />,
+		})),
 ];

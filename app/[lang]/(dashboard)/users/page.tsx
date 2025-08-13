@@ -1,9 +1,10 @@
 "use client";
 import { DataTable } from "@/components/common/data-table/data-table";
 import { fake_users, User } from "./types";
-import { columns, fieldsWithOptions } from "./columns";
 import { HeaderActions, PageLayout } from "@/components/common/page/PageLayout";
 import { useSession } from "next-auth/react";
+import { columns } from "./columns";
+import { facetedFilters } from "./columnSchema";
 
 const headerActions: HeaderActions = {
 	primary: {
@@ -22,12 +23,7 @@ const Page = () => {
 
 	return (
 		<PageLayout title="Users" headerActions={headerActions}>
-			<DataTable
-				data={fake_users as User[]}
-				columns={columns}
-				facetedFilters={fieldsWithOptions}
-				columnResizeMode="onChange"
-			/>
+			<DataTable data={fake_users as User[]} columns={columns} facetedFilters={facetedFilters} />
 		</PageLayout>
 	);
 };

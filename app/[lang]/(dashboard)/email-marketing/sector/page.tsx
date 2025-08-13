@@ -23,7 +23,7 @@ const Page = () => {
 			<div className="mt-3 space-y-6">
 				<Card>
 					<CardContent>
-						<DataTable data={FAKE_DATA} columns={columns} facetedFilters={facetedFilters} visibilityState={visibilityState} />
+						<DataTable data={FAKE_DATA} columns={columns} facetedFilters={[]} visibilityState={visibilityState} />
 					</CardContent>
 				</Card>
 			</div>

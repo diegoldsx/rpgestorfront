@@ -1,10 +1,12 @@
-import { ColumnDef } from "@tanstack/react-table";
+import { CellContext, ColumnDef } from "@tanstack/react-table";
 import { exactFilter } from "@/components/common/data-table/columnUtils";
 import Cell from "@/app/types/Cell";
 import { Message } from "./types/message";
 import { fields } from "./config/fields";
+import { EmailType } from "@/types/Email";
+import Link from "next/link";
 
-export const columns: ColumnDef<Message>[] = fields.map((field) => ({
+const columns: ColumnDef<Message>[] = fields.map((field) => ({
 	id: field.id,
 	accessorKey: field.id,
 	header: field.title,
@@ -24,3 +26,16 @@ export const columns: ColumnDef<Message>[] = fields.map((field) => ({
 		return <Cell>{value}</Cell>;
 	},
 }));
+
+export default [
+	{
+		id: "actions",
+		header: "Actions",
+		size: 150,
+		cell: ({ row }: CellContext<EmailType, unknown>) => (
+			<Link href={"emails/details-page?id=" + row.original.id}>Editar</Link>
+		),
+	},
+	,
+	...columns,
+] as ColumnDef<Message>[];

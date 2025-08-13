@@ -3,13 +3,9 @@
 import { HeadingPages } from "@/components/common/heading/heading-pages";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { DataTable } from "@/components/common/data-table/data-table";
-import {
-	getFieldsWithOptions,
-	getVisibilityState,
-} from "./components/columnSchema";
+import { getFieldsWithOptions, getVisibilityState } from "./components/columnSchema";
 import { columns } from "./components/columns";
 import { fakeCategories } from "@/types/Category";
-
 
 export const moduleLabels = {
 	detailsUrl: "categories/details-page",
@@ -17,8 +13,7 @@ export const moduleLabels = {
 	route: "/categories",
 	new: "Registrar categoria",
 	edit: "Editar categoria",
-}
-
+};
 
 const Page = () => {
 	// const { data, loading, error } =
@@ -46,10 +41,8 @@ const Page = () => {
 				<DataTable
 					data={fakeCategories || []}
 					columns={columns}
-
-					facetedFilters={getFieldsWithOptions()}
+					facetedFilters={[]}
 					visibilityState={getVisibilityState()}
-					columnResizeMode="onChange"
 				/>
 			</CardContent>
 		</Card>

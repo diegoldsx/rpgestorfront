@@ -2,7 +2,7 @@ import { z } from "zod";
 import { StatusEnum } from "./options";
 
 export const SubmissionSchema = z.object({
-	id: z.string().optional(),
+	id: z.string(),
 	packagingName: z.string().min(1, "O Nome da Embalagem é obrigatório."),
 	strategicPartners: z
 		.string()

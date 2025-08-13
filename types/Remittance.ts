@@ -1,11 +1,11 @@
 
 
 import { z } from "zod";
-import { BankEnum } from "./options";
+import { BankEnum, BanksOptions } from "./options";
 
 export const RemittanceSchema = z.object({
-	id: z.string().optional(),
-	bank: BankEnum,
+	id: z.string(),
+	bank:  z.enum(["itau", "caixa", "bradesco"]),
 	search: z.string().min(1, "A quantia é obrigatória."),
 	searchFor: z.string().min(1, "A quantia é obrigatória."),
 	dueDate: z.string().min(1, "A data de vencimento é obrigatória."),

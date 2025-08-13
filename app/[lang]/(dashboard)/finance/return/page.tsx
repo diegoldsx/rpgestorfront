@@ -8,15 +8,13 @@ import { columns } from "./components/columns";
 import { facetedFilters, visibilityState } from "./components/columnSchema";
 import { fakeReturns } from "@/types/Return";
 
-
 export const moduleLabels = {
 	detailsUrl: "return/details-page",
 	title: "Return",
 	route: "/return",
 	new: "Registrar Return",
 	edit: "Editar Return",
-}
-
+};
 
 const Page = () => {
 	// const { data, loading, error } =
@@ -44,10 +42,8 @@ const Page = () => {
 				<DataTable
 					data={fakeReturns}
 					columns={columns}
-
 					facetedFilters={facetedFilters}
 					visibilityState={visibilityState}
-					columnResizeMode="onChange"
 				/>
 			</CardContent>
 		</Card>

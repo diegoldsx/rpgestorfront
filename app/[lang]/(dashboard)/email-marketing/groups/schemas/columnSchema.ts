@@ -1,6 +1,7 @@
 import { VisibilityState } from "@tanstack/react-table";
 import { GroupSchemaType } from "./schema";
 import { ColumnSchema } from "@/types/columns/ColumnsDefinition";
+import { FacetedFilter } from "@/components/common/data-table/data-table";
 
 export const columnSchema: Array<ColumnSchema<GroupSchemaType>> = [
 	{
@@ -50,6 +51,9 @@ export function getVisibilityState(
 	);
 }
 
+
+
+
 export function getFieldsWithOptions() {
-	return columnSchema.filter(({ options }) => !!options);
+	return columnSchema.filter(({ options }) => !!options) as FacetedFilter[];
 }

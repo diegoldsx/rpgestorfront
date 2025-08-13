@@ -4,7 +4,7 @@ import { z } from "zod";
 import { CostCenterEnum, PaymentMethodEnum, StatusEnum } from "./options";
 
 export const ExpenseSchema = z.object({
-	id: z.string().optional(),
+	id: z.string(),
 	payer: z.string().min(1, "O pagador é obrigatório."),
 	competenceDate: z.string().optional(),
 	dueDate: z.string().min(1, "A data de vencimento é obrigatória."),

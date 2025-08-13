@@ -8,15 +8,13 @@ import { columns } from "./components/columns";
 import { facetedFilters, visibilityState } from "./components/columnSchema";
 import { fakeTransfers } from "@/types/Transfer";
 
-
 export const moduleLabels = {
 	detailsUrl: "transfer/details-page",
 	title: "Transferência",
 	route: "/transfer",
 	new: "Registrar Transferência",
 	edit: "Editar Transferência",
-}
-
+};
 
 const Page = () => {
 	// const { data, loading, error } =
@@ -44,10 +42,8 @@ const Page = () => {
 				<DataTable
 					data={fakeTransfers}
 					columns={columns}
-
 					facetedFilters={facetedFilters}
 					visibilityState={visibilityState}
-					columnResizeMode="onChange"
 				/>
 			</CardContent>
 		</Card>

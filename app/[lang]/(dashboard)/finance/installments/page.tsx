@@ -3,13 +3,9 @@
 import { HeadingPages } from "@/components/common/heading/heading-pages";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { DataTable } from "@/components/common/data-table/data-table";
-import {
-facetedFilters,
-visibilityState
-} from "./components/columnSchema";
+import { facetedFilters, visibilityState } from "./components/columnSchema";
 import { columns } from "./components/columns";
-import {  fakeInstallments as fakeData } from "@/types/Installment";
-
+import { fakeInstallments as fakeData } from "@/types/Installment";
 
 export const moduleLabels = {
 	detailsUrl: "installments/details-page",
@@ -17,8 +13,7 @@ export const moduleLabels = {
 	route: "/installments",
 	new: "Registrar parcela",
 	edit: "Editar parcela",
-}
-
+};
 
 const Page = () => {
 	// const { data, loading, error } =
@@ -48,7 +43,6 @@ const Page = () => {
 					columns={columns}
 					facetedFilters={facetedFilters}
 					visibilityState={visibilityState}
-					columnResizeMode="onChange"
 				/>
 			</CardContent>
 		</Card>

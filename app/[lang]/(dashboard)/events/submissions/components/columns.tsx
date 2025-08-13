@@ -1,6 +1,6 @@
 "use client";
 
-import { ColumnDef } from "@tanstack/react-table";
+import { CellContext, ColumnDef } from "@tanstack/react-table";
 import { exactFilter } from "@/components/common/data-table/columnUtils";
 import { columnSchema } from "./columnSchema";
 import Link from "next/link";
@@ -9,8 +9,15 @@ import ActionsCell from "@/components/common/data-table/columns/ActionCell";
 import { SubmissionType } from "@/types/Submission";
 import { moduleLabels } from "../page";
 
-
 export const columns: ColumnDef<SubmissionType>[] = [
+	{
+		id: "actions",
+		header: "Actions",
+		size: 150,
+		cell: ({ row }: CellContext<SubmissionType, unknown>) => (
+			<Link href={`submissions/details-page?id=${row.original.id}`}>Edit </Link>
+		),
+	},
 	...columnSchema
 		.filter((item) => item.isVisible !== false)
 		.map(({ id, title, options, type, size = 0 }) => ({
@@ -19,18 +26,6 @@ export const columns: ColumnDef<SubmissionType>[] = [
 			header: title,
 			filterFn: exactFilter,
 			size: size,
-			cell: (props: { getValue: () => any }) => (
-				<DataCell getValue={props.getValue} type={type} options={options} />
-			),
+			cell: (props: { getValue: () => any }) => <DataCell getValue={props.getValue} type={type} options={options} />,
 		})),
-	{
-		id: "actions",
-		header: "Actions",
-		size: 150,
-		cell: ({ row }) => (
-			<Link href={moduleLabels.detailsUrl}>
-				<ActionsCell row={row} editUrl={moduleLabels.detailsUrl} label="Edit" />
-			</Link>
-		),
-	},
 ];

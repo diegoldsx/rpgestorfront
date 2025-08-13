@@ -6,8 +6,8 @@ import { DataTable } from "@/components/common/data-table/data-table";
 
 import { columns } from "./components/columns";
 import { facetedFilters, visibilityState } from "./components/columnSchema";
-import { fakeRemittance } from "@/types/Remittance";
-
+import { fakeRemittance, RemittanceType } from "@/types/Remittance";
+import { ColumnDef } from "@tanstack/react-table";
 
 export const moduleLabels = {
 	detailsUrl: "remittance/details-page",
@@ -15,8 +15,7 @@ export const moduleLabels = {
 	route: "/remittance",
 	new: "Registrar Remessa",
 	edit: "Editar Remessa",
-}
-
+};
 
 const Page = () => {
 	// const { data, loading, error } =
@@ -43,11 +42,9 @@ const Page = () => {
 			<CardContent>
 				<DataTable
 					data={fakeRemittance}
-					columns={columns}
-
+					columns={[]}
 					facetedFilters={facetedFilters}
 					visibilityState={visibilityState}
-					columnResizeMode="onChange"
 				/>
 			</CardContent>
 		</Card>

@@ -1,7 +1,7 @@
 import * as z from "zod";
 
 export const ContentSchema = z.object({
-	id: z.string().optional(),
+	id: z.string(),
 	contentType: z.enum(["content1", "content2"]),
 	status: z.enum(["active", "inactive"]),
 	expirationDate: z.string().optional(),

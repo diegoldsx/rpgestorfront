@@ -14,7 +14,7 @@ const permissionSchema = z.object({
 
 // schema completo do usuário
 export const userSchema = z.object({
-	id: z.string().optional(),
+	id: z.string(),
 	name: z.string().min(3, "O nome é obrigatório"),
 	email: z.string().email("O email é obrigatório"),
 	status: z.enum(["active", "inactive"], {
@@ -31,7 +31,7 @@ export const userSchema = z.object({
 	password: z.string().min(6).optional(),
 	resetToken: z.string().nullable().optional(),
 	resetTokenExpiry: z.number().nullable().optional(),
-	profile: z.any().nullable().optional(),
+	profile: z.any().optional(),
 });
 
 export type User = z.infer<typeof userSchema>;
@@ -57,15 +57,7 @@ export const fake_users: User[] = [
 		permissions: [
 			{ route: "/assemblies", level: "admin" },
 			{ route: "/content", level: "admin" },
-			{ route: "/content-type", level: "admin" },
-			{ route: "/customer", level: "admin" },
-			{ route: "/email-marketing", level: "admin" },
-			{ route: "/events", level: "admin" },
-			{ route: "/finance", level: "admin" },
-			{ route: "/members", level: "admin" },
-			{ route: "/afilliations", level: "admin" },
-			{ route: "/service-desk", level: "admin" },
-			{ route: "/users", level: "admin" },
+		
 		],
 	},
 	{

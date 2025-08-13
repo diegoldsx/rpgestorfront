@@ -28,11 +28,12 @@ import DataTableHeader from "./data-table-header";
 import { TableDataExporter } from "./table-data-exporter";
 import { DataTableAdvancedSearch } from "./data-table-advanced-search";
 import Link from "next/link";
+import { Option } from "@/types/options/Option";
 
 export type FacetedFilter = {
 	id: string;
 	title: string;
-	options: { value: string; label: string }[];
+	options: Option[];
 };
 
 interface DataTableProps<TData extends { id: string | number }> {
@@ -43,12 +44,10 @@ interface DataTableProps<TData extends { id: string | number }> {
 	selectable?: boolean;
 	visibilityState?: VisibilityState;
 	sortBy?: SortingState;
-	meta: { editEndpoint: string };
 }
 
 export function DataTable<TData extends { id: string | number }>({
 	columns,
-	meta,
 	data,
 	facetedFilters,
 	visibilityState = {},

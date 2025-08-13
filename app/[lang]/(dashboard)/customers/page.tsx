@@ -43,8 +43,6 @@ const Page = () => {
 					columns={columns}
 					facetedFilters={getFieldsWithOptions()}
 					visibilityState={getVisibilityState()}
-					columnResizeMode="onChange"
-					meta={{ endpoint: "/customers" }}
 				/>
 			</CardContent>
 		</Card>

@@ -3,13 +3,9 @@
 import { HeadingPages } from "@/components/common/heading/heading-pages";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { DataTable } from "@/components/common/data-table/data-table";
-import {
-	getFieldsWithOptions,
-	getVisibilityState,
-} from "./components/columnSchema";
+import { facetedFilters, getFieldsWithOptions, getVisibilityState } from "./components/columnSchema";
 import { columns } from "./components/columns";
 import { ExpenseType, fakeExpenses } from "@/types/Expense";
-
 
 export const moduleLabels = {
 	detailsUrl: "expenses/details-page",
@@ -17,8 +13,7 @@ export const moduleLabels = {
 	route: "/expenses",
 	new: "Registrar despesa",
 	edit: "Editar despesa",
-}
-
+};
 
 const Page = () => {
 	// const { data, loading, error } =
@@ -46,10 +41,8 @@ const Page = () => {
 				<DataTable
 					data={fakeExpenses}
 					columns={columns}
-
-					facetedFilters={getFieldsWithOptions()}
+					facetedFilters={facetedFilters}
 					visibilityState={getVisibilityState()}
-					columnResizeMode="onChange"
 				/>
 			</CardContent>
 		</Card>

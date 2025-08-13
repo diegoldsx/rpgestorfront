@@ -3,6 +3,7 @@ import { VisibilityState } from "@tanstack/react-table";
 import { Column, createColumn } from "@/types/columns/ColumnsDefinition";
 import { InstallmentType } from "@/types/Installment";
 import { CostCenterOptions, PaymentMethodOptions } from "@/types/options";
+import { FacetedFilter } from "@/components/common/data-table/data-table";
 
 
 
@@ -77,7 +78,7 @@ export const defaultValues = Object.fromEntries(
 	columnSchema.map(({ id, defaultValue }) => [id, defaultValue])
 ) as Partial<InstallmentType>;
 
-export const facetedFilters = columnSchema.filter((f) => !!f.options);
+export const facetedFilters = columnSchema.filter((f) => !!f.options) as FacetedFilter[];
 
 export const visibleColumns: ReadonlyArray<string> = ["*"];
 export const visibilityState: VisibilityState = Object.fromEntries(

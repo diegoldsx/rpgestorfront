@@ -4,7 +4,7 @@ import { z } from "zod";
 import { CostCenterEnum, PaymentMethodEnum, StatusEnum } from "./options";
 
 export const IncomeSchema = z.object({
-	id: z.string().optional(),
+	id: z.string(),
 	payer: z.string().min(1, "O pagador é obrigatório."),
 	description: z.string().min(1, "A descrição é obrigatória."),
 	competenceDate: z.string().optional(),
@@ -43,8 +43,8 @@ export const fakeIncomes: IncomeType[] = [
 		competenceDate: "Cometence",
 		dueDate: "Due Date",
 		account: "Account",
-		paymentMethod: PaymentMethodEnum.Values.pix,
-		costCenter: CostCenterEnum.Values.administrativo,
+		paymentMethod: "pix",
+		costCenter: "administrativo",
 		category: "Category",
 		value: "Value",
 		paidValue: "Paid Value",

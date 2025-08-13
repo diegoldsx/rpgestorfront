@@ -3,13 +3,9 @@
 import { HeadingPages } from "@/components/common/heading/heading-pages";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { DataTable } from "@/components/common/data-table/data-table";
-import {
-	getFieldsWithOptions,
-	getVisibilityState,
-} from "./components/columnSchema";
+import { getFieldsWithOptions, getVisibilityState } from "./components/columnSchema";
 import { columns } from "./components/columns";
-import {fakeCourses as fakeData } from "@/types/Course";
-
+import { fakeCourses as fakeData } from "@/types/Course";
 
 export const moduleLabels = {
 	detailsUrl: "courses/details-page",
@@ -17,11 +13,9 @@ export const moduleLabels = {
 	route: "/courses",
 	new: "Registrar curso",
 	edit: "Editar curso",
-}
+};
 
 const Page = () => {
-
-
 	return (
 		<Card>
 			<CardHeader>
@@ -41,14 +35,7 @@ const Page = () => {
 			</CardHeader>
 
 			<CardContent>
-				<DataTable
-					data={fakeData || []}
-					columns={columns}
-
-					facetedFilters={getFieldsWithOptions()}
-					visibilityState={getVisibilityState()}
-					columnResizeMode="onChange"
-				/>
+				<DataTable data={fakeData || []} columns={columns} facetedFilters={[]} visibilityState={getVisibilityState()} />
 			</CardContent>
 		</Card>
 	);

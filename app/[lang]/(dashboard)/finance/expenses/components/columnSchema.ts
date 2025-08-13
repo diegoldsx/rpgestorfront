@@ -3,6 +3,7 @@ import { VisibilityState } from "@tanstack/react-table";
 import { createColumn } from "@/types/columns/ColumnsDefinition";
 import { CostCenterOptions, PaymentMethodOptions, Status, StatusEnum } from "@/types/options";
 import { ExpenseType } from "@/types/Expense";
+import { FacetedFilter } from "@/components/common/data-table/data-table";
 
 
 export const columnSchema: Array<Column<ExpenseType>> = [
@@ -278,7 +279,7 @@ export const defaultValues = Object.fromEntries(
 	columnSchema.map(({ id, defaultValue }) => [id, defaultValue])
 ) as Partial<ExpenseType>;
 
-export const facetedFilters = columnSchema.filter((f) => !!f.options);
+export const facetedFilters = columnSchema.filter((f) => !!f.options) as FacetedFilter[];
 
 export const visibleColumns: ReadonlyArray<string> = ["*"];
 export const visibilityState: VisibilityState = Object.fromEntries(
@@ -289,7 +290,9 @@ export const visibilityState: VisibilityState = Object.fromEntries(
 );
 
 
-
+export function getFieldsWithOptions() {
+	return columnSchema.filter(({ options }) => !!options)as FacetedFilter[];
+}
 
 export function getVisibilityState(
 	visibilityArray: string[] = ["*"]
@@ -304,6 +307,3 @@ export function getVisibilityState(
 	);
 }
 
-export function getFieldsWithOptions() {
-	return columnSchema.filter(({ options }) => !!options);
-}

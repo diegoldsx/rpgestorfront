@@ -7,7 +7,6 @@ import Link from "next/link";
 import DataCell from "@/components/common/data-table/columns/DataCell";
 import ActionsCell from "@/components/common/data-table/columns/ActionCell";
 import { AssemblyType } from "@/types/Assembly";
-import { makeActionColumn } from "@/components/common/data-table/columns/ActionColumn";
 
 export const columns: ColumnDef<AssemblyType>[] = [
 	{

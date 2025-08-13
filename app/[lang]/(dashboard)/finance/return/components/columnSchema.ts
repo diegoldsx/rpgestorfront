@@ -2,6 +2,7 @@ import { Column } from "@/types/columns/ColumnsDefinition";
 import { VisibilityState } from "@tanstack/react-table";
 import { createColumn } from "@/types/columns/ColumnsDefinition";
 import { ReturnType } from "@/types/Return";
+import { FacetedFilter } from "@/components/common/data-table/data-table";
 
 export const columnSchema: Array<Column<ReturnType>> = [
 	createColumn<ReturnType>({
@@ -30,7 +31,7 @@ export const defaultValues = Object.fromEntries(
 	columnSchema.map(({ id, defaultValue }) => [id, defaultValue])
 ) as Partial<ReturnType>;
 
-export const facetedFilters = columnSchema.filter((f) => !!f.options);
+export const facetedFilters = columnSchema.filter((f) => !!f.options) as FacetedFilter[];
 
 export const visibleColumns: ReadonlyArray<string> = ["*"];
 export const visibilityState: VisibilityState = Object.fromEntries(

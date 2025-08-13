@@ -3,6 +3,7 @@ import { VisibilityState } from "@tanstack/react-table";
 import { CustomerType } from "@/types/Customer";
 import { createColumn } from "@/types/columns/ColumnsDefinition";
 import { DocumentType } from "@/types/options";
+import { FacetedFilter } from "@/components/common/data-table/data-table";
 
 export const columnSchema: Array<Column<CustomerType>> = [
 	createColumn<CustomerType>({
@@ -228,5 +229,5 @@ export function getVisibilityState(visibilityArray: string[] = ["*"]): Visibilit
 }
 
 export function getFieldsWithOptions() {
-	return columnSchema.filter(({ options }) => !!options);
+	return columnSchema.filter(({ options }) => !!options) as FacetedFilter[];
 }

@@ -1,4 +1,5 @@
 import { FieldConfig as Field } from "@/app/types/FieldConfig";
+import { FacetedFilter } from "@/components/common/data-table/data-table";
 import { Column } from "@/types/columns/ColumnsDefinition";
 import { ServiceDeskType } from "@/types/ServiceDesk";
 import { VisibilityState } from "@tanstack/react-table";
@@ -118,6 +119,6 @@ export function getVisibilityState(
 	);
 }
 
-export function getFieldsWithOptions() {
-	return columnSchema.filter(({ options }) => !!options);
-}
+export const getFacedFilters = columnSchema.filter(
+  ({ options }) => !!options
+) as FacetedFilter[];

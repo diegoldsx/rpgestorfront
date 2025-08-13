@@ -8,15 +8,13 @@ import { columns } from "./components/columns";
 import { fakeProvisions as fakeData } from "@/types/Provision";
 import { facetedFilters, visibilityState } from "./components/columnSchema";
 
-
 export const moduleLabels = {
 	detailsUrl: "provisions/details-page",
 	title: "Provisão",
 	route: "/provisions",
 	new: "Registrar provisão",
 	edit: "Editar provisão",
-}
-
+};
 
 const Page = () => {
 	// const { data, loading, error } =
@@ -44,10 +42,8 @@ const Page = () => {
 				<DataTable
 					data={fakeData}
 					columns={columns}
-
 					facetedFilters={facetedFilters}
 					visibilityState={visibilityState}
-					columnResizeMode="onChange"
 				/>
 			</CardContent>
 		</Card>

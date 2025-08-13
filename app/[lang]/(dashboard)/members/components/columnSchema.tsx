@@ -1,8 +1,15 @@
 "use client";
 import type { CellContext, ColumnDef, VisibilityState } from "@tanstack/react-table";
 import { MemberType, MemberTypesOptions } from "@/types/Member";
+import Link from "next/link";
 
 export const memberCols: ColumnDef<MemberType>[] = [
+	{
+		id: "actions",
+		header: "Actions",
+		size: 150,
+		cell: ({ row }) => <Link href={`members/details-page?id=${row.original.id}`}>Editar </Link>,
+	},
 	{ header: "ID", accessorKey: "id" },
 	{ header: "Data de nascimento", accessorKey: "birthDate" },
 	{ header: "Status", accessorKey: "status" },
