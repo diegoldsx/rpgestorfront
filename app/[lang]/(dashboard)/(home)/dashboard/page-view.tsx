@@ -21,17 +21,6 @@ interface DashboardPageViewProps {
 
 const DashboardPageView = ({ reports, accountBalance, membersSituation }: DashboardPageViewProps) => {
 	return (
-		<>
-			<DonutChart
-				title="Members"
-				labels={["Ativos", "Inativos"]}
-				series={[membersSituation.active, membersSituation.inactive]}
-				width={380}
-			/>
-		</>
-	);
-
-	return (
 		<div className="space-y-6">
 			{/* Área de métricas principais */}
 			<div className="grid grid-cols-12">
