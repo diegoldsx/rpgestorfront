@@ -2,85 +2,88 @@ import { VisibilityState } from "@tanstack/react-table";
 import { AssemblyType } from "@/types/Assembly";
 import { Column, createColumn } from "@/types/columns/ColumnsDefinition";
 import { Status } from "@/types/options";
+import { getAutoColumnSize } from "@/components/common/data-table/columnUtils";
 
 export const columnSchema: Array<Column<AssemblyType>> = [
 	createColumn<AssemblyType>({
 		id: "id",
 		title: "ID",
 		type: "id",
-		size: 100,
+		size: 50,
 	}),
 	createColumn<AssemblyType>({
 		id: "name",
 		title: "Nome",
 		type: "text",
 
-		size: 600,
+		size: 250,
 	}),
 	createColumn<AssemblyType>({
 		id: "status",
 		title: "Situação",
 		type: "badge",
 		defaultValue: "active",
-		size: 150,
+		size: 70,
 		options: Status,
 	}),
 	createColumn<AssemblyType>({
 		id: "startDate",
 		title: "Data de início",
 		type: "date",
+		size: 100,
 
 
-		size: 180,
 	}),
 	createColumn<AssemblyType>({
 		id: "endDate",
 		title: "Data fim",
 		type: "date",
+		size: 100,
 
-		size: 180,
 	}),
 	createColumn<AssemblyType>({
 		id: "resultDate",
 		title: "Data resultado",
 		type: "date",
 
-		size: 180,
+		size: 100,
 	}),
 	createColumn<AssemblyType>({
 		id: "description",
 		title: "Descrição",
 		type: "textarea",
 
-		size: 200,
+		size: 300,
 	}),
 	createColumn<AssemblyType>({
 		id: "type",
 		title: "Tipo",
 		type: "text",
 
-		size: 200,
+		size: 100,
 	}),
 	createColumn<AssemblyType>({
 		id: "allowChangeVote",
 		title: "Permite mudar voto",
 		type: "checkbox",
+		size: 250,
 
-		size: 300,
+
 	}),
 	createColumn<AssemblyType>({
 		id: "displayMode",
 		title: "Modo exibição",
 		type: "text",
-
 		size: 200,
+
 	}),
 	createColumn<AssemblyType>({
 		id: "videoConference",
 		title: "Conferência de vídeo",
 		type: "checkbox",
+		
 
-		size: 220,
+		size: 200,
 	}),
 ];
 

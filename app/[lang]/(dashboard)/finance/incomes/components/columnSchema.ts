@@ -11,7 +11,7 @@ export const columnSchema: Array<Column<IncomeType>> = [
 		id: "id",
 		title: "ID",
 		type: "id",
-		size: 100,
+		size: 50,
 	}),
 	createColumn<IncomeType>({
 		id: "payer",
@@ -31,7 +31,7 @@ export const columnSchema: Array<Column<IncomeType>> = [
 	}),
 	createColumn<IncomeType>({
 		id: "description",
-		title: "Descri o",
+		title: "Descrição",
 		type: "text",
 		defaultValue: "",
 		isVisible: true,
@@ -47,7 +47,7 @@ export const columnSchema: Array<Column<IncomeType>> = [
 	}),
 	createColumn<IncomeType>({
 		id: "paymentMethod",
-		title: "M todo de pagamento",
+		title: "Forma de pagamento",
 		type: "select",
 		options: PaymentMethodOptions,
 		defaultValue: "",
@@ -177,7 +177,7 @@ export const columnSchema: Array<Column<IncomeType>> = [
 		type: "text",
 		defaultValue: "",
 		isVisible: true,
-		size: 200,
+		size: 250,
 	}),
 	createColumn<IncomeType>({
 		id: "invoiceInstructions",
@@ -185,7 +185,7 @@ export const columnSchema: Array<Column<IncomeType>> = [
 		type: "text",
 		defaultValue: "",
 		isVisible: true,
-		size: 200,
+		size: 250,
 	}),
 	createColumn<IncomeType>({
 		id: "sampleMessage",
@@ -193,7 +193,7 @@ export const columnSchema: Array<Column<IncomeType>> = [
 		type: "text",
 		defaultValue: "",
 		isVisible: true,
-		size: 200,
+		size: 1000,
 	}),
 ]
 

@@ -31,7 +31,7 @@ export const columnSchema: Array<Column<ExpenseType>> = [
 	}),
 	createColumn<ExpenseType>({
 		id: "description",
-		title: "Descri o",
+		title: "Descrição",
 		type: "text",
 		defaultValue: "",
 		isVisible: true,
@@ -47,12 +47,12 @@ export const columnSchema: Array<Column<ExpenseType>> = [
 	}),
 	createColumn<ExpenseType>({
 		id: "paymentMethod",
-		title: "M todo de pagamento",
+		title: "Forma de pagamento",
 		type: "select",
 		options: PaymentMethodOptions,
 		defaultValue: "",
 		isVisible: true,
-		size: 200,
+		size: 300,
 	}),
 	createColumn<ExpenseType>({
 		id: "costCenter",
@@ -102,7 +102,7 @@ export const columnSchema: Array<Column<ExpenseType>> = [
 		type: "text",
 		defaultValue: "",
 		isVisible: true,
-		size: 200,
+		size: 300,
 	}),
 	createColumn<ExpenseType>({
 		id: "observations",
@@ -110,7 +110,7 @@ export const columnSchema: Array<Column<ExpenseType>> = [
 		type: "text",
 		defaultValue: "",
 		isVisible: true,
-		size: 200,
+		size: 300,
 	}),
 	createColumn<ExpenseType>({
 		id: "status",
@@ -207,7 +207,7 @@ export const columnSchema: Array<Column<ExpenseType>> = [
 		type: "text",
 		defaultValue: "",
 		isVisible: true,
-		size: 200,
+		size: 250,
 	}),
 	createColumn<ExpenseType>({
 		id: "itemBaseDocument",
@@ -215,7 +215,7 @@ export const columnSchema: Array<Column<ExpenseType>> = [
 		type: "text",
 		defaultValue: "",
 		isVisible: true,
-		size: 200,
+		size: 300,
 	}),
 	createColumn<ExpenseType>({
 		id: "itemDueDate",
@@ -247,7 +247,7 @@ export const columnSchema: Array<Column<ExpenseType>> = [
 		type: "text",
 		defaultValue: "",
 		isVisible: true,
-		size: 200,
+		size: 100,
 	}),
 	createColumn<ExpenseType>({
 		id: "taxCSSL",
@@ -255,7 +255,7 @@ export const columnSchema: Array<Column<ExpenseType>> = [
 		type: "text",
 		defaultValue: "",
 		isVisible: true,
-		size: 200,
+		size: 100,
 	}),
 	createColumn<ExpenseType>({
 		id: "taxPIS",
@@ -263,7 +263,7 @@ export const columnSchema: Array<Column<ExpenseType>> = [
 		type: "text",
 		defaultValue: "",
 		isVisible: true,
-		size: 200,
+		size: 100,
 	}),
 	createColumn<ExpenseType>({
 		id: "taxCOFINS",
@@ -271,7 +271,7 @@ export const columnSchema: Array<Column<ExpenseType>> = [
 		type: "text",
 		defaultValue: "",
 		isVisible: true,
-		size: 200,
+		size: 100,
 	})
 ]
 
