@@ -1,52 +1,79 @@
 "use client";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
-import { OverviewChart, OverviewChartProps } from "@/components/charts/OverviewChart";
-import { MembersStatsChart, MembersStatsChartProps } from "@/components/charts/MemberStatsChart";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { ReportsArea, ReportServerItem } from "@/components/charts/ReportsArea";
 import { AccountBalance } from "@/components/charts/AccountBalance";
 import { MemberStatusPieChart } from "@/components/charts/MemberStatus";
 import { IncomesXExpensesChart } from "@/components/charts/IncomesXExpensesChart";
-import DonutChart from "@/components/charts/DonutChart";
+import { FinancialBalanceDonuts } from "@/components/charts/FinancialBalanceChart";
+
 interface DashboardPageViewProps {
-	trans: {
-		[key: string]: string;
-	};
-	overview: OverviewChartProps;
-	memberStats: MembersStatsChartProps;
+	trans: { [key: string]: string };
+	overview: any;
+	memberStats: any;
 	reports: ReportServerItem[];
 	accountBalance: AccountBalance[];
 	membersSituation: { active: number; inactive: number };
+	financialBalanceChartData: any;
 }
 
-const DashboardPageView = ({ reports, accountBalance, membersSituation }: DashboardPageViewProps) => {
+const DashboardPageView = ({
+	reports,
+	accountBalance,
+	membersSituation,
+	financialBalanceChartData,
+}: DashboardPageViewProps) => {
 	return (
 		<div className="space-y-6">
-			{/* Área de métricas principais */}
-			<div className="grid grid-cols-12">
-				<div className="col-span-12">
-					<IncomesXExpensesChart total={0} totalExpenses={0} totalIncomes={0} categories={["Jul"]} series={[0]} />
-				</div>
+			<div className="flex w-full gap-6 items-stretch">
+				<Card className="flex-1 flex flex-col">
+					<CardHeader>
+						<CardTitle className="text-lg">Receitas x Despesas</CardTitle>
+					</CardHeader>
+					<CardContent className="flex-1 min-h-0 p-0">
+						<div className="h-full">
+							<IncomesXExpensesChart total={0} totalExpenses={0} totalIncomes={0} categories={["Jul"]} series={[0]} />
+						</div>
+					</CardContent>
+				</Card>
+
+				<Card className="flex-1 flex flex-col">
+					<CardHeader>
+						<CardTitle className="text-lg">Balanço por grupo</CardTitle>
+					</CardHeader>
+					<CardContent className="flex-1 min-h-0 p-0">
+						<div className="h-full">
+							<FinancialBalanceDonuts data={financialBalanceChartData} />
+						</div>
+					</CardContent>
+				</Card>
 			</div>
 
-			{/* Métricas secundárias */}
-			<div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-				<div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-					<ReportsArea reports={reports} /> {/* Indicadores financeiros */}
-				</div>
-
-				<div className="grid grid-cols-1">
-					<AccountBalance accountBalance={accountBalance} />
-				</div>
-
-				<Card>
-					<CardHeader className="border-none p-6 pt-5 mb-0">
-						<CardTitle className="text-lg font-semibold text-default-900 p-0">Receitas x Despesas</CardTitle>
+			<div className="grid grid-cols-1 lg:grid-cols-3 gap-6 items-stretch">
+				<Card className="flex flex-col">
+					<CardHeader>
+						<CardTitle className="text-lg">Indicadores Financeiros</CardTitle>
 					</CardHeader>
-					<CardContent>
-						<div className="dashtail-legend">
-							<MemberStatusPieChart active={membersSituation.active} inactive={membersSituation.inactive} />
-						</div>
+					<CardContent className="flex-1 min-h-0">
+						<ReportsArea reports={reports} />
+					</CardContent>
+				</Card>
+
+				<Card className="flex flex-col">
+					<CardHeader>
+						<CardTitle className="text-lg">Saldo por Conta</CardTitle>
+					</CardHeader>
+					<CardContent className="flex-1 min-h-0">
+						<AccountBalance accountBalance={accountBalance} />
+					</CardContent>
+				</Card>
+
+				<Card className="flex flex-col">
+					<CardHeader>
+						<CardTitle className="text-lg">Situação de Membros</CardTitle>
+					</CardHeader>
+					<CardContent className="flex-1 min-h-0">
+						<MemberStatusPieChart active={membersSituation.active} inactive={membersSituation.inactive} />
 					</CardContent>
 				</Card>
 			</div>

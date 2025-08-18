@@ -89,6 +89,29 @@ export async function getAccountBalance() {
 	return { accounts };
 }
 
+export async function getBalancePieChartSeries() {
+	const balance = {
+		incomes_categories: [
+			{ name: "Vendas", value: 128000 },
+			{ name: "Serviços", value: 8200 },
+		],
+		expenses_categories: [
+			{ name: "Operacional", value: 64000 },
+			{ name: "Impostos", value: 22000 },
+		],
+		incomes_cost_center: [
+			{ name: "Loja A", value: 74000 },
+			{ name: "Loja B", value: 66000 },
+		],
+		expenses_cost_center: [
+			{ name: "Loja A", value: 43000 },
+			{ name: "Loja B", value: 28000 },
+		],
+	};
+
+	return balance;
+}
+
 export async function getIncomesXExpensesData(startDate: string, endDate: string) {
 	const data = FAKE_INCOMES_X_EXPENSES_DATA.filter((item) => item.date >= startDate && item.date <= endDate);
 
