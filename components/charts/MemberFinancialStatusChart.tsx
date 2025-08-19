@@ -36,7 +36,7 @@ export const redPalette = ["#e0b3ae", "#d88b83", "#d06358", "#c34c3f", "#a14036"
 
 const brl = new Intl.NumberFormat("pt-BR", { style: "currency", currency: "BRL" });
 
-export function FinancialBalanceDonuts({
+export function MemberFinancialStatusChart({
 	data = defaultData,
 	title = "Receitas x Despesas",
 }: {

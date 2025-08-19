@@ -6,6 +6,7 @@ import { AccountBalance } from "@/components/charts/AccountBalance";
 import { MemberStatusPieChart } from "@/components/charts/MemberStatus";
 import { IncomesXExpensesChart } from "@/components/charts/IncomesXExpensesChart";
 import { FinancialBalanceDonuts } from "@/components/charts/FinancialBalanceChart";
+import { MemberFinancialStatusChart } from "@/components/charts/MemberFinancialStatusChart";
 
 interface DashboardPageViewProps {
 	trans: { [key: string]: string };
@@ -15,6 +16,7 @@ interface DashboardPageViewProps {
 	accountBalance: AccountBalance[];
 	membersSituation: { active: number; inactive: number };
 	financialBalanceChartData: any;
+	incomeXExpenses: any;
 }
 
 const DashboardPageView = ({
@@ -25,19 +27,19 @@ const DashboardPageView = ({
 }: DashboardPageViewProps) => {
 	return (
 		<div className="space-y-6">
-			<div className="flex w-full gap-6 items-stretch">
-				<Card className="flex-1 flex flex-col">
+			<div className="flex w-full gap-6 ">
+				<Card className="flex-[3] flex flex-col">
 					<CardHeader>
 						<CardTitle className="text-lg">Receitas x Despesas</CardTitle>
 					</CardHeader>
-					<CardContent className="flex-1 min-h-0 p-0">
+					<CardContent className="f min-h-0 p-0">
 						<div className="h-full">
 							<IncomesXExpensesChart total={0} totalExpenses={0} totalIncomes={0} categories={["Jul"]} series={[0]} />
 						</div>
 					</CardContent>
 				</Card>
 
-				<Card className="flex-1 flex flex-col">
+				<Card className="flex-[1] flex flex-col">
 					<CardHeader>
 						<CardTitle className="text-lg">Balanço por grupo</CardTitle>
 					</CardHeader>
@@ -55,7 +57,7 @@ const DashboardPageView = ({
 						<CardTitle className="text-lg">Indicadores Financeiros</CardTitle>
 					</CardHeader>
 					<CardContent className="flex-1 min-h-0">
-						<ReportsArea reports={reports} />
+						<MemberFinancialStatusChart />
 					</CardContent>
 				</Card>
 

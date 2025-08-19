@@ -3,7 +3,7 @@ import { z } from "zod";
 const individualSchema = z.object({
 	id: z.string(),
 	type: z.literal("individual"),
-	status: z.enum(["active", "inactive"]),
+	status: z.enum(["active", "inactive", "pending"]),
 	code: z.string(),
 	fullName: z.string(),
 	cpf: z.string().min(11),
@@ -28,7 +28,7 @@ const individualSchema = z.object({
 const companySchema = z.object({
 	id: z.string(),
 	type: z.literal("company"),
-	status: z.enum(["active", "inactive"]),
+	status: z.enum(["active", "inactive", "pending"]),
 	code: z.string(),
 	corporateName: z.string(),
 	tradeName: z.string(),
@@ -102,5 +102,29 @@ export const fakeMembers: MemberType[] = [
 			number: "1000",
 			complement: "Sala 501",
 		},
+	},
+	{
+		id: "3",
+		type: "individual",
+		status: "pending",
+		code: "PF001",
+		cpf: "12345678900",
+		fullName: "João da Silva",
+		birthDate: "1990-05-15",
+		address: {
+			zipCode: "12345-678",
+			street: "Rua das Flores",
+			number: "123",
+			complement: "Apto 45",
+			district: "Centro",
+			city: "São Paulo",
+			state: "SP",
+		},
+		contact: {
+			phone: "(11) 1234-5678",
+			email: "joao@email.com",
+		},
+		paymentGroup: "Mensal",
+		cycle: "Janeiro-Dezembro",
 	},
 ];
