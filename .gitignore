@@ -37,6 +37,9 @@ tsconfig.tsbuildinfo
 /.contentlayer/
 .aider*
 
+.md
+.env.local*
+
 
 .cursorrules
 .windsurfrules
