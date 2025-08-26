@@ -37,8 +37,9 @@ tsconfig.tsbuildinfo
 /.contentlayer/
 .aider*
 
-.md
+
 .env.local*
+*.md
 
 
 .cursorrules
