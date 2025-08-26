@@ -1,13 +1,5 @@
 "use client";
 
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { ReportsArea, ReportServerItem } from "@/components/charts/ReportsArea";
-import { AccountBalance } from "@/components/charts/AccountBalance";
-import { MemberStatusPieChart } from "@/components/charts/MemberStatus";
-import { IncomesXExpensesChart } from "@/components/charts/IncomesXExpensesChart";
-import { FinancialBalanceDonuts } from "@/components/charts/FinancialBalanceChart";
-import { MemberFinancialStatusChart } from "@/components/charts/MemberFinancialStatusChart";
-
 interface DashboardPageViewProps {
 	trans: { [key: string]: string };
 	overview: any;
@@ -34,7 +26,7 @@ const DashboardPageView = ({
 					</CardHeader>
 					<CardContent className="f min-h-0 p-0">
 						<div className="h-full">
-							<IncomesXExpensesChart total={0} totalExpenses={0} totalIncomes={0} categories={["Jul"]} series={[0]} />
+							<IncomesXExpensesChart />
 						</div>
 					</CardContent>
 				</Card>
@@ -78,9 +70,22 @@ const DashboardPageView = ({
 						<MemberStatusPieChart active={membersSituation.active} inactive={membersSituation.inactive} />
 					</CardContent>
 				</Card>
+
+				<Card>
+					<EventsBalanceChart />
+				</Card>
 			</div>
 		</div>
 	);
 };
 
 export default DashboardPageView;
+
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { ReportsArea, ReportServerItem } from "@/components/charts/ReportsArea";
+import { AccountBalance } from "@/components/charts/AccountBalance";
+import { MemberStatusPieChart } from "@/components/charts/MemberStatus";
+import { IncomesXExpensesChart } from "@/components/charts/IncomesXExpensesChart";
+import { FinancialBalanceDonuts } from "@/components/charts/FinancialBalanceChart";
+import { MemberFinancialStatusChart } from "@/components/charts/MemberFinancialStatusChart";
+import { EventsBalanceChart } from "@/components/charts/EventBalanceChart";
