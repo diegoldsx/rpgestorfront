@@ -3,7 +3,7 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import { SubmitHandler } from "react-hook-form";
 import { GenericForm } from "@/components/form/GenericForm";
-import { fakeMembers } from "@/types/Member";
+import { fakeMembers, MemberType } from "@/types/Member";
 import { Tabs, TabList, Tab, TabPanel } from "@/components/Tabs";
 import { Home, FileIcon, Paperclip, DollarSign } from "lucide-react";
 import { RadioGroup } from "@/components/RadioButton";
@@ -34,7 +34,7 @@ export default function DetailsPage() {
 	const router = useRouter();
 	const memberId = useSearchParams().get("id");
 	const [selectedType, setSelectedType] = useState<MemberKind>("individual");
-	const [member, setMember] = useState<any | null>(null);
+	const [member, setMember] = useState<MemberType | null>(null);
 
 	useEffect(() => {
 		if (!memberId) return;
