@@ -5,36 +5,53 @@ import { Popover, PopoverTrigger, PopoverContent } from "@radix-ui/react-popover
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { CalendarIcon } from "lucide-react";
-import { format, setMonth, setYear } from "date-fns";
 import Select from "@/components/Select";
+import { format, startOfMonth, endOfMonth, subMonths } from "date-fns";
 
 const months = ["Jan", "Fev", "Mar", "Abr", "Mai", "Jun", "Jul", "Ago", "Set", "Out", "Nov", "Dez"];
 
 const currentYear = new Date().getFullYear();
 const years = Array.from({ length: 50 }, (_, i) => currentYear - 25 + i);
 
+export type Range = { from: Date; to: Date };
+
 interface Props extends React.HTMLAttributes<HTMLDivElement> {
 	label?: string;
-	onRangeSelect?: (range: { from: Date; to: Date }) => void;
+	onRangeSelect?: (range: Range) => void;
+	initialRange?: Range;
 }
 
 export const DatePickerRangeByMonth = React.forwardRef<HTMLDivElement, Props>(
-	({ label, onRangeSelect, ...rest }, ref) => {
+	({ label, onRangeSelect, initialRange, ...rest }, ref) => {
 		const [open, setOpen] = React.useState(false);
 		const [fromMonth, setFromMonth] = React.useState<{ month: number; year: number } | null>(null);
 		const [toMonth, setToMonth] = React.useState<{ month: number; year: number } | null>(null);
 
+		React.useEffect(() => {
+			if (initialRange) {
+				const f = startOfMonth(initialRange.from);
+				const t = startOfMonth(initialRange.to);
+				setFromMonth({ month: f.getMonth(), year: f.getFullYear() });
+				setToMonth({ month: t.getMonth(), year: t.getFullYear() });
+				return;
+			}
+			const now = new Date();
+			const defaultFrom = startOfMonth(subMonths(now, 11)); // 12 meses incluindo mês atual
+			const defaultTo = startOfMonth(now);
+			setFromMonth({ month: defaultFrom.getMonth(), year: defaultFrom.getFullYear() });
+			setToMonth({ month: defaultTo.getMonth(), year: defaultTo.getFullYear() });
+		}, [initialRange]);
+
 		const formatSelection = (m: { month: number; year: number } | null) =>
-			m ? format(new Date(m.year, m.month), "MM/yyyy") : "";
+			m ? format(new Date(m.year, m.month, 1), "MM/yyyy") : "";
 
 		const confirmSelection = () => {
 			if (!fromMonth || !toMonth) return;
-			const from = setMonth(setYear(new Date(), fromMonth.year), fromMonth.month);
-			const to = setMonth(setYear(new Date(), toMonth.year), toMonth.month);
+			// normaliza para primeiro dia do mês (from) e último dia do mês (to)
+			const from = startOfMonth(new Date(fromMonth.year, fromMonth.month, 1));
+			const to = endOfMonth(new Date(toMonth.year, toMonth.month, 1));
 			if (from > to) return;
 			onRangeSelect?.({ from, to });
-			console.log("startDate:", from);
-			console.log("endDate:", to);
 			setOpen(false);
 		};
 

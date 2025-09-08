@@ -4,6 +4,8 @@ import { fakeMembers } from "@/types/Member";
 import { memberCols } from "./components/columnSchema";
 
 const Page = () => {
+	const total = Array.isArray(fakeMembers) ? fakeMembers.length : 0;
+
 	return (
 		<PageLayout
 			title="Associados"
@@ -14,7 +16,17 @@ const Page = () => {
 				},
 			}}
 		>
-			{fakeMembers && <DataTable data={fakeMembers} columns={memberCols} />}
+			<div>
+				<div className="relative mb-4">
+					<div className="absolute right-0 top-0">
+						<div className="">
+							<div>Total de associados: {total.toLocaleString("pt-BR")}</div>
+						</div>
+					</div>
+				</div>
+
+				{fakeMembers && <DataTable data={fakeMembers} columns={memberCols} />}
+			</div>
 		</PageLayout>
 	);
 };
