@@ -106,7 +106,7 @@ export const fakeMembers: MemberType[] = [
 	{
 		id: "3",
 		type: "individual",
-		status: "pending",
+		status: "active",
 		code: "PF001",
 		cpf: "12345678900",
 		fullName: "João da Silva",
