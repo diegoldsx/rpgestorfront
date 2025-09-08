@@ -34,7 +34,7 @@ export default function DetailsPage() {
 	const router = useRouter();
 	const memberId = useSearchParams().get("id");
 	const [selectedType, setSelectedType] = useState<MemberKind>("individual");
-	const [member, setMember] = useState<MemberFormData | null>(null);
+	const [member, setMember] = useState<any | null>(null);
 
 	useEffect(() => {
 		if (!memberId) return;
