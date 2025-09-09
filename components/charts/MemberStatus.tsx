@@ -7,16 +7,17 @@ const ApexChart = dynamic(() => import("react-apexcharts"), { ssr: false });
 type UserStatusPieChartProps = {
 	active: number;
 	inactive: number;
+	pending: number;
 };
 
-export function MemberStatusPieChart({ active, inactive }: UserStatusPieChartProps) {
-	const series = [active, inactive];
+export function MemberStatusPieChart({ active, inactive, pending }: UserStatusPieChartProps) {
+	const series = [active, inactive, pending];
 	const options = {
 		chart: {
 			type: "donut" as const,
 		},
-		labels: ["Ativos", "Inativos"],
-		colors: ["#22c55e", "#f43f5e"],
+		labels: ["Ativos", "Inativos", "Pendente"],
+		colors: ["#22c55e", "#f43f5e", "#FFD700"],
 		legend: {
 			position: "bottom" as const,
 		},
@@ -37,17 +38,17 @@ export function MemberStatusPieChart({ active, inactive }: UserStatusPieChartPro
 						total: {
 							show: true,
 							label: "Total",
-							formatter: () => `${active + inactive}`,
+							formatter: () => `${active + inactive + pending}`,
 						},
 					},
 				},
 			},
 		},
 	};
-
+	console.log(series);
 	return (
-		<div className="w-full flex flex-col min-h-full justify-center">
-			<ApexChart options={options} series={series} type="donut" height={300} />
+		<div className="h-auto">
+			<ApexChart options={options} series={series} type="donut" />
 		</div>
 	);
 }

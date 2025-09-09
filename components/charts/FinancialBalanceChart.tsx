@@ -5,11 +5,9 @@ import { useMemo, useState } from "react";
 import type { ApexOptions } from "apexcharts";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Label } from "@/components/ui/label";
-import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/card";
 
 const Chart = dynamic(() => import("react-apexcharts"), { ssr: false });
 
-// Cores padronizadas
 const GREEN_MAIN = "#22c55e";
 const RED_MAIN = "#f43f5e";
 
@@ -18,7 +16,6 @@ const RED_SHADES = ["#9f1239", "#be123c", "#e11d48", "#f43f5e", "#b91c1c", "#991
 
 const brl = new Intl.NumberFormat("pt-BR", { style: "currency", currency: "BRL" });
 
-// MOCK — substitua pelos seus dados
 const balanceMock = {
 	costCenter: [
 		{ chart: { label: "Centro A", value: "a" }, income: 15000, expenses: 8500 },
@@ -56,27 +53,19 @@ function useBalanceDonuts(groupBy: GroupBy, data: typeof balanceMock) {
 	const makeOptions = (labelsArr: string[], colors: string[]): ApexOptions => ({
 		chart: {
 			type: "donut",
-			background: "transparent", // sem fundo preto
+			background: "transparent",
 			toolbar: { show: false },
 			animations: { enabled: false },
 		},
 		labels: labelsArr,
 		legend: { show: false },
-		theme: { mode: "light" }, // mantém tudo claro
-		tooltip: {
-			theme: "light", // tooltip claro
-			fillSeriesColor: false,
-			y: { formatter: (val) => brl.format(Number(val || 0)) },
-		},
+		tooltip: { theme: "light", fillSeriesColor: false, y: { formatter: (val) => brl.format(Number(val || 0)) } },
 		colors,
 		dataLabels: { enabled: false },
 		plotOptions: { pie: { donut: { size: "70%", labels: { show: false } } } },
 		fill: { opacity: 1 },
-		states: {
-			hover: { filter: { type: "darken" } }, // escurece no hover sem trocar o fundo
-			active: { filter: { type: "darken" } },
-		},
-		stroke: { width: 1, colors: ["#e5e7eb"] }, // separação sutil (cinza claro)
+		states: { hover: { filter: { type: "darken" } }, active: { filter: { type: "darken" } } },
+		stroke: { width: 1, colors: ["#e5e7eb"] },
 	});
 
 	const incomeColors = useMemo(() => pickShades(GREEN_SHADES, labels.length), [labels]);
@@ -93,104 +82,78 @@ function useBalanceDonuts(groupBy: GroupBy, data: typeof balanceMock) {
 	};
 }
 
-function Legend() {
-	return (
-		<div className="flex items-center gap-4 text-sm">
-			<span className="inline-flex items-center gap-1.5">
-				<span className="h-2.5 w-2.5 rounded-full" style={{ backgroundColor: GREEN_MAIN }} />
-				<span className="font-medium">Receitas</span>
-			</span>
-			<span className="inline-flex items-center gap-1.5">
-				<span className="h-2.5 w-2.5 rounded-full" style={{ backgroundColor: RED_MAIN }} />
-				<span className="font-medium">Despesas</span>
-			</span>
-		</div>
-	);
-}
-
 export function FinancialBalanceDonuts({ data = balanceMock }: { data?: typeof balanceMock }) {
 	const [groupBy, setGroupBy] = useState<GroupBy>("category");
 	const { series, options, totals, balance } = useBalanceDonuts(groupBy, data);
 
 	return (
-		<Card className="flex flex-col justify-between h-full">
-			<CardHeader className="pb-2">
-				<div className="flex items-center justify-between gap-4">
-					{/* Radio com label selecionada em negrito */}
-					<RadioGroup value={groupBy} onValueChange={(v) => setGroupBy(v as GroupBy)} className="flex gap-4 mt-2">
-						<div className="flex items-center gap-2">
-							<RadioGroupItem id="by-category" value="category" />
-							<Label
-								htmlFor="by-category"
-								className={`text-sm ${groupBy === "category" ? "font-semibold" : "font-normal"}`}
-							>
-								Categorias
-							</Label>
-						</div>
-						<div className="flex items-center gap-2">
-							<RadioGroupItem id="by-costcenter" value="costCenter" />
-							<Label
-								htmlFor="by-costcenter"
-								className={`text-sm ${groupBy === "costCenter" ? "font-semibold" : "font-normal"}`}
-							>
-								Centro de Custo
-							</Label>
-						</div>
-					</RadioGroup>
-				</div>
-			</CardHeader>
-
-			<CardContent className="flex justify-center gap-8">
-				<div className="flex flex-col items-center">
-					<div id="receitas-label" className="text-sm mb-1">
-						Receitas
+		<div className="flex h-full flex-col">
+			{/* Header */}
+			<header className="flex-shrink-0 border-b p-4">
+				<RadioGroup value={groupBy} onValueChange={(v) => setGroupBy(v as GroupBy)} className="flex gap-4">
+					<div className="flex items-center gap-2">
+						<RadioGroupItem id="by-category" value="category" />
+						<Label htmlFor="by-category" className="text-sm font-semibold text-gray-900">
+							Categorias
+						</Label>
 					</div>
-					<div role="img" aria-labelledby="receitas-label">
+					<div className="flex items-center gap-2">
+						<RadioGroupItem id="by-costcenter" value="costCenter" />
+						<Label htmlFor="by-costcenter" className="text-sm font-semibold text-gray-900">
+							Centro de Custo
+						</Label>
+					</div>
+				</RadioGroup>
+			</header>
+
+			{/* Charts */}
+			<div className="flex flex-1 flex-col items-center justify-center gap-2 p-2 md:flex-row">
+				<div className="flex w-full flex-1 flex-col items-center">
+					<div className="mb-2 text-sm text-gray-700">Receitas</div>
+					<div className="h-full w-full max-w-[360px]">
 						<Chart
 							key={`income-${groupBy}`}
 							options={options.income}
 							series={series.incomes}
 							type="donut"
-							height={200}
-							width={200}
+							height="100%"
+							width="100%"
 						/>
 					</div>
 				</div>
-				<div className="flex flex-col items-center">
-					<div id="despesas-label" className="text-sm  mb-1">
-						Despesas
-					</div>
-					<div role="img" aria-labelledby="despesas-label">
+
+				<div className="flex w-full flex-1 flex-col items-center">
+					<div className="mb-2 text-sm text-gray-700">Despesas</div>
+					<div className="h-full w-full max-w-[360px]">
 						<Chart
 							key={`expenses-${groupBy}`}
 							options={options.expenses}
 							series={series.expenses}
 							type="donut"
-							height={200}
-							width={200}
+							height="100%"
+							width="100%"
 						/>
 					</div>
 				</div>
-			</CardContent>
+			</div>
 
-			<CardFooter className="pt-2 border-t">
-				<div className="w-full">
-					<div className="flex justify-between text-sm">
-						<div>
-							<div>Total Receitas</div>
-							<div style={{ color: GREEN_MAIN }}>{brl.format(totals.income)}</div>
-						</div>
-						<div>
-							<div>Total Despesas</div>
-							<div style={{ color: RED_MAIN }}>{brl.format(totals.expenses)}</div>
-						</div>
-						<div>
-							<div>Saldo</div>
-							<div className={balance < 0 ? "text-red-600" : "text-emerald-700"}>{brl.format(balance)}</div>
-						</div>
+			{/* Footer */}
+			<footer className="flex-shrink-0 border-t p-4">
+				<div className="flex justify-between text-sm">
+					<div>
+						<div className="text-gray-700">Total Receitas</div>
+						<div className="text-emerald-500">{brl.format(totals.income)}</div>
+					</div>
+					<div>
+						<div className="text-gray-700">Total Despesas</div>
+						<div className="text-rose-500">{brl.format(totals.expenses)}</div>
+					</div>
+					<div>
+						<div className="text-gray-700">Saldo</div>
+						<div className={balance < 0 ? "text-rose-600" : "text-emerald-700"}>{brl.format(balance)}</div>
 					</div>
 				</div>
-			</CardFooter>
-		</Card>
+			</footer>
+		</div>
 	);
 }

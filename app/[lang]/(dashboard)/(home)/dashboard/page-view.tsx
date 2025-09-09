@@ -18,7 +18,7 @@ interface DashboardPageViewProps {
 	memberStats?: any;
 	reports?: any[];
 	accountBalance?: any[];
-	membersSituation?: { active: number; inactive: number };
+	membersSituation?: { active: number; inactive: number; pending: number };
 	financialBalanceChartData?: any;
 	incomeXExpenses?: any;
 }
@@ -30,7 +30,7 @@ const associatesData = {
 
 const DashboardPageView: React.FC<DashboardPageViewProps> = ({
 	accountBalance = [],
-	membersSituation = { active: 0, inactive: 0 },
+	membersSituation = { active: 0, inactive: 0, pending: 0 },
 }) => {
 	return (
 		<main className="space-y-6">
@@ -48,30 +48,34 @@ const DashboardPageView: React.FC<DashboardPageViewProps> = ({
 			</section>
 
 			<section className="grid grid-cols-1 md:grid-cols-3 gap-6">
-				<Card>
-					<CardHeader>
-						<CardTitle className="text-lg">Balanço por grupo</CardTitle>
+				<Card className="flex flex-col">
+					<CardHeader className="pb-3">
+						<CardTitle className="text-lg font-semibold">Balanço por grupo</CardTitle>
 					</CardHeader>
-					<CardContent className="p-4 min-h-[220px] flex items-center justify-center">
+					<CardContent className="flex-1">
 						<FinancialBalanceDonuts />
 					</CardContent>
 				</Card>
 
-				<Card>
-					<CardHeader>
-						<CardTitle className="text-lg">Saldo por Conta</CardTitle>
+				<Card className="flex flex-col">
+					<CardHeader className="pb-3">
+						<CardTitle className="text-lg font-semibold">Saldo por Conta</CardTitle>
 					</CardHeader>
-					<CardContent className="p-4 min-h-[220px]">
+					<CardContent className="flex-1">
 						<AccountBalance accountBalance={accountBalance} />
 					</CardContent>
 				</Card>
 
-				<Card>
-					<CardHeader>
-						<CardTitle className="text-lg">Situação de Membros</CardTitle>
+				<Card className="flex flex-col">
+					<CardHeader className="pb-3">
+						<CardTitle className="text-lg font-semibold">Associados - Situação Financeira</CardTitle>
 					</CardHeader>
-					<CardContent className="p-4  flex items-center justify-between">
-						<MemberStatusPieChart active={membersSituation.active} inactive={membersSituation.inactive} />
+					<CardContent className="flex-1">
+						<MemberStatusPieChart
+							active={membersSituation.active}
+							inactive={membersSituation.inactive}
+							pending={membersSituation.pending}
+						/>
 					</CardContent>
 				</Card>
 			</section>

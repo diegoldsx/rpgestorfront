@@ -29,7 +29,7 @@ const Dashboard = async ({ params: { lang } }: DashboardProps) => {
 	const trans = await getDictionary(lang);
 	const { overview, memberStats, reports, balance, incomeXExpensesData, accounts } = await getData();
 
-	const membersSituation = { active: 32, inactive: 3 };
+	const membersSituation = { active: 32, inactive: 3, pending: 8 };
 	const userSituation = { active: 32, inactive: 3 };
 
 	return (
