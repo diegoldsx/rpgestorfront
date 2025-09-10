@@ -1,15 +1,24 @@
 "use client";
 
-import { ColumnDef } from "@tanstack/react-table";
+import { ColumnDef, RowData } from "@tanstack/react-table";
 import { exactFilter } from "@/components/common/data-table/columnUtils";
 import { columnSchema } from "../schemas/columnSchema";
 import Link from "next/link";
 import { ContentTypeSchemaType } from "../schemas/schema";
 import DataCell from "@/components/common/data-table/columns/DataCell";
+import { DataTableRowActions } from "@/components/common/data-table/table-row-actions";
 
 const editUrl = "content-type/details-page?id=";
 
+const ActionsColumn: ColumnDef<any> = {
+	id: "actions",
+	header: "Actions",
+	size: 150,
+	cell: ({ row }): RowData => <DataTableRowActions href={`content-type/details-page?id=`} row={row} />,
+};
+
 export const columns: ColumnDef<ContentTypeSchemaType>[] = [
+	ActionsColumn,
 	{
 		id: "actions",
 		header: "Actions",

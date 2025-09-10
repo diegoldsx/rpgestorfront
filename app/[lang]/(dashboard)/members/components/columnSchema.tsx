@@ -1,15 +1,18 @@
 "use client";
-import type { CellContext, ColumnDef, VisibilityState } from "@tanstack/react-table";
+import type { CellContext, ColumnDef, RowData, VisibilityState } from "@tanstack/react-table";
 import { MemberType, MemberTypesOptions } from "@/types/Member";
 import Link from "next/link";
+import { DataTableRowActions } from "@/components/common/data-table/table-row-actions";
+
+const ActionsColumn: ColumnDef<any> = {
+	id: "actions",
+	header: "Actions",
+	size: 150,
+	cell: ({ row }): RowData => <DataTableRowActions href={`members/details-page?id=`} row={row} />,
+};
 
 export const memberCols: ColumnDef<MemberType>[] = [
-	{
-		id: "actions",
-		header: "Actions",
-		size: 150,
-		cell: ({ row }) => <Link href={`members/details-page?id=${row.original.id}`}>Editar </Link>,
-	},
+	ActionsColumn,
 	{ header: "ID", accessorKey: "id" },
 	{ header: "Data de nascimento", accessorKey: "birthDate" },
 	{ header: "Status", accessorKey: "status" },

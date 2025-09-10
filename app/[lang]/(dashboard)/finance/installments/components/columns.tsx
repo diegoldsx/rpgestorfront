@@ -1,6 +1,6 @@
 "use client";
 
-import { ColumnDef } from "@tanstack/react-table";
+import { ColumnDef, RowData } from "@tanstack/react-table";
 import { exactFilter } from "@/components/common/data-table/columnUtils";
 import Link from "next/link";
 
@@ -9,8 +9,15 @@ import ActionsCell from "@/components/common/data-table/columns/ActionCell";
 import { moduleLabels } from "../page";
 import { InstallmentType } from "@/types/Installment";
 import { columnSchema } from "./columnSchema";
-
+import { DataTableRowActions } from "@/components/common/data-table/table-row-actions";
+const ActionsColumn: ColumnDef<any> = {
+	id: "actions",
+	header: "Actions",
+	size: 150,
+	cell: ({ row }): RowData => <DataTableRowActions href={`installments/details-page?id=`} row={row} />,
+};
 export const columns: ColumnDef<InstallmentType>[] = [
+	ActionsColumn,
 	{
 		id: "actions",
 		header: "Actions",

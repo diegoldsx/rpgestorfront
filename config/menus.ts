@@ -48,15 +48,15 @@ export const menusConfig: any = {
 			{
 				title: "Financeiro",
 				icon: DollarSign,
-				href: "/finance/income",
+				href: "/finance/incomes",
 				child: [
 					{ title: "Receita", href: "/finance/incomes" },
 					{ title: "Despesa", href: "/finance/expenses" },
 					{ title: "Provisionamento", href: "/finance/provisions" },
-					{ title: "Parcela por Grupo", href: "/finance/instalments" },
-					{ title: "Transferência", href: "/finance/transfers" },
-					{ title: "Remessa", href: "/finance/connection/remittances" },
-					{ title: "Retornos", href: "/finance/connection/returns" },
+					{ title: "Parcela por Grupo", href: "/finance/installments" },
+					{ title: "Transferência", href: "/finance/transfer" },
+					{ title: "Remessa", href: "/finance/remittances" },
+					{ title: "Retornos", href: "/finance/return" },
 					{ title: "Importar", href: "#" },
 					{ title: "Balancete", href: "#" },
 					{ title: "Fluxo de Caixa", href: "#" },
@@ -72,7 +72,7 @@ export const menusConfig: any = {
 			{
 				title: "Eventos",
 				icon: Calendar,
-				href: "/events",
+				href: "/events/courses",
 				child: [
 					{ title: "Eventos", href: "/events" },
 					{ title: "Cursos", href: "/events/courses" },
@@ -116,7 +116,7 @@ export const menusConfig: any = {
 				child: [
 					{ title: "Mensagens", href: "/email-marketing/messages" },
 					{ title: "Grupos", href: "/email-marketing/groups" },
-					{ title: "Emails", href: "/email-marketing/email" },
+					{ title: "Emails", href: "/email-marketing/emails" },
 					{ title: "Setor", href: "/email-marketing/sector" },
 				],
 			},

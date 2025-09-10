@@ -1,6 +1,6 @@
 "use client";
 
-import { ColumnDef } from "@tanstack/react-table";
+import { ColumnDef, RowData } from "@tanstack/react-table";
 import { exactFilter } from "@/components/common/data-table/columnUtils";
 import { columnSchema } from "./columnSchema";
 import Link from "next/link";
@@ -9,8 +9,16 @@ import DataCell from "@/components/common/data-table/columns/DataCell";
 import ActionsCell from "@/components/common/data-table/columns/ActionCell";
 import { moduleLabels } from "../page";
 import { ProvisionType } from "@/types/Provision";
+import { DataTableRowActions } from "@/components/common/data-table/table-row-actions";
 
+const ActionsColumn: ColumnDef<any> = {
+	id: "actions",
+	header: "Actions",
+	size: 150,
+	cell: ({ row }): RowData => <DataTableRowActions href={`provisions/details-page?id=`} row={row} />,
+};
 export const columns: ColumnDef<ProvisionType>[] = [
+	ActionsColumn,
 	...columnSchema
 		.filter((item) => item.isVisible !== false)
 		.map(({ id, title, options, type, size = 0 }) => ({

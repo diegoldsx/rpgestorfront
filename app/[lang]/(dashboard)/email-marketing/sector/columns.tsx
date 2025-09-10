@@ -1,10 +1,11 @@
-import { CellContext, ColumnDef } from "@tanstack/react-table";
+import { CellContext, ColumnDef, RowData } from "@tanstack/react-table";
 import { exactFilter } from "@/components/common/data-table/columnUtils";
 import Cell from "@/app/types/Cell";
 import { Sector } from "./types/sector";
 import { fields } from "./config/fields";
 import { SectorType } from "@/types/Sector";
 import Link from "next/link";
+import { DataTableRowActions } from "@/components/common/data-table/table-row-actions";
 
 const cols: ColumnDef<Sector>[] = fields.map((field) => ({
 	id: field.id,
@@ -26,16 +27,11 @@ const cols: ColumnDef<Sector>[] = fields.map((field) => ({
 		return <Cell>{value}</Cell>;
 	},
 }));
+const ActionsColumn: ColumnDef<any> = {
+	id: "actions",
+	header: "Actions",
+	size: 150,
+	cell: ({ row }): RowData => <DataTableRowActions href={`sector/details-page?id=`} row={row} />,
+};
 
-export const columns = [
-	{
-		id: "actions",
-		header: "Actions",
-		size: 150,
-		cell: ({ row }: CellContext<Sector, unknown>) => (
-			<Link href={"sector/details-page?id=" + row.original.id}>Editar</Link>
-		),
-	},
-	,
-	...cols,
-] as ColumnDef<Sector>[];
+export const columns = [ActionsColumn, ...cols] as ColumnDef<Sector>[];

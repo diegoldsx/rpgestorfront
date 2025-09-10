@@ -1,6 +1,6 @@
 "use client";
 
-import { MoreHorizontal } from "lucide-react";
+import { MoreVertical, Cog } from "lucide-react";
 import { Row } from "@tanstack/react-table";
 
 import { Button } from "@/components/ui/button";
@@ -17,44 +17,45 @@ import {
 	DropdownMenuSubTrigger,
 	DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import Link from "next/link";
 
 interface DataTableRowActionsProps {
 	row: Row<any>;
-	labels: any[];
+	labels?: any[];
+	href: string;
 }
 
-export function DataTableRowActions({ row, labels }: DataTableRowActionsProps) {
+export function DataTableRowActions({ row, labels, href }: DataTableRowActionsProps) {
 	return (
 		<DropdownMenu>
 			<DropdownMenuTrigger asChild>
-				<Button
-					variant="ghost"
-					className="flex h-8 w-8 p-0 data-[state=open]:bg-muted"
-				>
-					<MoreHorizontal className="h-4 w-4" />
-					<span className="sr-only">Open menu</span>
+				<Button variant="ghost" className="flex h-8 w-8 p-0 data-[state=open]:bg-muted">
+					<MoreVertical className="h- w-6" />
+					<span className="sr-only">Abrir Menu</span>
 				</Button>
 			</DropdownMenuTrigger>
 			<DropdownMenuContent align="end" className="w-[160px]">
-				<DropdownMenuItem>Edit</DropdownMenuItem>
-				<DropdownMenuItem>Make a copy</DropdownMenuItem>
-				<DropdownMenuItem>Favorite</DropdownMenuItem>
+				<DropdownMenuItem>
+					<Link href={`${href}${row.original.id}`}>Editar</Link>
+				</DropdownMenuItem>
+
 				<DropdownMenuSeparator />
 				<DropdownMenuSub>
 					<DropdownMenuSubTrigger>Labels</DropdownMenuSubTrigger>
 					<DropdownMenuSubContent>
 						<DropdownMenuRadioGroup value={row.original.label}>
-							{labels.map((label) => (
-								<DropdownMenuRadioItem key={label.value} value={label.value}>
-									{label.label}
-								</DropdownMenuRadioItem>
-							))}
+							{labels &&
+								labels.map((label) => (
+									<DropdownMenuRadioItem key={label.value} value={label.value}>
+										{label.label}
+									</DropdownMenuRadioItem>
+								))}
 						</DropdownMenuRadioGroup>
 					</DropdownMenuSubContent>
 				</DropdownMenuSub>
 				<DropdownMenuSeparator />
-				<DropdownMenuItem>
-					Delete
+				<DropdownMenuItem onClick={() => alert("Excluir registro: " + row.original.id + " - (Implementar...)")}>
+					Excluir
 					<DropdownMenuShortcut>⌘⌫</DropdownMenuShortcut>
 				</DropdownMenuItem>
 			</DropdownMenuContent>

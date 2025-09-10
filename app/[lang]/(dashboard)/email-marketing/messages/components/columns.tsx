@@ -1,6 +1,6 @@
 "use client";
 
-import { ColumnDef } from "@tanstack/react-table";
+import { ColumnDef, RowData } from "@tanstack/react-table";
 import { exactFilter } from "@/components/common/data-table/columnUtils";
 import { columnSchema } from "../schemas/columnSchema";
 import Link from "next/link";
@@ -8,17 +8,17 @@ import { MessageSchemaType } from "../schemas/schema";
 import DataCell from "@/components/common/data-table/columns/DataCell";
 import ActionsCell from "@/components/common/data-table/columns/ActionCell";
 import { Input } from "@/components/ui/input";
+import { DataTableRowActions } from "@/components/common/data-table/table-row-actions";
 
-const editUrl = "messages/details?id=";
+const ActionsColumn: ColumnDef<any> = {
+	id: "actions",
+	header: "Actions",
+	size: 150,
+	cell: ({ row }): RowData => <DataTableRowActions href={`messages/details-page?id=`} row={row} />,
+};
 
 export const columns: ColumnDef<MessageSchemaType>[] = [
-	{
-		id: "actions",
-		header: "Actions",
-		accessorFn: () => {},
-		size: 150,
-		cell: ({ row }) => <Link href={editUrl + row.original.id}>Editar </Link>,
-	} as ColumnDef<MessageSchemaType>,
+	ActionsColumn,
 	...columnSchema
 		.filter((item) => item.isVisible !== false)
 		.map(({ id, title, options, type, size = 0 }) => ({

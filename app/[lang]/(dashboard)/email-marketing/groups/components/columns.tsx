@@ -1,6 +1,6 @@
 "use client";
 
-import { ColumnDef } from "@tanstack/react-table";
+import { ColumnDef, RowData } from "@tanstack/react-table";
 import { exactFilter } from "@/components/common/data-table/columnUtils";
 import { columnSchema } from "../schemas/columnSchema";
 import Link from "next/link";
@@ -8,6 +8,7 @@ import { GroupSchemaType } from "../schemas/schema";
 import DataCell from "@/components/common/data-table/columns/DataCell";
 import ActionsCell from "@/components/common/data-table/columns/ActionCell";
 import { Input } from "@/components/ui/input";
+import { DataTableRowActions } from "@/components/common/data-table/table-row-actions";
 
 const editUrl = "groups/details-page?id=";
 
@@ -16,7 +17,7 @@ export const columns: ColumnDef<GroupSchemaType>[] = [
 		id: "actions",
 		header: "Actions",
 		size: 150,
-		cell: ({ row }) => <Link href={editUrl + row.original.id}>Editar </Link>,
+		cell: ({ row }): RowData => <DataTableRowActions href={`groups/details-page?id=`} row={row} />,
 	},
 	...columnSchema
 		.filter((item) => item.isVisible !== false)

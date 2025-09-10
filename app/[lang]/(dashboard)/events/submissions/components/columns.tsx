@@ -1,6 +1,6 @@
 "use client";
 
-import { CellContext, ColumnDef } from "@tanstack/react-table";
+import { CellContext, ColumnDef, RowData } from "@tanstack/react-table";
 import { exactFilter } from "@/components/common/data-table/columnUtils";
 import { columnSchema } from "./columnSchema";
 import Link from "next/link";
@@ -8,8 +8,17 @@ import DataCell from "@/components/common/data-table/columns/DataCell";
 import ActionsCell from "@/components/common/data-table/columns/ActionCell";
 import { SubmissionType } from "@/types/Submission";
 import { moduleLabels } from "../page";
+import { DataTableRowActions } from "@/components/common/data-table/table-row-actions";
+
+const ActionsColumn: ColumnDef<any> = {
+	id: "actions",
+	header: "Actions",
+	size: 150,
+	cell: ({ row }): RowData => <DataTableRowActions href={`submissions/details-page?id=`} row={row} />,
+};
 
 export const columns: ColumnDef<SubmissionType>[] = [
+	ActionsColumn,
 	{
 		id: "actions",
 		header: "Actions",
