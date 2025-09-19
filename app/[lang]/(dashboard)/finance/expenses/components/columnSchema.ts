@@ -1,10 +1,9 @@
 import { Column } from "@/types/columns/ColumnsDefinition";
 import { VisibilityState } from "@tanstack/react-table";
 import { createColumn } from "@/types/columns/ColumnsDefinition";
-import { CostCenterOptions, PaymentMethodOptions, Status, StatusEnum } from "@/types/options";
+import { CostCenterOptions, PaymentMethodOptions, Status } from "@/types/options";
 import { ExpenseType } from "@/types/Expense";
 import { FacetedFilter } from "@/components/common/data-table/data-table";
-
 
 export const columnSchema: Array<Column<ExpenseType>> = [
 	createColumn<ExpenseType>({
@@ -272,8 +271,8 @@ export const columnSchema: Array<Column<ExpenseType>> = [
 		defaultValue: "",
 		isVisible: true,
 		size: 100,
-	})
-]
+	}),
+];
 
 export const defaultValues = Object.fromEntries(
 	columnSchema.map(({ id, defaultValue }) => [id, defaultValue])
@@ -283,27 +282,17 @@ export const facetedFilters = columnSchema.filter((f) => !!f.options) as Faceted
 
 export const visibleColumns: ReadonlyArray<string> = ["*"];
 export const visibilityState: VisibilityState = Object.fromEntries(
-	columnSchema.map(({ id }) => [
-		id,
-		visibleColumns.includes(id) || visibleColumns[0] === "*",
-	])
+	columnSchema.map(({ id }) => [id, visibleColumns.includes(id) || visibleColumns[0] === "*"])
 );
 
-
 export function getFieldsWithOptions() {
-	return columnSchema.filter(({ options }) => !!options)as FacetedFilter[];
+	return columnSchema.filter(({ options }) => !!options) as FacetedFilter[];
 }
 
-export function getVisibilityState(
-	visibilityArray: string[] = ["*"]
-): VisibilityState {
+export function getVisibilityState(visibilityArray: string[] = ["*"]): VisibilityState {
 	return Object.fromEntries(
 		columnSchema
 			.filter(({ id }) => id !== undefined)
-			.map(({ id }) => [
-				id as string,
-				visibilityArray.includes("*") || visibilityArray.includes(id as string),
-			])
+			.map(({ id }) => [id as string, visibilityArray.includes("*") || visibilityArray.includes(id as string)])
 	);
 }
-

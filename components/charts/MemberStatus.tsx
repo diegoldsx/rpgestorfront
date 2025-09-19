@@ -5,12 +5,12 @@ import dynamic from "next/dynamic";
 const ApexChart = dynamic(() => import("react-apexcharts"), { ssr: false });
 
 type UserStatusPieChartProps = {
-	active: number;
-	inactive: number;
+	active?: number;
+	inactive?: number;
 	pending: number;
 };
 
-export function MemberStatusPieChart({ active, inactive, pending }: UserStatusPieChartProps) {
+export function MemberStatusPieChart({ active = 10, inactive = 3, pending = 1 }: UserStatusPieChartProps) {
 	const series = [active, inactive, pending];
 	const options = {
 		chart: {

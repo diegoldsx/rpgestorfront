@@ -57,6 +57,12 @@ export const Status: Option[] = [
 	{ label: "Inativo", value: "inactive" },
 	{ label: "Pendente", value: "pending" },
 ] as const;
+
+export const StatusOptions: Option[] = [
+	{ label: "Ativo", value: "active" },
+	{ label: "Inativo", value: "inactive" },
+	{ label: "Pendente", value: "pending" },
+] as const;
 export const StatusEnum = createEnumFromOptions(Status);
 export type StatusType = z.infer<typeof StatusEnum>;
 

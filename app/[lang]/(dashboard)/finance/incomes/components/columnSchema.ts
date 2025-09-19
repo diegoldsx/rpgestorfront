@@ -5,7 +5,6 @@ import { CostCenterOptions, DiscountTypeOptions, PaymentMethodOptions, Status } 
 import { IncomeType } from "@/types/Income";
 import { FacetedFilter } from "@/components/common/data-table/data-table";
 
-
 export const columnSchema: Array<Column<IncomeType>> = [
 	createColumn<IncomeType>({
 		id: "id",
@@ -195,7 +194,7 @@ export const columnSchema: Array<Column<IncomeType>> = [
 		isVisible: true,
 		size: 1000,
 	}),
-]
+];
 
 export const defaultValues = Object.fromEntries(
 	columnSchema.map(({ id, defaultValue }) => [id, defaultValue])
@@ -205,14 +204,9 @@ export const facetedFilters = columnSchema.filter((f) => !!f.options) as Faceted
 
 export const visibleColumns: ReadonlyArray<string> = ["*"];
 export const visibilityState: VisibilityState = Object.fromEntries(
-	columnSchema.map(({ id }) => [
-		id,
-		visibleColumns.includes(id) || visibleColumns[0] === "*",
-	])
+	columnSchema.map(({ id }) => [id, visibleColumns.includes(id) || visibleColumns[0] === "*"])
 );
-
 
 export function getFieldsWithOptions() {
 	return columnSchema.filter(({ options }) => !!options);
 }
-

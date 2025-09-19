@@ -5,12 +5,14 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { AccountBalance } from "@/components/charts/AccountBalance";
 import { MemberStatusPieChart } from "@/components/charts/MemberStatus";
 import { IncomesXExpensesChart } from "@/components/charts/IncomesXExpensesChart";
-import { FinancialBalanceDonuts } from "@/components/charts/FinancialBalanceChart";
 import { EventsBalanceChart } from "@/components/charts/EventBalanceChart";
 import LastEvents from "./components/lastEvents";
 import AreaChart from "@/components/charts/AreaChart";
 import { LastMembers } from "./components/lastMembers";
 import { LastInactiveMembers } from "./components/lastInactiveMembers";
+import AnnouncementsStatusChart from "./components/announcementsChart";
+import Grid from "@/components/common/Grid";
+import { GroupsBalanceChart } from "./components/GroupsBalanceChart";
 
 interface DashboardPageViewProps {
 	trans?: { [key: string]: string };
@@ -28,10 +30,7 @@ const associatesData = {
 	categories: ["Jan", "Fev", "Mar", "Abr", "Mai", "Jun", "Jul", "Ago", "Set", "Out", "Nov", "Dez"],
 };
 
-const DashboardPageView: React.FC<DashboardPageViewProps> = ({
-	accountBalance = [],
-	membersSituation = { active: 0, inactive: 0, pending: 0 },
-}) => {
+const DashboardPageView: React.FC<DashboardPageViewProps> = ({ accountBalance = [] }) => {
 	return (
 		<main className="space-y-6">
 			<section>
@@ -46,15 +45,20 @@ const DashboardPageView: React.FC<DashboardPageViewProps> = ({
 					</CardContent>
 				</Card>
 			</section>
-
 			<section className="grid grid-cols-1 md:grid-cols-3 gap-6">
 				<Card className="flex flex-col">
 					<CardHeader className="pb-3">
-						<CardTitle className="text-lg font-semibold">Balanço por grupo</CardTitle>
+						<CardTitle className="text-lg font-semibold">Associados - Situação Financeira</CardTitle>
 					</CardHeader>
 					<CardContent className="flex-1">
-						<FinancialBalanceDonuts />
+						<MemberStatusPieChart active={10} pending={2} inactive={5} />
 					</CardContent>
+				</Card>
+				<Card className="flex flex-col">
+					<CardHeader className="pb-3">
+						<CardTitle className="text-lg font-semibold">Comunicados</CardTitle>
+					</CardHeader>
+					<CardContent className="flex-1">{<AnnouncementsStatusChart />} </CardContent>
 				</Card>
 
 				<Card className="flex flex-col">
@@ -65,17 +69,12 @@ const DashboardPageView: React.FC<DashboardPageViewProps> = ({
 						<AccountBalance accountBalance={accountBalance} />
 					</CardContent>
 				</Card>
+			</section>
 
+			<section>
 				<Card className="flex flex-col">
-					<CardHeader className="pb-3">
-						<CardTitle className="text-lg font-semibold">Associados - Situação Financeira</CardTitle>
-					</CardHeader>
 					<CardContent className="flex-1">
-						<MemberStatusPieChart
-							active={membersSituation.active}
-							inactive={membersSituation.inactive}
-							pending={membersSituation.pending}
-						/>
+						<GroupsBalanceChart />
 					</CardContent>
 				</Card>
 			</section>
@@ -111,9 +110,7 @@ const DashboardPageView: React.FC<DashboardPageViewProps> = ({
 					<CardHeader>
 						<CardTitle className="text-lg">Eventos</CardTitle>
 					</CardHeader>
-					<CardContent className="p-4 min-h-[300px]">
-						<EventsBalanceChart />
-					</CardContent>
+					<CardContent className="p-4 min-h-[300px]">{<EventsBalanceChart />}</CardContent>
 				</Card>
 			</section>
 		</main>
