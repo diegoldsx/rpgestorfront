@@ -29,14 +29,14 @@ export const menusConfig: any = {
 				child: [
 					{ title: "Associados", href: "/members" },
 					{
-						title: "Relatório Ocorrência",
+						title: "Gerar Parcela",
 						href: "/members",
 					},
 					{
-						title: "Relatório Grupo",
+						title: "Grupo de Pagamento",
 						href: "/members",
 					},
-					{ title: "Relatórios Dinâmicos", href: "#" },
+					{ title: "Importar Associados", href: "#" },
 					{ title: "Grupo Pagamento", href: "#" },
 				],
 			},
@@ -88,7 +88,10 @@ export const menusConfig: any = {
 			{
 				title: "Conteúdo",
 				icon: FileText,
-				child: [{ title: "Tipo", href: "/content/content-type" }, { title: "Conteúdo", href: "/content" }],
+				child: [
+					{ title: "Tipo", href: "/content/content-type" },
+					{ title: "Conteúdo", href: "/content" },
+				],
 			},
 			{
 				title: "Agenda",
